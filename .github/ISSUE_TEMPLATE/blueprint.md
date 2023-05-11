@@ -2,7 +2,7 @@
 name: Component Blueprint
 about: Checklist for releasing a new component blueprint
 title: '[Component Blueprint]'
-labels: '[namespace]-[name], Type: Design, not-reviewed'
+labels: 'auro-toast, Type: Design, not-reviewed'
 assignees: leeejune
 ---
 
