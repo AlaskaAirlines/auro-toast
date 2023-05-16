@@ -63,14 +63,14 @@ import "@aurodesignsystem/auro-toast";
 **Reference component in HTML**
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 ## Install bundled assets from CDN
 
-In cases where the project is not able to process JS assets, there are pre-processed assets available for use. Two bundles are available -- `auro-toast__bundled.js` for modern browsers and `auro-toast__bundled.es5.js` for legacy browsers (including IE11).
+In cases where the project is not able to process JS assets, there are pre-processed assets available for use. See -- `auro-toast__bundled.js` for modern browsers. Legacy browsers such as IE11 are no longer supported.
 
-Since the legacy bundle includes many polyfills that are not needed by modern browsers, we recommend you load these bundles using [differential serving](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/) so that the browser only loads the bundle it needs. To accomplish this, the script tag for the modern bundle should have `type="module"` and the script tag for the legacy bundle should have the `nomodule` attribute. See the example below.
+We recommend you load these bundles using [differential serving](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/) so that the browser only loads the bundle correctly. To accomplish this, the script tag for the modern bundle should have `type="module"` and the script tag.
 
 ### Bundle example code
 
@@ -94,7 +94,7 @@ The `<auro-toast>` element should be used in situations where users may:
 ### Default auro-toast
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 ## Development

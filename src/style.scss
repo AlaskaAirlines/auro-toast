@@ -19,13 +19,22 @@
 // }
 
 
-// Selector is for initial setup only
-// delete when building new custom element
-.testClass {
+.toast {
   display: inline-block;
-  padding: var(--auro-text-body-size-default);
-  border: 1px solid var(--auro-color-border-error-on-light);
-  color:  var(--auro-color-border-error-on-light);
+  min-width: 100%;
+  min-height: 60px;
+  padding: var(--auro-size-200) var(--auro-size-150);
+  border-radius: 8px;
+  
+  @media (576px <= width <= 1023px) {
+    min-width: 33%;
+    max-width: 50%;
+  }
+  @media (width >= 1024px) {
+    min-width: 200px;
+    max-width: 500px;
+  }
+
 }
 
 // Selector for native :focus-visible support

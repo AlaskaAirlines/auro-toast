@@ -53,13 +53,13 @@ toggleDialogClose = (elName) => {
 ## Example(s)
 
 <div class="exampleWrapper">
-  <auro-toast>Hello World</auro-toast>
+  <auro-toast>Toast content goes here.</auro-toast>
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 </auro-accordion>
