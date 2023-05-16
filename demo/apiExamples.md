@@ -32,7 +32,7 @@ The auro-toast element provides users a way to ... (it would be great if you fil
     <div class="exampleWrapper">
       <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
       <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-      <auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+      <auro-button onClick="toggleToast()">Show default toast</auro-button>
       <auro-toast>Toast content goes here.</auro-toast>
       <!-- AURO-GENERATED-CONTENT:END -->
     </div>
@@ -42,7 +42,7 @@ The auro-toast element provides users a way to ... (it would be great if you fil
 <!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -56,7 +56,7 @@ Explanation and use description.
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+  <auro-button onClick="toggleToast()">Show default toast</auro-button>
   <auro-toast>Toast content goes here.</auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -66,7 +66,7 @@ Explanation and use description.
 <!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -80,7 +80,7 @@ Explanation and use description.
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+  <auro-button onClick="toggleToast()">Show default toast</auro-button>
   <auro-toast>Toast content goes here.</auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -90,7 +90,7 @@ Explanation and use description.
 <!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -104,7 +104,7 @@ Explanation and use description.
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+  <auro-button onClick="toggleToast()">Show default toast</auro-button>
   <auro-toast>Toast content goes here.</auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -114,7 +114,7 @@ Explanation and use description.
 <!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -128,7 +128,7 @@ Explanation and use description.
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+  <auro-button onClick="toggleToast()">Show default toast</auro-button>
   <auro-toast>Toast content goes here.</auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -138,7 +138,7 @@ Explanation and use description.
 <!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -152,7 +152,7 @@ Explanation and use description.
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+  <auro-button onClick="toggleToast()">Show default toast</auro-button>
   <auro-toast>Toast content goes here.</auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -162,7 +162,7 @@ Explanation and use description.
 <!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->

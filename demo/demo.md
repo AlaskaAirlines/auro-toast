@@ -32,7 +32,7 @@ The following illustrates the default use of the auro-toast element.
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -42,10 +42,10 @@ The following illustrates the default use of the auro-toast element.
 <!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
-
+<!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
 ## Recommended Use and Version Control
