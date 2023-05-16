@@ -14,22 +14,28 @@
 // @import './node_modules/@aurodesignsystem/webcorestylesheets/dist/auroElement/auroElement';
 
 // container styles - defines the look of the outer custom component
-// :host {
-//   ...
-// }
-
-
-// Selector is for initial setup only
-// delete when building new custom element
-.testClass {
+:host {
   display: inline-block;
-  padding: var(--auro-text-body-size-default);
-  border: 1px solid var(--auro-color-border-error-on-light);
-  color:  var(--auro-color-border-error-on-light);
+  min-width: 100%;
+  min-height: 60px;
+  padding: var(--auro-size-200) var(--auro-size-150);
+  border-radius: 8px;
+  box-shadow: var(--auro-elevation-200);
+  
+  @media ($auro-grid-breakpoint-sm <= width < $auro-grid-breakpoint-lg) {
+    min-width: 33%;
+    max-width: 50%;
+  }
+  @media (width >= $auro-grid-breakpoint-lg) {
+    min-width: 200px;
+    max-width: 500px;
+  }
+
 }
 
 // Selector for native :focus-visible support
 :focus-visible {
   background-color: var(--auro-color-border-error-on-light);
   color: var(--auro-color-base-white);
+
 }
