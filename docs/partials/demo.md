@@ -14,38 +14,9 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./useCases.md) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
-## Additional Information
+## auro-toast default use
 
-> Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam fermentum libero ipsum, ac tempor sapien blandit in. Nam tincidunt non felis molestie varius.
-
-|convallis|tristique|nisl dignissim|eleifend|
-|---|---|---|---|
-|√|√|||
-|||√|√|
-
-Aenean at blandit lorem. Fusce imperdiet mi nec gravida maximus. Quisque nisl libero, condimentum in nisi a, imperdiet lacinia arcu.
-
-```javascript
-toggleDialog = (elName) => {
-  let dialog = document.querySelector(elName);
-  const html = document.querySelector('html');
-
-  html.style.overflow = 'hidden';
-  dialog.removeAttribute("open");
-  dialog.setAttribute("open", true);
-}
-
-toggleDialogClose = (elName) => {
-  let dialog = document.querySelector(elName);
-  const html = document.querySelector('html');
-
-  html.style.overflow = '';
-  dialog.removeAttribute("open");
-}
-```
-
-## Example(s)
-
+The following illustrates the default use of the auro-toast element.
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
   <!-- AURO-GENERATED-CONTENT:END -->
@@ -58,8 +29,6 @@ toggleDialogClose = (elName) => {
 <!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>
-
-Having a closing statement about your example helps to really complete the thought with your reader.
 
 ## Recommended Use and Version Control
 
@@ -75,14 +44,13 @@ registerComponent('custom-toast');
 This will create a new custom element that you can use in your HTML that will function identically to the `auro-toast` element.
 
 <div class="exampleWrapper">
-  <custom-header display="display">Salutations World!</custom-header>
+  <custom-toast>Salutations World!</custom-toast>
 </div>
 
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
-
   ```html
-  <custom-header display="display">Salutations World!</custom-header>
+  <custom-toast>Salutations World!</custom-toast>
   ```
 
 </auro-accordion>
