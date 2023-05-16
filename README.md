@@ -85,7 +85,7 @@ import "@aurodesignsystem/auro-toast";
 <!-- The below code snippet is automatically added from ./../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -130,7 +130,7 @@ The `<auro-toast>` use cases include:
 <!-- The below code snippet is automatically added from ./../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-button onClick="toggleToast()">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->

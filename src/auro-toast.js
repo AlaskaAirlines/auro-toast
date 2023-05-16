@@ -6,14 +6,12 @@
 // If using litElement base class
 import { LitElement, html } from "lit";
 
-// If using auroElement base class
-// See instructions for importing auroElement base class https://git.io/JULq4
-// import { LitElement, html } from "lit";
-// import AuroElement from '@aurodesignsystem/webcorestylesheets/dist/auroElement/auroElement';
-
 // Import touch detection lib
 import styleCss from "./style-css.js";
 import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg_es6.js';
+
+const TIME_TIL_FADE_OUT = 5000;
+const FADE_OUT_DURATION = 300;
 
 // See https://git.io/JJ6SJ for "How to document your components using JSDoc"
 /**
@@ -39,6 +37,10 @@ export class AuroToast extends LitElement {
      */
     this.svg = this.dom.body.firstChild;
 
+    /**
+     * @private
+     */
+    this.fadeOutTimer = undefined;
   }
 
   // This function is to define props used within the scope of this component
@@ -68,15 +70,41 @@ export class AuroToast extends LitElement {
    */
   handleOnClose() {
     this.visible = false;
+    clearTimeout(this.fadeOutTimer);
   }
 
-  // When using auroElement, use the following attribute and function when hiding content from screen readers.
-  // aria-hidden="${this.hideAudible(this.hiddenAudible)}"
+  /**
+   * @private
+   * @returns {void}
+   */
+  fadeOutToast() {
+    const toastContainer = this.shadowRoot.querySelector('#toastContainer');
+    toastContainer.className = 'hidden';
 
-  // function that renders the HTML and CSS into  the scope of the component
+    // Wait until fade out completes to set visible to false
+    setTimeout(() => {
+      this.visible = false;
+    }, FADE_OUT_DURATION);
+  }
+
+  updated() {
+    if (this.visible) {
+      this.fadeOutTimer = setTimeout(() => {
+        this.fadeOutToast();
+      }, TIME_TIL_FADE_OUT);
+    }
+  }
+
   render() {
     return this.visible
-      ? html`<slot></slot><button class="toastButton" @click="${this.handleOnClose}">${this.svg}</button>`
+      ? html`
+      <div id="toastContainer">
+        <slot></slot>
+        <button class="toastButton" @click="${this.handleOnClose}">
+          ${this.svg}
+        </button>
+      </div>
+      `
       : undefined;
   }
 }
