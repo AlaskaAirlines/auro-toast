@@ -19,7 +19,6 @@ import styleCss from "./style-css.js";
  * The auro-toast element provides users a way to ... (it would be great if you fill this out).
  *
  * @attr {Boolean} fixed - Uses fixed pixel values for element shape
- * @attr {String} cssClass - Applies designated CSS class to demo element - you want to delete me!
  */
 
 // build the component class
@@ -34,9 +33,6 @@ export class AuroToast extends LitElement {
   static get properties() {
     return {
       // ...super.properties,
-
-      // this property is DEMO ONLY! Please delete.
-      cssClass:   { type: String }
     };
   }
 
@@ -49,13 +45,7 @@ export class AuroToast extends LitElement {
 
   // function that renders the HTML and CSS into  the scope of the component
   render() {
-    return html`
-
-      <!-- this is demo code, DO NOT USE IN YOUR ELEMENT -->
-      <div class=${this.cssClass} tabindex="0">
-        <slot></slot>
-      </div>
-    `;
+    return html`<slot></slot>`;
   }
 }
 

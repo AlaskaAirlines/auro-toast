@@ -6,64 +6,28 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 
 # Toast
 
-`<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of ...
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam convallis in tellus nec pellentesque. Integer bibendum ligula sit amet vehicula gravida. Maecenas accumsan, ligula vitae molestie iaculis, tellus mi laoreet ex [install instructions](https://auro.alaskaair.com/components/auro/button/install), ac malesuada velit dolor vel mi. Cras et rutrum urna. Sed mattis mi eu tortor ullamcorper, egestas bibendum mauris cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra eros eget neque commodo vulputate. In tempus eu velit at dictum.
-
-Nulla at augue facilisis `odio lobortis` molestie vitae a nulla.
+`<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating toast messages to Alaska customers.
 
 ## auro-toast use cases
 
-The `<auro-toast>` element should be used in situations where users may:
+The `<auro-toast>` use cases include:
 
-* ...
-* ...
-* ...
+* Error toast
+* Success toast
 
-## Additional Information
-
-> Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam fermentum libero ipsum, ac tempor sapien blandit in. Nam tincidunt non felis molestie varius.
-
-|convallis|tristique|nisl dignissim|eleifend|
-|---|---|---|---|
-|√|√|||
-|||√|√|
-
-Aenean at blandit lorem. Fusce imperdiet mi nec gravida maximus. Quisque nisl libero, condimentum in nisi a, imperdiet lacinia arcu.
-
-```javascript
-toggleDialog = (elName) => {
-  let dialog = document.querySelector(elName);
-  const html = document.querySelector('html');
-
-  html.style.overflow = 'hidden';
-  dialog.removeAttribute("open");
-  dialog.setAttribute("open", true);
-}
-
-toggleDialogClose = (elName) => {
-  let dialog = document.querySelector(elName);
-  const html = document.querySelector('html');
-
-  html.style.overflow = '';
-  dialog.removeAttribute("open");
-}
-```
-
-## Example(s)
-
+## auro-toast default use
+The following illustrates the default use of the auro-toast element.
 <div class="exampleWrapper">
-  <auro-toast>Hello World</auro-toast>
+  <auro-toast>Toast content goes here.</auro-toast>
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 </auro-accordion>
-Having a closing statement about your example helps to really complete the thought with your reader.
 
 ## Recommended Use and Version Control
 
@@ -79,12 +43,16 @@ registerComponent('custom-toast');
 This will create a new custom element that you can use in your HTML that will function identically to the `auro-toast` element.
 
 <div class="exampleWrapper">
-  <custom-header display="display">Salutations World!</custom-header>
+  <custom-toast>Salutations World!</custom-toast>
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
+
+```html
+<auro-toast>Toast content goes here.</auro-toast>
+```
   ```html
-  <custom-header display="display">Salutations World!</custom-header>
+  <custom-toast>Salutations World!</custom-toast>
   ```
 
 </auro-accordion>

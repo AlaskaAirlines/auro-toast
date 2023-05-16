@@ -23,13 +23,13 @@ The auro-toast element provides users a way to ... (it would be great if you fil
 <div class="twoColDemoRow">
   <div>
     <div class="exampleWrapper">
-      <auro-toast>Hello World</auro-toast>
+      <auro-toast>Toast content goes here.</auro-toast>
     </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 </auro-accordion>
@@ -40,13 +40,13 @@ The auro-toast element provides users a way to ... (it would be great if you fil
 Explanation and use description.
 
 <div class="exampleWrapper">
-  <auro-toast>Hello World</auro-toast>
+  <auro-toast>Toast content goes here.</auro-toast>
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 </auro-accordion>
@@ -57,13 +57,13 @@ Explanation and use description.
 Explanation and use description.
 
 <div class="exampleWrapper">
-  <auro-toast>Hello World</auro-toast>
+  <auro-toast>Toast content goes here.</auro-toast>
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 </auro-accordion>
@@ -74,13 +74,13 @@ Explanation and use description.
 Explanation and use description.
 
 <div class="exampleWrapper">
-  <auro-toast>Hello World</auro-toast>
+  <auro-toast>Toast content goes here.</auro-toast>
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 </auro-accordion>
@@ -91,13 +91,13 @@ Explanation and use description.
 Explanation and use description.
 
 <div class="exampleWrapper">
-  <auro-toast>Hello World</auro-toast>
+  <auro-toast>Toast content goes here.</auro-toast>
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 </auro-accordion>
@@ -108,13 +108,13 @@ Explanation and use description.
 Explanation and use description.
 
 <div class="exampleWrapper">
-  <auro-toast>Hello World</auro-toast>
+  <auro-toast>Toast content goes here.</auro-toast>
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
 ```html
-<auro-toast>Hello World</auro-toast>
+<auro-toast>Toast content goes here.</auro-toast>
 ```
 
 </auro-accordion>
