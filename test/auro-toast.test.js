@@ -1,4 +1,4 @@
-import { fixture, html, expect } from '@open-wc/testing';
+import { fixture, html, expect, aTimeout } from '@open-wc/testing';
 import '../src/auro-toast';
 
 describe('auro-toast', () => {
@@ -24,6 +24,18 @@ describe('auro-toast', () => {
     closeButton.click()
     expect(el.visible).to.be.false
   })
-  
 
+  it('auro-toast is hidden after five seconds', async () => {
+    const el = await fixture(html`
+    <auro-toast>Something</auro-toast>
+  `);
+
+  el.setAttribute("visible", true)
+
+  await aTimeout(5050);
+  const root = el.shadowRoot;
+  const toastContainer = root.querySelector('#toastContainer');
+
+  expect(toastContainer.classList.contains('hidden')).to.be.true;
+  }).timeout(5060);
 });

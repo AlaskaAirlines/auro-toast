@@ -4,12 +4,11 @@
 // ---------------------------------------------------------------------
 
 /**
- * @param {string} elName ID for targeted element
- * @returns {dom} attribute setting
+ * @returns {void}
  */
-toggleToast = (elName) => {
-    let toast = document.querySelector(elName);
-    if (!toast.hasAttribute('visible')) {
-      toast.setAttribute("visible", true)
-    }
+toggleToast = () => {
+  const toast = document.querySelector('auro-toast');
+  if (!toast.hasAttribute('visible')) {
+    toast.setAttribute("visible", true);
   }
+};
