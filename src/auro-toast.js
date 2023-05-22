@@ -21,6 +21,7 @@ import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg_es6.js';
  *
  * @attr {Boolean} fixed - Uses fixed pixel values for element shape
  * @attr {Boolean} visible - Sets state of toast to visible
+ * @attr {String} variant - Component will render visually based on which variant value is set; currently supports `error`, `success`
  */
 
 // build the component class
@@ -48,6 +49,10 @@ export class AuroToast extends LitElement {
       ...super.properties,
       visible: {
         type: Boolean,
+        reflect: true
+      },
+      variant: {
+        type: String,
         reflect: true
       }
     };

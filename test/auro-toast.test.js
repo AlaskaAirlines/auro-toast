@@ -25,4 +25,5 @@ describe('auro-toast', () => {
     expect(el.visible).to.be.false
   })
   
+
 });
