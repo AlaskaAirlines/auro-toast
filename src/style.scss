@@ -46,9 +46,10 @@
   align-items: center;
   padding: var(--auro-size-200) var(--auro-size-150);
   border-radius: 8px;
+  background-color: var(--auro-color-brand-gray-400);
   box-shadow: var(--auro-elevation-200);
   gap: var(--auro-size-200);
-
+  color: var(--auro-color-text-primary-on-dark);
 
   @media ($auro-grid-breakpoint-sm <= width < $auro-grid-breakpoint-lg) {
     right: 1%;
@@ -62,6 +63,26 @@
     left: unset;
     min-width: 200px;
     max-width: 500px;
+  }
+
+}
+
+:host([variant='error']) {
+  background-color: var(--auro-color-alert-bkg-error-default);
+  color: var(--auro-color-text-primary-on-light);
+
+  svg {
+    color: var(--auro-color-alert-error-on-light);
+  }
+
+}
+
+:host([variant='success']) {
+  background-color: var(--auro-color-alert-bkg-success-default);
+  color: var(--auro-color-text-primary-on-light);
+
+  svg {
+    color: var(--auro-color-alert-success-on-light);
   }
 
 }

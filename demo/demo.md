@@ -8,6 +8,8 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./description.md) -->
 <!-- The below content is automatically added from ./description.md -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./description.md) -->
+<!-- The below content is automatically added from ./description.md -->
 `<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating toast messages to Alaska customers.
 <!-- AURO-GENERATED-CONTENT:END -->
 
@@ -15,10 +17,13 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./useCases.md) -->
 <!-- The below content is automatically added from ./useCases.md -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./useCases.md) -->
+<!-- The below content is automatically added from ./useCases.md -->
 The `<auro-toast>` use cases include:
 
 * Error toast
 * Success toast
+<!-- AURO-GENERATED-CONTENT:END -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## auro-toast default use
@@ -40,7 +45,7 @@ The following illustrates the default use of the auro-toast element.
 <auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
-<!-- AURO-GENERATED-CONTENT:END -->
+
 </auro-accordion>
 
 ## Recommended Use and Version Control
