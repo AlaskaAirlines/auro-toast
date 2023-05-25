@@ -13,26 +13,43 @@ import { LitElement, html } from "lit";
 
 // Import touch detection lib
 import styleCss from "./style-css.js";
+import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg_es6.js';
 
 // See https://git.io/JJ6SJ for "How to document your components using JSDoc"
 /**
  * The auro-toast element provides users a way to ... (it would be great if you fill this out).
  *
  * @attr {Boolean} fixed - Uses fixed pixel values for element shape
+ * @attr {Boolean} visible - Sets state of toast to visible
  */
 
 // build the component class
 export class AuroToast extends LitElement {
-  // constructor() {
-  //   super();
-  // }
+  constructor() {
+    super();
+
+    /**
+     * @private
+     */
+    this.dom = new DOMParser().parseFromString(closeIcon.svg, 'text/html');
+
+    /**
+     * @private
+     */
+    this.svg = this.dom.body.firstChild;
+
+  }
 
   // This function is to define props used within the scope of this component
   // Be sure to review  https://lit.dev/docs/components/properties/
   // to understand how to use reflected attributes with your property settings.
   static get properties() {
     return {
-      // ...super.properties,
+      ...super.properties,
+      visible: {
+        type: Boolean,
+        reflect: true
+      }
     };
   }
 
@@ -40,12 +57,22 @@ export class AuroToast extends LitElement {
     return [styleCss];
   }
 
+  /**
+   * @private
+   * @returns {void}
+   */
+  handleOnClose() {
+    this.visible = false;
+  }
+
   // When using auroElement, use the following attribute and function when hiding content from screen readers.
   // aria-hidden="${this.hideAudible(this.hiddenAudible)}"
 
   // function that renders the HTML and CSS into  the scope of the component
   render() {
-    return html`<slot></slot>`;
+    return this.visible
+      ? html`<slot></slot><button class="toastButton" @click="${this.handleOnClose}">${this.svg}</button>`
+      : undefined;
   }
 }
 
