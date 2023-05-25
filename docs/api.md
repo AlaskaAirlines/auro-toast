@@ -10,6 +10,6 @@ The auro-toast element provides users a way to ... (it would be great if you fil
 
 ## Properties
 
-| Property   | Attribute  | Type     | Description                                      |
-|------------|------------|----------|--------------------------------------------------|
-| `cssClass` | `cssClass` | `String` | Applies designated CSS class to demo element - you want to delete me! |
+| Property  | Attribute | Type      | Description                    |
+|-----------|-----------|-----------|--------------------------------|
+| `visible` | `visible` | `Boolean` | Sets state of toast to visible |

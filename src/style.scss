@@ -9,26 +9,50 @@
 
 @import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/breakpoints';
 @import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/core';
+@import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/utilityClasses/displayProperties';
 
 // Support for auroElement styles
 // @import './node_modules/@aurodesignsystem/webcorestylesheets/dist/auroElement/auroElement';
 
+.toastButton {
+  width: var(--auro-size-400);
+  height: var(--auro-size-400);
+  padding-right: 0;
+  padding-left: 0;
+  border: 2px solid transparent;
+  margin-left: auto;
+  background-color: transparent;
+
+  &:hover {
+    border: 1px solid var(--auro-color-ui-bkg-hover-on-light);
+    border-radius: 50%;
+    background-color: var(--auro-color-ui-bkg-hover-on-light);
+    cursor: pointer;
+
+  }
+
+}
+
 // container styles - defines the look of the outer custom component
-:host {
-  display: inline-block;
-  min-width: 100%;
+:host([visible]) {
+  display: inline-flex;
+  min-width: 95%;
   min-height: 60px;
+  align-items: center;
   padding: var(--auro-size-200) var(--auro-size-150);
   border-radius: 8px;
   box-shadow: var(--auro-elevation-200);
-  
-  @media ($auro-grid-breakpoint-sm <= width < $auro-grid-breakpoint-lg) {
+  gap: var(--auro-size-200);
+
+  @media ($auro-grid-breakpoint-sm <=width < $auro-grid-breakpoint-lg) {
     min-width: 33%;
     max-width: 50%;
+
   }
-  @media (width >= $auro-grid-breakpoint-lg) {
+  @media (width >=$auro-grid-breakpoint-lg) {
     min-width: 200px;
     max-width: 500px;
+    
   }
 
 }
