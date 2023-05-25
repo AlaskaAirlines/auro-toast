@@ -35,6 +35,11 @@
 
 // container styles - defines the look of the outer custom component
 :host([visible]) {
+  position: fixed;
+  z-index: var(--auro-depth-modal);
+  right: 2%;
+  bottom: 2%;
+  left: 2%;
   display: inline-flex;
   min-width: 95%;
   min-height: 60px;
@@ -44,15 +49,19 @@
   box-shadow: var(--auro-elevation-200);
   gap: var(--auro-size-200);
 
-  @media ($auro-grid-breakpoint-sm <=width < $auro-grid-breakpoint-lg) {
+
+  @media ($auro-grid-breakpoint-sm <= width < $auro-grid-breakpoint-lg) {
+    right: 1%;
+    left: unset;
     min-width: 33%;
     max-width: 50%;
 
   }
   @media (width >=$auro-grid-breakpoint-lg) {
+    right: 1%;
+    left: unset;
     min-width: 200px;
     max-width: 500px;
-    
   }
 
 }
