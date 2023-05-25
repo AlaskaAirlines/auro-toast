@@ -6,27 +6,41 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 
 # Toast
 
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./description.md) -->
+<!-- The below content is automatically added from ./description.md -->
 `<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating toast messages to Alaska customers.
+<!-- AURO-GENERATED-CONTENT:END -->
 
 ## auro-toast use cases
 
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./useCases.md) -->
+<!-- The below content is automatically added from ./useCases.md -->
 The `<auro-toast>` use cases include:
 
 * Error toast
 * Success toast
+<!-- AURO-GENERATED-CONTENT:END -->
 
 ## auro-toast default use
+
 The following illustrates the default use of the auro-toast element.
 <div class="exampleWrapper">
-  <auro-toast>Toast content goes here.</auro-toast>
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
+<!-- The below content is automatically added from ./../../apiExamples/basic.html -->
+<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
+<auro-toast>Toast content goes here.</auro-toast>
+<!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
+<!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
 
 ```html
+<auro-button onClick="toggleToast('auro-toast')">Show default toast</auro-button>
 <auro-toast>Toast content goes here.</auro-toast>
 ```
-
+<!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
 ## Recommended Use and Version Control
@@ -47,10 +61,6 @@ This will create a new custom element that you can use in your HTML that will fu
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
-
-```html
-<auro-toast>Toast content goes here.</auro-toast>
-```
   ```html
   <custom-toast>Salutations World!</custom-toast>
   ```
