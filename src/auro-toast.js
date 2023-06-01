@@ -20,6 +20,8 @@ const FADE_OUT_DURATION = 300;
  * @attr {Boolean} fixed - Uses fixed pixel values for element shape
  * @attr {Boolean} visible - Sets state of toast to visible
  * @attr {String} variant - Component will render visually based on which variant value is set; currently supports `error`, `success`
+ * @attr {Boolean} noIcon - Removes icon from the toast UI
+ * @fires onToastClose - Notifies that the toast has been closed
  */
 
 // build the component class
@@ -69,7 +71,7 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   handleOnClose() {
-    this.visible = false;
+    this.fadeOutToast();
     clearTimeout(this.fadeOutTimer);
   }
 
@@ -81,14 +83,30 @@ export class AuroToast extends LitElement {
     const toastContainer = this.shadowRoot.querySelector('#toastContainer');
     toastContainer.className = 'hidden';
 
-    // Wait until fade out completes to set visible to false
     setTimeout(() => {
-      this.visible = false;
+      this.closeToast();
     }, FADE_OUT_DURATION);
   }
 
-  updated() {
-    if (this.visible) {
+  /**
+   * @private
+   * @returns {void}
+   */
+  closeToast() {
+    this.visible = false;
+    this.dispatchEvent(new CustomEvent('onToastClose', {
+      bubbles: true,
+      composed: true,
+      detail: this
+    }));
+  }
+
+
+  updated(changedProperties) {
+    if (changedProperties.has('variant')) {
+      clearTimeout(this.fadeOutTimer);
+    }
+    if (this.visible && this.variant !== 'error') {
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
       }, TIME_TIL_FADE_OUT);
@@ -96,15 +114,31 @@ export class AuroToast extends LitElement {
   }
 
   render() {
-    return this.visible
-      ? html`
-      <div id="toastContainer">
-        <slot></slot>
-        <button class="toastButton" @click="${this.handleOnClose}">
-          ${this.svg}
-        </button>
-      </div>
-      `
+    let iconHtml = html``;
+
+    switch (this.variant) {
+      case undefined:
+      case null:
+        // default toast uses information icon
+        iconHtml = this.generateIconHtml(information.svg);
+        break;
+      case "error":
+        iconHtml = this.generateIconHtml(error.svg);
+        break;
+      case "success":
+        iconHtml = this.generateIconHtml(success.svg);
+        break;
+      default:
+        break;
+    }
+
+    return this.visible ? html`<div id="toastContainer">
+    ${iconHtml}
+      <div class="message"><slot></slot></div>
+      <button class="closeButton" aria-label="closeToast" @click="${this.handleOnClose}">
+        ${this.svg}
+      </button>
+  </div>`
       : undefined;
   }
 }

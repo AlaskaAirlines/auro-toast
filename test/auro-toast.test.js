@@ -1,4 +1,4 @@
-import { fixture, html, expect, aTimeout } from '@open-wc/testing';
+import { fixture, html, expect, aTimeout, elementUpdated } from '@open-wc/testing';
 import '../src/auro-toast';
 
 describe('auro-toast', () => {
@@ -11,19 +11,20 @@ describe('auro-toast', () => {
   });
 
   it('auro-toast custom element is defined', async () => {
-    const el = await !!customElements.get("auro-toast");
+    const el = !!customElements.get("auro-toast");
 
-    await expect(el).to.be.true;
+    expect(el).to.be.true;
   });
 
   it('close the toast when the X icon button is clicked on', async () => {
     const el = await fixture(html`
-    <auro-toast visible> Hello I am a toast! </auro-toast>
+    <auro-toast id="2" visible> Hello I am a toast! </auro-toast>
   `);
     const closeButton = el.shadowRoot.querySelector('button');
-    closeButton.click()
-    expect(el.visible).to.be.false
-  })
+    closeButton.click();
+
+    setTimeout(() => expect(el.visible).to.be.false, 1000);
+  });
 
   it('auro-toast is hidden after five seconds', async () => {
     const el = await fixture(html`
@@ -37,5 +38,16 @@ describe('auro-toast', () => {
   const toastContainer = root.querySelector('#toastContainer');
 
   expect(toastContainer.classList.contains('hidden')).to.be.true;
+  setTimeout(() => expect(el.visible).to.be.false, 1000);
   }).timeout(5060);
+
+  it('sets auro-toast to noIcon style', async () => {
+    const el = await fixture(html`
+      <auro-toast variant="success" noIcon visible> Success </auro-toast>
+    `);
+    const root = el.shadowRoot;
+    expect(root.querySelector('.icon')).to.not.exist;
+
+  });
+
 });

@@ -9,19 +9,17 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./description.md) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
-## auro-toast use cases
+## Component use cases
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./useCases.md) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## auro-toast default use
-
-The following illustrates the default use of the auro-toast element.
+The following illustrates the default use of the auro-toast. This toast will automatically dismiss after five seconds if the user does not dismiss it. In this case, the toast is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
@@ -32,11 +30,11 @@ The following illustrates the default use of the auro-toast element.
 
 ## Single toasts
 ### Error
+The error toast will not automatically dismiss itself. The user must close the toast. When the toast is closed, it is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
 <div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/error.html) -->
-  <!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/error.html) -->
+<!-- AURO-GENERATED-CONTENT:END -->
 </div>
-
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
@@ -46,11 +44,11 @@ The following illustrates the default use of the auro-toast element.
 </auro-accordion>
 
 ### Success
+The success toast will automatically dismiss after five seconds if the user does not dismiss it. In this case, the toast is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
 <div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/success.html) -->
-  <!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/success.html) -->
+<!-- AURO-GENERATED-CONTENT:END -->
 </div>
-
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
@@ -58,6 +56,72 @@ The following illustrates the default use of the auro-toast element.
 <!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>
+
+## Multiple toasts
+The auro-toast multi-toasts use case requires the use of the auro-toaster component.
+
+### The setup
+Triggering the toasts relies on setting the visible property to true. See the following example code that is implemented into this demo.
+
+```js
+showToast = (toastID) => {
+  const toast = document.querySelector(toastID);
+
+  if (!toast.hasAttribute('visible')) {
+    toast.setAttribute('visible', true);
+  }
+};
+```
+<div class="exampleWrapper">
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/multipleToasts.html) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+</div>
+
+<auro-accordion lowProfile justifyRight>
+  <span slot="trigger">See code</span>
+
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/multipleToasts.html) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+
+</auro-accordion>
+
+
+## Dynamic toasts
+If you choose to implement toasts dynamically, the following is an example of how to implement dynamic toasts using Vue.
+```js
+interface Toast {
+  variant: string,
+  message: string,
+  visible: boolean
+}
+
+const toasts = ref<Array<Toast>>([]);
+
+// Function that adds toasts to the toasts array
+handleToastEvent(toast) {
+  toasts.push(toast);
+}
+
+// Function that removes the toast from the DOM
+handleOnToastClose(event) {
+  // In event.details comes the ID of the auro-toast that was closed (visible was set to false)
+  const id = event.details;
+  toasts.value = toasts.filter((t) => t.id !== id)
+}
+```
+```html
+<auro-toaster>
+     <auro-toast 
+      v-for="(toast, i) in toasts"
+      :variant="toast.variant"
+      :visible="toast.visible"
+      :id="i" 
+      @onClose="handleOnToastClose">
+        {{ toast.message }}
+     </auro-toast>
+  <auro-toaster>
+```
+
 
 ## Recommended Use and Version Control
 
