@@ -21,7 +21,9 @@ The following sections are editable by making changes to the following files:
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/description.md) -->
 <!-- The below content is automatically added from ./../docs/partials/description.md -->
-`<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating toast messages to Alaska customers.
+`<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating a toast message to Alaska customers.
+
+`<auro-toaster>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating a stack of auro-toast components.
 <!-- AURO-GENERATED-CONTENT:END -->
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/readmeAddlInfo.md) -->
 <!-- The below content is automatically added from ./../docs/partials/readmeAddlInfo.md -->
@@ -85,8 +87,9 @@ import "@aurodesignsystem/auro-toast";
 <!-- The below code snippet is automatically added from ./../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast()">Show default toast</auro-button>
-<auro-toast>Toast content goes here.</auro-toast>
+<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
+<br>
+<auro-toast id="defaultToast"> Default toast with no error type  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 
@@ -105,9 +108,9 @@ We recommend you load these bundles using [differential serving](https://philipw
 
 ```html
 <!-- **NOTE:** Be sure to replace `@latest` in the URL with the version of the asset you want. @latest is NOT aware of any MAJOR releases, use at your own risk. -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@aurodesignsystem/design-tokens@latest/dist/tokens/CSSCustomProperties.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@alaskaairux/design-tokens@latest/dist/tokens/CSSCustomProperties.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@aurodesignsystem/webcorestylesheets@latest/dist/bundled/essentials.css" />
-<script src="https://cdn.jsdelivr.net/@aurodesignsystem/auro-toast@latest/dist/auro-toast__bundled.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/@aurodesignsystem/auro-toast@latest/dist/auro-toast__bundled.js" type="module"></script>
 ```
 
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -120,6 +123,7 @@ The `<auro-toast>` use cases include:
 
 * Error toast
 * Success toast
+* Default toast
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## API Code Examples
@@ -130,8 +134,9 @@ The `<auro-toast>` use cases include:
 <!-- The below code snippet is automatically added from ./../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="toggleToast()">Show default toast</auro-button>
-<auro-toast>Toast content goes here.</auro-toast>
+<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
+<br>
+<auro-toast id="defaultToast"> Default toast with no error type  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 

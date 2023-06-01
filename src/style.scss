@@ -11,73 +11,79 @@
 @import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/core';
 @import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/utilityClasses/displayProperties';
 
-// Support for auroElement styles
-// @import './node_modules/@aurodesignsystem/webcorestylesheets/dist/auroElement/auroElement';
-
-.toastButton {
-  width: var(--auro-size-400);
-  height: var(--auro-size-400);
-  padding-right: 0;
-  padding-left: 0;
-  border: 2px solid transparent;
-  margin-left: auto;
-  background-color: transparent;
-
-  &:hover {
-    border: 1px solid var(--auro-color-ui-bkg-hover-on-light);
-    border-radius: 50%;
-    background-color: var(--auro-color-ui-bkg-hover-on-light);
-    cursor: pointer;
-
-  }
-
-}
-
 // container styles - defines the look of the outer custom component
 :host([visible]) {
-  position: fixed;
-  z-index: var(--auro-depth-modal);
-  right: 2%;
-  bottom: 2%;
-  left: 2%;
   display: inline-flex;
-  min-width: 95%;
+  min-width: 100%;
   min-height: 60px;
-  align-items: center;
   padding: var(--auro-size-200) var(--auro-size-150);
   border-radius: 8px;
   background-color: var(--auro-color-brand-gray-400);
   box-shadow: var(--auro-elevation-200);
-  gap: var(--auro-size-200);
   color: var(--auro-color-text-primary-on-dark);
+  gap: var(--auro-size-200);
+  pointer-events: auto;
 
-  @media ($auro-grid-breakpoint-sm <= width < $auro-grid-breakpoint-lg) {
-    right: 1%;
-    left: unset;
+  @media ($auro-grid-breakpoint-sm <=width < $auro-grid-breakpoint-lg) {
     min-width: 33%;
     max-width: 50%;
-
   }
   @media (width >=$auro-grid-breakpoint-lg) {
-    right: 1%;
-    left: unset;
     min-width: 200px;
     max-width: 500px;
   }
 
+  #toastContainer {
+    display: flex;
+    width: 100%;
+    gap: var(--auro-size-200);
+  }
+
+  .closeButton {
+    width: var(--auro-size-400);
+    height: var(--auro-size-400);
+    padding-right: 0;
+    padding-left: 0;
+    border: 2px solid transparent;
+    margin-left: auto;
+    background-color: transparent;
+    color: var(--auro-color-text-primary-on-dark);
+
+  }
+
+  button {
+    &:hover {
+      border: 1px solid var(--auro-color-ui-bkg-hover-on-light);
+      border-radius: 50%;
+      background-color: var(--auro-color-ui-bkg-hover-on-light);
+      cursor: pointer;
+
+    }
+  }
+
   .hidden {
     opacity: 0;
-    transition: visibility 0s 300ms, opacity 300ms linear;
+    transition: visibility 0s 300ms, opacity 300ms ease-out;
     visibility: hidden;
   }
 
+  .icon {
+    display: flex;
+    justify-content: center;
+    padding-top: var(--auro-size-25);
+    margin-right: calc(var(--auro-size-100) * -1);
+  }
+
+  .message {
+    align-self: center;
+  }
 }
 
 :host([variant='error']) {
   background-color: var(--auro-color-alert-bkg-error-default);
   color: var(--auro-color-text-primary-on-light);
 
-  svg {
+  .icon {
     color: var(--auro-color-alert-error-on-light);
   }
 
@@ -87,15 +93,15 @@
   background-color: var(--auro-color-alert-bkg-success-default);
   color: var(--auro-color-text-primary-on-light);
 
-  svg {
+  .icon {
     color: var(--auro-color-alert-success-on-light);
   }
 
 }
 
-// Selector for native :focus-visible support
-:focus-visible {
-  background-color: var(--auro-color-border-error-on-light);
-  color: var(--auro-color-base-white);
-
+:host([variant='error']),
+:host([variant='success']) {
+  .closeButton {
+    color: var(--auro-color-text-primary-on-light);
+  }
 }
