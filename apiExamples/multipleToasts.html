@@ -1,0 +1,10 @@
+
+<auro-button onClick="showToast('#toast-default')">Show default toast</auro-button>
+<auro-button onClick="showToast('#toast-error')">Show error toast</auro-button>
+<auro-button onClick="showToast('#toast-success')">Show success toast</auro-button>
+
+<auro-toaster>
+    <auro-toast id="toast-default">Default toast</auro-toast>
+    <auro-toast id="toast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
+    <auro-toast id="toast-success" variant="success">Successfully added lap infant</auro-toast>
+</auro-toaster>

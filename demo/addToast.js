@@ -3,12 +3,10 @@
 
 // ---------------------------------------------------------------------
 
-/**
- * @returns {void}
- */
-toggleToast = () => {
-  const toast = document.querySelector('auro-toast');
+showToast = (toastID) => {
+  const toast = document.querySelector(toastID);
+
   if (!toast.hasAttribute('visible')) {
-    toast.setAttribute("visible", true);
+    toast.setAttribute('visible', true);
   }
 };
