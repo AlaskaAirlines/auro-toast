@@ -88,8 +88,9 @@ import "@aurodesignsystem/auro-toast";
 
 ```html
 <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<br>
-<auro-toast id="defaultToast"> Default toast with no error type  </auro-toast>
+<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
+<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 
@@ -135,8 +136,9 @@ The `<auro-toast>` use cases include:
 
 ```html
 <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<br>
-<auro-toast id="defaultToast"> Default toast with no error type  </auro-toast>
+<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
+<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 
