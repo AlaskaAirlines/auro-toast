@@ -24,14 +24,28 @@ The `<auro-toast>` use cases include:
 * Default toast
 <!-- AURO-GENERATED-CONTENT:END -->
 
+### The setup
+Triggering the toasts relies on setting the visible property to true. See the following example code which is used in this demo.
+
+```js
+showToast = (toastID) => {
+  const toast = document.querySelector(toastID);
+
+  if (!toast.hasAttribute('visible')) {
+    toast.setAttribute('visible', true);
+  }
+};
+```
+
 ## auro-toast default use
 The following illustrates the default use of the auro-toast. This toast will automatically dismiss after five seconds if the user does not dismiss it. In this case, the toast is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
 <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<br>
-<auro-toast id="defaultToast"> Default toast with no error type  </auro-toast>
+<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
+<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
@@ -41,8 +55,9 @@ The following illustrates the default use of the auro-toast. This toast will aut
 
 ```html
 <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<br>
-<auro-toast id="defaultToast"> Default toast with no error type  </auro-toast>
+<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
+<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
@@ -55,8 +70,9 @@ The error toast will not automatically dismiss itself. The user must close the t
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/error.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/error.html -->
 <auro-button onClick="showToast('#errorToast')">Show error toast</auro-button>
-<br>
-<auro-toast variant="error" id="errorToast"> Unable to add lap infant. Please try again  </auro-toast>
+<auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast"> Unable to add lap infant. Please try again  </auro-toast>
+<auro-button onClick="showToast('#errorToast-noIcon')">Show error toast with no icon</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast-noIcon" noIcon> Unable to add lap infant. Please try again  </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
@@ -66,8 +82,9 @@ The error toast will not automatically dismiss itself. The user must close the t
 
 ```html
 <auro-button onClick="showToast('#errorToast')">Show error toast</auro-button>
-<br>
-<auro-toast variant="error" id="errorToast"> Unable to add lap infant. Please try again  </auro-toast>
+<auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast"> Unable to add lap infant. Please try again  </auro-toast>
+<auro-button onClick="showToast('#errorToast-noIcon')">Show error toast with no icon</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast-noIcon" noIcon> Unable to add lap infant. Please try again  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
@@ -78,8 +95,9 @@ The success toast will automatically dismiss after five seconds if the user does
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/success.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/success.html -->
 <auro-button onClick="showToast('#successToast')">Show success toast</auro-button>
-<br>
-<auro-toast variant="success" id="successToast"> Successfully added lap infant  </auro-toast>
+<auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast"> Successfully added lap infant  </auro-toast>
+<auro-button onClick="showToast('#successToast-noIcon')">Show success toast with no icon</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast-noIcon" noIcon> Successfully added lap infant  </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
@@ -89,27 +107,15 @@ The success toast will automatically dismiss after five seconds if the user does
 
 ```html
 <auro-button onClick="showToast('#successToast')">Show success toast</auro-button>
-<br>
-<auro-toast variant="success" id="successToast"> Successfully added lap infant  </auro-toast>
+<auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast"> Successfully added lap infant  </auro-toast>
+<auro-button onClick="showToast('#successToast-noIcon')">Show success toast with no icon</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast-noIcon" noIcon> Successfully added lap infant  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
 ## Multiple toasts
 The auro-toast multi-toasts use case requires the use of the auro-toaster component.
-
-### The setup
-Triggering the toasts relies on setting the visible property to true. See the following example code that is implemented into this demo.
-
-```js
-showToast = (toastID) => {
-  const toast = document.querySelector(toastID);
-
-  if (!toast.hasAttribute('visible')) {
-    toast.setAttribute('visible', true);
-  }
-};
-```
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/multipleToasts.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/multipleToasts.html -->

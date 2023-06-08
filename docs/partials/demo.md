@@ -14,6 +14,19 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./useCases.md) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
+### The setup
+Triggering the toasts relies on setting the visible property to true. See the following example code which is used in this demo.
+
+```js
+showToast = (toastID) => {
+  const toast = document.querySelector(toastID);
+
+  if (!toast.hasAttribute('visible')) {
+    toast.setAttribute('visible', true);
+  }
+};
+```
+
 ## auro-toast default use
 The following illustrates the default use of the auro-toast. This toast will automatically dismiss after five seconds if the user does not dismiss it. In this case, the toast is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
 <div class="exampleWrapper">
@@ -59,19 +72,6 @@ The success toast will automatically dismiss after five seconds if the user does
 
 ## Multiple toasts
 The auro-toast multi-toasts use case requires the use of the auro-toaster component.
-
-### The setup
-Triggering the toasts relies on setting the visible property to true. See the following example code that is implemented into this demo.
-
-```js
-showToast = (toastID) => {
-  const toast = document.querySelector(toastID);
-
-  if (!toast.hasAttribute('visible')) {
-    toast.setAttribute('visible', true);
-  }
-};
-```
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/multipleToasts.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -84,7 +84,6 @@ showToast = (toastID) => {
 <!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>
-
 
 ## Dynamic toasts
 If you choose to implement toasts dynamically, the following is an example of how to implement dynamic toasts using Vue.
