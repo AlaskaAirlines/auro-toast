@@ -9,6 +9,9 @@ import { LitElement, html } from "lit";
 // Import touch detection lib
 import styleCss from "./style-css.js";
 import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg_es6.js';
+import information from '@alaskaairux/icons/dist/icons/alert/information-stroke_es6.js';
+import error from '@alaskaairux/icons/dist/icons/alert/error_es6.js';
+import success from '@alaskaairux/icons/dist/icons/interface/check-stroke_es6.js';
 
 const TIME_TIL_FADE_OUT = 5000;
 const FADE_OUT_DURATION = 300;
@@ -17,7 +20,6 @@ const FADE_OUT_DURATION = 300;
 /**
  * The auro-toast element provides users a way to ... (it would be great if you fill this out).
  *
- * @attr {Boolean} fixed - Uses fixed pixel values for element shape
  * @attr {Boolean} visible - Sets state of toast to visible
  * @attr {String} variant - Component will render visually based on which variant value is set; currently supports `error`, `success`
  * @attr {Boolean} noIcon - Removes icon from the toast UI
@@ -58,12 +60,29 @@ export class AuroToast extends LitElement {
       variant: {
         type: String,
         reflect: true
+      },
+      noIcon: {
+        type: Boolean
       }
     };
   }
 
   static get styles() {
     return [styleCss];
+  }
+
+  /**
+   * @private
+   * @param {string} svgContent - The imported svg icon.
+   * @returns {string} - The html template for the icon.
+   */
+  generateIconHtml(svgContent) {
+    const dom = new DOMParser().parseFromString(svgContent, 'text/html'),
+      svg = dom.body.firstChild;
+
+    return this.noIcon
+      ? html``
+      : html`<div class="icon">${svg}</div>`;
   }
 
   /**

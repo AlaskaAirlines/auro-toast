@@ -35,7 +35,7 @@
 
   #toastContainer {
     display: flex;
-    width: 100%;
+    align-items: center;
     gap: var(--auro-size-200);
   }
 
@@ -47,9 +47,6 @@
     border: 2px solid transparent;
     margin-left: auto;
     background-color: transparent;
-    color: var(--auro-color-text-primary-on-dark);
-
-  }
 
   button {
     &:hover {
