@@ -125,6 +125,7 @@ export class AuroToast extends LitElement {
     if (changedProperties.has('variant')) {
       clearTimeout(this.fadeOutTimer);
     }
+    // do not auto dismiss for error toasts
     if (this.visible && this.variant !== 'error') {
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
