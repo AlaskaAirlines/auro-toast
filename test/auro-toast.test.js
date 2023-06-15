@@ -28,17 +28,29 @@ describe('auro-toast', () => {
 
   it('auro-toast is hidden after five seconds', async () => {
     const el = await fixture(html`
-    <auro-toast>Something</auro-toast>
+    <auro-toast visible>Something</auro-toast>
   `);
-
-  el.setAttribute("visible", true)
 
   await aTimeout(5050);
   const root = el.shadowRoot;
   const toastContainer = root.querySelector('#toastContainer');
 
   expect(toastContainer.classList.contains('hidden')).to.be.true;
-  setTimeout(() => expect(el.visible).to.be.false, 1000);
+  await aTimeout(310);
+  expect(el.visible).to.be.false;
+  }).timeout(5400);
+
+  it('error auro-toast should not auto dismiss', async () => {
+    const el = await fixture(html`
+    <auro-toast variant="error" visible>Something</auro-toast>
+  `);
+
+  await aTimeout(5050);
+  const root = el.shadowRoot;
+  const toastContainer = root.querySelector('#toastContainer');
+
+  expect(toastContainer.classList.contains('hidden')).to.be.false;
+  expect(el.visible).to.be.true;
   }).timeout(5060);
 
   it('sets auro-toast to noIcon style', async () => {
