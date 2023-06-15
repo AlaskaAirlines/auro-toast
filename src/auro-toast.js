@@ -112,6 +112,7 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   closeToast() {
+    clearTimeout(this.fadeOutTimer);
     this.visible = false;
     this.dispatchEvent(new CustomEvent('onToastClose', {
       bubbles: true,
@@ -120,6 +121,24 @@ export class AuroToast extends LitElement {
     }));
   }
 
+  /**
+   * For mobile, set the onclick function so the toast can be dismissed if it is tapped on anywhere inside the toast.
+   * @private
+   * @returns {void}
+   */
+  setOnClick() {
+    const mobileBreakPoint = 767;
+    if (window.innerWidth < mobileBreakPoint) {
+      this.onclick = () => {
+        this.fadeOutToast();
+      };
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setOnClick();
+  }
 
   updated(changedProperties) {
     if (changedProperties.has('variant')) {

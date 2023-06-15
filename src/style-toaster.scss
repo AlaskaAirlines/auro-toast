@@ -24,15 +24,10 @@
   gap: var(--auro-size-200);
   pointer-events: none;
   
-  @media ($auro-grid-breakpoint-sm <=width < $auro-grid-breakpoint-lg) {
-    right: 1%;
-    left: unset;
-    width: 100%;
-}
   @media (width >=$auro-grid-breakpoint-lg) {
     right: 1%;
     left: unset;
     width: 100%;
-}
+  }
 
 }
