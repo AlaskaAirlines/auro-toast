@@ -88,7 +88,15 @@ The auro-toast multi-toasts use case requires the use of the auro-toaster compon
 ## Dynamic toasts
 If you choose to implement toasts dynamically, the following is an example of how to implement dynamic toasts using Vue.
 ```js
+import { v4 as uuidv4 } from 'uuid';
+
+interface ToastEvent {
+  variant: string,
+  message: string
+}
+
 interface Toast {
+  id: string
   variant: string,
   message: string,
   visible: boolean
@@ -96,15 +104,20 @@ interface Toast {
 
 const toasts = ref<Array<Toast>>([]);
 
-// Function that adds toasts to the toasts array
-handleToastEvent(toast) {
-  toasts.push(toast);
+
+// Function that adds toasts to the toasts array, which will trigger the toast to be visible
+handleToastEvent(e: ToastEvent) {
+  toast.id = uuidv4();
+  toast.visible = true;
+  toast.variant = e.variant;
+  toast.message = e.message
+  toasts.value.push(toast);
 }
 
 // Function that removes the toast from the DOM
 handleOnToastClose(event) {
-  // In event.details comes the ID of the auro-toast that was closed (visible was set to false)
-  const id = event.details;
+  // In event.detail comes the ID of the auro-toast that was closed (visible was set to false)
+  const id = event.detail.id;
   toasts.value = toasts.filter((t) => t.id !== id)
 }
 ```
@@ -112,10 +125,10 @@ handleOnToastClose(event) {
 <auro-toaster>
      <auro-toast 
       v-for="(toast, i) in toasts"
-      :variant="toast.variant"
+      :id="toast.id" 
       :visible="toast.visible"
-      :id="i" 
-      @onClose="handleOnToastClose">
+      :variant="toast.variant"
+      @on-toast-close="handleOnToastClose">
         {{ toast.message }}
      </auro-toast>
   <auro-toaster>
@@ -136,13 +149,14 @@ registerComponent('custom-toast');
 This will create a new custom element that you can use in your HTML that will function identically to the `auro-toast` element.
 
 <div class="exampleWrapper">
-  <custom-toast>Salutations World!</custom-toast>
+  <custom-toast variant="error" visible>Salutations World!</custom-toast>
 </div>
 
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
-  ```html
-  <custom-toast>Salutations World!</custom-toast>
-  ```
+
+```html
+  <custom-toast variant="error" visible>Salutations World!</custom-toast>
+```
 
 </auro-accordion>
