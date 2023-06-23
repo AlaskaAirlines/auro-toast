@@ -99,8 +99,8 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   fadeOutToast() {
-    const toastContainer = this.shadowRoot.querySelector('#toastContainer');
-    toastContainer.className = 'hidden';
+    const toastContainer = this.shadowRoot.querySelector('.toastContainer');
+    toastContainer.classList.add('hidden');
 
     setTimeout(() => {
       this.closeToast();
@@ -171,7 +171,7 @@ export class AuroToast extends LitElement {
         break;
     }
 
-    return this.visible ? html`<div id="toastContainer">
+    return this.visible ? html`<div class="toastContainer">
     ${iconHtml}
       <div class="message"><slot></slot></div>
       <button class="closeButton" aria-label="closeToast" @click="${this.handleOnClose}">

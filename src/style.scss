@@ -33,7 +33,7 @@
     max-width: 500px;
   }
 
-  #toastContainer {
+  .toastContainer {
     display: flex;
     width: 100%;
     gap: var(--auro-size-200);
@@ -49,9 +49,6 @@
     background-color: transparent;
     color: var(--auro-color-text-primary-on-dark);
 
-  }
-
-  button {
     &:hover {
       border: 1px solid var(--auro-color-ui-bkg-hover-on-light);
       border-radius: 50%;
@@ -99,8 +96,8 @@
 
 }
 
-:host([variant='error']),
-:host([variant='success']) {
+:host([visible][variant='error']),
+:host([visible][variant='success']) {
   .closeButton {
     color: var(--auro-color-text-primary-on-light);
   }
