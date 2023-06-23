@@ -22,169 +22,91 @@ The auro-toast element provides users a way to ... (it would be great if you fil
 
 ## API Examples
 
-### Basic
-
-<div class="twoColDemoRow">
-  <div>
-    <div class="exampleWrapper">
-      <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
-      <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-      <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-      <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-      <auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-      <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
-      <!-- AURO-GENERATED-CONTENT:END -->
-    </div>
-<auro-accordion lowProfile justifyRight>
-  <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
-
-```html
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
-```
-<!-- AURO-GENERATED-CONTENT:END -->
-</auro-accordion>
-
-### Attribute Examples
-
-#### <a name="attributeName"></a>`attributeName`<a href="#auro-toast" style="float: right; font-size: 1rem; font-weight: 100;">back to top</a>
-Explanation and use description.
-
-<div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
-  <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-  <auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
-  <!-- AURO-GENERATED-CONTENT:END -->
-</div>
-<auro-accordion lowProfile justifyRight>
-  <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
-
-```html
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
-```
-<!-- AURO-GENERATED-CONTENT:END -->
-</auro-accordion>
-
 ### Property Examples
 
-#### <a name="propertyName"></a>`propertyName`<a href="#auro-toast" style="float: right; font-size: 1rem; font-weight: 100;">back to top</a>
-Explanation and use description.
+#### visible
+
+State of the toast which determines if it is visible.
 
 <div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
-  <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-  <auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/visible.html) -->
+  <!-- The below content is automatically added from ./../../apiExamples/visible.html -->
+  <auro-button onClick="showToast('#d-toast')"> Set visible to true </auro-button>
+  <auro-toast id="d-toast" style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
+
+```js 
+showToast = (toastID) => {
+  const toast = document.querySelector(toastID);
+
+  if (!toast.hasAttribute('visible')) {
+    toast.setAttribute('visible', true);
+  }
+};
+```
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/visible.html) -->
+<!-- The below code snippet is automatically added from ./../../apiExamples/visible.html -->
 
 ```html
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+<auro-button onClick="showToast('#d-toast')"> Set visible to true </auro-button>
+<auro-toast id="d-toast" style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-### Method Examples
+#### variant
 
-#### <a name="methodName"></a>`methodName`<a href="#auro-toast" style="float: right; font-size: 1rem; font-weight: 100;">back to top</a>
-Explanation and use description.
+What the component will render visually based on which variant value is set; currently supports `error`, `success`.
 
 <div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
-  <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-  <auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/variant.html) -->
+  <!-- The below content is automatically added from ./../../apiExamples/variant.html -->
+  <auro-button onClick="showToast('#defaultVariant')">Show default toast</auro-button>
+  <auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">Default toast</auro-toast>
+  <auro-button onClick="showToast('#errorVariant')">Show error toast</auro-button>
+  <auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">Unable to add lap infant. Please try again</auro-toast>
+  <auro-button onClick="showToast('#successVariant')">Show success toast</auro-button>
+  <auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">Successfully added lap infant</auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/variant.html) -->
+<!-- The below code snippet is automatically added from ./../../apiExamples/variant.html -->
 
 ```html
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+<auro-button onClick="showToast('#defaultVariant')">Show default toast</auro-button>
+<auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">Default toast</auro-toast>
+<auro-button onClick="showToast('#errorVariant')">Show error toast</auro-button>
+<auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">Unable to add lap infant. Please try again</auro-toast>
+<auro-button onClick="showToast('#successVariant')">Show success toast</auro-button>
+<auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">Successfully added lap infant</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-### Event Examples
+#### noIcon
 
-#### <a name="eventName"></a>`eventName`<a href="#auro-toast" style="float: right; font-size: 1rem; font-weight: 100;">back to top</a>
-Explanation and use description.
+If set, no icon will be visible on the toast.
 
 <div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
-  <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-  <auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/noIcon.html) -->
+  <!-- The below content is automatically added from ./../../apiExamples/noIcon.html -->
+  <auro-button onClick="showToast('#noIcon')"> Show toast with no icon </auro-button>
+  <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/noIcon.html) -->
+<!-- The below code snippet is automatically added from ./../../apiExamples/noIcon.html -->
 
 ```html
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
-```
-<!-- AURO-GENERATED-CONTENT:END -->
-</auro-accordion>
-
-### Slot Examples
-
-#### <a name="slotName"></a>`slotName`<a href="#auro-toast" style="float: right; font-size: 1rem; font-weight: 100;">back to top</a>
-Explanation and use description.
-
-<div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
-  <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-  <auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-  <auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
-  <!-- AURO-GENERATED-CONTENT:END -->
-</div>
-<auro-accordion lowProfile justifyRight>
-  <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
-
-```html
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+<auro-button onClick="showToast('#noIcon')"> Show toast with no icon </auro-button>
+<auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
