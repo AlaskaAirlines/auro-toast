@@ -33,7 +33,7 @@ describe('auro-toast', () => {
 
   await aTimeout(5050);
   const root = el.shadowRoot;
-  const toastContainer = root.querySelector('#toastContainer');
+  const toastContainer = root.querySelector('.toastContainer');
 
   expect(toastContainer.classList.contains('hidden')).to.be.true;
   await aTimeout(310);
@@ -47,7 +47,7 @@ describe('auro-toast', () => {
 
   await aTimeout(5050);
   const root = el.shadowRoot;
-  const toastContainer = root.querySelector('#toastContainer');
+  const toastContainer = root.querySelector('.toastContainer');
 
   expect(toastContainer.classList.contains('hidden')).to.be.false;
   expect(el.visible).to.be.true;
