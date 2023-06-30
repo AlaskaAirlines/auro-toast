@@ -18,7 +18,7 @@ const FADE_OUT_DURATION = 300;
 
 // See https://git.io/JJ6SJ for "How to document your components using JSDoc"
 /**
- * The auro-toast element provides users a way to ... (it would be great if you fill this out).
+ * The auro-toast element provides users a way to display short, temporary messages.
  *
  * @attr {Boolean} visible - Sets state of toast to visible
  * @attr {String} variant - Component will render visually based on which variant value is set; currently supports `error`, `success`
