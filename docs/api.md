@@ -1,6 +1,6 @@
 # auro-toast
 
-The auro-toast element provides users a way to ... (it would be great if you fill this out).
+The auro-toast element provides users a way to display short, temporary messages.
 
 ## Properties
 
