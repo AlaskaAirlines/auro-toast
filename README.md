@@ -21,9 +21,9 @@ The following sections are editable by making changes to the following files:
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/description.md) -->
 <!-- The below content is automatically added from ./../docs/partials/description.md -->
-`<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating a toast message to Alaska customers.
+The `<auro-toast>` element is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of sending an unobtrusive toast (or push) notification to your visitors.
 
-`<auro-toaster>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating a stack of auro-toast components.
+The `<auro-toaster>` wrapper-element is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of managing a series of notifications  at the bottom of the screen using the `<auro-toast>` element.
 <!-- AURO-GENERATED-CONTENT:END -->
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/readmeAddlInfo.md) -->
 <!-- The below content is automatically added from ./../docs/partials/readmeAddlInfo.md -->
@@ -87,10 +87,20 @@ import "@aurodesignsystem/auro-toast";
 <!-- The below code snippet is automatically added from ./../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+<!-- icon variant -->
+<auro-button onClick="showToast('#defaultToast')">
+  Show default notification
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;"id="defaultToast">
+  Default notification with no error type
+</auro-toast>
+<!-- no icon variant -->
+<auro-button onClick="showToast('#defaultToast-noIcon')">
+  Show default notification with no icon
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="defaultToast-noIcon" noIcon>
+  Default notification with no error type
+</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 
@@ -122,9 +132,9 @@ We recommend you load these bundles using [differential serving](https://philipw
 <!-- The below content is automatically added from ./../docs/partials/useCases.md -->
 The `<auro-toast>` use cases include:
 
-* Error toast
-* Success toast
-* Default toast
+* Sending an error push notification
+* Sending a success push notification
+* Sending any type of push notification
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## API Code Examples
@@ -135,10 +145,20 @@ The `<auro-toast>` use cases include:
 <!-- The below code snippet is automatically added from ./../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+<!-- icon variant -->
+<auro-button onClick="showToast('#defaultToast')">
+  Show default notification
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;"id="defaultToast">
+  Default notification with no error type
+</auro-toast>
+<!-- no icon variant -->
+<auro-button onClick="showToast('#defaultToast-noIcon')">
+  Show default notification with no icon
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="defaultToast-noIcon" noIcon>
+  Default notification with no error type
+</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 

@@ -8,9 +8,9 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./description.md) -->
 <!-- The below content is automatically added from ./description.md -->
-`<auro-toast>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating a toast message to Alaska customers.
+The `<auro-toast>` element is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of sending an unobtrusive toast (or push) notification to your visitors.
 
-`<auro-toaster>` is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of illustrating a stack of auro-toast components.
+The `<auro-toaster>` wrapper-element is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of managing a series of notifications  at the bottom of the screen using the `<auro-toast>` element.
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## Component use cases
@@ -19,13 +19,13 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 <!-- The below content is automatically added from ./useCases.md -->
 The `<auro-toast>` use cases include:
 
-* Error toast
-* Success toast
-* Default toast
+* Sending an error push notification
+* Sending a success push notification
+* Sending any type of push notification
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ### The setup
-Triggering the toasts relies on setting the visible property to true. See the following example code which is used in this demo.
+Triggering the toasts relies on setting the `visible` property to `true`. See the following example to see how this code is used in an example.
 
 ```js
 showToast = (toastID) => {
@@ -37,15 +37,29 @@ showToast = (toastID) => {
 };
 ```
 
-## auro-toast default use
-The following illustrates the default use of the auro-toast. This toast will automatically dismiss after five seconds if the user does not dismiss it. In this case, the toast is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
+## Default push notifications
+
+The following demo illustrates the `default` notification using the `<auro-toast>` element. This push notification will automatically dismiss after five seconds. The user may also dismiss it manually. The toast is **NOT** removed from the DOM. The visible property is set to `false`, which will hide the toast on the UI.
+
+Also notice in this demo the use of the `noIcon` attribute. this attribute removes the use of the default `information` icon.
+
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+<!-- icon variant -->
+<auro-button onClick="showToast('#defaultToast')">
+  Show default notification
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;"id="defaultToast">
+  Default notification with no error type
+</auro-toast>
+<!-- no icon variant -->
+<auro-button onClick="showToast('#defaultToast-noIcon')">
+  Show default notification with no icon
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="defaultToast-noIcon" noIcon>
+  Default notification with no error type
+</auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
@@ -54,24 +68,38 @@ The following illustrates the default use of the auro-toast. This toast will aut
 <!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
 
 ```html
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+<!-- icon variant -->
+<auro-button onClick="showToast('#defaultToast')">
+  Show default notification
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;"id="defaultToast">
+  Default notification with no error type
+</auro-toast>
+<!-- no icon variant -->
+<auro-button onClick="showToast('#defaultToast-noIcon')">
+  Show default notification with no icon
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="defaultToast-noIcon" noIcon>
+  Default notification with no error type
+</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-## Single toasts
+## Single notification
 
-### Error
-The error toast will not automatically dismiss itself. The user must close the toast. When the toast is closed, it is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
+Aside from the `default` notification, the `<auro-toast>` supports multiple variations, `success` and `error`. See below for more information on these variants.
+
+### Error notification
+
+The error push notification using the `<auro-toast>` element will **NOT** automatically dismiss itself. The user **MUST** dismiss the notification manually. When the notification is dismissed, it is not removed from the DOM. The `visible` property is set to `false`, which hides the notification from the UI.
+
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/error.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/error.html -->
-<auro-button onClick="showToast('#errorToast')">Show error toast</auro-button>
+<auro-button onClick="showToast('#errorToast')">Show error notification</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast"> Unable to add lap infant. Please try again  </auro-toast>
-<auro-button onClick="showToast('#errorToast-noIcon')">Show error toast with no icon</auro-button>
+<auro-button onClick="showToast('#errorToast-noIcon')">Show error notification with no icon</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast-noIcon" noIcon> Unable to add lap infant. Please try again  </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -81,16 +109,18 @@ The error toast will not automatically dismiss itself. The user must close the t
 <!-- The below code snippet is automatically added from ./../../apiExamples/error.html -->
 
 ```html
-<auro-button onClick="showToast('#errorToast')">Show error toast</auro-button>
+<auro-button onClick="showToast('#errorToast')">Show error notification</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast"> Unable to add lap infant. Please try again  </auro-toast>
-<auro-button onClick="showToast('#errorToast-noIcon')">Show error toast with no icon</auro-button>
+<auro-button onClick="showToast('#errorToast-noIcon')">Show error notification with no icon</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast-noIcon" noIcon> Unable to add lap infant. Please try again  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-### Success
-The success toast will automatically dismiss after five seconds if the user does not dismiss it. In this case, the toast is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
+### Success notification
+
+The success push notification using the `<auro-toast>` element will automatically dismiss after five seconds if the user does not manually dismiss it. In this case, the notification is not removed from the DOM. The `visible` property is set to `false`, which hides the notification from the UI.
+
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/success.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/success.html -->
@@ -115,7 +145,9 @@ The success toast will automatically dismiss after five seconds if the user does
 </auro-accordion>
 
 ## Multiple toasts
-The auro-toast multi-toasts use case requires the use of the auro-toaster component.
+
+The multi-notification use case requires the use of the `<auro-toaster>` component.
+
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/multipleToasts.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/multipleToasts.html -->
@@ -123,9 +155,9 @@ The auro-toast multi-toasts use case requires the use of the auro-toaster compon
 <auro-button onClick="showToast('#toast-error')">Show error toast</auro-button>
 <auro-button onClick="showToast('#toast-success')">Show success toast</auro-button>
 <auro-toaster>
-    <auro-toast id="toast-default">Default toast</auro-toast>
-    <auro-toast id="toast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
-    <auro-toast id="toast-success" variant="success">Successfully added lap infant</auro-toast>
+  <auro-toast id="toast-default">Default toast</auro-toast>
+  <auro-toast id="toast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
+  <auro-toast id="toast-success" variant="success">Successfully added lap infant</auro-toast>
 </auro-toaster>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -139,16 +171,18 @@ The auro-toast multi-toasts use case requires the use of the auro-toaster compon
 <auro-button onClick="showToast('#toast-error')">Show error toast</auro-button>
 <auro-button onClick="showToast('#toast-success')">Show success toast</auro-button>
 <auro-toaster>
-    <auro-toast id="toast-default">Default toast</auro-toast>
-    <auro-toast id="toast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
-    <auro-toast id="toast-success" variant="success">Successfully added lap infant</auro-toast>
+  <auro-toast id="toast-default">Default toast</auro-toast>
+  <auro-toast id="toast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
+  <auro-toast id="toast-success" variant="success">Successfully added lap infant</auro-toast>
 </auro-toaster>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
 ## Dynamic toasts
-If you choose to implement toasts dynamically, the following is an example of how to implement dynamic toasts using Vue.
+
+If you choose to implement push notifications dynamically, the following is an example of how to implement dynamic `<auro-toast>` elements using Vue.
+
 ```js
 import { v4 as uuidv4 } from 'uuid';
 
@@ -182,17 +216,20 @@ handleOnToastClose(event) {
   toasts.value = toasts.filter((t) => t.id !== id)
 }
 ```
+
+The following example is for the HTML template.
+
 ```html
 <auro-toaster>
-     <auro-toast 
-      v-for="(toast, i) in toasts"
-      :id="toast.id" 
-      :visible="toast.visible"
-      :variant="toast.variant"
-      @on-toast-close="handleOnToastClose">
-        {{ toast.message }}
-     </auro-toast>
-  <auro-toaster>
+  <auro-toast
+    v-for="(toast, i) in toasts"
+    :id="toast.id"
+    :visible="toast.visible"
+    :variant="toast.variant"
+    @on-toast-close="handleOnToastClose">
+    {{ toast.message }}
+  </auro-toast>
+<auro-toaster>
 ```
 
 ## Recommended Use and Version Control

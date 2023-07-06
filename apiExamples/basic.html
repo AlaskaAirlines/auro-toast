@@ -1,4 +1,15 @@
-<auro-button onClick="showToast('#defaultToast')">Show default toast</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast"> Default toast with no error type  </auro-toast>
-<auro-button onClick="showToast('#defaultToast-noIcon')">Show default toast with no icon</auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"  id="defaultToast-noIcon" noIcon> Default toast with no error type  </auro-toast>
+<!-- icon variant -->
+<auro-button onClick="showToast('#defaultToast')">
+  Show default notification
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;"id="defaultToast">
+  Default notification with no error type
+</auro-toast>
+
+<!-- no icon variant -->
+<auro-button onClick="showToast('#defaultToast-noIcon')">
+  Show default notification with no icon
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="defaultToast-noIcon" noIcon>
+  Default notification with no error type
+</auro-toast>

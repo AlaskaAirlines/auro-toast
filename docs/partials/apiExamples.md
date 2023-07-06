@@ -7,7 +7,7 @@
 
 #### visible
 
-State of the toast which determines if it is visible.
+State of the push notification which determines if it is `visible`.
 
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/visible.html) -->
@@ -16,7 +16,8 @@ State of the toast which determines if it is visible.
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
-```js 
+```js
+// Example function
 showToast = (toastID) => {
   const toast = document.querySelector(toastID);
 
@@ -48,7 +49,7 @@ What the component will render visually based on which variant value is set; cur
 
 #### noIcon
 
-If set, no icon will be visible on the toast.
+Using the `noIcon` attribute will set no icon to be visible in the notification.
 
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/noIcon.html) -->
