@@ -26,19 +26,25 @@ The auro-toast element provides users a way to display short, temporary messages
 
 #### visible
 
-State of the toast which determines if it is visible.
+State of the push notification which determines if it is `visible`.
 
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/visible.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/visible.html -->
-  <auro-button onClick="showToast('#d-toast')"> Set visible to true </auro-button>
-  <auro-toast id="d-toast" style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
+  <!-- example markup -->
+  <auro-button onClick="showToast('#d-toast')">
+    Set visible to true
+  </auro-button>
+  <auro-toast id="d-toast" style="display: block; margin: 0.5rem 0;">
+    Default toast
+  </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
-```js 
+```js
+// Example function
 showToast = (toastID) => {
   const toast = document.querySelector(toastID);
 
@@ -51,8 +57,13 @@ showToast = (toastID) => {
 <!-- The below code snippet is automatically added from ./../../apiExamples/visible.html -->
 
 ```html
-<auro-button onClick="showToast('#d-toast')"> Set visible to true </auro-button>
-<auro-toast id="d-toast" style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
+<!-- example markup -->
+<auro-button onClick="showToast('#d-toast')">
+  Set visible to true
+</auro-button>
+<auro-toast id="d-toast" style="display: block; margin: 0.5rem 0;">
+  Default toast
+</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
@@ -64,12 +75,24 @@ What the component will render visually based on which variant value is set; cur
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/variant.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/variant.html -->
-  <auro-button onClick="showToast('#defaultVariant')">Show default toast</auro-button>
-  <auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">Default toast</auro-toast>
-  <auro-button onClick="showToast('#errorVariant')">Show error toast</auro-button>
-  <auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">Unable to add lap infant. Please try again</auro-toast>
-  <auro-button onClick="showToast('#successVariant')">Show success toast</auro-button>
-  <auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">Successfully added lap infant</auro-toast>
+  <auro-button onClick="showToast('#defaultVariant')">
+    Show default toast
+  </auro-button>
+  <auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">
+    Default toast
+  </auro-toast>
+  <auro-button onClick="showToast('#errorVariant')">
+    Show error toast
+  </auro-button>
+  <auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">
+    Unable to add lap infant. Please try again
+  </auro-toast>
+  <auro-button onClick="showToast('#successVariant')">
+    Show success toast
+  </auro-button>
+  <auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">
+    Successfully added lap infant
+  </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion lowProfile justifyRight>
@@ -78,19 +101,31 @@ What the component will render visually based on which variant value is set; cur
 <!-- The below code snippet is automatically added from ./../../apiExamples/variant.html -->
 
 ```html
-<auro-button onClick="showToast('#defaultVariant')">Show default toast</auro-button>
-<auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">Default toast</auro-toast>
-<auro-button onClick="showToast('#errorVariant')">Show error toast</auro-button>
-<auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">Unable to add lap infant. Please try again</auro-toast>
-<auro-button onClick="showToast('#successVariant')">Show success toast</auro-button>
-<auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">Successfully added lap infant</auro-toast>
+<auro-button onClick="showToast('#defaultVariant')">
+  Show default toast
+</auro-button>
+<auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">
+  Default toast
+</auro-toast>
+<auro-button onClick="showToast('#errorVariant')">
+  Show error toast
+</auro-button>
+<auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">
+  Unable to add lap infant. Please try again
+</auro-toast>
+<auro-button onClick="showToast('#successVariant')">
+  Show success toast
+</auro-button>
+<auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">
+  Successfully added lap infant
+</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
 #### noIcon
 
-If set, no icon will be visible on the toast.
+Using the `noIcon` attribute will set no icon to be visible in the notification.
 
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/noIcon.html) -->

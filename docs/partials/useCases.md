@@ -1,5 +1,5 @@
 The `<auro-toast>` use cases include:
 
-* Error toast
-* Success toast
-* Default toast
+* Sending an error push notification
+* Sending a success push notification
+* Sending any type of push notification

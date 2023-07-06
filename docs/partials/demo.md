@@ -15,7 +15,7 @@ This file is generated based on a template fetched from `./docs/partials/demo.md
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ### The setup
-Triggering the toasts relies on setting the visible property to true. See the following example code which is used in this demo.
+Triggering the toasts relies on setting the `visible` property to `true`. See the following example to see how this code is used in an example.
 
 ```js
 showToast = (toastID) => {
@@ -27,8 +27,12 @@ showToast = (toastID) => {
 };
 ```
 
-## auro-toast default use
-The following illustrates the default use of the auro-toast. This toast will automatically dismiss after five seconds if the user does not dismiss it. In this case, the toast is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
+## Default push notifications
+
+The following demo illustrates the `default` notification using the `<auro-toast>` element. This push notification will automatically dismiss after five seconds. The user may also dismiss it manually. The toast is **NOT** removed from the DOM. The visible property is set to `false`, which will hide the toast on the UI.
+
+Also notice in this demo the use of the `noIcon` attribute. this attribute removes the use of the default `information` icon.
+
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -41,9 +45,14 @@ The following illustrates the default use of the auro-toast. This toast will aut
 
 </auro-accordion>
 
-## Single toasts
-### Error
-The error toast will not automatically dismiss itself. The user must close the toast. When the toast is closed, it is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
+## Single notification
+
+Aside from the `default` notification, the `<auro-toast>` supports multiple variations, `success` and `error`. See below for more information on these variants.
+
+### Error notification
+
+The error push notification using the `<auro-toast>` element will **NOT** automatically dismiss itself. The user **MUST** dismiss the notification manually. When the notification is dismissed, it is not removed from the DOM. The `visible` property is set to `false`, which hides the notification from the UI.
+
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/error.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -56,8 +65,10 @@ The error toast will not automatically dismiss itself. The user must close the t
 
 </auro-accordion>
 
-### Success
-The success toast will automatically dismiss after five seconds if the user does not dismiss it. In this case, the toast is not removed from the DOM. The visible property is set to false, which hides the toast on the UI.
+### Success notification
+
+The success push notification using the `<auro-toast>` element will automatically dismiss after five seconds if the user does not manually dismiss it. In this case, the notification is not removed from the DOM. The `visible` property is set to `false`, which hides the notification from the UI.
+
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/success.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -71,7 +82,9 @@ The success toast will automatically dismiss after five seconds if the user does
 </auro-accordion>
 
 ## Multiple toasts
-The auro-toast multi-toasts use case requires the use of the auro-toaster component.
+
+The multi-notification use case requires the use of the `<auro-toaster>` component.
+
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/multipleToasts.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -86,7 +99,9 @@ The auro-toast multi-toasts use case requires the use of the auro-toaster compon
 </auro-accordion>
 
 ## Dynamic toasts
-If you choose to implement toasts dynamically, the following is an example of how to implement dynamic toasts using Vue.
+
+If you choose to implement push notifications dynamically, the following is an example of how to implement dynamic `<auro-toast>` elements using Vue.
+
 ```js
 import { v4 as uuidv4 } from 'uuid';
 
@@ -104,7 +119,6 @@ interface Toast {
 
 const toasts = ref<Array<Toast>>([]);
 
-
 // Function that adds toasts to the toasts array, which will trigger the toast to be visible
 handleToastEvent(e: ToastEvent) {
   toast.id = uuidv4();
@@ -121,17 +135,20 @@ handleOnToastClose(event) {
   toasts.value = toasts.filter((t) => t.id !== id)
 }
 ```
+
+The following example is for the HTML template.
+
 ```html
 <auro-toaster>
-     <auro-toast 
-      v-for="(toast, i) in toasts"
-      :id="toast.id" 
-      :visible="toast.visible"
-      :variant="toast.variant"
-      @on-toast-close="handleOnToastClose">
-        {{ toast.message }}
-     </auro-toast>
-  <auro-toaster>
+  <auro-toast
+    v-for="(toast, i) in toasts"
+    :id="toast.id"
+    :visible="toast.visible"
+    :variant="toast.variant"
+    @on-toast-close="handleOnToastClose">
+    {{ toast.message }}
+  </auro-toast>
+<auro-toaster>
 ```
 
 
