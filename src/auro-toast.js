@@ -114,6 +114,14 @@ export class AuroToast extends LitElement {
   closeToast() {
     clearTimeout(this.fadeOutTimer);
     this.visible = false;
+
+    /**
+     * Emits closed toast event.
+     *
+     * @event onToastClose
+     * @type {object}
+     * @property {boolean} false - Sets visibility value for the toast element.
+     */
     this.dispatchEvent(new CustomEvent('onToastClose', {
       bubbles: true,
       composed: true,
