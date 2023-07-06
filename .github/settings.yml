@@ -3,7 +3,7 @@ repository:
   # See https://github.com/apps/settings for app settings
 
   # A short description of the repository that will show up on GitHub
-  description: Custom element that ....
+  description: Custom element that illustrates a push notification after an action is complete
 
   # A URL with more information about the repository
   homepage: https://auro.alaskaair.com/components/auro/toast
