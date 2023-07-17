@@ -12,6 +12,6 @@ The auro-toast element provides users a way to display short, temporary messages
 
 ## Events
 
-| Event          | Type                | Description                             |
-|----------------|---------------------|-----------------------------------------|
-| `onToastClose` | `CustomEvent<this>` | Notifies that the toast has been closed |
+| Event          | Type     | Description                             |
+|----------------|----------|-----------------------------------------|
+| `onToastClose` | `object` | Notifies that the toast has been closed |

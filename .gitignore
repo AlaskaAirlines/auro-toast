@@ -6,6 +6,7 @@ docTemplates/
 ## Demo support files
 demo/*.css
 demo/*.css.map
+demo/*min.js
 
 ## CSS built from Sass process
 src/*.css
