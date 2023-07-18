@@ -16,17 +16,10 @@ State of the push notification which determines if it is `visible`.
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
 
-```js
-// Example function
-showToast = (toastID) => {
-  const toast = document.querySelector(toastID);
-
-  if (!toast.hasAttribute('visible')) {
-    toast.setAttribute('visible', true);
-  }
-};
-```
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/visible.html) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/showToast.js) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>
@@ -45,6 +38,9 @@ What the component will render visually based on which variant value is set; cur
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/variant.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/showToast.js) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+
 </auro-accordion>
 
 #### noIcon
@@ -60,5 +56,9 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
 
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/noIcon.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
+
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/showToast.js) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+
 
 </auro-accordion>
