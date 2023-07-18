@@ -43,7 +43,6 @@ For the most up to date information on [UI development browser support](https://
 [![Build Status](https://img.shields.io/github/actions/workflow/status/AlaskaAirlines/auro-toast/testPublish.yml?style=for-the-badge)](https://github.com/AlaskaAirlines/auro-toast/actions/workflows/testPublish.yml)
 [![See it on NPM!](https://img.shields.io/npm/v/@aurodesignsystem/auro-toast?style=for-the-badge&color=orange)](https://www.npmjs.com/package/@aurodesignsystem/auro-toast)
 [![License](https://img.shields.io/npm/l/@aurodesignsystem/auro-toast?color=blue&style=for-the-badge)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/@aurodesignsystem/auro-toast?style=for-the-badge)](https://snyk.io/test/npm/@aurodesignsystem/auro-toast?tab=issues)
 
 ```shell
 $ npm i @aurodesignsystem/auro-toast
