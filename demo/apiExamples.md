@@ -42,17 +42,6 @@ State of the push notification which determines if it is `visible`.
 </div>
 <auro-accordion lowProfile justifyRight>
   <span slot="trigger">See code</span>
-
-```js
-// Example function
-showToast = (toastID) => {
-  const toast = document.querySelector(toastID);
-
-  if (!toast.hasAttribute('visible')) {
-    toast.setAttribute('visible', true);
-  }
-};
-```
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/visible.html) -->
 <!-- The below code snippet is automatically added from ./../../apiExamples/visible.html -->
 
@@ -64,6 +53,19 @@ showToast = (toastID) => {
 <auro-toast id="d-toast" style="display: block; margin: 0.5rem 0;">
   Default toast
 </auro-toast>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/showToast.js) -->
+<!-- The below code snippet is automatically added from ./../../apiExamples/showToast.js -->
+
+```js
+export function showToast(toastID) {
+  const toast = document.querySelector(toastID);
+
+  if (!toast.hasAttribute('visible')) {
+    toast.setAttribute('visible', true);
+  }
+};
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
@@ -121,6 +123,19 @@ What the component will render visually based on which variant value is set; cur
 </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/showToast.js) -->
+<!-- The below code snippet is automatically added from ./../../apiExamples/showToast.js -->
+
+```js
+export function showToast(toastID) {
+  const toast = document.querySelector(toastID);
+
+  if (!toast.hasAttribute('visible')) {
+    toast.setAttribute('visible', true);
+  }
+};
+```
+<!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
 #### noIcon
@@ -142,6 +157,19 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
 ```html
 <auro-button onClick="showToast('#noIcon')"> Show toast with no icon </auro-button>
 <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/showToast.js) -->
+<!-- The below code snippet is automatically added from ./../../apiExamples/showToast.js -->
+
+```js
+export function showToast(toastID) {
+  const toast = document.querySelector(toastID);
+
+  if (!toast.hasAttribute('visible')) {
+    toast.setAttribute('visible', true);
+  }
+};
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
