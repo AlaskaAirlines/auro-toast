@@ -211,10 +211,3 @@ Automated tests are required for every Auro component. See `.\test\auro-toast.te
 Bundled assets are only generated in the remote and not merged back to this repo. To review and/or test a bundled asset locally, run `$ npm run bundler` to generate assets.
 
 <!-- AURO-GENERATED-CONTENT:END -->
-
-### Demo deployment
-
-<!-- AURO-GENERATED-CONTENT:START (REMOTE:url=https://raw.githubusercontent.com/AlaskaAirlines/WC-Generator/master/componentDocs/partials/development/deploymentDemo.md) -->
-To deploy a demo version of the component for review, run `npm run build:demo` to create a `./build` directory that can be pushed to any static server.
-
-<!-- AURO-GENERATED-CONTENT:END -->
