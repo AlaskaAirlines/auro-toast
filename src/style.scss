@@ -4,31 +4,34 @@
 // ---------------------------------------------------------------------
 
 // Import Auro tokens
-@import './../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables';
-@import './../node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties';
+@import './../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables';
+@import './../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SassCustomProperties';
 
-@import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/breakpoints';
-@import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/core';
-@import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/utilityClasses/displayProperties';
+// Support for fallback values
+@import './../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables.scss';
+
+@import './../node_modules/@aurodesignsystem/webcorestylesheets/src/breakpoints';
+@import './../node_modules/@aurodesignsystem/webcorestylesheets/src/core';
+@import './../node_modules/@aurodesignsystem/webcorestylesheets/src/utilityClasses/displayProperties';
 
 // container styles - defines the look of the outer custom component
 :host([visible]) {
   display: inline-flex;
   min-width: 100%;
   min-height: 60px;
-  padding: var(--auro-size-200) var(--auro-size-150);
+  padding: var(--ds-size-200, $ds-size-200) var(--ds-size-150, $ds-size-150);
   border-radius: 8px;
-  background-color: var(--auro-color-brand-gray-400);
-  box-shadow: var(--auro-elevation-200);
-  color: var(--auro-color-text-primary-on-dark);
-  gap: var(--auro-size-200);
+  background-color: var(--ds-color-brand-gray-400, $ds-color-brand-gray-400);
+  box-shadow: var(--ds-elevation-200, $ds-elevation-200);
+  color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
+  gap: var(--ds-size-200, $ds-size-200);
   pointer-events: auto;
 
-  @media ($auro-grid-breakpoint-sm <=width < $auro-grid-breakpoint-lg) {
+  @media ($ds-grid-breakpoint-sm <=width < $ds-grid-breakpoint-lg) {
     min-width: 33%;
     max-width: 50%;
   }
-  @media (width >=$auro-grid-breakpoint-lg) {
+  @media (width >=$ds-grid-breakpoint-lg) {
     min-width: 200px;
     max-width: 500px;
   }
@@ -36,23 +39,23 @@
   .toastContainer {
     display: flex;
     width: 100%;
-    gap: var(--auro-size-200);
+    gap: var(--ds-size-200, $ds-size-200);
   }
 
   .closeButton {
-    width: var(--auro-size-400);
-    height: var(--auro-size-400);
+    width: var(--ds-size-400, $ds-size-400);
+    height: var(--ds-size-400, $ds-size-400);
     padding-right: 0;
     padding-left: 0;
     border: 2px solid transparent;
     margin-left: auto;
     background-color: transparent;
-    color: var(--auro-color-text-primary-on-dark);
+    color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
 
     &:hover {
-      border: 1px solid var(--auro-color-ui-bkg-hover-on-light);
+      border: 1px solid var(--ds-color-ui-bkg-hover-default, $ds-color-ui-bkg-hover-default);
       border-radius: 50%;
-      background-color: var(--auro-color-ui-bkg-hover-on-light);
+      background-color: var(--ds-color-ui-bkg-hover-default, $ds-color-ui-bkg-hover-default);
       cursor: pointer;
 
     }
@@ -67,8 +70,8 @@
   .icon {
     display: flex;
     justify-content: center;
-    padding-top: var(--auro-size-25);
-    margin-right: calc(var(--auro-size-100) * -1);
+    padding-top: var(--ds-size-25, $ds-size-25);
+    margin-right: calc(var(--ds-size-100, $ds-size-100) * -1);
   }
 
   .message {
@@ -77,21 +80,21 @@
 }
 
 :host([variant='error']) {
-  background-color: var(--auro-color-alert-bkg-error-default);
-  color: var(--auro-color-text-primary-on-light);
+  background-color: var(--ds-color-alert-bkg-error-default, $ds-color-alert-bkg-error-default);
+  color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
 
   .icon {
-    color: var(--auro-color-alert-error-on-light);
+    color: var(--ds-color-text-error-default, $ds-color-text-error-default);
   }
 
 }
 
 :host([variant='success']) {
-  background-color: var(--auro-color-alert-bkg-success-default);
-  color: var(--auro-color-text-primary-on-light);
+  background-color: var(--ds-color-alert-bkg-success-default, $ds-color-alert-bkg-success-default);
+  color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
 
   .icon {
-    color: var(--auro-color-alert-success-on-light);
+    color: var(--ds-color-alert-success-default, $ds-color-alert-success-default);
   }
 
 }
@@ -99,6 +102,6 @@
 :host([visible][variant='error']),
 :host([visible][variant='success']) {
   .closeButton {
-    color: var(--auro-color-text-primary-on-light);
+    color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
   }
 }

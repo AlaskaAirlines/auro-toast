@@ -4,27 +4,30 @@
 // ---------------------------------------------------------------------
 
 // Import Auro tokens
-@import './../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables';
-@import './../node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties';
+@import './../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables';
+@import './../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SassCustomProperties';
 
-@import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/breakpoints';
-@import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/core';
-@import './../node_modules/@aurodesignsystem/webcorestylesheets/dist/utilityClasses/displayProperties';
+// Support for fallback values
+@import './../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables.scss';
+
+@import './../node_modules/@aurodesignsystem/webcorestylesheets/src/breakpoints';
+@import './../node_modules/@aurodesignsystem/webcorestylesheets/src/core';
+@import './../node_modules/@aurodesignsystem/webcorestylesheets/src/utilityClasses/displayProperties';
 
 // container styles - defines the look of the outer custom component
 :host {
   position: fixed;
-  z-index: var(--auro-depth-modal);
+  z-index: var(--ds-depth-modal, $ds-depth-modal);
   right: 2%;
   bottom: 2%;
   left: 2%;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
-  gap: var(--auro-size-200);
+  gap: var(--ds-size-200, $ds-size-200);
   pointer-events: none;
-  
-  @media (width >=$auro-grid-breakpoint-lg) {
+
+  @media (width >=$ds-grid-breakpoint-lg) {
     right: 1%;
     left: unset;
     width: 100%;
