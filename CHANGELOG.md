@@ -1,5 +1,17 @@
 # Semantic Release Automated Changelog
 
+## [1.0.1](https://github.com/AlaskaAirlines/auro-toast/compare/v1.0.0...v1.0.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* feedback review for update library dependency and remove unused code ([a1b662a](https://github.com/AlaskaAirlines/auro-toast/commit/a1b662aa72d65b19d7f9a6298930ca59d9aa79b4))
+
+
+### Performance Improvements
+
+* **token:** update token per new theming [#44](https://github.com/AlaskaAirlines/auro-toast/issues/44) ([404d451](https://github.com/AlaskaAirlines/auro-toast/commit/404d4510f2b607f766bebe4d4af1bcbcdd2411d0))
+
 # 1.0.0 (2023-07-18)
 
 
