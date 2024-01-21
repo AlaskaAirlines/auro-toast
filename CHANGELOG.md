@@ -1,5 +1,17 @@
 # Semantic Release Automated Changelog
 
+# [1.1.0](https://github.com/AlaskaAirlines/auro-toast/compare/v1.0.1...v1.1.0) (2024-01-21)
+
+
+### Features
+
+* add suport for SSR projects [#31](https://github.com/AlaskaAirlines/auro-toast/issues/31) ([54e5b44](https://github.com/AlaskaAirlines/auro-toast/commit/54e5b445c82d8fc10e8441cfcbf12186403c4509))
+
+
+### Performance Improvements
+
+* update to support node policy ([7006b4d](https://github.com/AlaskaAirlines/auro-toast/commit/7006b4d72dfb586d41f1b75d710a7c27ebaeb89b))
+
 ## [1.0.1](https://github.com/AlaskaAirlines/auro-toast/compare/v1.0.0...v1.0.1) (2023-11-16)
 
 
