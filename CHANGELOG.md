@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [1.1.1](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.0...v1.1.1) (2024-01-27)
+
+
+### Performance Improvements
+
+* update index per SSR support ([cfc98cf](https://github.com/AlaskaAirlines/auro-toast/commit/cfc98cf060f70281c354aceda5155917c07e48e8))
+
 # [1.1.0](https://github.com/AlaskaAirlines/auro-toast/compare/v1.0.1...v1.1.0) (2024-01-21)
 
 
