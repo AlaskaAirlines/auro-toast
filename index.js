@@ -1,4 +1,4 @@
-import { AuroToast } from './src/auro-toast';
+import { AuroToast } from './src/auro-toast.js';
 
 /**
  * Register Custom Element.
