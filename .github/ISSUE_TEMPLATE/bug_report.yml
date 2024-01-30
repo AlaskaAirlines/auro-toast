@@ -18,7 +18,7 @@ body:
     attributes:
       value: >
         [![See it on
-        NPM!](https://img.shields.io/npm/v/@alaskaairux/auro-toast?style=for-the-badge&color=orange)](https://www.npmjs.com/package/@alaskaairux/auro-toast)
+        NPM!](https://img.shields.io/npm/v/@aurodesignsystem/auro-toast?style=for-the-badge&color=orange)](https://www.npmjs.com/package/@aurodesignsystem/auro-toast)
   - type: textarea
     id: details
     attributes:

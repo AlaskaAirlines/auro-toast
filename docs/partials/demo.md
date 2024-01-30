@@ -37,7 +37,7 @@ Also notice in this demo the use of the `noIcon` attribute. this attribute remov
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
@@ -57,7 +57,7 @@ The error push notification using the `<auro-toast>` element will **NOT** automa
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/error.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/error.html) -->
@@ -73,7 +73,7 @@ The success push notification using the `<auro-toast>` element will automaticall
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/success.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/success.html) -->
@@ -90,7 +90,7 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/multipleToasts.html) -->
@@ -159,7 +159,7 @@ There are two important parts of every Auro component. The <a href="https://deve
 To protect from versioning conflicts with other instances of the component being loaded, it is recommended to use our `registerComponent(name)` method and pass in a unique name.
 
 ```js
-import './node_modules/@alaskaairux/auro-toast';
+import './node_modules/@aurodesignsystem/auro-toast';
 registerComponent('custom-toast');
 ```
 
@@ -169,7 +169,7 @@ This will create a new custom element that you can use in your HTML that will fu
   <custom-toast variant="error" visible>Salutations World!</custom-toast>
 </div>
 
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
 ```html

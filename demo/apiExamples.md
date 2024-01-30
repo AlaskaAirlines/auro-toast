@@ -40,7 +40,7 @@ State of the push notification which determines if it is `visible`.
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/visible.html) -->
 <!-- The below code snippet is automatically added from ./../../apiExamples/visible.html -->
@@ -97,7 +97,7 @@ What the component will render visually based on which variant value is set; cur
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/variant.html) -->
 <!-- The below code snippet is automatically added from ./../../apiExamples/variant.html -->
@@ -149,7 +149,7 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
   <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/noIcon.html) -->
 <!-- The below code snippet is automatically added from ./../../apiExamples/noIcon.html -->

@@ -62,7 +62,7 @@ Also notice in this demo the use of the `noIcon` attribute. this attribute remov
 </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
 <!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
@@ -103,7 +103,7 @@ The error push notification using the `<auro-toast>` element will **NOT** automa
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast-noIcon" noIcon> Unable to add lap infant. Please try again  </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/error.html) -->
 <!-- The below code snippet is automatically added from ./../../apiExamples/error.html -->
@@ -130,7 +130,7 @@ The success push notification using the `<auro-toast>` element will automaticall
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast-noIcon" noIcon> Successfully added lap infant  </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/success.html) -->
 <!-- The below code snippet is automatically added from ./../../apiExamples/success.html -->
@@ -161,7 +161,7 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
 </auro-toaster>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/multipleToasts.html) -->
 <!-- The below code snippet is automatically added from ./../../apiExamples/multipleToasts.html -->
@@ -239,7 +239,7 @@ There are two important parts of every Auro component. The <a href="https://deve
 To protect from versioning conflicts with other instances of the component being loaded, it is recommended to use our `registerComponent(name)` method and pass in a unique name.
 
 ```js
-import './node_modules/@alaskaairux/auro-toast';
+import './node_modules/@aurodesignsystem/auro-toast';
 registerComponent('custom-toast');
 ```
 
@@ -248,7 +248,7 @@ This will create a new custom element that you can use in your HTML that will fu
 <div class="exampleWrapper">
   <custom-toast variant="error" visible>Salutations World!</custom-toast>
 </div>
-<auro-accordion lowProfile justifyRight>
+<auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
 ```html
