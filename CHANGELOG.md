@@ -1,5 +1,13 @@
 # Semantic Release Automated Changelog
 
+## [1.1.2](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.1...v1.1.2) (2024-01-31)
+
+
+### Performance Improvements
+
+* alaskaairux ref updates ([14f2978](https://github.com/AlaskaAirlines/auro-toast/commit/14f2978580b46c1a2629b1cbf5299fe05c5fcdbc))
+* **cdn:** update references from unpkg to jsdelivr ([fcb4a38](https://github.com/AlaskaAirlines/auro-toast/commit/fcb4a38cd0965fc6a3f856f8b9a7ab0d5e417f8f))
+
 ## [1.1.1](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.0...v1.1.1) (2024-01-27)
 
 
