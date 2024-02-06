@@ -9,4 +9,3 @@
 # If a pull request touches any files in the ./src dir, only these owners
 # will be requested to review.
 ./src/*    @AlaskaAirlines/auroteamreviewers
-./src/*    @AlaskaAirlines/AuroToastInnersourceReviewers
