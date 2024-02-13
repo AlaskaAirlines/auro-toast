@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [1.1.3](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.2...v1.1.3) (2024-02-13)
+
+
+### Performance Improvements
+
+* update auro deps and add ESM badge ([3a408b1](https://github.com/AlaskaAirlines/auro-toast/commit/3a408b12f9502e10bb5d1c69af7ca293068440cf))
+
 ## [1.1.2](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.1...v1.1.2) (2024-01-31)
 
 
