@@ -8,10 +8,10 @@ import { LitElement, html } from "lit";
 
 // Import touch detection lib
 import styleCss from "./style-css.js";
-import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg_es6.js';
-import information from '@alaskaairux/icons/dist/icons/alert/information-stroke_es6.js';
-import error from '@alaskaairux/icons/dist/icons/alert/error_es6.js';
-import success from '@alaskaairux/icons/dist/icons/interface/check-stroke_es6.js';
+import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg.mjs';
+import information from '@alaskaairux/icons/dist/icons/alert/information-stroke.mjs';
+import error from '@alaskaairux/icons/dist/icons/alert/error.mjs';
+import success from '@alaskaairux/icons/dist/icons/interface/check-stroke.mjs';
 
 const TIME_TIL_FADE_OUT = 5000;
 const FADE_OUT_DURATION = 300;
