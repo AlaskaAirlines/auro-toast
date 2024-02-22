@@ -31,11 +31,10 @@ State of the push notification which determines if it is `visible`.
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/visible.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/visible.html -->
-  <!-- example markup -->
-  <auro-button onClick="showToast('#d-toast')">
+  <auro-button id="visibleToastBtn">
     Set visible to true
   </auro-button>
-  <auro-toast id="d-toast" style="display: block; margin: 0.5rem 0;">
+  <auro-toast id="visibleToast" style="display: block; margin: 0.5rem 0;">
     Default toast
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
@@ -46,11 +45,10 @@ State of the push notification which determines if it is `visible`.
 <!-- The below code snippet is automatically added from ./../../apiExamples/visible.html -->
 
 ```html
-<!-- example markup -->
-<auro-button onClick="showToast('#d-toast')">
+<auro-button id="visibleToastBtn">
   Set visible to true
 </auro-button>
-<auro-toast id="d-toast" style="display: block; margin: 0.5rem 0;">
+<auro-toast id="visibleToast" style="display: block; margin: 0.5rem 0;">
   Default toast
 </auro-toast>
 ```
@@ -77,19 +75,19 @@ What the component will render visually based on which variant value is set; cur
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/variant.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/variant.html -->
-  <auro-button onClick="showToast('#defaultVariant')">
+  <auro-button id="defaultVariantBtn">
     Show default toast
   </auro-button>
   <auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">
     Default toast
   </auro-toast>
-  <auro-button onClick="showToast('#errorVariant')">
+  <auro-button id="errorVariantBtn">
     Show error toast
   </auro-button>
   <auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">
     Unable to add lap infant. Please try again
   </auro-toast>
-  <auro-button onClick="showToast('#successVariant')">
+  <auro-button id="successVariantBtn">
     Show success toast
   </auro-button>
   <auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">
@@ -103,19 +101,19 @@ What the component will render visually based on which variant value is set; cur
 <!-- The below code snippet is automatically added from ./../../apiExamples/variant.html -->
 
 ```html
-<auro-button onClick="showToast('#defaultVariant')">
+<auro-button id="defaultVariantBtn">
   Show default toast
 </auro-button>
 <auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">
   Default toast
 </auro-toast>
-<auro-button onClick="showToast('#errorVariant')">
+<auro-button id="errorVariantBtn">
   Show error toast
 </auro-button>
 <auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">
   Unable to add lap infant. Please try again
 </auro-toast>
-<auro-button onClick="showToast('#successVariant')">
+<auro-button id="successVariantBtn">
   Show success toast
 </auro-button>
 <auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">
@@ -145,7 +143,7 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/noIcon.html) -->
   <!-- The below content is automatically added from ./../../apiExamples/noIcon.html -->
-  <auro-button onClick="showToast('#noIcon')"> Show toast with no icon </auro-button>
+  <auro-button id="noIconBtn"> Show toast with no icon </auro-button>
   <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -155,7 +153,7 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
 <!-- The below code snippet is automatically added from ./../../apiExamples/noIcon.html -->
 
 ```html
-<auro-button onClick="showToast('#noIcon')"> Show toast with no icon </auro-button>
+<auro-button id="noIconBtn"> Show toast with no icon </auro-button>
 <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->

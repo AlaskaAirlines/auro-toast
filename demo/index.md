@@ -47,17 +47,17 @@ Also notice in this demo the use of the `noIcon` attribute. this attribute remov
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/basic.html -->
 <!-- icon variant -->
-<auro-button onClick="showToast('#defaultToast')">
+<auro-button id="basicToastBtn">
   Show default notification
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"id="defaultToast">
+<auro-toast style="display: block; margin: 0.5rem 0;"id="basicToast">
   Default notification with no error type
 </auro-toast>
 <!-- no icon variant -->
-<auro-button onClick="showToast('#defaultToast-noIcon')">
+<auro-button id="basicToast-noIconBtn">
   Show default notification with no icon
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;" id="defaultToast-noIcon" noIcon>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast-noIcon" noIcon>
   Default notification with no error type
 </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -69,17 +69,17 @@ Also notice in this demo the use of the `noIcon` attribute. this attribute remov
 
 ```html
 <!-- icon variant -->
-<auro-button onClick="showToast('#defaultToast')">
+<auro-button id="basicToastBtn">
   Show default notification
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"id="defaultToast">
+<auro-toast style="display: block; margin: 0.5rem 0;"id="basicToast">
   Default notification with no error type
 </auro-toast>
 <!-- no icon variant -->
-<auro-button onClick="showToast('#defaultToast-noIcon')">
+<auro-button id="basicToast-noIconBtn">
   Show default notification with no icon
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;" id="defaultToast-noIcon" noIcon>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast-noIcon" noIcon>
   Default notification with no error type
 </auro-toast>
 ```
@@ -97,9 +97,9 @@ The error push notification using the `<auro-toast>` element will **NOT** automa
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/error.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/error.html -->
-<auro-button onClick="showToast('#errorToast')">Show error notification</auro-button>
+<auro-button id="errorToastBtn">Show error notification</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast"> Unable to add lap infant. Please try again  </auro-toast>
-<auro-button onClick="showToast('#errorToast-noIcon')">Show error notification with no icon</auro-button>
+<auro-button id="errorToast-noIconBtn">Show error notification with no icon</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast-noIcon" noIcon> Unable to add lap infant. Please try again  </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -109,9 +109,9 @@ The error push notification using the `<auro-toast>` element will **NOT** automa
 <!-- The below code snippet is automatically added from ./../../apiExamples/error.html -->
 
 ```html
-<auro-button onClick="showToast('#errorToast')">Show error notification</auro-button>
+<auro-button id="errorToastBtn">Show error notification</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast"> Unable to add lap infant. Please try again  </auro-toast>
-<auro-button onClick="showToast('#errorToast-noIcon')">Show error notification with no icon</auro-button>
+<auro-button id="errorToast-noIconBtn">Show error notification with no icon</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast-noIcon" noIcon> Unable to add lap infant. Please try again  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -124,9 +124,9 @@ The success push notification using the `<auro-toast>` element will automaticall
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/success.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/success.html -->
-<auro-button onClick="showToast('#successToast')">Show success toast</auro-button>
+<auro-button id="successToastBtn">Show success toast</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast"> Successfully added lap infant  </auro-toast>
-<auro-button onClick="showToast('#successToast-noIcon')">Show success toast with no icon</auro-button>
+<auro-button id="successToast-noIconBtn">Show success toast with no icon</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast-noIcon" noIcon> Successfully added lap infant  </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -136,9 +136,9 @@ The success push notification using the `<auro-toast>` element will automaticall
 <!-- The below code snippet is automatically added from ./../../apiExamples/success.html -->
 
 ```html
-<auro-button onClick="showToast('#successToast')">Show success toast</auro-button>
+<auro-button id="successToastBtn">Show success toast</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast"> Successfully added lap infant  </auro-toast>
-<auro-button onClick="showToast('#successToast-noIcon')">Show success toast with no icon</auro-button>
+<auro-button id="successToast-noIconBtn">Show success toast with no icon</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast-noIcon" noIcon> Successfully added lap infant  </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -151,13 +151,13 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/multipleToasts.html) -->
 <!-- The below content is automatically added from ./../../apiExamples/multipleToasts.html -->
-<auro-button onClick="showToast('#toast-default')">Show default toast</auro-button>
-<auro-button onClick="showToast('#toast-error')">Show error toast</auro-button>
-<auro-button onClick="showToast('#toast-success')">Show success toast</auro-button>
+<auro-button id="multiToastBtn-default">Show default toast</auro-button>
+<auro-button id="multiToastBtn-error">Show error toast</auro-button>
+<auro-button id="multiToastBtn-success">Show success toast</auro-button>
 <auro-toaster>
-  <auro-toast id="toast-default">Default toast</auro-toast>
-  <auro-toast id="toast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
-  <auro-toast id="toast-success" variant="success">Successfully added lap infant</auro-toast>
+  <auro-toast id="multiToast-default">Default toast</auro-toast>
+  <auro-toast id="multiToast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
+  <auro-toast id="multiToast-success" variant="success">Successfully added lap infant</auro-toast>
 </auro-toaster>
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -167,13 +167,13 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
 <!-- The below code snippet is automatically added from ./../../apiExamples/multipleToasts.html -->
 
 ```html
-<auro-button onClick="showToast('#toast-default')">Show default toast</auro-button>
-<auro-button onClick="showToast('#toast-error')">Show error toast</auro-button>
-<auro-button onClick="showToast('#toast-success')">Show success toast</auro-button>
+<auro-button id="multiToastBtn-default">Show default toast</auro-button>
+<auro-button id="multiToastBtn-error">Show error toast</auro-button>
+<auro-button id="multiToastBtn-success">Show success toast</auro-button>
 <auro-toaster>
-  <auro-toast id="toast-default">Default toast</auro-toast>
-  <auro-toast id="toast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
-  <auro-toast id="toast-success" variant="success">Successfully added lap infant</auro-toast>
+  <auro-toast id="multiToast-default">Default toast</auro-toast>
+  <auro-toast id="multiToast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
+  <auro-toast id="multiToast-success" variant="success">Successfully added lap infant</auro-toast>
 </auro-toaster>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
