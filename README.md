@@ -88,17 +88,17 @@ import "@aurodesignsystem/auro-toast";
 
 ```html
 <!-- icon variant -->
-<auro-button onClick="showToast('#defaultToast')">
+<auro-button id="basicToastBtn">
   Show default notification
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"id="defaultToast">
+<auro-toast style="display: block; margin: 0.5rem 0;"id="basicToast">
   Default notification with no error type
 </auro-toast>
 <!-- no icon variant -->
-<auro-button onClick="showToast('#defaultToast-noIcon')">
+<auro-button id="basicToast-noIconBtn">
   Show default notification with no icon
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;" id="defaultToast-noIcon" noIcon>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast-noIcon" noIcon>
   Default notification with no error type
 </auro-toast>
 ```
@@ -145,17 +145,17 @@ The `<auro-toast>` use cases include:
 
 ```html
 <!-- icon variant -->
-<auro-button onClick="showToast('#defaultToast')">
+<auro-button id="basicToastBtn">
   Show default notification
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"id="defaultToast">
+<auro-toast style="display: block; margin: 0.5rem 0;"id="basicToast">
   Default notification with no error type
 </auro-toast>
 <!-- no icon variant -->
-<auro-button onClick="showToast('#defaultToast-noIcon')">
+<auro-button id="basicToast-noIconBtn">
   Show default notification with no icon
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;" id="defaultToast-noIcon" noIcon>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast-noIcon" noIcon>
   Default notification with no error type
 </auro-toast>
 ```

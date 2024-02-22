@@ -50,9 +50,9 @@
       registerComponent('custom-toast');
     </script>
     <script type="module" src="../src/auro-toaster.js"></script>
-    <script src="./index.min.js"></script>
-    <script>
-      initToastIndexExamples();
+    <script type="module">
+      import { initExamples } from "./index.min.js"
+      initExamples();
     </script>
   </body>
 </html>
