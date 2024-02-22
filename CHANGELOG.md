@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [1.1.6](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.5...v1.1.6) (2024-02-22)
+
+
+### Performance Improvements
+
+* **docs:** update logic for JS examples ([004f8a0](https://github.com/AlaskaAirlines/auro-toast/commit/004f8a07d76199b788fd30e05eb26c78d0155441))
+
 ## [1.1.5](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.4...v1.1.5) (2024-02-22)
 
 
