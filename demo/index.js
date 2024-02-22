@@ -1,6 +1,6 @@
 import { showToast } from '../apiExamples/showToast';
 
-export function initToastIndexExamples(initCount) {
+export function initExamples(initCount) {
   initCount = initCount || 0;
 
   try {
@@ -10,7 +10,7 @@ export function initToastIndexExamples(initCount) {
     if (initCount <= 20) {
       // setTimeout handles issue where content is sometimes loaded after the functions get called
       setTimeout(() => {
-        initToastIndexExamples(initCount + 1);
+        initExamples(initCount + 1);
       }, 100);
     }
   }
