@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [1.1.5](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.4...v1.1.5) (2024-02-22)
+
+
+### Performance Improvements
+
+* **examples:** refactor JS examples ([90c273a](https://github.com/AlaskaAirlines/auro-toast/commit/90c273ae215f13ec3af915918c19277d1a493122))
+
 ## [1.1.4](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.3...v1.1.4) (2024-02-15)
 
 
