@@ -17,9 +17,7 @@
   min-height: calc(var(--ds-size-700, $ds-size-700) + var(--ds-size-50, $ds-size-50));
   padding: var(--ds-size-200, $ds-size-200) var(--ds-size-150, $ds-size-150);
   border-radius: var(--ds-size-100, $ds-size-100);
-  background-color: var(--ds-color-brand-gray-400, $ds-color-brand-gray-400);
   box-shadow: var(--ds-elevation-200, $ds-elevation-200);
-  color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
   gap: var(--ds-size-200, $ds-size-200);
   pointer-events: auto;
 
@@ -45,15 +43,10 @@
     padding-left: 0;
     border: var(--ds-size-25, $ds-size-25) solid transparent;
     margin-left: auto;
-    background-color: transparent;
-    color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
 
     &:hover {
-      border: 1px solid var(--ds-color-ui-bkg-hover-default, $ds-color-ui-bkg-hover-default);
       border-radius: 50%;
-      background-color: var(--ds-color-ui-bkg-hover-default, $ds-color-ui-bkg-hover-default);
       cursor: pointer;
-
     }
   }
 
@@ -72,32 +65,5 @@
 
   .message {
     align-self: center;
-  }
-}
-
-:host([variant='error']) {
-  background-color: var(--ds-color-alert-bkg-error-default, $ds-color-alert-bkg-error-default);
-  color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
-
-  .icon {
-    color: var(--ds-color-text-error-default, $ds-color-text-error-default);
-  }
-
-}
-
-:host([variant='success']) {
-  background-color: var(--ds-color-alert-bkg-success-default, $ds-color-alert-bkg-success-default);
-  color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
-
-  .icon {
-    color: var(--ds-color-alert-success-default, $ds-color-alert-success-default);
-  }
-
-}
-
-:host([visible][variant='error']),
-:host([visible][variant='success']) {
-  .closeButton {
-    color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
   }
 }
