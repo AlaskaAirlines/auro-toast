@@ -171,3 +171,23 @@ export function showToast(toastID) {
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
+
+### Theme Support
+
+The component may be restyled using the following code sample and changing the values of the following token(s).
+
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../src/tokens.scss) -->
+<!-- The below code snippet is automatically added from ./../../src/tokens.scss -->
+
+```scss
+:host {
+  --ds-auro-toast-background-color: var(--ds-color-brand-gray-400, $ds-color-brand-gray-400);
+  --ds-auro-toast-border-color: var(--ds-color-border-divider-default, $ds-color-border-divider-default);
+  --ds-auro-toast-close-button-icon-color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
+  --ds-auro-toast-close-button-background-color: transparent;
+  --ds-auro-toast-close-button-border-color: var(--ds-color-border-divider-default, $ds-color-border-divider-default);
+  --ds-auro-toast-icon-color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
+  --ds-auro-toast-text-color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
+}
+```
+<!-- AURO-GENERATED-CONTENT:END -->
