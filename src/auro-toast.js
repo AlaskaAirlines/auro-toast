@@ -8,6 +8,9 @@ import { LitElement, html } from "lit";
 
 // Import touch detection lib
 import styleCss from "./style-css.js";
+import colorCss from "./color-css.js";
+import tokensCss from "./tokens-css.js";
+
 import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg.mjs';
 import information from '@alaskaairux/icons/dist/icons/alert/information-stroke.mjs';
 import error from '@alaskaairux/icons/dist/icons/alert/error.mjs';
@@ -68,7 +71,11 @@ export class AuroToast extends LitElement {
   }
 
   static get styles() {
-    return [styleCss];
+    return [
+      styleCss,
+      colorCss,
+      tokensCss
+    ];
   }
 
   /**
