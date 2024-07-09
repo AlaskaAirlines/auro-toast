@@ -1,5 +1,22 @@
 # Semantic Release Automated Changelog
 
+# [1.2.0-beta.1](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.6...v1.2.0-beta.1) (2024-07-09)
+
+
+### Bug Fixes
+
+* **hover:** corrects minor visual jump in close button on hover ([7e1a45d](https://github.com/AlaskaAirlines/auro-toast/commit/7e1a45dd0ea7b7bf660757128f0855b1e0520f60))
+
+
+### Features
+
+* refactor color token structure with tier 3 tokens [#37](https://github.com/AlaskaAirlines/auro-toast/issues/37) ([4c3e3ce](https://github.com/AlaskaAirlines/auro-toast/commit/4c3e3ce2a5f503bbed3854a38014f339d6dbb2c1))
+
+
+### Performance Improvements
+
+* replace hard coded values with tokens ([f31eb13](https://github.com/AlaskaAirlines/auro-toast/commit/f31eb13358d815056a73179d4eb74b829323a9e2))
+
 ## [1.1.6](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.5...v1.1.6) (2024-02-22)
 
 
