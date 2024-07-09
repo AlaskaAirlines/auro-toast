@@ -3,18 +3,25 @@
 
 // ---------------------------------------------------------------------
 
+/* eslint-disable lit/binding-positions, lit/no-invalid-html */
+
 // If using litElement base class
-import { LitElement, html } from "lit";
+import { LitElement } from "lit";
+import { html } from 'lit/static-html.js';
 
 // Import touch detection lib
 import styleCss from "./style-css.js";
 import colorCss from "./color-css.js";
 import tokensCss from "./tokens-css.js";
 
-import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg.mjs';
-import information from '@alaskaairux/icons/dist/icons/alert/information-stroke.mjs';
-import error from '@alaskaairux/icons/dist/icons/alert/error.mjs';
-import success from '@alaskaairux/icons/dist/icons/interface/check-stroke.mjs';
+
+import { AuroDependencyVersioning } from '@aurodesignsystem/auro-library/scripts/runtime/dependencyTagVersioning.mjs';
+
+import { AuroButton } from '@aurodesignsystem/auro-button/src/auro-button.js';
+import buttonVersion from './buttonVersion';
+
+import { AuroIcon } from '@aurodesignsystem/auro-icon/src/auro-icon.js';
+import iconVersion from './iconVersion';
 
 const TIME_TIL_FADE_OUT = 5000;
 const FADE_OUT_DURATION = 300;
@@ -34,15 +41,18 @@ export class AuroToast extends LitElement {
   constructor() {
     super();
 
-    /**
-     * @private
-     */
-    this.dom = new DOMParser().parseFromString(closeIcon.svg, 'text/html');
+
+    const versioning = new AuroDependencyVersioning();
 
     /**
      * @private
      */
-    this.svg = this.dom.body.firstChild;
+    this.buttonTag = versioning.generateTag('auro-button', buttonVersion, AuroButton);
+
+    /**
+     * @private
+     */
+    this.iconTag = versioning.generateTag('auro-icon', iconVersion, AuroIcon);
 
     /**
      * @private
@@ -80,16 +90,24 @@ export class AuroToast extends LitElement {
 
   /**
    * @private
-   * @param {string} svgContent - The imported svg icon.
+   * @param {string} category - The category of the icon.
+   * @param {string} name - The name of the icon.
    * @returns {string} - The html template for the icon.
    */
-  generateIconHtml(svgContent) {
-    const dom = new DOMParser().parseFromString(svgContent, 'text/html'),
-      svg = dom.body.firstChild;
-
+  generateIconHtml(category, name) {
     return this.noIcon
       ? html``
-      : html`<div class="icon">${svg}</div>`;
+      : html`
+        <${this.iconTag} 
+          ?onDark="${!this.variant}" 
+          ?error="${this.getAttribute('variant') === 'error'}" 
+          ?success="${this.getAttribute('variant') === 'success'}" 
+          class="icon" 
+          customSize 
+          category="${category}" 
+          name="${name}">
+        </${this.iconTag}>
+      `;
   }
 
   /**
@@ -174,25 +192,25 @@ export class AuroToast extends LitElement {
       case undefined:
       case null:
         // default toast uses information icon
-        iconHtml = this.generateIconHtml(information.svg);
+        iconHtml = this.generateIconHtml('alert', 'information-stroke');
         break;
       case "error":
-        iconHtml = this.generateIconHtml(error.svg);
+        iconHtml = this.generateIconHtml('alert', 'error-stroke');
         break;
       case "success":
-        iconHtml = this.generateIconHtml(success.svg);
+        iconHtml = this.generateIconHtml('interface', 'check-stroke');
         break;
       default:
         break;
     }
 
     return this.visible ? html`<div aria-live="polite" class="toastContainer">
-    ${iconHtml}
+      ${iconHtml}
       <div class="message"><slot></slot></div>
-      <button class="closeButton" aria-label="closeToast" @click="${this.handleOnClose}">
-        ${this.svg}
-      </button>
-  </div>`
+        <${this.buttonTag} class="closeButton" variant="flat" ?onDark="${!this.variant}" @click="${this.handleOnClose}">
+          <${this.iconTag} class="closeButtonIcon" customSize customColor category="interface" name="x-lg"></${this.iconTag}>
+        </${this.buttonTag}>
+      </div>`
       : undefined;
   }
 }
