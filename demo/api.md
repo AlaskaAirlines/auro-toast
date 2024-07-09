@@ -180,14 +180,16 @@ The component may be restyled using the following code sample and changing the v
 <!-- The below code snippet is automatically added from ./../../src/tokens.scss -->
 
 ```scss
+@import "./../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables";
+
 :host {
-  --ds-auro-toast-background-color: var(--ds-color-brand-gray-400, $ds-color-brand-gray-400);
-  --ds-auro-toast-border-color: var(--ds-color-border-divider-default, $ds-color-border-divider-default);
-  --ds-auro-toast-close-button-icon-color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
+  --ds-auro-toast-background-color: var(--ds-color-brand-gray-400, #{$ds-color-brand-gray-400});
+  --ds-auro-toast-border-color: var(--ds-color-border-divider-default, #{$ds-color-border-divider-default});
+  --ds-auro-toast-close-button-icon-color: var(--ds-color-text-primary-inverse, #{$ds-color-text-primary-inverse});
   --ds-auro-toast-close-button-background-color: transparent;
   --ds-auro-toast-close-button-border-color: transparent;
-  --ds-auro-toast-icon-color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
-  --ds-auro-toast-text-color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
+  --ds-auro-toast-icon-color: var(--ds-color-text-primary-inverse, #{$ds-color-text-primary-inverse});
+  --ds-auro-toast-text-color: var(--ds-color-text-primary-inverse, #{$ds-color-text-primary-inverse});
 }
 ```
 <!-- AURO-GENERATED-CONTENT:END -->

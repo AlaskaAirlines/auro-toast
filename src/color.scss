@@ -22,23 +22,22 @@
     color: var(--ds-auro-toast-close-button-icon-color);
 
     &:hover {
-      --ds-auro-toast-close-button-border-color: var(--ds-color-border-divider-default, $ds-color-border-divider-default);
-      --ds-auro-toast-close-button-background-color: var(--ds-color-container-ui-tertiary-active-default, $ds-color-container-ui-tertiary-active-default);
+      --ds-auro-toast-close-button-border-color: var(--ds-color-border-divider-default, #{$ds-color-border-divider-default});
+      --ds-auro-toast-close-button-background-color: var(--ds-color-container-ui-tertiary-active-default, #{$ds-color-container-ui-tertiary-active-default});
     }
-  }
-  
+  }  
 }
 
 :host([variant='error']) {
   --ds-auro-toast-background-color: var(--ds-color-container-error-default, #{$ds-color-container-error-default});
-  --ds-auro-toast-text-color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
-  --ds-auro-toast-icon-color: var(--ds-color-icon-error-default, $ds-color-icon-error-default);
-  --ds-auro-toast-close-button-icon-color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
+  --ds-auro-toast-text-color: var(--ds-color-text-primary-default, #{$ds-color-text-primary-default});
+  --ds-auro-toast-icon-color: var(--ds-color-icon-error-default, #{$ds-color-icon-error-default});
+  --ds-auro-toast-close-button-icon-color: var(--ds-color-text-primary-default, #{$ds-color-text-primary-default});
 }
 
 :host([variant='success']) {
   --ds-auro-toast-background-color: var(--ds-color-container-success-default, #{$ds-color-container-success-default});
-  --ds-auro-toast-text-color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
-  --ds-auro-toast-icon-color: var(--ds-color-icon-success-default, $ds-color-icon-success-default);
-  --ds-auro-toast-close-button-icon-color: var(--ds-color-text-primary-default, $ds-color-text-primary-default);
+  --ds-auro-toast-text-color: var(--ds-color-text-primary-default, #{$ds-color-text-primary-default});
+  --ds-auro-toast-icon-color: var(--ds-color-icon-success-default, #{$ds-color-icon-success-default});
+  --ds-auro-toast-close-button-icon-color: var(--ds-color-text-primary-default, #{$ds-color-text-primary-default});
 }
