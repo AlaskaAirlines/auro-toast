@@ -183,13 +183,9 @@ The component may be restyled using the following code sample and changing the v
 @import "./../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables";
 
 :host {
-  --ds-auro-toast-background-color: var(--ds-color-brand-gray-400, #{$ds-color-brand-gray-400});
-  --ds-auro-toast-border-color: var(--ds-color-border-divider-default, #{$ds-color-border-divider-default});
-  --ds-auro-toast-close-button-icon-color: var(--ds-color-text-primary-inverse, #{$ds-color-text-primary-inverse});
-  --ds-auro-toast-close-button-background-color: transparent;
-  --ds-auro-toast-close-button-border-color: transparent;
-  --ds-auro-toast-icon-color: var(--ds-color-text-primary-inverse, #{$ds-color-text-primary-inverse});
+  --ds-auro-toast-container-color: var(--ds-color-container-subtle-inverse, #{$ds-color-container-subtle-inverse});
   --ds-auro-toast-text-color: var(--ds-color-text-primary-inverse, #{$ds-color-text-primary-inverse});
+  --ds-auro-toast-close-button-hover-container-color: var(--ds-color-container-ui-secondary-hover-default, #{$ds-color-container-ui-secondary-hover-default});
 }
 ```
 <!-- AURO-GENERATED-CONTENT:END -->

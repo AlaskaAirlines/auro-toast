@@ -37,8 +37,8 @@
   }
 
   .closeButton {
-    width: var(--ds-size-400, $ds-size-400);
-    height: var(--ds-size-400, $ds-size-400);
+    width: var(--ds-size-300, $ds-size-300);
+    height: var(--ds-size-300, $ds-size-300);
     padding-right: 0;
     padding-left: 0;
     border: var(--ds-size-25, $ds-size-25) solid transparent;
@@ -50,6 +50,11 @@
     }
   }
 
+  .closeButtonIcon {
+    width: var(--ds-size-300, $ds-size-300);
+    height: var(--ds-size-300, $ds-size-300);
+  }
+
   .hidden {
     opacity: 0;
     transition: visibility 0s 300ms, opacity 300ms ease-out;
@@ -57,9 +62,9 @@
   }
 
   .icon {
-    display: flex;
+    width: var(--ds-size-300, $ds-size-300);
+    height: var(--ds-size-300, $ds-size-300);
     justify-content: center;
-    padding-top: var(--ds-size-25, $ds-size-25);
     margin-right: calc(var(--ds-size-100, $ds-size-100) * -1);
   }
 

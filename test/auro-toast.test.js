@@ -20,7 +20,7 @@ describe('auro-toast', () => {
     const el = await fixture(html`
     <auro-toast id="2" visible> Hello I am a toast! </auro-toast>
   `);
-    const closeButton = el.shadowRoot.querySelector('button');
+    const closeButton = el.shadowRoot.querySelector('.closeButton');
     closeButton.click();
 
     setTimeout(() => expect(el.visible).to.be.false, 1000);
