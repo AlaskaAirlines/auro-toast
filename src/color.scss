@@ -15,12 +15,14 @@
   }
 
   .closeButton {
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--ds-auro-toast-close-button-border-color);
     background-color: var(--ds-auro-toast-close-button-background-color);
     color: var(--ds-auro-toast-close-button-icon-color);
 
     &:hover {
-      border: 1px solid var(--ds-auro-toast-close-button-border-color);
-      
+      --ds-auro-toast-close-button-border-color: var(--ds-color-border-divider-default, $ds-color-border-divider-default);
       --ds-auro-toast-close-button-background-color: var(--ds-color-container-ui-tertiary-active-default, $ds-color-container-ui-tertiary-active-default);
     }
   }

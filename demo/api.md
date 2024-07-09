@@ -185,7 +185,7 @@ The component may be restyled using the following code sample and changing the v
   --ds-auro-toast-border-color: var(--ds-color-border-divider-default, $ds-color-border-divider-default);
   --ds-auro-toast-close-button-icon-color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
   --ds-auro-toast-close-button-background-color: transparent;
-  --ds-auro-toast-close-button-border-color: var(--ds-color-border-divider-default, $ds-color-border-divider-default);
+  --ds-auro-toast-close-button-border-color: transparent;
   --ds-auro-toast-icon-color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
   --ds-auro-toast-text-color: var(--ds-color-text-primary-inverse, $ds-color-text-primary-inverse);
 }
