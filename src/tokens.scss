@@ -1,3 +1,5 @@
+@import "./../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables";
+
 :host {
   --ds-auro-toast-background-color: var(--ds-color-brand-gray-400, #{$ds-color-brand-gray-400});
   --ds-auro-toast-border-color: var(--ds-color-border-divider-default, #{$ds-color-border-divider-default});
