@@ -60,11 +60,6 @@ The use of any Auro custom element has a dependency on the [Auro Design Tokens](
 
 <!-- AURO-GENERATED-CONTENT:END -->
 
-### CSS Custom Property fallbacks
-
-<!-- AURO-GENERATED-CONTENT:START (REMOTE:url=https://raw.githubusercontent.com/AlaskaAirlines/WC-Generator/master/componentDocs/partials/usage/cssFallbacks.md) -->
-<!-- AURO-GENERATED-CONTENT:END -->
-
 ### Define dependency in project component
 
 <!-- AURO-GENERATED-CONTENT:START (REMOTE:url=https://raw.githubusercontent.com/AlaskaAirlines/WC-Generator/master/componentDocs/partials/usage/componentImportDescription.md) -->
