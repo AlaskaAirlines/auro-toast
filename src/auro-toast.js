@@ -14,6 +14,10 @@ import styleCss from "./style-css.js";
 import colorCss from "./color-css.js";
 import tokensCss from "./tokens-css.js";
 
+import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg.mjs';
+import successIcon from '@alaskaairux/icons/dist/icons/interface/check-stroke.mjs';
+import errorIcon from '@alaskaairux/icons/dist/icons/alert/error-stroke.mjs';
+import infoIcon from '@alaskaairux/icons/dist/icons/alert/information-stroke.mjs';
 
 import { AuroDependencyVersioning } from '@aurodesignsystem/auro-library/scripts/runtime/dependencyTagVersioning.mjs';
 
@@ -41,6 +45,49 @@ export class AuroToast extends LitElement {
   constructor() {
     super();
 
+    /**
+     * @private
+     */
+    this.closeDom = new DOMParser().parseFromString(closeIcon.svg, 'text/html');
+
+    /**
+     * @private
+     */
+    this.closeSvg = this.closeDom.body.firstChild;
+    this.closeSvg.setAttribute('slot', 'svg');
+
+    /**
+     * @private
+     */
+    this.successDom = new DOMParser().parseFromString(successIcon.svg, 'text/html');
+
+    /**
+     * @private
+     */
+    this.successSvg = this.successDom.body.firstChild;
+    this.successSvg.setAttribute('slot', 'svg');
+
+    /**
+     * @private
+     */
+    this.errorDom = new DOMParser().parseFromString(errorIcon.svg, 'text/html');
+
+    /**
+     * @private
+     */
+    this.errorSvg = this.errorDom.body.firstChild;
+    this.errorSvg.setAttribute('slot', 'svg');
+
+    /**
+     * @private
+     */
+    this.infoDom = new DOMParser().parseFromString(infoIcon.svg, 'text/html');
+
+    /**
+     * @private
+     */
+    this.infoSvg = this.infoDom.body.firstChild;
+    this.infoSvg.setAttribute('slot', 'svg');
 
     const versioning = new AuroDependencyVersioning();
 
@@ -86,28 +133,6 @@ export class AuroToast extends LitElement {
       colorCss,
       tokensCss
     ];
-  }
-
-  /**
-   * @private
-   * @param {string} category - The category of the icon.
-   * @param {string} name - The name of the icon.
-   * @returns {string} - The html template for the icon.
-   */
-  generateIconHtml(category, name) {
-    return this.noIcon
-      ? html``
-      : html`
-        <${this.iconTag} 
-          ?onDark="${!this.variant}" 
-          ?error="${this.getAttribute('variant') === 'error'}" 
-          ?success="${this.getAttribute('variant') === 'success'}" 
-          class="icon" 
-          customSize 
-          category="${category}" 
-          name="${name}">
-        </${this.iconTag}>
-      `;
   }
 
   /**
@@ -186,29 +211,23 @@ export class AuroToast extends LitElement {
   }
 
   render() {
-    let iconHtml = html``;
-
-    switch (this.variant) {
-      case undefined:
-      case null:
-        // default toast uses information icon
-        iconHtml = this.generateIconHtml('alert', 'information-stroke');
-        break;
-      case "error":
-        iconHtml = this.generateIconHtml('alert', 'error-stroke');
-        break;
-      case "success":
-        iconHtml = this.generateIconHtml('interface', 'check-stroke');
-        break;
-      default:
-        break;
-    }
-
     return this.visible ? html`<div aria-live="polite" class="toastContainer">
-      ${iconHtml}
+      ${this.noIcon ? undefined : html`
+        <${this.iconTag} customSize customColor customSvg class="testing">
+          ${this.variant === 'success' ? this.successSvg : undefined}
+          ${this.variant === 'error' ? this.errorSvg : undefined}
+          ${this.variant !== 'success' && this.variant !== 'error' ? this.infoSvg : undefined}
+        </${this.iconTag}>
+      `}
       <div class="message"><slot></slot></div>
-        <${this.buttonTag} class="closeButton" variant="flat" ?onDark="${!this.variant}" @click="${this.handleOnClose}">
-          <${this.iconTag} class="closeButtonIcon" customSize customColor category="interface" name="x-lg"></${this.iconTag}>
+        <${this.buttonTag}
+          variant="flat"
+          ?onDark=${this.getAttribute('variant') !== 'error' && this.getAttribute('variant') !== 'success'}
+          @click="${this.handleCloseButtonClick}" part="close-button">
+          <${this.iconTag} customSize customColor customSvg>
+            ${this.closeSvg}
+          </${this.iconTag}>
+          <span class="util_displayHiddenVisually">Close</span>
         </${this.buttonTag}>
       </div>`
       : undefined;
