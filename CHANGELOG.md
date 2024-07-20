@@ -1,5 +1,17 @@
 # Semantic Release Automated Changelog
 
+# [1.2.0-beta.2](https://github.com/AlaskaAirlines/auro-toast/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2024-07-20)
+
+
+### Features
+
+* **version:** implement custom versioned components ([f0c717c](https://github.com/AlaskaAirlines/auro-toast/commit/f0c717c9a70cf8a81b4beb8c42cc64cd8cf17cab))
+
+
+### Performance Improvements
+
+* **icon:** update to use dynamic named icon ([22939fd](https://github.com/AlaskaAirlines/auro-toast/commit/22939fdbacc04952d8b3a73b8796f8c7275781ef))
+
 # [1.2.0-beta.1](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.6...v1.2.0-beta.1) (2024-07-09)
 
 
