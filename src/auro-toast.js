@@ -211,15 +211,16 @@ export class AuroToast extends LitElement {
   }
 
   render() {
-    return this.visible ? html`<div aria-live="polite" class="toastContainer">
-      ${this.noIcon ? undefined : html`
-        <${this.iconTag} customSize customColor customSvg class="testing">
-          ${this.variant === 'success' ? this.successSvg : undefined}
-          ${this.variant === 'error' ? this.errorSvg : undefined}
-          ${this.variant !== 'success' && this.variant !== 'error' ? this.infoSvg : undefined}
-        </${this.iconTag}>
-      `}
-      <div class="message"><slot></slot></div>
+    return this.visible ? html`
+      <div aria-live="polite" class="toastContainer">
+        ${this.noIcon ? undefined : html`
+          <${this.iconTag} customSize customColor customSvg class="typeIcon">
+            ${this.variant === 'success' ? this.successSvg : undefined}
+            ${this.variant === 'error' ? this.errorSvg : undefined}
+            ${this.variant !== 'success' && this.variant !== 'error' ? this.infoSvg : undefined}
+          </${this.iconTag}>
+        `}
+        <div class="message"><slot></slot></div>
         <${this.buttonTag}
           variant="flat"
           ?onDark=${this.getAttribute('variant') !== 'error' && this.getAttribute('variant') !== 'success'}
@@ -229,8 +230,8 @@ export class AuroToast extends LitElement {
           </${this.iconTag}>
           <span class="util_displayHiddenVisually">Close</span>
         </${this.buttonTag}>
-      </div>`
-      : undefined;
+      </div>
+    ` : undefined;
   }
 }
 

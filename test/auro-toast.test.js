@@ -2,60 +2,62 @@ import { fixture, html, expect, aTimeout, elementUpdated } from '@open-wc/testin
 import '../src/auro-toast';
 
 describe('auro-toast', () => {
-  // it('auro-toast is accessible', async () => {
-  //   const el = await fixture(html`
-  //     <auro-toast></auro-toast>
-  //   `);
+  it('auro-toast is accessible', async () => {
+    const el = await fixture(html`
+      <auro-toast></auro-toast>
+    `);
 
-  //   await expect(el).to.be.accessible();
-  // });
+    await expect(el).to.be.accessible();
+  });
 
-  // it('auro-toast custom element is defined', async () => {
-  //   const el = !!customElements.get("auro-toast");
+  it('auro-toast custom element is defined', async () => {
+    const el = !!customElements.get("auro-toast");
 
-  //   expect(el).to.be.true;
-  // });
+    expect(el).to.be.true;
+  });
 
-  // it('close the toast when the X icon button is clicked on', async () => {
-  //   const el = await fixture(html`
-  //     <auro-toast id="2" visible> Hello I am a toast! </auro-toast>
-  //   `);
+  it('close the toast when the X icon button is clicked on', async () => {
+    const el = await fixture(html`
+      <auro-toast id="2" visible> Hello I am a toast! </auro-toast>
+    `);
 
-  //   const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
-  //   closeButton.click();
+    const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+    closeButton.click();
 
-  //   setTimeout(() => expect(el.visible).to.be.false, 1000);
-  // });
+    setTimeout(() => expect(el.visible).to.be.false, 1000);
+  });
 
-  // it('auro-toast is hidden after five seconds', async () => {
-  //   const el = await fixture(html`
-  //     <auro-toast visible>Something</auro-toast>
-  //   `);
+  it('auro-toast is hidden after five seconds', async () => {
+    const el = await fixture(html`
+      <auro-toast visible>Something</auro-toast>
+    `);
 
-  //   await aTimeout(5500);
-  //   const root = el.shadowRoot;
+    await aTimeout(5500);
+    const root = el.shadowRoot;
 
-  //   expect(el.visible).to.be.false;
-  // }).timeout(6000);
+    expect(el.visible).to.be.false;
+  }).timeout(6000);
 
-  // it('error auro-toast should not auto dismiss', async () => {
-  //   const el = await fixture(html`
-  //     <auro-toast variant="error" visible>Something</auro-toast>
-  //   `);
+  it('error auro-toast should not auto dismiss', async () => {
+    const el = await fixture(html`
+      <auro-toast variant="error" visible>Something</auro-toast>
+    `);
 
-  //   await aTimeout(5050);
-  //   const root = el.shadowRoot;
-  //   const toastContainer = root.querySelector('.toastContainer');
+    await aTimeout(5050);
+    const root = el.shadowRoot;
+    const toastContainer = root.querySelector('.toastContainer');
 
-  //   expect(el.visible).to.be.true;
-  // }).timeout(5060);
+    expect(el.visible).to.be.true;
+  }).timeout(5060);
 
-  // it('sets auro-toast to noIcon style', async () => {
-  //   const el = await fixture(html`
-  //     <auro-toast variant="success" noIcon visible> Success </auro-toast>
-  //   `);
-  //   const root = el.shadowRoot;
-  //   expect(root.querySelector('[auro-icon]')).to.not.exist;
-  // });
+  it('sets auro-toast to noIcon style', async () => {
+    const el = await fixture(html`
+      <auro-toast variant="success" noIcon visible> Success </auro-toast>
+    `);
+    const root = el.shadowRoot;
+
+    console.warn(el.shadowRoot.querySelector('.typeIcon'));
+    expect(root.querySelector('.typeIcon')).to.not.exist;
+  });
 
 });
