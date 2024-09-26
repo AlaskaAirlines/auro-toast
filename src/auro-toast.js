@@ -22,10 +22,10 @@ import infoIcon from '@alaskaairux/icons/dist/icons/alert/information-stroke.mjs
 import { AuroDependencyVersioning } from '@aurodesignsystem/auro-library/scripts/runtime/dependencyTagVersioning.mjs';
 
 import { AuroButton } from '@aurodesignsystem/auro-button/src/auro-button.js';
-import buttonVersion from './buttonVersion';
+import buttonVersion from './buttonVersion.js';
 
 import { AuroIcon } from '@aurodesignsystem/auro-icon/src/auro-icon.js';
-import iconVersion from './iconVersion';
+import iconVersion from './iconVersion.js';
 
 const TIME_TIL_FADE_OUT = 5000;
 const FADE_OUT_DURATION = 300;
