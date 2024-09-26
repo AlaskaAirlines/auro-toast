@@ -1,52 +1,5 @@
 # Semantic Release Automated Changelog
 
-# [2.0.0-beta.1](https://github.com/AlaskaAirlines/auro-toast/compare/v1.2.0-beta.2...v2.0.0-beta.1) (2024-09-26)
-
-
-### Features
-
-* add tag name as attribute when custom registered ([c140d41](https://github.com/AlaskaAirlines/auro-toast/commit/c140d41e678179a631e69efa01fb979f03ac767c))
-
-
-### Performance Improvements
-
-* refactor custom component registration config ([ec76cc7](https://github.com/AlaskaAirlines/auro-toast/commit/ec76cc76c3b386b0a13194a8ec8d68f6f03465f6))
-* update dependencies ([2831c72](https://github.com/AlaskaAirlines/auro-toast/commit/2831c7285753ce4281ce80cb24d0b3a11b89998a))
-
-
-### BREAKING CHANGES
-
-* trigger major release for theming support #37
-
-# [1.2.0-beta.2](https://github.com/AlaskaAirlines/auro-toast/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2024-07-20)
-
-
-### Features
-
-* **version:** implement custom versioned components ([f0c717c](https://github.com/AlaskaAirlines/auro-toast/commit/f0c717c9a70cf8a81b4beb8c42cc64cd8cf17cab))
-
-
-### Performance Improvements
-
-* **icon:** update to use dynamic named icon ([22939fd](https://github.com/AlaskaAirlines/auro-toast/commit/22939fdbacc04952d8b3a73b8796f8c7275781ef))
-
-# [1.2.0-beta.1](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.6...v1.2.0-beta.1) (2024-07-09)
-
-
-### Bug Fixes
-
-* **hover:** corrects minor visual jump in close button on hover ([7e1a45d](https://github.com/AlaskaAirlines/auro-toast/commit/7e1a45dd0ea7b7bf660757128f0855b1e0520f60))
-
-
-### Features
-
-* refactor color token structure with tier 3 tokens [#37](https://github.com/AlaskaAirlines/auro-toast/issues/37) ([4c3e3ce](https://github.com/AlaskaAirlines/auro-toast/commit/4c3e3ce2a5f503bbed3854a38014f339d6dbb2c1))
-
-
-### Performance Improvements
-
-* replace hard coded values with tokens ([f31eb13](https://github.com/AlaskaAirlines/auro-toast/commit/f31eb13358d815056a73179d4eb74b829323a9e2))
-
 ## [1.1.6](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.5...v1.1.6) (2024-02-22)
 
 
