@@ -1,5 +1,23 @@
 # Semantic Release Automated Changelog
 
+# [2.0.0-beta.1](https://github.com/AlaskaAirlines/auro-toast/compare/v1.2.0-beta.2...v2.0.0-beta.1) (2024-09-26)
+
+
+### Features
+
+* add tag name as attribute when custom registered ([c140d41](https://github.com/AlaskaAirlines/auro-toast/commit/c140d41e678179a631e69efa01fb979f03ac767c))
+
+
+### Performance Improvements
+
+* refactor custom component registration config ([ec76cc7](https://github.com/AlaskaAirlines/auro-toast/commit/ec76cc76c3b386b0a13194a8ec8d68f6f03465f6))
+* update dependencies ([2831c72](https://github.com/AlaskaAirlines/auro-toast/commit/2831c7285753ce4281ce80cb24d0b3a11b89998a))
+
+
+### BREAKING CHANGES
+
+* trigger major release for theming support #37
+
 # [1.2.0-beta.2](https://github.com/AlaskaAirlines/auro-toast/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2024-07-20)
 
 
