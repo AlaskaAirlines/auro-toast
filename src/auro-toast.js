@@ -19,6 +19,8 @@ import successIcon from '@alaskaairux/icons/dist/icons/interface/check-stroke.mj
 import errorIcon from '@alaskaairux/icons/dist/icons/alert/error-stroke.mjs';
 import infoIcon from '@alaskaairux/icons/dist/icons/alert/information-stroke.mjs';
 
+import AuroLibraryRuntimeUtils from '@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs';
+
 import { AuroDependencyVersioning } from '@aurodesignsystem/auro-library/scripts/runtime/dependencyTagVersioning.mjs';
 
 import { AuroButton } from '@aurodesignsystem/auro-button/src/auro-button.js';
@@ -65,6 +67,7 @@ export class AuroToast extends LitElement {
      * @private
      */
     this.successSvg = this.successDom.body.firstChild;
+
     this.successSvg.setAttribute('slot', 'svg');
 
     /**
@@ -104,6 +107,11 @@ export class AuroToast extends LitElement {
     /**
      * @private
      */
+    this.runtimeUtils = new AuroLibraryRuntimeUtils();
+
+    /**
+     * @private
+     */
     this.fadeOutTimer = undefined;
   }
 
@@ -133,6 +141,11 @@ export class AuroToast extends LitElement {
       colorCss,
       tokensCss
     ];
+  }
+
+  firstUpdated() {
+    // Add the tag name as an attribute if it is different than the component name
+    this.runtimeUtils.handleComponentTagRename(this, 'auro-toast');
   }
 
   /**
