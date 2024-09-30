@@ -1,5 +1,32 @@
 # Semantic Release Automated Changelog
 
+# [2.0.0](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.6...v2.0.0) (2024-09-30)
+
+
+### Bug Fixes
+
+* **hover:** corrects minor visual jump in close button on hover ([b323af2](https://github.com/AlaskaAirlines/auro-toast/commit/b323af2a973a2dfd595276bda97bda834d506206))
+
+
+### Features
+
+* add tag name as attribute when custom registered ([9ee3022](https://github.com/AlaskaAirlines/auro-toast/commit/9ee3022285387258ec725fdaeb0165f717fb5fec))
+* refactor color token structure with tier 3 tokens [#37](https://github.com/AlaskaAirlines/auro-toast/issues/37) ([6c5798e](https://github.com/AlaskaAirlines/auro-toast/commit/6c5798e0ea401b21c7fa73c50c6ce6e21b1f5f3c))
+* **version:** implement custom versioned components ([cf0b4da](https://github.com/AlaskaAirlines/auro-toast/commit/cf0b4da9ec6587f546d3d40508c8ad75047cb1b7))
+
+
+### Performance Improvements
+
+* **icon:** update to use dynamic named icon ([d197718](https://github.com/AlaskaAirlines/auro-toast/commit/d197718bd77e8a31b31a5989bb8feb504060fed4))
+* refactor custom component registration config ([f53c1a2](https://github.com/AlaskaAirlines/auro-toast/commit/f53c1a265b4aa8a669d84ea92f82018c8cf58838))
+* replace hard coded values with tokens ([e876f93](https://github.com/AlaskaAirlines/auro-toast/commit/e876f93352407b5c8e85fa233856c8bb98c0bddf))
+* update dependencies ([cbed764](https://github.com/AlaskaAirlines/auro-toast/commit/cbed76442e6707a5f8cfdd4b5f196c48aff181ed))
+
+
+### BREAKING CHANGES
+
+* trigger major release for theming support #37
+
 ## [1.1.6](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.5...v1.1.6) (2024-02-22)
 
 
