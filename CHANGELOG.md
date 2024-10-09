@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [2.0.1](https://github.com/AlaskaAirlines/auro-toast/compare/v2.0.0...v2.0.1) (2024-10-09)
+
+
+### Bug Fixes
+
+* make auro-library a normal dep instead of devDep ([6ce7415](https://github.com/AlaskaAirlines/auro-toast/commit/6ce741520d1aed3c0c7c07a6fd09de23c6bd415a))
+
 # [2.0.0](https://github.com/AlaskaAirlines/auro-toast/compare/v1.1.6...v2.0.0) (2024-09-30)
 
 
