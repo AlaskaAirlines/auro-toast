@@ -5,6 +5,10 @@ import { initErrorExample } from '../apiExamples/error';
 import { initSuccessExample } from '../apiExamples/success';
 import { initMultipleToastsExample } from '../apiExamples/multipleToasts';
 
+import { AuroToast } from '../src/auro-toast.js';
+
+AuroToast.register('custom-toast');
+
 export function initExamples(initCount) {
   initCount = initCount || 0;
 
