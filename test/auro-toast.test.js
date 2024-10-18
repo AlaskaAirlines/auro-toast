@@ -1,5 +1,5 @@
 import { fixture, html, expect, aTimeout, elementUpdated } from '@open-wc/testing';
-import '../src/auro-toast';
+import '../index.js';
 
 describe('auro-toast', () => {
   it('auro-toast is accessible', async () => {

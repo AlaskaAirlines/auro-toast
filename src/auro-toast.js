@@ -143,6 +143,18 @@ export class AuroToast extends LitElement {
     ];
   }
 
+  /**
+   * This will register this element with the browser.
+   * @param {string} [name="auro-toast"] - The name of element that you want to register to.
+   *
+   * @example
+   * AuroToast.register("custom-toast") // this will register this element to <custom-toast/>
+   *
+   */
+  static register(name = "auro-toast") {
+    AuroLibraryRuntimeUtils.prototype.registerComponent(name, AuroToast);
+  }
+
   firstUpdated() {
     // Add the tag name as an attribute if it is different than the component name
     this.runtimeUtils.handleComponentTagRename(this, 'auro-toast');
@@ -246,9 +258,4 @@ export class AuroToast extends LitElement {
       </div>
     ` : undefined;
   }
-}
-
-// default internal definition
-if (!customElements.get("auro-toast")) {
-  customElements.define("auro-toast", AuroToast);
 }
