@@ -17,8 +17,3 @@ export default class AuroToaster extends LitElement {
     return html`<slot></slot>`;
   }
 }
-
-// default internal definition
-if (!customElements.get("auro-toaster")) {
-  customElements.define("auro-toaster", AuroToaster);
-}
