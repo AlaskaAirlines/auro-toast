@@ -14,7 +14,6 @@
 :host([visible]) {
   display: inline-flex;
   min-width: 100%;
-  min-height: calc(var(--ds-size-700, $ds-size-700) + var(--ds-size-50, $ds-size-50));
   padding: var(--ds-size-200, $ds-size-200) var(--ds-size-150, $ds-size-150);
   border-radius: var(--ds-size-100, $ds-size-100);
   box-shadow: var(--ds-elevation-200, $ds-elevation-200);
