@@ -2,6 +2,7 @@ import { initVisibleExample } from "../apiExamples/visible";
 import { initVariantToastsExample } from "../apiExamples/variant";
 import { initNoIconExample } from "../apiExamples/noIcon";
 
+import '../index.js';
 /* eslint-disable jsdoc/require-jsdoc, no-magic-numbers, no-param-reassign */
 
 export function initExamples(initCount) {
