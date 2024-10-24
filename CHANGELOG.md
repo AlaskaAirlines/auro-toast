@@ -1,5 +1,22 @@
 # Semantic Release Automated Changelog
 
+# [2.1.0](https://github.com/AlaskaAirlines/auro-toast/compare/v2.0.1...v2.1.0) (2024-10-24)
+
+
+### Bug Fixes
+
+* remove min-height style ([7cadc5d](https://github.com/AlaskaAirlines/auro-toast/commit/7cadc5d7c5a8669f5c1f34b9dea01e77229f2d89))
+
+
+### Features
+
+* **api:** add register static method [#49](https://github.com/AlaskaAirlines/auro-toast/issues/49) ([2105fbf](https://github.com/AlaskaAirlines/auro-toast/commit/2105fbf6f181cf1689bd36adeb785d05414701e6))
+
+
+### Performance Improvements
+
+* update dependency versions ([3762e5d](https://github.com/AlaskaAirlines/auro-toast/commit/3762e5d0e8b87d8308cce1decbf03108c6a3368a))
+
 ## [2.0.1](https://github.com/AlaskaAirlines/auro-toast/compare/v2.0.0...v2.0.1) (2024-10-09)
 
 
