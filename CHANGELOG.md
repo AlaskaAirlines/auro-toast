@@ -1,5 +1,22 @@
 # Semantic Release Automated Changelog
 
+# [2.2.0](https://github.com/AlaskaAirlines/auro-toast/compare/v2.1.0...v2.2.0) (2024-11-01)
+
+
+### Bug Fixes
+
+* remove customsize attribute [#51](https://github.com/AlaskaAirlines/auro-toast/issues/51) ([01ef209](https://github.com/AlaskaAirlines/auro-toast/commit/01ef209259836b6a5747f43eddc8455ac0dc4f01))
+
+
+### Features
+
+* update auro-icon package and icon size token applied [#51](https://github.com/AlaskaAirlines/auro-toast/issues/51) ([181e614](https://github.com/AlaskaAirlines/auro-toast/commit/181e614e4ae6d9ffa3e741eef40146ed0fa4dbca))
+
+
+### Performance Improvements
+
+* update dependencies ([72a5cb2](https://github.com/AlaskaAirlines/auro-toast/commit/72a5cb2283aed51744fbc96de89664ecec716a4c))
+
 # [2.1.0](https://github.com/AlaskaAirlines/auro-toast/compare/v2.0.1...v2.1.0) (2024-10-24)
 
 
