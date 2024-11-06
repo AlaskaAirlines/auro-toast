@@ -1,6 +1,7 @@
 /* eslint-disable jsdoc/require-jsdoc, no-magic-numbers, no-param-reassign */
 
 import { initBasicExample } from '../apiExamples/basic';
+import { initCustomExample } from '../apiExamples/customToast';
 import { initErrorExample } from '../apiExamples/error';
 import { initSuccessExample } from '../apiExamples/success';
 import { initMultipleToastsExample } from '../apiExamples/multipleToasts';
@@ -16,6 +17,7 @@ export function initExamples(initCount) {
   try {
     // javascript example function calls to be added here upon creation to test examples
     initBasicExample();
+    initCustomExample();
     initErrorExample();
     initSuccessExample();
     initMultipleToastsExample();

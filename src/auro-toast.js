@@ -3,7 +3,7 @@
 
 // ---------------------------------------------------------------------
 
-/* eslint-disable lit/binding-positions, lit/no-invalid-html */
+/* eslint-disable lit/binding-positions, lit/no-invalid-html, max-lines */
 
 // If using litElement base class
 import { LitElement } from "lit";
@@ -37,8 +37,11 @@ const FADE_OUT_DURATION = 300;
  * The auro-toast element provides users a way to display short, temporary messages.
  *
  * @attr {Boolean} visible - Sets state of toast to visible
- * @attr {String} variant - Component will render visually based on which variant value is set; currently supports `error`, `success`
+ * @attr {String} variant - Component will render visually based on which variant value is set; currently supports `error`, `success`, `custom`
  * @attr {Boolean} noIcon - Removes icon from the toast UI
+ * @attr {Boolean} disableAutoHide - Prevents the toast from auto-hiding on the default time.
+ * @csspart type-icon - Apply css to the toast type icon
+ * @csspart close-button - Apply css to the toast close button
  * @fires onToastClose - Notifies that the toast has been closed
  */
 
@@ -131,6 +134,10 @@ export class AuroToast extends LitElement {
       },
       noIcon: {
         type: Boolean
+      },
+      disableAutoHide: {
+        type: Boolean,
+        reflect: true
       }
     };
   }
@@ -164,8 +171,8 @@ export class AuroToast extends LitElement {
    * @private
    * @returns {void}
    */
-  handleOnClose() {
-    this.fadeOutToast();
+  clickToClose() {
+    this.closeToast();
     clearTimeout(this.fadeOutTimer);
   }
 
@@ -174,12 +181,16 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   fadeOutToast() {
-    const toastContainer = this.shadowRoot.querySelector('.toastContainer');
-    toastContainer.classList.add('hidden');
+    if (!this.disableAutoHide) {
+      const toastContainer = this.shadowRoot.querySelector('.toastContainer');
+      if (toastContainer) {
+        toastContainer.classList.add('hidden');
+      }
 
-    setTimeout(() => {
-      this.closeToast();
-    }, FADE_OUT_DURATION);
+      setTimeout(() => {
+        this.closeToast();
+      }, FADE_OUT_DURATION);
+    }
   }
 
   /**
@@ -218,20 +229,62 @@ export class AuroToast extends LitElement {
     }
   }
 
+  /**
+   * Determines which type icon to render based on the variant prop.
+   * @private
+   * @returns {HTMLElement} - The icon element to render.
+   */
+  getVariantIcon() {
+    const VARIANT_ICONS = {
+      success: this.successSvg,
+      error: this.errorSvg,
+      default: this.infoSvg
+    };
+
+    return VARIANT_ICONS[this.variant] || VARIANT_ICONS.default;
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.setOnClick();
   }
 
   updated(changedProperties) {
+    if (changedProperties.has('visible')) {
+      this.handleSlotContent();
+    }
+
     if (changedProperties.has('variant')) {
       clearTimeout(this.fadeOutTimer);
     }
-    // do not auto dismiss for error toasts
-    if (this.visible && this.variant !== 'error') {
+    // do not auto dismiss for error toasts or if disableAutoHide is set
+    if (this.visible && !this.disableAutoHide && this.variant !== 'error') {
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
       }, TIME_TIL_FADE_OUT);
+    }
+  }
+
+  /**
+   * Mirrors any defined custom type svg into the correct place in the template.
+   * @private
+   * @returns {void}
+   */
+  handleSlotContent() {
+    try {
+      const customSvg = this.querySelector(`[slot="customSvg"]`);
+
+      if (customSvg) {
+        const iconSvg = customSvg.cloneNode(true);
+        const typeIcon = this.shadowRoot.querySelector('.typeIcon');
+
+        if (typeIcon) {
+          iconSvg.setAttribute('slot', 'svg');
+          typeIcon.appendChild(iconSvg);
+        }
+      }
+    } catch (error) {
+      console.error('handleSlotContent', error); // eslint-disable-line no-console
     }
   }
 
@@ -239,17 +292,17 @@ export class AuroToast extends LitElement {
     return this.visible ? html`
       <div aria-live="polite" class="toastContainer">
         ${this.noIcon ? undefined : html`
-          <${this.iconTag} customColor customSvg class="typeIcon">
-            ${this.variant === 'success' ? this.successSvg : undefined}
-            ${this.variant === 'error' ? this.errorSvg : undefined}
-            ${this.variant !== 'success' && this.variant !== 'error' ? this.infoSvg : undefined}
+          <${this.iconTag} customColor customSvg class="typeIcon" part="type-icon">
+            ${this.variant === 'custom' ? undefined : html`${this.getVariantIcon()}`}
           </${this.iconTag}>
         `}
         <div class="message"><slot></slot></div>
         <${this.buttonTag}
           variant="flat"
           ?onDark=${this.getAttribute('variant') !== 'error' && this.getAttribute('variant') !== 'success'}
-          @click="${this.handleOnClose}" part="close-button">
+          @click="${this.clickToClose}"
+          part="close-button"
+          class="closeButton">
           <${this.iconTag} customColor customSvg>
             ${this.closeSvg}
           </${this.iconTag}>

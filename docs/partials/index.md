@@ -151,6 +151,26 @@ The following example is for the HTML template.
 <auro-toaster>
 ```
 
+## Customizing Toast Notifications
+
+The toast notification can be customized in several ways.
+
+- By applying the `variant="custom"` attribute value, you may pass in custom svg to use in place of the defaults assigned to the other variants.
+- You may recolor the toast notification using the tier 3 theme tokens.
+- You may disable the auto hide behavior of the toast by applying the `disableAutoHide` attribute.
+- You may programmatically show the toast by applying the `visible` attribute. (e.g. if you want the toast to show on load)
+
+<div class="exampleWrapper">
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/customToast.html) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+</div>
+<auro-accordion alignRight>
+  <span slot="trigger">See code</span>
+
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/customToast.html) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+
+</auro-accordion>
 
 ## Recommended Use and Version Control
 
