@@ -6,8 +6,8 @@ This file is generated based on a template fetched from `./docs/partials/index.m
 
 # Toast
 
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./description.md) -->
-<!-- The below content is automatically added from ./description.md -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/description.md) -->
+<!-- The below content is automatically added from ./../docs/partials/description.md -->
 The `<auro-toast>` element is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of sending an unobtrusive toast (or push) notification to your visitors.
 
 The `<auro-toaster>` wrapper-element is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of managing a series of notifications  at the bottom of the screen using the `<auro-toast>` element.
@@ -15,8 +15,8 @@ The `<auro-toaster>` wrapper-element is a [HTML custom element](https://develope
 
 ## Component use cases
 
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./useCases.md) -->
-<!-- The below content is automatically added from ./useCases.md -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/useCases.md) -->
+<!-- The below content is automatically added from ./../docs/partials/useCases.md -->
 The `<auro-toast>` use cases include:
 
 * Sending an error push notification
@@ -44,8 +44,8 @@ The following demo illustrates the `default` notification using the `<auro-toast
 Also notice in this demo the use of the `noIcon` attribute. this attribute removes the use of the default `information` icon.
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
-<!-- The below content is automatically added from ./../../apiExamples/basic.html -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/basic.html) -->
+<!-- The below content is automatically added from ./../apiExamples/basic.html -->
 <!-- icon variant -->
 <auro-button id="basicToastBtn">
   Show default notification
@@ -64,8 +64,8 @@ Also notice in this demo the use of the `noIcon` attribute. this attribute remov
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/basic.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/basic.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/basic.html -->
 
 ```html
 <!-- icon variant -->
@@ -95,8 +95,8 @@ Aside from the `default` notification, the `<auro-toast>` supports multiple vari
 The error push notification using the `<auro-toast>` element will **NOT** automatically dismiss itself. The user **MUST** dismiss the notification manually. When the notification is dismissed, it is not removed from the DOM. The `visible` property is set to `false`, which hides the notification from the UI.
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/error.html) -->
-<!-- The below content is automatically added from ./../../apiExamples/error.html -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/error.html) -->
+<!-- The below content is automatically added from ./../apiExamples/error.html -->
 <auro-button id="errorToastBtn">Show error notification</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="error" id="errorToast"> Unable to add lap infant. Please try again  </auro-toast>
 <auro-button id="errorToast-noIconBtn">Show error notification with no icon</auro-button>
@@ -105,8 +105,8 @@ The error push notification using the `<auro-toast>` element will **NOT** automa
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/error.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/error.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/error.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/error.html -->
 
 ```html
 <auro-button id="errorToastBtn">Show error notification</auro-button>
@@ -122,8 +122,8 @@ The error push notification using the `<auro-toast>` element will **NOT** automa
 The success push notification using the `<auro-toast>` element will automatically dismiss after five seconds if the user does not manually dismiss it. In this case, the notification is not removed from the DOM. The `visible` property is set to `false`, which hides the notification from the UI.
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/success.html) -->
-<!-- The below content is automatically added from ./../../apiExamples/success.html -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/success.html) -->
+<!-- The below content is automatically added from ./../apiExamples/success.html -->
 <auro-button id="successToastBtn">Show success toast</auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" variant="success" id="successToast"> Successfully added lap infant  </auro-toast>
 <auro-button id="successToast-noIconBtn">Show success toast with no icon</auro-button>
@@ -132,8 +132,8 @@ The success push notification using the `<auro-toast>` element will automaticall
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/success.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/success.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/success.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/success.html -->
 
 ```html
 <auro-button id="successToastBtn">Show success toast</auro-button>
@@ -149,8 +149,8 @@ The success push notification using the `<auro-toast>` element will automaticall
 The multi-notification use case requires the use of the `<auro-toaster>` component.
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/multipleToasts.html) -->
-<!-- The below content is automatically added from ./../../apiExamples/multipleToasts.html -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/multipleToasts.html) -->
+<!-- The below content is automatically added from ./../apiExamples/multipleToasts.html -->
 <auro-button id="multiToastBtn-default">Show default toast</auro-button>
 <auro-button id="multiToastBtn-error">Show error toast</auro-button>
 <auro-button id="multiToastBtn-success">Show success toast</auro-button>
@@ -163,8 +163,8 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/multipleToasts.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/multipleToasts.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/multipleToasts.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/multipleToasts.html -->
 
 ```html
 <auro-button id="multiToastBtn-default">Show default toast</auro-button>
@@ -227,7 +227,6 @@ The following example is for the HTML template.
     :visible="toast.visible"
     :variant="toast.variant"
     @on-toast-close="handleOnToastClose">
-    {{ toast.message }}
   </auro-toast>
 <auro-toaster>
 ```
@@ -242,8 +241,8 @@ The toast notification can be customized in several ways.
 - You may programmatically show the toast by applying the `visible` attribute. (e.g. if you want the toast to show on load)
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/customToast.html) -->
-<!-- The below content is automatically added from ./../../apiExamples/customToast.html -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=../apiExamples/customToast.html) -->
+<!-- The below content is automatically added from ../apiExamples/customToast.html -->
 <!-- icon variant -->
 <auro-button id="customizedToastBtn">
   Show customized notification
@@ -263,8 +262,8 @@ The toast notification can be customized in several ways.
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/customToast.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/customToast.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=../apiExamples/customToast.html) -->
+<!-- The below code snippet is automatically added from ../apiExamples/customToast.html -->
 
 ```html
 <!-- icon variant -->

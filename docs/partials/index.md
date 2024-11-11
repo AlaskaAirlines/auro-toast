@@ -6,12 +6,12 @@ This file is generated based on a template fetched from `./docs/partials/index.m
 
 # Toast
 
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./description.md) -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/description.md) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## Component use cases
 
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./useCases.md) -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/useCases.md) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ### The setup
@@ -34,13 +34,13 @@ The following demo illustrates the `default` notification using the `<auro-toast
 Also notice in this demo the use of the `noIcon` attribute. this attribute removes the use of the default `information` icon.
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/basic.html) -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/basic.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/basic.html) -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/basic.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>
@@ -54,13 +54,13 @@ Aside from the `default` notification, the `<auro-toast>` supports multiple vari
 The error push notification using the `<auro-toast>` element will **NOT** automatically dismiss itself. The user **MUST** dismiss the notification manually. When the notification is dismissed, it is not removed from the DOM. The `visible` property is set to `false`, which hides the notification from the UI.
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/error.html) -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/error.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/error.html) -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/error.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>
@@ -70,13 +70,13 @@ The error push notification using the `<auro-toast>` element will **NOT** automa
 The success push notification using the `<auro-toast>` element will automatically dismiss after five seconds if the user does not manually dismiss it. In this case, the notification is not removed from the DOM. The `visible` property is set to `false`, which hides the notification from the UI.
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/success.html) -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/success.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/success.html) -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/success.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>
@@ -86,14 +86,14 @@ The success push notification using the `<auro-toast>` element will automaticall
 The multi-notification use case requires the use of the `<auro-toaster>` component.
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/multipleToasts.html) -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/multipleToasts.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/multipleToasts.html) -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/multipleToasts.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>
@@ -161,13 +161,13 @@ The toast notification can be customized in several ways.
 - You may programmatically show the toast by applying the `visible` attribute. (e.g. if you want the toast to show on load)
 
 <div class="exampleWrapper">
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/customToast.html) -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=../apiExamples/customToast.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/customToast.html) -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=../apiExamples/customToast.html) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>

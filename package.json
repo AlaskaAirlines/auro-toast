@@ -22,7 +22,7 @@
   "dependencies": {
     "@aurodesignsystem/auro-button": "^8.1.0",
     "@aurodesignsystem/auro-icon": "^6.0.1",
-    "@aurodesignsystem/auro-library": "~2.8",
+    "@aurodesignsystem/auro-library": "^3.0.2",
     "chalk": "^5.3.0",
     "lit": "^3.2.1"
   },

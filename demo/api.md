@@ -1,5 +1,5 @@
-<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../api.md) -->
-<!-- The below content is automatically added from ./../api.md -->
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/api.md) -->
+<!-- The below content is automatically added from ./../docs/api.md -->
 
 # auro-toast
 
@@ -37,8 +37,8 @@ The auro-toast element provides users a way to display short, temporary messages
 State of the push notification which determines if it is `visible`.
 
 <div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/visible.html) -->
-  <!-- The below content is automatically added from ./../../apiExamples/visible.html -->
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/visible.html) -->
+  <!-- The below content is automatically added from ./../apiExamples/visible.html -->
   <auro-button id="visibleToastBtn">
     Set visible to true
   </auro-button>
@@ -49,8 +49,8 @@ State of the push notification which determines if it is `visible`.
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/visible.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/visible.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/visible.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/visible.html -->
 
 ```html
 <auro-button id="visibleToastBtn">
@@ -61,8 +61,8 @@ State of the push notification which determines if it is `visible`.
 </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/showToast.js) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/showToast.js -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/showToast.js) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/showToast.js -->
 
 ```js
 export function showToast(toastID) {
@@ -81,8 +81,8 @@ export function showToast(toastID) {
 What the component will render visually based on which variant value is set; currently supports `error`, `success`.
 
 <div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/variant.html) -->
-  <!-- The below content is automatically added from ./../../apiExamples/variant.html -->
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/variant.html) -->
+  <!-- The below content is automatically added from ./../apiExamples/variant.html -->
   <auro-button id="defaultVariantBtn">
     Show default toast
   </auro-button>
@@ -105,8 +105,8 @@ What the component will render visually based on which variant value is set; cur
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/variant.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/variant.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/variant.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/variant.html -->
 
 ```html
 <auro-button id="defaultVariantBtn">
@@ -129,8 +129,8 @@ What the component will render visually based on which variant value is set; cur
 </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/showToast.js) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/showToast.js -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/showToast.js) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/showToast.js -->
 
 ```js
 export function showToast(toastID) {
@@ -149,24 +149,24 @@ export function showToast(toastID) {
 Using the `noIcon` attribute will set no icon to be visible in the notification.
 
 <div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../../apiExamples/noIcon.html) -->
-  <!-- The below content is automatically added from ./../../apiExamples/noIcon.html -->
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/noIcon.html) -->
+  <!-- The below content is automatically added from ./../apiExamples/noIcon.html -->
   <auro-button id="noIconBtn"> Show toast with no icon </auro-button>
   <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/noIcon.html) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/noIcon.html -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/noIcon.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/noIcon.html -->
 
 ```html
 <auro-button id="noIconBtn"> Show toast with no icon </auro-button>
 <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../apiExamples/showToast.js) -->
-<!-- The below code snippet is automatically added from ./../../apiExamples/showToast.js -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/showToast.js) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/showToast.js -->
 
 ```js
 export function showToast(toastID) {
@@ -184,8 +184,8 @@ export function showToast(toastID) {
 
 The component may be restyled using the following code sample and changing the values of the following token(s).
 
-<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../../src/tokens.scss) -->
-<!-- The below code snippet is automatically added from ./../../src/tokens.scss -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../src/tokens.scss) -->
+<!-- The below code snippet is automatically added from ./../src/tokens.scss -->
 
 ```scss
 @import "./../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables";
