@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+# [2.3.0](https://github.com/AlaskaAirlines/auro-toast/compare/v2.2.0...v2.3.0) (2024-11-13)
+
+
+### Features
+
+* support fully customized toasts [#53](https://github.com/AlaskaAirlines/auro-toast/issues/53) ([4d6f91a](https://github.com/AlaskaAirlines/auro-toast/commit/4d6f91afb5739c93b2ec2b998f7f86cb9c62af19))
+
 # [2.2.0](https://github.com/AlaskaAirlines/auro-toast/compare/v2.1.0...v2.2.0) (2024-11-01)
 
 
