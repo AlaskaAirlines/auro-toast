@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [2.4.2](https://github.com/AlaskaAirlines/auro-toast/compare/v2.4.1...v2.4.2) (2025-02-08)
+
+
+### Performance Improvements
+
+* update dependencies ([a8d225c](https://github.com/AlaskaAirlines/auro-toast/commit/a8d225cd98cb9496b64c96520fb45c84d8a69e1f))
+
 ## [2.4.1](https://github.com/AlaskaAirlines/auro-toast/compare/v2.4.0...v2.4.1) (2024-12-23)
 
 
