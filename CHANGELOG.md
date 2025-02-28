@@ -1,5 +1,20 @@
 # Semantic Release Automated Changelog
 
+# [3.0.0](https://github.com/AlaskaAirlines/auro-toast/compare/v2.4.2...v3.0.0) (2025-02-28)
+
+
+* feat!: move peer dependencies to "real" dependencies ([daf09f5](https://github.com/AlaskaAirlines/auro-toast/commit/daf09f5802eb9661df36908059c7fea21f08e205))
+
+
+### BREAKING CHANGES
+
+* last change was breaking _on a patch version_ because of peer dependencies
+
+Summary:
+  Our current build process relies on peer dependencies being present, but
+  the peer dependency pipeline is causing far more issues than it's worth.
+  Why not just make them regular dependencies? This is what this PR does :)
+
 ## [2.4.2](https://github.com/AlaskaAirlines/auro-toast/compare/v2.4.1...v2.4.2) (2025-02-08)
 
 
