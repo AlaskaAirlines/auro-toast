@@ -4,11 +4,15 @@
 // ---------------------------------------------------------------------
 
 // Import Auro tokens
-@import './../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables';
+@import "./../node_modules/@aurodesignsystem/design-tokens/dist/alaska/SCSSVariables--alaska";
 
 :host([visible]) {
   background-color: var(--ds-auro-toast-container-color);
   color: var(--ds-auro-toast-text-color);
+
+  .typeIcon {
+    color: var(--ds-auro-toast-icon-color);
+  }
 
   .closeButton {
     &:hover {
@@ -18,11 +22,13 @@
 }
 
 :host([variant='error']) {
-  --ds-auro-toast-container-color: var(--ds-color-container-error-default, #{$ds-color-container-error-default});
-  --ds-auro-toast-text-color: var(--ds-color-text-primary-default, #{$ds-color-text-primary-default});
+  --ds-auro-toast-container-color: var(--ds-basic-color-status-error-subtle, #{$ds-basic-color-status-error-subtle});
+  --ds-auro-toast-icon-color: var(--ds-basic-color-status-error, #{$ds-basic-color-status-error});
+  --ds-auro-toast-text-color: var(--ds-basic-color-texticon-default, #{$ds-basic-color-texticon-default});
 }
 
 :host([variant='success']) {
-  --ds-auro-toast-container-color: var(--ds-color-container-success-default, #{$ds-color-container-success-default});
-  --ds-auro-toast-text-color: var(--ds-color-text-primary-default, #{$ds-color-text-primary-default});
+  --ds-auro-toast-container-color: var(--ds-basic-color-status-success-subtle, #{$ds-basic-color-status-success-subtle});
+  --ds-auro-toast-icon-color: var(--ds-basic-color-status-success, #{$ds-basic-color-status-success});
+  --ds-auro-toast-text-color: var(--ds-basic-color-texticon-default, #{$ds-basic-color-texticon-default});
 }

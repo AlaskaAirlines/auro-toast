@@ -188,12 +188,13 @@ The component may be restyled using the following code sample and changing the v
 <!-- The below code snippet is automatically added from ./../src/tokens.scss -->
 
 ```scss
-@import "./../node_modules/@aurodesignsystem/design-tokens/dist/tokens/SCSSVariables";
+@import "./../node_modules/@aurodesignsystem/design-tokens/dist/alaska/SCSSVariables--alaska";
 
 :host {
-  --ds-auro-toast-container-color: var(--ds-color-container-subtle-inverse, #{$ds-color-container-subtle-inverse});
-  --ds-auro-toast-text-color: var(--ds-color-text-primary-inverse, #{$ds-color-text-primary-inverse});
-  --ds-auro-toast-close-button-hover-container-color: var(--ds-color-container-ui-secondary-hover-default, #{$ds-color-container-ui-secondary-hover-default});
+  --ds-auro-toast-close-button-hover-container-color: var(--ds-advanced-color-button-tertiary-background-hover, #{$ds-advanced-color-button-tertiary-background-hover});
+  --ds-auro-toast-container-color: var(--ds-advanced-color-shared-background-strong, #{$ds-advanced-color-shared-background-strong});
+  --ds-auro-toast-icon-color: var(--ds-basic-color-texticon-inverse, #{$ds-basic-color-texticon-inverse});
+  --ds-auro-toast-text-color: var(--ds-basic-color-texticon-inverse, #{$ds-basic-color-texticon-inverse});
 }
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
