@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+# [3.1.0](https://github.com/AlaskaAirlines/auro-toast/compare/v3.0.0...v3.1.0) (2025-04-30)
+
+
+### Features
+
+* update to use new theming tokens [#63](https://github.com/AlaskaAirlines/auro-toast/issues/63) ([61e5671](https://github.com/AlaskaAirlines/auro-toast/commit/61e5671a4695230a626a22489570d0bb0279d4c8))
+
 # [3.0.0](https://github.com/AlaskaAirlines/auro-toast/compare/v2.4.2...v3.0.0) (2025-02-28)
 
 
