@@ -20,11 +20,11 @@
     "node": "^20.x || ^22.x "
   },
   "dependencies": {
-    "@aurodesignsystem/auro-button": "^9.3.1",
-    "@aurodesignsystem/auro-icon": "^8.0.1",
-    "@aurodesignsystem/auro-library": "^4.2.1",
-    "@aurodesignsystem/design-tokens": "^5.10.0",
-    "@aurodesignsystem/webcorestylesheets": "6.1.0",
+    "@aurodesignsystem/auro-button": "^9.3.2",
+    "@aurodesignsystem/auro-icon": "^8.0.2",
+    "@aurodesignsystem/auro-library": "^4.4.1",
+    "@aurodesignsystem/design-tokens": "^5.14.0",
+    "@aurodesignsystem/webcorestylesheets": "6.2.0",
     "chalk": "^5.3.0",
     "lit": "^3.3.0"
   },
