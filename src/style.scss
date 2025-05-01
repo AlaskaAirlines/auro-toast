@@ -44,7 +44,7 @@
   }
 
   [auro-icon] {
-    --ds-auro-icon-size: var(--ds-size-300, $ds-size-300);
+    --ds-auro-icon-size: var(--ds-size-300, #{$ds-size-300});
   }
 
   .message {
