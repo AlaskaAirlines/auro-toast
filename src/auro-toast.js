@@ -10,9 +10,9 @@ import { LitElement } from "lit";
 import { html } from 'lit/static-html.js';
 
 // Import touch detection lib
-import styleCss from "./style-css.js";
-import colorCss from "./color-css.js";
-import tokensCss from "./tokens-css.js";
+import styleCss from "./styles/style-css.js";
+import colorCss from "./styles/color-css.js";
+import tokensCss from "./styles/tokens-css.js";
 
 import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg.mjs';
 import successIcon from '@alaskaairux/icons/dist/icons/interface/check-stroke.mjs';
@@ -296,9 +296,10 @@ export class AuroToast extends LitElement {
             ${this.variant === 'custom' ? undefined : html`${this.getVariantIcon()}`}
           </${this.iconTag}>
         `}
-        <div class="message"><slot></slot></div>
+        <div class="message body-default"><slot></slot></div>
         <${this.buttonTag}
           variant="flat"
+          shape="circle"
           ?onDark=${this.getAttribute('variant') !== 'error' && this.getAttribute('variant') !== 'success'}
           @click="${this.clickToClose}"
           part="close-button"

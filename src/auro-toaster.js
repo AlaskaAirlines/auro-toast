@@ -5,7 +5,7 @@
 
 // If using litElement base class
 import { LitElement, html } from "lit";
-import styleCss from "./style-toaster-css.js";
+import styleCss from "./styles/style-toaster.scss";
 
 export default class AuroToaster extends LitElement {
 
