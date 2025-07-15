@@ -1,0 +1,66 @@
+// Copyright (c) 2023 Alaska Airlines. All right reserved. Licensed under the Apache-2.0 license
+// See LICENSE in the project root for license information.
+
+// ---------------------------------------------------------------------
+
+// Import Auro tokens
+@use "@aurodesignsystem/design-tokens/dist/legacy/auro-classic/SCSSVariables" as vac;
+
+@use '@aurodesignsystem/webcorestylesheets/dist/bundled/type/classes.alaska.min.css';
+
+// container styles - defines the look of the outer custom component
+:host([visible]) {
+  display: inline-flex;
+  min-width: 100%;
+  padding: var(--ds-size-200, vac.$ds-size-200) var(--ds-size-150, vac.$ds-size-150);
+  border-radius: var(--ds-size-100, vac.$ds-size-100);
+  box-shadow: var(--ds-elevation-200, vac.$ds-elevation-200);
+  gap: var(--ds-size-200, vac.$ds-size-200);
+  pointer-events: auto;
+
+  @media (vac.$ds-grid-breakpoint-sm <=width < vac.$ds-grid-breakpoint-lg) {
+    min-width: 33%;
+    max-width: 50%;
+  }
+  
+  @media (width >=vac.$ds-grid-breakpoint-lg) {
+    min-width: 200px;
+    max-width: 500px;
+  }
+
+  .toastContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--ds-size-200, vac.$ds-size-200);
+  }
+
+  .hidden {
+    opacity: 0;
+    transition: visibility 0s 300ms, opacity 300ms ease-out;
+    visibility: hidden;
+  }
+
+  [auro-icon] {
+    --ds-auro-icon-size: var(--ds-size-300, #{vac.$ds-size-300});
+  }
+
+  .message {
+    flex: 1;
+  }
+
+  .closeButton {
+    border-radius: 50%;
+  }
+}
+
+:host([visible]:not([noIcon])) {
+  .closeButton {
+    margin-top: calc(var(--ds-size-25, vac.$ds-size-25) + calc(var(--ds-size-25, vac.$ds-size-25) / 2));
+  }
+}
+
+[auro-icon] {
+  align-self: center;
+}

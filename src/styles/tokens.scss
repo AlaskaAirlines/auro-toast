@@ -1,0 +1,8 @@
+@use "@aurodesignsystem/design-tokens/dist/themes/alaska/SCSSVariables--alaska" as v;
+
+:host {
+  --ds-auro-toast-close-button-hover-container-color: var(--ds-advanced-color-button-tertiary-background-hover, #{v.$ds-advanced-color-button-tertiary-background-hover});
+  --ds-auro-toast-container-color: var(--ds-advanced-color-shared-background-strong, #{v.$ds-advanced-color-shared-background-strong});
+  --ds-auro-toast-icon-color: var(--ds-basic-color-texticon-inverse, #{v.$ds-basic-color-texticon-inverse});
+  --ds-auro-toast-text-color: var(--ds-basic-color-texticon-inverse, #{v.$ds-basic-color-texticon-inverse});
+}

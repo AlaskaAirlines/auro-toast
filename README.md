@@ -82,7 +82,7 @@ import "@aurodesignsystem/auro-toast";
 <auro-button id="basicToastBtn">
   Show default notification
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"id="basicToast">
+<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
   Default notification with no error type
 </auro-toast>
 <!-- no icon variant -->
@@ -139,7 +139,7 @@ The `<auro-toast>` use cases include:
 <auro-button id="basicToastBtn">
   Show default notification
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;"id="basicToast">
+<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
   Default notification with no error type
 </auro-toast>
 <!-- no icon variant -->
