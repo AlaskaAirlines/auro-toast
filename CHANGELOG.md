@@ -1,5 +1,14 @@
 # Semantic Release Automated Changelog
 
+## [3.1.2](https://github.com/AlaskaAirlines/auro-toast/compare/v3.1.1...v3.1.2) (2025-07-16)
+
+
+### Bug Fixes
+
+* add themeable type styles ([e894341](https://github.com/AlaskaAirlines/auro-toast/commit/e8943415123297962c26ef5d4694b2245425f3d9))
+* scss linter errors ([7420712](https://github.com/AlaskaAirlines/auro-toast/commit/742071205ffd7c36c971208f9b696c65496e6d75))
+* update docs head content ([aeb2e2a](https://github.com/AlaskaAirlines/auro-toast/commit/aeb2e2a8b5cd73bfaae38567886950db262eac3f))
+
 ## [3.1.1](https://github.com/AlaskaAirlines/auro-toast/compare/v3.1.0...v3.1.1) (2025-05-01)
 
 
