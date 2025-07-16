@@ -19,7 +19,7 @@
   gap: var(--ds-size-200, vac.$ds-size-200);
   pointer-events: none;
 
-  @media (width >=vac.$ds-grid-breakpoint-lg) {
+  @media (width >= #{vac.$ds-grid-breakpoint-lg}) {
     right: 1%;
     left: unset;
     width: 100%;
