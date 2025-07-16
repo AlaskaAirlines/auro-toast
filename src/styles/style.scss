@@ -8,6 +8,10 @@
 
 @use '@aurodesignsystem/webcorestylesheets/dist/bundled/type/classes.alaska.min.css';
 
+[auro-icon] {
+  align-self: center;
+}
+
 // container styles - defines the look of the outer custom component
 :host([visible]) {
   display: inline-flex;
@@ -18,12 +22,11 @@
   gap: var(--ds-size-200, vac.$ds-size-200);
   pointer-events: auto;
 
-  @media (vac.$ds-grid-breakpoint-sm <=width < vac.$ds-grid-breakpoint-lg) {
+  @media (#{vac.$ds-grid-breakpoint-sm} <= width < #{vac.$ds-grid-breakpoint-lg}) {
     min-width: 33%;
     max-width: 50%;
   }
-  
-  @media (width >=vac.$ds-grid-breakpoint-lg) {
+  @media (width >= #{vac.$ds-grid-breakpoint-lg}) {
     min-width: 200px;
     max-width: 500px;
   }
@@ -59,8 +62,4 @@
   .closeButton {
     margin-top: calc(var(--ds-size-25, vac.$ds-size-25) + calc(var(--ds-size-25, vac.$ds-size-25) / 2));
   }
-}
-
-[auro-icon] {
-  align-self: center;
 }
