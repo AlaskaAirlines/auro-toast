@@ -1,1 +1,1 @@
-./node_modules/.bin/npm-run-all preCommit test linters postinstall
+npx npm-run-all preCommit test linters postinstall
