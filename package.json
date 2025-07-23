@@ -155,7 +155,7 @@
     "scssLint": "stylelint \"./src/**/*.scss\"",
     "dev": "concurrently --kill-others \"npm run build:watch\" \"npm run serve\"",
     "dist:js": "copyfiles -u 1 -V './src/**/*.js' ./dist",
-    "esLint": "./node_modules/.bin/eslint src/**/*.js --ignore-pattern 'src/**/*Version.js'",
+    "esLint": "eslint src/**/*.js --ignore-pattern 'src/**/*Version.js'",
     "linters": "npm-run-all scssLint esLint",
     "preCommit": "node ./node_modules/@aurodesignsystem/auro-library/scripts/build/pre-commit.mjs",
     "postCss:component": "node ./node_modules/@aurodesignsystem/auro-library/scripts/build/postCss.mjs",
