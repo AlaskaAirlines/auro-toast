@@ -1,6 +1,7 @@
 import { initVisibleExample } from "../apiExamples/visible";
 import { initVariantToastsExample } from "../apiExamples/variant";
 import { initNoIconExample } from "../apiExamples/noIcon";
+import { initTimeTilHideExample } from "../apiExamples/timeTilHide";
 
 import '../index.js';
 /* eslint-disable jsdoc/require-jsdoc, no-magic-numbers, no-param-reassign */
@@ -13,6 +14,7 @@ export function initExamples(initCount) {
     initVisibleExample();
     initVariantToastsExample();
     initNoIconExample();
+    initTimeTilHideExample();
   } catch (err) {
     if (initCount <= 20) {
       // setTimeout handles issue where content is sometimes loaded after the functions get called

@@ -51,6 +51,7 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/noIcon.html) -->
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
+
 <auro-accordion alignRight>
   <span slot="trigger">See code</span>
 
@@ -60,6 +61,25 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/showToast.js) -->
 <!-- AURO-GENERATED-CONTENT:END -->
 
+</auro-accordion>
+
+#### timeTilHide
+
+Using the `timeTilHide` attribute will set a timer in milliseconds for how long the notification will be visible before it automatically hides. The default is `5000` milliseconds.
+
+<div class="exampleWrapper">
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/timeTilHide.html) -->
+  <!-- AURO-GENERATED-CONTENT:END -->
+</div>
+
+<auro-accordion alignRight>
+  <span slot="trigger">See code</span>
+
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/timeTilHide.html) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/showToast.js) -->
+<!-- AURO-GENERATED-CONTENT:END -->
 
 </auro-accordion>
 
