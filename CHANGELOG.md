@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [3.1.3](https://github.com/AlaskaAirlines/auro-toast/compare/v3.1.2...v3.1.3) (2025-07-24)
+
+
+### Bug Fixes
+
+* update pre-commit script to use npx and simplify eslint command ([53269cb](https://github.com/AlaskaAirlines/auro-toast/commit/53269cb526ac5803b8a0b7276d06eed2f63b6372))
+
 ## [3.1.2](https://github.com/AlaskaAirlines/auro-toast/compare/v3.1.1...v3.1.2) (2025-07-16)
 
 
