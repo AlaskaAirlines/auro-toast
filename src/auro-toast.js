@@ -41,7 +41,7 @@ const FADE_OUT_DURATION = 300;
  * @attr {String} variant - Component will render visually based on which variant value is set; currently supports `error`, `success`, `custom`
  * @attr {Boolean} noIcon - Removes icon from the toast UI
  * @attr {Boolean} disableAutoHide - Prevents the toast from auto-hiding on the default time.
- * @attr {Boolean} timeTilFadeOut - Sets the time in seconds until the toast fades out.
+ * @attr {Number} timeTilHide - Sets the time in seconds until the toast hides.
  * @csspart type-icon - Apply css to the toast type icon
  * @csspart close-button - Apply css to the toast close button
  * @fires onToastClose - Notifies that the toast has been closed
@@ -143,6 +143,7 @@ export class AuroToast extends LitElement {
       },
       timeTilHide: {
         type: Number,
+        reflect: true
       }
     };
   }
