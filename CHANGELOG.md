@@ -1,5 +1,22 @@
 # Semantic Release Automated Changelog
 
+# [3.2.0](https://github.com/AlaskaAirlines/auro-toast/compare/v3.1.3...v3.2.0) (2025-07-24)
+
+
+### Bug Fixes
+
+* correct attr name typo ([4461fc8](https://github.com/AlaskaAirlines/auro-toast/commit/4461fc8201064ffbdac1fea762469e8482898752))
+
+
+### Features
+
+* add custom hide duration as an attribute [#21](https://github.com/AlaskaAirlines/auro-toast/issues/21) ([56bf369](https://github.com/AlaskaAirlines/auro-toast/commit/56bf3692cf189969fc0c61376f6126f480e75bae))
+
+
+### Performance Improvements
+
+* update docs and make attribute expect milliseconds ([1312bf0](https://github.com/AlaskaAirlines/auro-toast/commit/1312bf0d15b2f8281164cdda43da91bacf915339))
+
 ## [3.1.3](https://github.com/AlaskaAirlines/auro-toast/compare/v3.1.2...v3.1.3) (2025-07-24)
 
 
