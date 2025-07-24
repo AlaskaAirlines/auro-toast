@@ -8,6 +8,7 @@ The auro-toast element provides users a way to display short, temporary messages
 |-------------------|-------------------|-----------|--------------------------------------------------|
 | `disableAutoHide` | `disableAutoHide` | `Boolean` | Prevents the toast from auto-hiding on the default time. |
 | `noIcon`          | `noIcon`          | `Boolean` | Removes icon from the toast UI                   |
+| `timeTilHide`     | `timeTilHide`     | `Number`  | Sets the time in milliseconds until the toast hides. |
 | `variant`         | `variant`         | `String`  | Component will render visually based on which variant value is set; currently supports `error`, `success`, `custom` |
 | `visible`         | `visible`         | `Boolean` | Sets state of toast to visible                   |
 
