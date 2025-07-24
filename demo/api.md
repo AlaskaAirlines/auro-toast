@@ -11,6 +11,7 @@ The auro-toast element provides users a way to display short, temporary messages
 |-------------------|-------------------|-----------|--------------------------------------------------|
 | [disableAutoHide](#disableAutoHide) | `disableAutoHide` | `Boolean` | Prevents the toast from auto-hiding on the default time. |
 | [noIcon](#noIcon)          | `noIcon`          | `Boolean` | Removes icon from the toast UI                   |
+| [timeTilHide](#timeTilHide)     | `timeTilHide`     | `Number`  | Sets the time in milliseconds until the toast hides. |
 | [variant](#variant)         | `variant`         | `String`  | Component will render visually based on which variant value is set; currently supports `error`, `success`, `custom` |
 | [visible](#visible)         | `visible`         | `Boolean` | Sets state of toast to visible                   |
 
@@ -163,6 +164,50 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
 ```html
 <auro-button id="noIconBtn"> Show toast with no icon </auro-button>
 <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/showToast.js) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/showToast.js -->
+
+```js
+export function showToast(toastID) {
+  const toast = document.querySelector(toastID);
+
+  if (!toast.hasAttribute('visible')) {
+    toast.setAttribute('visible', true);
+  }
+};
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+</auro-accordion>
+
+#### timeTilHide
+
+Using the `timeTilHide` attribute will set a timer in milliseconds for how long the notification will be visible before it automatically hides. The default is `5000` milliseconds.
+
+<div class="exampleWrapper">
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/timeTilHide.html) -->
+  <!-- The below content is automatically added from ./../apiExamples/timeTilHide.html -->
+  <auro-button id="timeTilHideToastBtn">
+    Show default notification
+  </auro-button>
+  <auro-toast timeTilHide="1000" style="display: block; margin: 0.5rem 0;" id="timeTilHideToast">
+    Default notification with no error type
+  </auro-toast>
+  <!-- AURO-GENERATED-CONTENT:END -->
+</div>
+<auro-accordion alignRight>
+  <span slot="trigger">See code</span>
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/timeTilHide.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/timeTilHide.html -->
+
+```html
+<auro-button id="timeTilHideToastBtn">
+  Show default notification
+</auro-button>
+<auro-toast timeTilHide="1000" style="display: block; margin: 0.5rem 0;" id="timeTilHideToast">
+  Default notification with no error type
+</auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/showToast.js) -->
