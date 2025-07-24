@@ -30,7 +30,6 @@ import { AuroIcon } from '@aurodesignsystem/auro-icon/src/auro-icon.js';
 import iconVersion from './iconVersion.js';
 
 const DEFAULT_TIME_TIL_FADE_OUT = 5000;
-const MS_IN_SECOND = 1000;
 const FADE_OUT_DURATION = 300;
 
 // See https://git.io/JJ6SJ for "How to document your components using JSDoc"
@@ -41,7 +40,7 @@ const FADE_OUT_DURATION = 300;
  * @attr {String} variant - Component will render visually based on which variant value is set; currently supports `error`, `success`, `custom`
  * @attr {Boolean} noIcon - Removes icon from the toast UI
  * @attr {Boolean} disableAutoHide - Prevents the toast from auto-hiding on the default time.
- * @attr {Number} timeTilHide - Sets the time in seconds until the toast hides.
+ * @attr {Number} timeTilHide - Sets the time in milliseconds until the toast hides.
  * @csspart type-icon - Apply css to the toast type icon
  * @csspart close-button - Apply css to the toast close button
  * @fires onToastClose - Notifies that the toast has been closed
@@ -268,7 +267,7 @@ export class AuroToast extends LitElement {
     if (this.visible && !this.disableAutoHide && this.variant !== 'error') {
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
-      }, this.timeTilHide * MS_IN_SECOND || DEFAULT_TIME_TIL_FADE_OUT);
+      }, this.timeTilHide || DEFAULT_TIME_TIL_FADE_OUT);
     }
   }
 
