@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [3.2.1](https://github.com/AlaskaAirlines/auro-toast/compare/v3.2.0...v3.2.1) (2025-07-28)
+
+
+### Bug Fixes
+
+* correct close button size ([64bc611](https://github.com/AlaskaAirlines/auro-toast/commit/64bc6114aaff0dccc331baa4244f541e0420b67f))
+
 # [3.2.0](https://github.com/AlaskaAirlines/auro-toast/compare/v3.1.3...v3.2.0) (2025-07-24)
 
 
