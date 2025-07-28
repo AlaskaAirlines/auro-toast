@@ -306,6 +306,7 @@ export class AuroToast extends LitElement {
         <${this.buttonTag}
           variant="flat"
           shape="circle"
+          size="xs"
           ?onDark=${this.getAttribute('variant') !== 'error' && this.getAttribute('variant') !== 'success'}
           @click="${this.clickToClose}"
           part="close-button"
