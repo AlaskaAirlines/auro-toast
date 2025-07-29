@@ -35,7 +35,7 @@
     display: flex;
     width: 100%;
     flex-direction: row;
-    align-items: baseline;
+    align-items: center;
     gap: var(--ds-size-200, vac.$ds-size-200);
   }
 
@@ -58,8 +58,3 @@
   }
 }
 
-:host([visible]:not([noIcon])) {
-  .closeButton {
-    margin-top: calc(var(--ds-size-25, vac.$ds-size-25) + calc(var(--ds-size-25, vac.$ds-size-25) / 2));
-  }
-}
