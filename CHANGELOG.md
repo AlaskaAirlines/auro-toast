@@ -1,5 +1,17 @@
 # Semantic Release Automated Changelog
 
+## [3.2.2](https://github.com/AlaskaAirlines/auro-toast/compare/v3.2.1...v3.2.2) (2025-09-04)
+
+
+### Bug Fixes
+
+* update auro-library to latest version ([e4c8b12](https://github.com/AlaskaAirlines/auro-toast/commit/e4c8b12a3aa6684b275192e03be603bc182b3d53))
+
+
+### Performance Improvements
+
+* update button for icon fix and all other auro dependencies [#74](https://github.com/AlaskaAirlines/auro-toast/issues/74) ([7ea7c53](https://github.com/AlaskaAirlines/auro-toast/commit/7ea7c5304d621c455ea59e719c2a173f9411f85e))
+
 ## [3.2.1](https://github.com/AlaskaAirlines/auro-toast/compare/v3.2.0...v3.2.1) (2025-07-28)
 
 
