@@ -1,5 +1,12 @@
 # Semantic Release Automated Changelog
 
+## [3.2.3](https://github.com/AlaskaAirlines/auro-toast/compare/v3.2.2...v3.2.3) (2025-09-26)
+
+
+### Bug Fixes
+
+* **toaster:** fixed issue regarding scss file import and added register to toaster so users can call it directly ([d9a34a3](https://github.com/AlaskaAirlines/auro-toast/commit/d9a34a31769ee1a61c08dc4be85f1fd393890e97))
+
 ## [3.2.2](https://github.com/AlaskaAirlines/auro-toast/compare/v3.2.1...v3.2.2) (2025-09-04)
 
 
