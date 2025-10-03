@@ -69,10 +69,10 @@ State of the push notification which determines if it is `visible`.
 export function showToast(toastID) {
   const toast = document.querySelector(toastID);
 
-  if (!toast.hasAttribute('visible')) {
-    toast.setAttribute('visible', true);
+  if (!toast.hasAttribute("visible")) {
+    toast.setAttribute("visible", true);
   }
-};
+}
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
@@ -137,10 +137,10 @@ What the component will render visually based on which variant value is set; cur
 export function showToast(toastID) {
   const toast = document.querySelector(toastID);
 
-  if (!toast.hasAttribute('visible')) {
-    toast.setAttribute('visible', true);
+  if (!toast.hasAttribute("visible")) {
+    toast.setAttribute("visible", true);
   }
-};
+}
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
@@ -173,10 +173,10 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
 export function showToast(toastID) {
   const toast = document.querySelector(toastID);
 
-  if (!toast.hasAttribute('visible')) {
-    toast.setAttribute('visible', true);
+  if (!toast.hasAttribute("visible")) {
+    toast.setAttribute("visible", true);
   }
-};
+}
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
@@ -217,10 +217,10 @@ Using the `timeTilHide` attribute will set a timer in milliseconds for how long 
 export function showToast(toastID) {
   const toast = document.querySelector(toastID);
 
-  if (!toast.hasAttribute('visible')) {
-    toast.setAttribute('visible', true);
+  if (!toast.hasAttribute("visible")) {
+    toast.setAttribute("visible", true);
   }
-};
+}
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
