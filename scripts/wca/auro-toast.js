@@ -1,5 +1,4 @@
-
-import { AuroToast } from '../../src/auro-toast.js';
+import { AuroToast } from "../../src/auro-toast.js";
 
 /**
  * The auro-toast element provides users a way to display short, temporary messages.
