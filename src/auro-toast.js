@@ -5,29 +5,23 @@
 
 /* eslint-disable lit/binding-positions, lit/no-invalid-html, max-lines */
 
+import errorIcon from "@alaskaairux/icons/dist/icons/alert/error-stroke.mjs";
+import infoIcon from "@alaskaairux/icons/dist/icons/alert/information-stroke.mjs";
+import successIcon from "@alaskaairux/icons/dist/icons/interface/check-stroke.mjs";
+import closeIcon from "@alaskaairux/icons/dist/icons/interface/x-lg.mjs";
+import { AuroButton } from "@aurodesignsystem/auro-button/src/auro-button.js";
+import { AuroIcon } from "@aurodesignsystem/auro-icon/src/auro-icon.js";
+import { AuroDependencyVersioning } from "@aurodesignsystem/auro-library/scripts/runtime/dependencyTagVersioning.mjs";
+import AuroLibraryRuntimeUtils from "@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs";
 // If using litElement base class
 import { LitElement } from "lit";
-import { html } from 'lit/static-html.js';
-
+import { html } from "lit/static-html.js";
+import buttonVersion from "./buttonVersion.js";
+import iconVersion from "./iconVersion.js";
+import colorCss from "./styles/color-css.js";
 // Import touch detection lib
 import styleCss from "./styles/style-css.js";
-import colorCss from "./styles/color-css.js";
 import tokensCss from "./styles/tokens-css.js";
-
-import closeIcon from '@alaskaairux/icons/dist/icons/interface/x-lg.mjs';
-import successIcon from '@alaskaairux/icons/dist/icons/interface/check-stroke.mjs';
-import errorIcon from '@alaskaairux/icons/dist/icons/alert/error-stroke.mjs';
-import infoIcon from '@alaskaairux/icons/dist/icons/alert/information-stroke.mjs';
-
-import AuroLibraryRuntimeUtils from '@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs';
-
-import { AuroDependencyVersioning } from '@aurodesignsystem/auro-library/scripts/runtime/dependencyTagVersioning.mjs';
-
-import { AuroButton } from '@aurodesignsystem/auro-button/src/auro-button.js';
-import buttonVersion from './buttonVersion.js';
-
-import { AuroIcon } from '@aurodesignsystem/auro-icon/src/auro-icon.js';
-import iconVersion from './iconVersion.js';
 
 const DEFAULT_TIME_TIL_FADE_OUT = 5000;
 const FADE_OUT_DURATION = 300;
@@ -54,59 +48,66 @@ export class AuroToast extends LitElement {
     /**
      * @private
      */
-    this.closeDom = new DOMParser().parseFromString(closeIcon.svg, 'text/html');
+    this.closeDom = new DOMParser().parseFromString(closeIcon.svg, "text/html");
 
     /**
      * @private
      */
     this.closeSvg = this.closeDom.body.firstChild;
-    this.closeSvg.setAttribute('slot', 'svg');
+    this.closeSvg.setAttribute("slot", "svg");
 
     /**
      * @private
      */
-    this.successDom = new DOMParser().parseFromString(successIcon.svg, 'text/html');
+    this.successDom = new DOMParser().parseFromString(
+      successIcon.svg,
+      "text/html",
+    );
 
     /**
      * @private
      */
     this.successSvg = this.successDom.body.firstChild;
 
-    this.successSvg.setAttribute('slot', 'svg');
+    this.successSvg.setAttribute("slot", "svg");
 
     /**
      * @private
      */
-    this.errorDom = new DOMParser().parseFromString(errorIcon.svg, 'text/html');
+    this.errorDom = new DOMParser().parseFromString(errorIcon.svg, "text/html");
 
     /**
      * @private
      */
     this.errorSvg = this.errorDom.body.firstChild;
-    this.errorSvg.setAttribute('slot', 'svg');
+    this.errorSvg.setAttribute("slot", "svg");
 
     /**
      * @private
      */
-    this.infoDom = new DOMParser().parseFromString(infoIcon.svg, 'text/html');
+    this.infoDom = new DOMParser().parseFromString(infoIcon.svg, "text/html");
 
     /**
      * @private
      */
     this.infoSvg = this.infoDom.body.firstChild;
-    this.infoSvg.setAttribute('slot', 'svg');
+    this.infoSvg.setAttribute("slot", "svg");
 
     const versioning = new AuroDependencyVersioning();
 
     /**
      * @private
      */
-    this.buttonTag = versioning.generateTag('auro-button', buttonVersion, AuroButton);
+    this.buttonTag = versioning.generateTag(
+      "auro-button",
+      buttonVersion,
+      AuroButton,
+    );
 
     /**
      * @private
      */
-    this.iconTag = versioning.generateTag('auro-icon', iconVersion, AuroIcon);
+    this.iconTag = versioning.generateTag("auro-icon", iconVersion, AuroIcon);
 
     /**
      * @private
@@ -124,35 +125,31 @@ export class AuroToast extends LitElement {
   // to understand how to use reflected attributes with your property settings.
   static get properties() {
     return {
-      ...super.properties,
+      ...LitElement.properties,
       visible: {
         type: Boolean,
-        reflect: true
+        reflect: true,
       },
       variant: {
         type: String,
-        reflect: true
+        reflect: true,
       },
       noIcon: {
-        type: Boolean
+        type: Boolean,
       },
       disableAutoHide: {
         type: Boolean,
-        reflect: true
+        reflect: true,
       },
       timeTilHide: {
         type: Number,
-        reflect: true
-      }
+        reflect: true,
+      },
     };
   }
 
   static get styles() {
-    return [
-      styleCss,
-      colorCss,
-      tokensCss
-    ];
+    return [styleCss, colorCss, tokensCss];
   }
 
   /**
@@ -169,7 +166,7 @@ export class AuroToast extends LitElement {
 
   firstUpdated() {
     // Add the tag name as an attribute if it is different than the component name
-    this.runtimeUtils.handleComponentTagRename(this, 'auro-toast');
+    this.runtimeUtils.handleComponentTagRename(this, "auro-toast");
   }
 
   /**
@@ -187,9 +184,9 @@ export class AuroToast extends LitElement {
    */
   fadeOutToast() {
     if (!this.disableAutoHide) {
-      const toastContainer = this.shadowRoot.querySelector('.toastContainer');
+      const toastContainer = this.shadowRoot.querySelector(".toastContainer");
       if (toastContainer) {
-        toastContainer.classList.add('hidden');
+        toastContainer.classList.add("hidden");
       }
 
       setTimeout(() => {
@@ -213,11 +210,13 @@ export class AuroToast extends LitElement {
      * @type {object}
      * @property {boolean} false - Sets visibility value for the toast element.
      */
-    this.dispatchEvent(new CustomEvent('onToastClose', {
-      bubbles: true,
-      composed: true,
-      detail: this
-    }));
+    this.dispatchEvent(
+      new CustomEvent("onToastClose", {
+        bubbles: true,
+        composed: true,
+        detail: this,
+      }),
+    );
   }
 
   /**
@@ -243,7 +242,7 @@ export class AuroToast extends LitElement {
     const VARIANT_ICONS = {
       success: this.successSvg,
       error: this.errorSvg,
-      default: this.infoSvg
+      default: this.infoSvg,
     };
 
     return VARIANT_ICONS[this.variant] || VARIANT_ICONS.default;
@@ -255,16 +254,16 @@ export class AuroToast extends LitElement {
   }
 
   updated(changedProperties) {
-    if (changedProperties.has('visible')) {
+    if (changedProperties.has("visible")) {
       this.handleSlotContent();
     }
 
-    if (changedProperties.has('variant')) {
+    if (changedProperties.has("variant")) {
       clearTimeout(this.fadeOutTimer);
     }
 
     // do not auto dismiss for error toasts or if disableAutoHide is set
-    if (this.visible && !this.disableAutoHide && this.variant !== 'error') {
+    if (this.visible && !this.disableAutoHide && this.variant !== "error") {
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
       }, this.timeTilHide || DEFAULT_TIME_TIL_FADE_OUT);
@@ -282,32 +281,37 @@ export class AuroToast extends LitElement {
 
       if (customSvg) {
         const iconSvg = customSvg.cloneNode(true);
-        const typeIcon = this.shadowRoot.querySelector('.typeIcon');
+        const typeIcon = this.shadowRoot.querySelector(".typeIcon");
 
         if (typeIcon) {
-          iconSvg.setAttribute('slot', 'svg');
+          iconSvg.setAttribute("slot", "svg");
           typeIcon.appendChild(iconSvg);
         }
       }
     } catch (error) {
-      console.error('handleSlotContent', error); // eslint-disable-line no-console
+      console.error("handleSlotContent", error); // eslint-disable-line no-console
     }
   }
 
   render() {
-    return this.visible ? html`
+    return this.visible
+      ? html`
       <div aria-live="polite" class="toastContainer">
-        ${this.noIcon ? undefined : html`
+        ${
+          this.noIcon
+            ? undefined
+            : html`
           <${this.iconTag} customColor customSvg class="typeIcon" part="type-icon">
-            ${this.variant === 'custom' ? undefined : html`${this.getVariantIcon()}`}
+            ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
           </${this.iconTag}>
-        `}
+        `
+        }
         <div class="message body-default"><slot></slot></div>
         <${this.buttonTag}
           variant="flat"
           shape="circle"
           size="xs"
-          ?onDark=${this.getAttribute('variant') !== 'error' && this.getAttribute('variant') !== 'success'}
+          ?onDark=${this.getAttribute("variant") !== "error" && this.getAttribute("variant") !== "success"}
           @click="${this.clickToClose}"
           part="close-button"
           class="closeButton">
@@ -317,6 +321,7 @@ export class AuroToast extends LitElement {
           <span class="util_displayHiddenVisually">Close</span>
         </${this.buttonTag}>
       </div>
-    ` : undefined;
+    `
+      : undefined;
   }
 }

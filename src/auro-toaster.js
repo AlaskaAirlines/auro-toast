@@ -3,14 +3,12 @@
 
 // ---------------------------------------------------------------------
 
+import AuroLibraryRuntimeUtils from "@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs";
 // If using litElement base class
-import { LitElement, html } from "lit";
+import { html, LitElement } from "lit";
 import styleCss from "./styles/style-toaster-css.js";
 
-import AuroLibraryRuntimeUtils from '@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs';
-
 export class AuroToaster extends LitElement {
-
   static get styles() {
     return [styleCss];
   }
