@@ -23,10 +23,10 @@ import AuroLibraryRuntimeUtils from '@aurodesignsystem/auro-library/scripts/util
 
 import { AuroDependencyVersioning } from '@aurodesignsystem/auro-library/scripts/runtime/dependencyTagVersioning.mjs';
 
-import { AuroButton } from '@aurodesignsystem/auro-button/src/auro-button.js';
+import { AuroButton } from '@aurodesignsystem-dev/auro-button/class';
 import buttonVersion from './buttonVersion.js';
 
-import { AuroIcon } from '@aurodesignsystem/auro-icon/src/auro-icon.js';
+import { AuroIcon } from '@aurodesignsystem-dev/auro-icon/class';
 import iconVersion from './iconVersion.js';
 
 const DEFAULT_TIME_TIL_FADE_OUT = 5000;
@@ -307,7 +307,7 @@ export class AuroToast extends LitElement {
           variant="flat"
           shape="circle"
           size="xs"
-          ?onDark=${this.getAttribute('variant') !== 'error' && this.getAttribute('variant') !== 'success'}
+          appearance="${this.getAttribute('variant') !== 'error' && this.getAttribute('variant') !== 'success' ? 'inverse' : 'default'}"
           @click="${this.clickToClose}"
           part="close-button"
           class="closeButton">

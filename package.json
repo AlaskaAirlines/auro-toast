@@ -20,8 +20,8 @@
     "node": "^20.x || ^22.x "
   },
   "dependencies": {
-    "@aurodesignsystem/auro-button": "^11.4.0",
-    "@aurodesignsystem/auro-icon": "^8.1.4",
+    "@aurodesignsystem-dev/auro-button": "0.0.0-pr359.2",
+    "@aurodesignsystem-dev/auro-icon": "0.0.0-pr211.2",
     "@aurodesignsystem/auro-library": "^5.4.0",
     "@aurodesignsystem/design-tokens": "^8.4.2",
     "@aurodesignsystem/webcorestylesheets": "^10.0.4",
