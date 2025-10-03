@@ -3,7 +3,7 @@ import { initTimeTilHideExample } from "../apiExamples/timeTilHide";
 import { initVariantToastsExample } from "../apiExamples/variant";
 import { initVisibleExample } from "../apiExamples/visible";
 
-import "../index.js";
+import "../src/registered";
 /* eslint-disable jsdoc/require-jsdoc, no-magic-numbers, no-param-reassign */
 
 export function initExamples(initCount) {

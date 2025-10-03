@@ -1,14 +1,16 @@
 /* eslint-disable jsdoc/require-jsdoc, no-magic-numbers, no-param-reassign */
 
+import { AuroToast, AuroToaster } from "../src/index";
+
 import { initBasicExample } from "../apiExamples/basic";
 import { initCustomExample } from "../apiExamples/customToast";
 import { initErrorExample } from "../apiExamples/error";
 import { initMultipleToastsExample } from "../apiExamples/multipleToasts";
 import { initSuccessExample } from "../apiExamples/success";
 
-import { AuroToast } from "../src/auro-toast.js";
 
 AuroToast.register(); // registering to `auro-toast`
+AuroToaster.register(); // registering to `auro-toaster`
 AuroToast.register("custom-toast");
 
 export function initExamples(initCount) {
