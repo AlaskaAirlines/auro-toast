@@ -1,17 +1,20 @@
 /* eslint-disable jsdoc/require-jsdoc, no-magic-numbers, no-param-reassign */
 
-import { initBasicExample } from '../apiExamples/basic';
-import { initCustomExample } from '../apiExamples/customToast';
-import { initErrorExample } from '../apiExamples/error';
-import { initSuccessExample } from '../apiExamples/success';
-import { initMultipleToastsExample } from '../apiExamples/multipleToasts';
+import { AuroToast, AuroToaster } from "../src/index";
 
-import { AuroToast } from '../src/auro-toast.js';
+import { initBasicExample } from "../apiExamples/basic";
+import { initCustomExample } from "../apiExamples/customToast";
+import { initErrorExample } from "../apiExamples/error";
+import { initMultipleToastsExample } from "../apiExamples/multipleToasts";
+import { initSuccessExample } from "../apiExamples/success";
+
 
 AuroToast.register(); // registering to `auro-toast`
-AuroToast.register('custom-toast');
+AuroToaster.register(); // registering to `auro-toaster`
+AuroToast.register("custom-toast");
 
 export function initExamples(initCount) {
+  // biome-ignore lint/style/noParameterAssign: legacy code, don't want to refactor right now
   initCount = initCount || 0;
 
   try {
@@ -21,7 +24,7 @@ export function initExamples(initCount) {
     initErrorExample();
     initSuccessExample();
     initMultipleToastsExample();
-  } catch (err) {
+  } catch (_err) {
     if (initCount <= 20) {
       // setTimeout handles issue where content is sometimes loaded after the functions get called
       setTimeout(() => {

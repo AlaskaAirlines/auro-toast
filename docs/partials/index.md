@@ -83,7 +83,8 @@ The success push notification using the `<auro-toast>` element will automaticall
 
 ## Multiple toasts
 
-The multi-notification use case requires the use of the `<auro-toaster>` component.
+The multi-notification use case requires the use of the `<auro-toaster>` component. Toaster will render the toasts
+at the bottom right of a page.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/multipleToasts.html) -->
@@ -179,7 +180,7 @@ There are two important parts of every Auro component. The <a href="https://deve
 To protect from versioning conflicts with other instances of the component being loaded, it is recommended to use our `AuroToast.register(name)` method and pass in a unique name.
 
 ```js
-import { AuroToast } from './src/auro-toast.js';
+import { AuroToast } from '@aurodesignsystem/auro-toast/class'
 
 AuroToast.register('custom-toast');
 ```
