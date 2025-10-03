@@ -4,24 +4,26 @@
 // ---------------------------------------------------------------------
 
 /* eslint-disable lit/binding-positions, lit/no-invalid-html, max-lines */
+import { LitElement } from "lit";
+import { html } from "lit/static-html.js";
 
+import { AuroDependencyVersioning } from "@aurodesignsystem/auro-library/scripts/runtime/dependencyTagVersioning.mjs";
+import AuroLibraryRuntimeUtils from "@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs";
+import { AuroButton } from "@aurodesignsystem/auro-button/class";
+import { AuroIcon } from "@aurodesignsystem/auro-icon/class";
+
+// Icons
 import errorIcon from "@alaskaairux/icons/dist/icons/alert/error-stroke.mjs";
 import infoIcon from "@alaskaairux/icons/dist/icons/alert/information-stroke.mjs";
 import successIcon from "@alaskaairux/icons/dist/icons/interface/check-stroke.mjs";
 import closeIcon from "@alaskaairux/icons/dist/icons/interface/x-lg.mjs";
-import { AuroButton } from "@aurodesignsystem/auro-button/src/auro-button.js";
-import { AuroIcon } from "@aurodesignsystem/auro-icon/src/auro-icon.js";
-import { AuroDependencyVersioning } from "@aurodesignsystem/auro-library/scripts/runtime/dependencyTagVersioning.mjs";
-import AuroLibraryRuntimeUtils from "@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs";
-// If using litElement base class
-import { LitElement } from "lit";
-import { html } from "lit/static-html.js";
+
 import buttonVersion from "./buttonVersion.js";
 import iconVersion from "./iconVersion.js";
-import colorCss from "./styles/color-css.js";
-// Import touch detection lib
-import styleCss from "./styles/style-css.js";
-import tokensCss from "./styles/tokens-css.js";
+
+import colorCss from "./styles/color.scss";
+import styleCss from "./styles/style.scss";
+import tokensCss from "./styles/tokens.scss";
 
 const DEFAULT_TIME_TIL_FADE_OUT = 5000;
 const FADE_OUT_DURATION = 300;
