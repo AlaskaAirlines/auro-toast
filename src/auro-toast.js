@@ -313,7 +313,7 @@ export class AuroToast extends LitElement {
           variant="flat"
           shape="circle"
           size="xs"
-          ?onDark=${this.getAttribute("variant") !== "error" && this.getAttribute("variant") !== "success"}
+          appearance=${this.getAttribute("variant") !== "error" && this.getAttribute("variant") !== "success" ? "inverse" : this.appearance}
           @click="${this.clickToClose}"
           part="close-button"
           class="closeButton">
