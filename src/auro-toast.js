@@ -266,6 +266,7 @@ export class AuroToast extends LitElement {
 
     // do not auto dismiss for error toasts or if disableAutoHide is set
     if (this.visible && !this.disableAutoHide && this.variant !== "error") {
+      clearTimeout(this.fadeOutTimer);
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
       }, this.timeTilHide || DEFAULT_TIME_TIL_FADE_OUT);
@@ -303,7 +304,7 @@ export class AuroToast extends LitElement {
           this.noIcon
             ? undefined
             : html`
-          <${this.iconTag} customColor customSvg class="typeIcon" part="type-icon">
+          <${this.iconTag} customColor customSvg class="typeIcon body-default" part="type-icon">
             ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
           </${this.iconTag}>
         `
@@ -313,7 +314,7 @@ export class AuroToast extends LitElement {
           variant="flat"
           shape="circle"
           size="xs"
-          appearance=${this.getAttribute("variant") !== "error" && this.getAttribute("variant") !== "success" ? "inverse" : this.appearance}
+          appearance=${this.variant !== "error" && this.variant !== "success" ? "inverse" : this.appearance}
           @click="${this.clickToClose}"
           part="close-button"
           class="closeButton">
