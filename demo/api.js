@@ -1,7 +1,11 @@
-import { initNoIconExample } from "../apiExamples/noIcon";
-import { initTimeTilHideExample } from "../apiExamples/timeTilHide";
+import { initBasicExample } from "../apiExamples/basic";
+import { initDisableAutoHideExample } from "../apiExamples/disable-auto-hide";
+import { initNoIconExample } from "../apiExamples/no-icon";
+import { initTimeTilHideExample } from "../apiExamples/time-til-hide";
 import { initVariantToastsExample } from "../apiExamples/variant";
+import { initCustomToastExample } from "../apiExamples/custom-toast";
 import { initVisibleExample } from "../apiExamples/visible";
+import { initMultipleToastsExample } from "../apiExamples/multiple-toasts";
 
 import "../src/registered";
 /* eslint-disable jsdoc/require-jsdoc, no-magic-numbers, no-param-reassign */
@@ -12,10 +16,14 @@ export function initExamples(initCount) {
 
   try {
     // javascript example function calls to be added here upon creation to test examples
-    initVisibleExample();
-    initVariantToastsExample();
+    initBasicExample();
+    initDisableAutoHideExample();
     initNoIconExample();
     initTimeTilHideExample();
+    initVariantToastsExample();
+    initCustomToastExample();
+    initVisibleExample();
+    initMultipleToastsExample();
   } catch (_err) {
     if (initCount <= 20) {
       // setTimeout handles issue where content is sometimes loaded after the functions get called

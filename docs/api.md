@@ -1,26 +1,32 @@
 # auro-toast
 
-The auro-toast element provides users a way to display short, temporary messages.
+The `auro-toast` element provides users a way to display short, temporary messages.
 
-## Properties
+### Properties & Attributes
 
-| Property          | Attribute         | Type      | Description                                      |
-|-------------------|-------------------|-----------|--------------------------------------------------|
-| `disableAutoHide` | `disableAutoHide` | `Boolean` | Prevents the toast from auto-hiding on the default time. |
-| `noIcon`          | `noIcon`          | `Boolean` | Removes icon from the toast UI                   |
-| `timeTilHide`     | `timeTilHide`     | `Number`  | Sets the time in milliseconds until the toast hides. |
-| `variant`         | `variant`         | `String`  | Component will render visually based on which variant value is set; currently supports `error`, `success`, `custom` |
-| `visible`         | `visible`         | `Boolean` | Sets state of toast to visible                   |
+| Properties      | Attributes      | Modifiers | Type                             | Default | Description                                                         |
+| --------------- | --------------- | --------- | -------------------------------- | ------- | ------------------------------------------------------------------- |
+| disableAutoHide | disableAutoHide |           | boolean                          |         | Prevents the toast from auto-hiding on the default time.            |
+| noIcon          | noIcon          |           | boolean                          |         | Removes icon from the toast UI.                                     |
+| timeTilHide     | timeTilHide     |           | number                           |         | Sets the time in milliseconds until the toast hides.                |
+| variant         | variant         |           | `error` \| `success` \| `custom` |         | Component will render visually based on which variant value is set. |
+| visible         | visible         |           | boolean                          |         | Sets state of toast to visible                                      |
 
-## Events
+### Methods
 
-| Event          | Type     | Description                             |
-|----------------|----------|-----------------------------------------|
-| `onToastClose` | `object` | Notifies that the toast has been closed |
+| Name     | Parameters                                                           | Return | Description                                       |
+| -------- | -------------------------------------------------------------------- | ------ | ------------------------------------------------- |
+| register | `name` (string) - The name of the element that you want to register. |        | This will register this element with the browser. |
 
-## CSS Shadow Parts
+### Events
 
-| Part           | Description                         |
-|----------------|-------------------------------------|
-| `close-button` | Apply css to the toast close button |
-| `type-icon`    | Apply css to the toast type icon    |
+| Name         | Description                             |
+| ------------ | --------------------------------------- |
+| onToastClose | Notifies that the toast has been closed |
+
+### CSS Shadow Parts
+
+| Name         | Description                         |
+| ------------ | ----------------------------------- |
+| close-button | Apply css to the toast close button |
+| type-icon    | Apply css to the toast type icon    |

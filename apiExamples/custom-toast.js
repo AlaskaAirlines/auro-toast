@@ -1,8 +1,8 @@
 /* eslint-disable jsdoc/require-jsdoc */
 
-export function initBasicExample() {
-  const btn = document.querySelector("#basicToastBtn");
-  const toast = document.querySelector("#basicToast");
+export function initCustomToastExample() {
+  const btn = document.querySelector("#customizedToastBtn");
+  const toast = document.querySelector("#customizedToast");
 
   btn.addEventListener("click", () => {
     if (!toast.hasAttribute("visible")) {

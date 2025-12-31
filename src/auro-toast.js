@@ -30,13 +30,9 @@ const FADE_OUT_DURATION = 300;
 
 // See https://git.io/JJ6SJ for "How to document your components using JSDoc"
 /**
- * The auro-toast element provides users a way to display short, temporary messages.
+ * The `auro-toast` element provides users a way to display short, temporary messages.
+ * @customElement auro-toast
  *
- * @attr {Boolean} visible - Sets state of toast to visible
- * @attr {String} variant - Component will render visually based on which variant value is set; currently supports `error`, `success`, `custom`
- * @attr {Boolean} noIcon - Removes icon from the toast UI
- * @attr {Boolean} disableAutoHide - Prevents the toast from auto-hiding on the default time.
- * @attr {Number} timeTilHide - Sets the time in milliseconds until the toast hides.
  * @csspart type-icon - Apply css to the toast type icon
  * @csspart close-button - Apply css to the toast close button
  * @fires onToastClose - Notifies that the toast has been closed
@@ -47,6 +43,10 @@ export class AuroToast extends LitElement {
   constructor() {
     super();
 
+    this._initializeDefaults();
+  }
+
+  _initializeDefaults() {
     /**
      * @private
      */
@@ -128,25 +128,47 @@ export class AuroToast extends LitElement {
   static get properties() {
     return {
       ...LitElement.properties,
-      visible: {
-        type: Boolean,
-        reflect: true,
-      },
-      variant: {
-        type: String,
-        reflect: true,
-      },
-      noIcon: {
-        type: Boolean,
-      },
+
+      /**
+       * Prevents the toast from auto-hiding on the default time.
+       */
       disableAutoHide: {
         type: Boolean,
         reflect: true,
       },
+
+      /**
+       * Removes icon from the toast UI.
+       */
+      noIcon: {
+        type: Boolean,
+        reflect: true,
+      },
+
+      /**
+       * Sets the time in milliseconds until the toast hides.
+       */
       timeTilHide: {
         type: Number,
         reflect: true,
       },
+
+      /**
+       * Component will render visually based on which variant value is set.
+       * @type {'error' | 'success' | 'custom'}
+       */
+      variant: {
+        type: String,
+        reflect: true,
+      },
+
+      /**
+       * Sets state of toast to visible
+       */
+      visible: {
+        type: Boolean,
+        reflect: true,
+      }
     };
   }
 
@@ -156,7 +178,7 @@ export class AuroToast extends LitElement {
 
   /**
    * This will register this element with the browser.
-   * @param {string} [name="auro-toast"] - The name of element that you want to register to.
+   * @param {string} [name="auro-toast"] - The name of the element that you want to register.
    *
    * @example
    * AuroToast.register("custom-toast") // this will register this element to <custom-toast/>
