@@ -16,7 +16,7 @@ export class AuroToaster extends LitElement {
 
   /**
    * This will register this element with the browser.
-   * @param {string} [name="auro-toaster"] - The name of element that you want to register to.
+   * @param {string} [name="auro-toaster"] - The name of the element that you want to register.
    *
    * @example
    * AuroToaster.register("custom-toast") // this will register this element to <custom-toast/>
