@@ -1,8 +1,8 @@
 /* eslint-disable jsdoc/require-jsdoc */
 
-export function initBasicExample() {
-  const btn = document.querySelector("#basicToastBtn");
-  const toast = document.querySelector("#basicToast");
+export function initDisableAutoHideExample() {
+  const btn = document.querySelector("#disableHideToastBtn");
+  const toast = document.querySelector("#disableHideToast");
 
   btn.addEventListener("click", () => {
     if (!toast.hasAttribute("visible")) {

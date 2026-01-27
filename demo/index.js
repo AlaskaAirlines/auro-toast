@@ -3,11 +3,7 @@
 import { AuroToast, AuroToaster } from "../src/index";
 
 import { initBasicExample } from "../apiExamples/basic";
-import { initCustomExample } from "../apiExamples/customToast";
-import { initErrorExample } from "../apiExamples/error";
-import { initMultipleToastsExample } from "../apiExamples/multipleToasts";
-import { initSuccessExample } from "../apiExamples/success";
-
+import { initCustomExample } from "../apiExamples/custom";
 
 AuroToast.register(); // registering to `auro-toast`
 AuroToaster.register(); // registering to `auro-toaster`
@@ -21,9 +17,6 @@ export function initExamples(initCount) {
     // javascript example function calls to be added here upon creation to test examples
     initBasicExample();
     initCustomExample();
-    initErrorExample();
-    initSuccessExample();
-    initMultipleToastsExample();
   } catch (_err) {
     if (initCount <= 20) {
       // setTimeout handles issue where content is sometimes loaded after the functions get called
