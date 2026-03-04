@@ -319,34 +319,40 @@ export class AuroToast extends LitElement {
   }
 
   render() {
-    return this.visible
-      ? html`
-      <div aria-live="polite" class="toastContainer">
+    return html`
+      <div aria-live="polite" aria-atomic="true">
         ${
-          this.noIcon
-            ? undefined
-            : html`
-          <${this.iconTag} customColor customSvg class="typeIcon body-default" part="type-icon">
-            ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
-          </${this.iconTag}>
+          this.visible
+            ? html`
+          <div class="toastContainer">
+            ${
+              this.noIcon
+                ? undefined
+                : html`
+              <${this.iconTag} customColor customSvg class="typeIcon body-default" part="type-icon">
+                ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
+              </${this.iconTag}>
+            `
+            }
+            <div class="message body-default"><slot></slot></div>
+            <${this.buttonTag}
+              variant="flat"
+              shape="circle"
+              size="xs"
+              appearance=${this.variant !== "error" && this.variant !== "success" ? "inverse" : this.appearance}
+              @click="${this.clickToClose}"
+              part="close-button"
+              class="closeButton">
+              <${this.iconTag} customColor customSvg>
+                ${this.closeSvg}
+              </${this.iconTag}>
+              <span slot="ariaLabel">Close</span>
+            </${this.buttonTag}>
+          </div>
         `
+            : undefined
         }
-        <div class="message body-default"><slot></slot></div>
-        <${this.buttonTag}
-          variant="flat"
-          shape="circle"
-          size="xs"
-          appearance=${this.variant !== "error" && this.variant !== "success" ? "inverse" : this.appearance}
-          @click="${this.clickToClose}"
-          part="close-button"
-          class="closeButton">
-          <${this.iconTag} customColor customSvg>
-            ${this.closeSvg}
-          </${this.iconTag}>
-          <span class="util_displayHiddenVisually">Close</span>
-        </${this.buttonTag}>
       </div>
-    `
-      : undefined;
+    `;
   }
 }
