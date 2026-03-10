@@ -27,6 +27,6 @@ export class AuroToaster extends LitElement {
   }
 
   render() {
-    return html`<slot></slot>`;
+    return html`<slot role="status"></slot>`;
   }
 }
