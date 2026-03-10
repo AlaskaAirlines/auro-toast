@@ -320,7 +320,7 @@ export class AuroToast extends LitElement {
 
   render() {
     return html`
-      <div aria-live="polite" aria-atomic="true">
+      <div role="status">
         ${
           this.visible
             ? html`
