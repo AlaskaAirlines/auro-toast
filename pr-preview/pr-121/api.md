@@ -330,6 +330,35 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
+### Dynamic Toasts
+
+The dynamic notification use case requires the use of the `<auro-toaster>` component. Toaster will render the toasts at the bottom right of a page.
+
+<div class="exampleWrapper">
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/dynamic-toasts.html) -->
+  <!-- The below content is automatically added from ./../apiExamples/dynamic-toasts.html -->
+  <auro-button id="dynamicToastBtn-default">Show default toast</auro-button>
+  <auro-button id="dynamicToastBtn-error">Show error toast</auro-button>
+  <auro-button id="dynamicToastBtn-success">Show success toast</auro-button>
+  <auro-toaster id="dynamicToaster">
+  </auro-toaster>
+  <!-- AURO-GENERATED-CONTENT:END -->
+</div>
+<auro-accordion alignRight>
+  <span slot="trigger">See code</span>
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/dynamic-toasts.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/dynamic-toasts.html -->
+
+```html
+<auro-button id="dynamicToastBtn-default">Show default toast</auro-button>
+<auro-button id="dynamicToastBtn-error">Show error toast</auro-button>
+<auro-button id="dynamicToastBtn-success">Show success toast</auro-button>
+<auro-toaster id="dynamicToaster">
+</auro-toaster>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+</auro-accordion>
+
 ## Restyle Component with CSS Variables
 
 The component may be restyled by changing the values of the following token(s).
