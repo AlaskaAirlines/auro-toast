@@ -9,6 +9,10 @@
 @use '@aurodesignsystem/webcorestylesheets/dist/bundled/type/classes.alaska.min.css';
 
 // container styles - defines the look of the outer custom component
+:host {
+  display: none;
+}
+
 :host([visible]) {
   display: inline-block;
   min-width: 100%;
