@@ -6,6 +6,7 @@ export function initMultipleToastsExample() {
 
   btn.addEventListener("click", () => {
     if (!toast.hasAttribute("visible")) {
+      toast.triggerElement = btn;
       toast.setAttribute("visible", true);
     }
   });
@@ -15,6 +16,7 @@ export function initMultipleToastsExample() {
 
   btnTwo.addEventListener("click", () => {
     if (!toastTwo.hasAttribute("visible")) {
+      toastTwo.triggerElement = btnTwo;
       toastTwo.setAttribute("visible", true);
     }
   });
@@ -24,6 +26,7 @@ export function initMultipleToastsExample() {
 
   btnThree.addEventListener("click", () => {
     if (!toastThree.hasAttribute("visible")) {
+      toastThree.triggerElement = btnThree;
       toastThree.setAttribute("visible", true);
     }
   });

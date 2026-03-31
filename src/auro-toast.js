@@ -154,6 +154,26 @@ export class AuroToast extends LitElement {
       },
 
       /**
+       * The id of the element that triggered the toast.
+       * When the toast is manually closed, focus will return to this element.
+       * Takes precedence over the triggerElement property if both are set.
+       */
+      trigger: {
+        type: String,
+        reflect: true,
+      },
+
+      /**
+       * A direct reference to the element that triggered the toast.
+       * When the toast is manually closed, focus will return to this element.
+       * Use the trigger attribute instead if you prefer a declarative approach.
+       * @type {HTMLElement}
+       */
+      triggerElement: {
+        type: Object,
+      },
+
+      /**
        * Component will render visually based on which variant value is set.
        * @type {'error' | 'success' | 'custom'}
        */
@@ -194,10 +214,27 @@ export class AuroToast extends LitElement {
   }
 
   /**
+   * Returns focus to the trigger element when the toast is manually closed.
+   * Not called on auto-dismiss — moving focus during auto-dismiss would
+   * interrupt the AT user's current position in the page.
+   * @private
+   * @returns {void}
+   */
+  _returnFocus() {
+    const target = this.triggerElement ??
+      (this.trigger ? document.getElementById(this.trigger) : null);
+
+    if (target) {
+      target.focus();
+    }
+  }
+
+  /**
    * @private
    * @returns {void}
    */
   clickToClose() {
+    this._returnFocus();
     this.closeToast();
     clearTimeout(this.fadeOutTimer);
   }
@@ -320,39 +357,37 @@ export class AuroToast extends LitElement {
 
   render() {
     return html`
-      <div role="status">
-        ${
-          this.visible
-            ? html`
-          <div class="toastContainer">
-            ${
-              this.noIcon
-                ? undefined
-                : html`
-              <${this.iconTag} customColor customSvg class="typeIcon body-default" part="type-icon">
-                ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
-              </${this.iconTag}>
-            `
-            }
-            <div class="message body-default"><slot></slot></div>
-            <${this.buttonTag}
-              variant="flat"
-              shape="circle"
-              size="xs"
-              appearance=${this.variant !== "error" && this.variant !== "success" ? "inverse" : this.appearance}
-              @click="${this.clickToClose}"
-              part="close-button"
-              class="closeButton">
-              <${this.iconTag} customColor customSvg>
-                ${this.closeSvg}
-              </${this.iconTag}>
-              <span slot="ariaLabel">Close</span>
-            </${this.buttonTag}>
-          </div>
-        `
-            : undefined
-        }
-      </div>
+      ${
+        this.visible
+          ? html`
+        <div class="toastContainer">
+          ${
+            this.noIcon
+              ? undefined
+              : html`
+            <${this.iconTag} customColor customSvg class="typeIcon body-default" part="type-icon">
+              ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
+            </${this.iconTag}>
+          `
+          }
+          <div class="message body-default"><slot></slot></div>
+          <${this.buttonTag}
+            variant="flat"
+            shape="circle"
+            size="xs"
+            appearance=${this.variant !== "error" && this.variant !== "success" ? "inverse" : this.appearance}
+            @click="${this.clickToClose}"
+            part="close-button"
+            class="closeButton">
+            <${this.iconTag} customColor customSvg>
+              ${this.closeSvg}
+            </${this.iconTag}>
+            <div slot="ariaLabel">. Close this notification.</div>
+          </${this.buttonTag}>
+        </div>
+      `
+          : undefined
+      }
     `;
   }
 }
