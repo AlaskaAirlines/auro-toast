@@ -392,6 +392,54 @@ export function initDynamicToastsExample() {
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
+### Dynamic Injection of Standalone Toasts without auro-toaster
+
+When dynamically injecting `auro-toast` elements at runtime, the consumer is responsible for a container element with `aria-live` that **must already be present in the DOM** before any toast is appended to it. Screen reader register a live region when it first encounters the element on the page — content added to it later will trigger an announcement. If a live region and toast content enter the DOM at the same time, the screen reader has no opportunity to register the region first and will **not** announce the content.
+
+The required pattern is a persistent container — a `div` or equivalent — with `aria-live="polite"` or `aria-live="assertive"`* that remains in the DOM at all times. Your application logic then injects `auro-toast` elements into this container at runtime as notifications occur.
+
+`auro-toast` automatically detects any ancestor live region at connection time. When one is found, it defers to that region and does not add its own role, preventing nested live regions.
+
+\* Only use `aria-live="assertive"` if your UI is making use of toasts that are alerting the user of important information. If you are not using `auro-toaster` you are responsible for managing the changes between `assertive` and `polite` announcement states.
+
+<div class="exampleWrapper">
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/standalone-toast.html) -->
+  <!-- The below content is automatically added from ./../apiExamples/standalone-toast.html -->
+  <auro-button id="standaloneToastBtn">Show toast</auro-button>
+  <div id="standaloneContainer" aria-live="polite" aria-atomic="false"></div>
+  <!-- AURO-GENERATED-CONTENT:END -->
+</div>
+<auro-accordion alignRight>
+  <span slot="trigger">See code</span>
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/standalone-toast.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/standalone-toast.html -->
+
+```html
+<auro-button id="standaloneToastBtn">Show toast</auro-button>
+<div id="standaloneContainer" aria-live="polite" aria-atomic="false"></div>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/standalone-toast.js) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/standalone-toast.js -->
+
+```js
+/* eslint-disable jsdoc/require-jsdoc */
+
+export function initStandaloneToastExample() {
+  const container = document.querySelector("#standaloneContainer");
+
+  document.querySelector("#standaloneToastBtn").addEventListener("click", () => {
+    const toast = document.createElement("auro-toast");
+    toast.setAttribute("visible", "");
+    toast.setAttribute("variant", "success");
+    toast.textContent = "Successfully added lap infant";
+    container.appendChild(toast);
+  });
+}
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+</auro-accordion>
+
 ## Restyle Component with CSS Variables
 
 The component may be restyled by changing the values of the following token(s).
