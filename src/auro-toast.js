@@ -120,6 +120,14 @@ export class AuroToast extends LitElement {
      * @private
      */
     this.fadeOutTimer = undefined;
+
+    /**
+     * True when the toast is not inside an auro-toaster and must manage its
+     * own live region announcement. Set once in connectedCallback.
+     * Default -- assumes toast is inside toaster.
+     * @private
+     */
+    this._isStandalone = false;
   }
 
   // This function is to define props used within the scope of this component
@@ -312,6 +320,58 @@ export class AuroToast extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.setOnClick();
+
+    // Dispatch a cancelable event so auro-toaster can signal it will handle
+    // announcements. If nothing cancels the event the toast is standalone and
+    // must register its own live region on the host element — before
+    // any visibility change — so the AT has already observed it as a live
+    // region by the time content is rendered into the shadow DOM.
+    const event = new CustomEvent('toast-request-announce', {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    });
+
+    // NOTE — reverse logic:
+    // dispatchEvent() returns TRUE when nobody called preventDefault(), which
+    // means no auro-toaster was listening — the toast is standalone and must
+    // own its live region. It returns FALSE when a toaster cancelled the event,
+    // signalling that the toaster's aria-live region will handle announcements.
+    const eventNotPrevented = this.dispatchEvent(event);
+
+    // Secondary check: even if no toaster answered the event, the toast may
+    // be inside another element that already owns a live region (e.g. a plain
+    // div[aria-live="polite"]). Setting a role on the host in that case would
+    // create a nested live region. aria-live="off" is intentionally excluded
+    // — it disables live region behavior and is not an active announcer.
+    this._isStandalone = eventNotPrevented && !this._hasAncestorLiveRegion();
+
+    if (this._isStandalone) {
+      this.setAttribute('role', this.variant === 'error' ? 'alert' : 'status');
+    }
+  }
+
+  /**
+   * Walks the DOM ancestors (crossing shadow boundaries) looking for any
+   * active live region — either an aria-live="polite/assertive" attribute or
+   * an implicit live region role (alert, status, log).
+   * aria-live="off" is not considered active and is intentionally ignored.
+   * @private
+   * @returns {boolean}
+   */
+  _hasAncestorLiveRegion() {
+    let node = this.parentElement;
+    while (node) {
+      if (
+        ['polite', 'assertive'].includes(node.getAttribute?.('aria-live')) ||
+        ['alert', 'status', 'log'].includes(node.getAttribute?.('role'))
+      ) {
+        return true;
+      }
+      // Traverse up, crossing shadow DOM boundaries if needed
+      node = node.parentElement ?? node.getRootNode()?.host ?? null;
+    }
+    return false;
   }
 
   updated(changedProperties) {
@@ -319,8 +379,12 @@ export class AuroToast extends LitElement {
       this.handleSlotContent();
     }
 
+    // Keep the standalone role in sync if variant changes after connection.
     if (changedProperties.has("variant")) {
       clearTimeout(this.fadeOutTimer);
+      if (this._isStandalone) {
+        this.setAttribute('role', this.variant === 'error' ? 'alert' : 'status');
+      }
     }
 
     // do not auto dismiss for error toasts or if disableAutoHide is set
