@@ -172,6 +172,156 @@ describe("auro-toaster — live region structure integrity", () => {
 });
 
 // ---------------------------------------------------------------------------
+// Standalone live region
+// ---------------------------------------------------------------------------
+
+describe("auro-toast — standalone live region", () => {
+  it("fires toast-request-announce when connected to the DOM", async () => {
+    const wrapper = await fixture(html`<div></div>`);
+
+    let eventFired = false;
+    wrapper.addEventListener('toast-request-announce', () => { eventFired = true; });
+
+    const toast = document.createElement('auro-toast');
+    toast.setAttribute('variant', 'success');
+    wrapper.appendChild(toast);
+    await elementUpdated(toast);
+
+    expect(eventFired).to.be.true;
+  });
+
+  it("toast-request-announce event is cancelable, bubbles, and is composed", async () => {
+    const wrapper = await fixture(html`<div></div>`);
+
+    let capturedEvent;
+    wrapper.addEventListener('toast-request-announce', (e) => { capturedEvent = e; });
+
+    const toast = document.createElement('auro-toast');
+    toast.setAttribute('variant', 'success');
+    wrapper.appendChild(toast);
+    await elementUpdated(toast);
+
+    expect(capturedEvent.bubbles).to.be.true;
+    expect(capturedEvent.cancelable).to.be.true;
+    expect(capturedEvent.composed).to.be.true;
+  });
+
+  it("sets role='status' on host at connection time — before visible is set", async () => {
+    const el = await fixture(html`
+      <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+    `);
+
+    // Role must already be present — no visibility change needed
+    expect(el.getAttribute('role')).to.equal('status');
+  });
+
+  it("sets role='alert' on host at connection time for error variant", async () => {
+    const el = await fixture(html`
+      <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+    `);
+
+    expect(el.getAttribute('role')).to.equal('alert');
+  });
+
+  it("updates role when variant changes after connection", async () => {
+    const el = await fixture(html`
+      <auro-toast variant="success" disableAutoHide>Message</auro-toast>
+    `);
+
+    expect(el.getAttribute('role')).to.equal('status');
+
+    el.variant = 'error';
+    await elementUpdated(el);
+
+    expect(el.getAttribute('role')).to.equal('alert');
+  });
+
+  it("does not set role when inside a div with aria-live='polite'", async () => {
+    const el = await fixture(html`
+      <div aria-live="polite">
+        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+      </div>
+    `);
+    const toast = el.querySelector('auro-toast');
+    await elementUpdated(toast);
+
+    expect(toast.getAttribute('role')).to.be.null;
+  });
+
+  it("does not set role when inside a div with aria-live='assertive'", async () => {
+    const el = await fixture(html`
+      <div aria-live="assertive">
+        <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+      </div>
+    `);
+    const toast = el.querySelector('auro-toast');
+    await elementUpdated(toast);
+
+    expect(toast.getAttribute('role')).to.be.null;
+  });
+
+  it("does not set role when inside a container with role='status'", async () => {
+    const el = await fixture(html`
+      <div role="status">
+        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+      </div>
+    `);
+    const toast = el.querySelector('auro-toast');
+    await elementUpdated(toast);
+
+    expect(toast.getAttribute('role')).to.be.null;
+  });
+
+  it("does not set role when inside a container with role='alert'", async () => {
+    const el = await fixture(html`
+      <div role="alert">
+        <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+      </div>
+    `);
+    const toast = el.querySelector('auro-toast');
+    await elementUpdated(toast);
+
+    expect(toast.getAttribute('role')).to.be.null;
+  });
+
+  it("sets role when inside a div with aria-live='off' — off is not an active live region", async () => {
+    const el = await fixture(html`
+      <div aria-live="off">
+        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+      </div>
+    `);
+    const toast = el.querySelector('auro-toast');
+    await elementUpdated(toast);
+
+    expect(toast.getAttribute('role')).to.equal('status');
+  });
+
+  it("does not set role on host when inside auro-toaster", async () => {
+    const el = await fixture(html`
+      <auro-toaster>
+        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+      </auro-toaster>
+    `);
+    const toast = el.querySelector('auro-toast');
+    await elementUpdated(toast);
+
+    expect(toast.getAttribute('role')).to.be.null;
+  });
+
+  it("does not set role on host for error toast when inside auro-toaster", async () => {
+    const el = await fixture(html`
+      <auro-toaster>
+        <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+      </auro-toaster>
+    `);
+    const toast = el.querySelector('auro-toast');
+    await elementUpdated(toast);
+
+    expect(toast.getAttribute('role')).to.be.null;
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Accessibility — axe-core
 // ---------------------------------------------------------------------------
 
