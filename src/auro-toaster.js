@@ -29,6 +29,14 @@ export class AuroToaster extends LitElement {
     this._assertiveResetTimer = undefined;
     this._announcedErrorToasts = new WeakSet();
 
+    // Cancel the standalone live region request from any child toast — the
+    // toaster's own aria-live region handles all announcements.
+    // Calling preventDefault() causes dispatchEvent() on the toast to return
+    // false, which the toast reads as "a toaster is present — do not set a
+    // standalone live region role on the host element."
+    this._onToastRequestAnnounce = (e) => e.preventDefault();
+    this.addEventListener('toast-request-announce', this._onToastRequestAnnounce);
+
     /**
      * @private
      */
@@ -57,6 +65,7 @@ export class AuroToaster extends LitElement {
     super.disconnectedCallback();
     this._observer?.disconnect();
     clearTimeout(this._assertiveResetTimer);
+    this.removeEventListener('toast-request-announce', this._onToastRequestAnnounce);
   }
 
   /**
