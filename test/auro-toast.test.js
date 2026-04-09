@@ -505,6 +505,28 @@ describe("auro-toast — live region politeness", () => {
     expect(toast.hasAttribute("visible")).to.be.true;
   }).timeout(4000);
 
+  it("does not trigger assertive when a non-auro-toast element with variant='error' and visible changes", async () => {
+    const el = await fixture(html`
+      <auro-toaster>
+        <div id="otherElement" variant="error">Not a toast</div>
+      </auro-toaster>
+    `);
+    await elementUpdated(el);
+
+    const divWithLive = el.shadowRoot?.querySelector("div[aria-live]");
+    expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+
+    // This element has variant="error" and is gaining visible — without the
+    // localName guard, isErrorToast and becameVisible would both be true and
+    // _setAssertiveTemporarily() would fire. The guard must prevent that.
+    const otherElement = el.querySelector("#otherElement");
+    otherElement.setAttribute("visible", "");
+    await elementUpdated(el);
+
+    // localName guard should prevent assertive from firing
+    expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+  });
+
   it("second error toast re-triggers assertive after politeness has reset to polite", async () => {
     const root = await fixture(html`
       <div>
