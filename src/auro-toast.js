@@ -179,6 +179,7 @@ export class AuroToast extends LitElement {
        */
       triggerElement: {
         type: Object,
+        attribute: false,
       },
 
       /**

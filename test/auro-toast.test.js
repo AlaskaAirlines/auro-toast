@@ -424,9 +424,9 @@ describe("auro-toast — live region announcements on show", () => {
 
     expect(slottedText).to.equal("Flight booked");
 
-    // shadow DOM must not contain the message text hardcoded
-    const shadowText = messageDiv.shadowRoot?.textContent?.trim();
-    expect(shadowText).to.not.equal("Flight booked");
+    // shadow DOM must not contain the message text hardcoded —
+    // the text lives in the light DOM (slot), not in the shadow template
+    expect(el.shadowRoot.innerHTML).to.not.include("Flight booked");
   });
 });
 
@@ -476,7 +476,7 @@ describe("auro-toast — live region politeness", () => {
     expect(liveRegion?.getAttribute("aria-live")).to.equal("polite");
   });
 
-  it("uses aria-live='assertive' for error toasts (recommended, currently fails)", async () => {
+  it("uses aria-live='assertive' for error toasts", async () => {
     const { toaster } = await fixtureWithVisibleToast("error");
     const liveRegion = getToasterLiveRegion(toaster);
 
@@ -547,9 +547,13 @@ describe("auro-toast — live region politeness", () => {
     await aTimeout(3500);
     expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
 
-    // second error toast becomes visible — should re-trigger assertive
+    // second error toast becomes visible — should re-trigger assertive.
+    // Await toast2's own update (the reactive change happens there, not on
+    // toaster), then flush a microtask to ensure the MutationObserver
+    // callback has run before asserting.
     toast2.visible = true;
-    await elementUpdated(toaster);
+    await elementUpdated(toast2);
+    await aTimeout(0);
 
     expect(divWithLive.getAttribute("aria-live")).to.equal("assertive");
   }).timeout(4500);
@@ -711,17 +715,20 @@ describe("auro-toast", () => {
       expect(() => closeButton.click()).to.not.throw;
     });
   });
-  it("renders custom variant without type icon", async () => {
+
+  it("renders custom variant with icon container but no default variant svg", async () => {
     const el = await fixture(html`
       <auro-toast variant="custom" visible disableAutoHide>Custom</auro-toast>
     `);
     await elementUpdated(el);
 
+    // The icon container is present but no variant-specific svg is rendered inside it
     const typeIcon = el.shadowRoot.querySelector(".typeIcon");
     expect(typeIcon).to.exist;
-    // variant=custom renders the icon container but without a variant svg
+    expect(typeIcon.querySelector('svg')).to.not.exist;
   });
-    it("handleSlotContent mirrors custom SVG into typeIcon", async () => {
+
+  it("handleSlotContent mirrors custom SVG into typeIcon", async () => {
     const el = await fixture(html`
       <auro-toast variant="custom" visible disableAutoHide>
         <svg slot="customSvg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
@@ -755,12 +762,7 @@ describe("auro-toast — color contrast", () => {
       expect(ratio, `Text contrast ratio ${ratio.toFixed(2)} does not meet WCAG AA (4.5:1)`).to.be.at.least(4.5);
     });
 
-    it(`${variant} — type icon meets WCAG minimum contrast ratio of 4.5:1 against host background`, async () => {
-      /**
-       * KNOWN ISSUE: The error icon color does not currently meet 3:1.
-       * This test will fail for the error variant until the icon color token is updated.
-       * Once fixed it acts as a regression guard for both variants.
-       */
+    it(`${variant} — type icon meets WCAG SC 1.4.11 contrast ratio of 3:1 against host background`, async () => {
       const el = await fixture(html`
         <auro-toast variant="${variant}" visible disableAutoHide>Test message</auro-toast>
       `);
@@ -771,14 +773,7 @@ describe("auro-toast — color contrast", () => {
       const iconColor = parseRgb(getComputedStyle(icon).color);
       const ratio = contrastRatio(iconColor, background);
 
-      /**
-       * This is temporary until we can get confirmation from design on how to address.
-       * The expectation is the preferred assertion.
-       */
-      if (ratio < 4.5) {
-        console.warn('\n\x1b[31m%s\x1b[0m', `[a11y] ${variant} icon contrast ratio ${ratio.toFixed(2)} does not meet WCAG AA (4.5:1) — this needs to be fixed`);
-      }
-      // expect(ratio, `Icon contrast ratio ${ratio.toFixed(2)} does not meet WCAG minimum (4.5:1)`).to.be.at.least(4.5);
+      expect(ratio, `Icon contrast ratio ${ratio.toFixed(2)} does not meet WCAG SC 1.4.11 minimum (3:1)`).to.be.at.least(3);
     });
   });
 });
