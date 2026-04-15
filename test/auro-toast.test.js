@@ -136,7 +136,7 @@ describe("auro-toaster — live region structure", () => {
     const ariaLabel = el.shadowRoot.querySelector('[slot="ariaLabel"]');
 
     expect(ariaLabel, "Expected an ariaLabel slot in the close button").to.exist;
-    expect(ariaLabel.textContent?.trim()).to.equal(". Close this notification.");
+    expect(ariaLabel.textContent?.trim()).to.equal("Close this notification.");
   });
 });
 
@@ -315,6 +315,31 @@ describe("auro-toast — standalone live region", () => {
       </auro-toaster>
     `);
     const toast = el.querySelector('auro-toast');
+    await elementUpdated(toast);
+
+    expect(toast.getAttribute('role')).to.be.null;
+  });
+
+  // Edge case: a toast that was standalone (role set) is moved into a live
+  // region container and reconnected. The stale role must be removed so it
+  // does not create a nested live region.
+  it("removes role when reconnected inside a container that owns a live region", async () => {
+    const wrapper = await fixture(html`
+      <div>
+        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <div id="liveContainer" aria-live="polite"></div>
+      </div>
+    `);
+
+    const toast = wrapper.querySelector('auro-toast');
+    await elementUpdated(toast);
+
+    // Standalone — role should be set
+    expect(toast.getAttribute('role')).to.equal('status');
+
+    // Move into live region container — triggers connectedCallback
+    const liveContainer = wrapper.querySelector('#liveContainer');
+    liveContainer.appendChild(toast);
     await elementUpdated(toast);
 
     expect(toast.getAttribute('role')).to.be.null;
@@ -527,6 +552,23 @@ describe("auro-toast — live region politeness", () => {
     expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
   });
 
+  it("does not trigger assertive when auro-toaster itself gains a visible attribute", async () => {
+    const el = await fixture(html`
+      <auro-toaster></auro-toaster>
+    `);
+    await elementUpdated(el);
+
+    const divWithLive = el.shadowRoot?.querySelector("div[aria-live]");
+    expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+
+    // auro-toaster shares the auro-toast prefix — the regex guard must
+    // exclude it so setting visible on the toaster itself does not fire assertive.
+    el.setAttribute("visible", "");
+    await elementUpdated(el);
+
+    expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+  });
+
   it("second error toast re-triggers assertive after politeness has reset to polite", async () => {
     const root = await fixture(html`
       <div>
@@ -703,6 +745,48 @@ describe("auro-toast", () => {
       await elementUpdated(el);
 
       expect(document.activeElement).to.equal(btn);
+    });
+
+    it("returns focus to trigger element via triggerElement property", async () => {
+      const root = await fixture(html`
+        <div>
+          <button id="triggerBtn">Show toast</button>
+          <auro-toast visible disableAutoHide>Message</auro-toast>
+        </div>
+      `);
+
+      const btn = root.querySelector("#triggerBtn");
+      const el = root.querySelector("auro-toast");
+      el.triggerElement = btn;
+      await elementUpdated(el);
+
+      const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+      closeButton.click();
+      await elementUpdated(el);
+
+      expect(document.activeElement).to.equal(btn);
+    });
+
+    it("trigger attribute takes precedence over triggerElement when both are set", async () => {
+      const root = await fixture(html`
+        <div>
+          <button id="attrBtn">Attribute target</button>
+          <button id="propBtn">Property target</button>
+          <auro-toast trigger="attrBtn" visible disableAutoHide>Message</auro-toast>
+        </div>
+      `);
+
+      const attrBtn = root.querySelector("#attrBtn");
+      const propBtn = root.querySelector("#propBtn");
+      const el = root.querySelector("auro-toast");
+      el.triggerElement = propBtn;
+      await elementUpdated(el);
+
+      const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+      closeButton.click();
+      await elementUpdated(el);
+
+      expect(document.activeElement).to.equal(attrBtn);
     });
 
     it("does not throw when no trigger is set and close is clicked", async () => {
