@@ -239,7 +239,7 @@ The toast notification can be customized in several ways.
   variant="custom"
   visible
   disableAutoHide
-  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default);">
+  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default); display: block; margin: 0.5rem 0;">
   Did you know you can create a price alert for this route?
   <br />
   <auro-button variant="tertiary">Create Alert</auro-button>
@@ -262,7 +262,7 @@ The toast notification can be customized in several ways.
   variant="custom"
   visible
   disableAutoHide
-  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default);">
+  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default); display: block; margin: 0.5rem 0;">
   Did you know you can create a price alert for this route?
   <br />
   <auro-button variant="tertiary">Create Alert</auro-button>
