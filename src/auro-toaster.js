@@ -12,6 +12,22 @@ export class AuroToaster extends LitElement {
     return [styleCss];
   }
 
+  constructor() {
+    super();
+    // Initialised in the constructor so they survive disconnect/reconnect.
+    // If these were in connectedCallback, a reconnected toaster would forget
+    // which error toasts it had already announced and could re-announce them.
+    this._assertiveResetTimer = undefined;
+    this._announcedErrorToasts = new WeakSet();
+
+    // Cancel the standalone live region request from any child toast — the
+    // toaster's own aria-live region handles all announcements.
+    // Calling preventDefault() causes dispatchEvent() on the toast to return
+    // false, which the toast reads as "a toaster is present — do not set a
+    // standalone live region role on the host element."
+    this._onToastRequestAnnounce = (e) => e.preventDefault();
+  }
+
   /**
    * This will register this element with the browser.
    * @param {string} [name="auro-toaster"] - The name of the element that you want to register to.
@@ -26,15 +42,6 @@ export class AuroToaster extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this._assertiveResetTimer = undefined;
-    this._announcedErrorToasts = new WeakSet();
-
-    // Cancel the standalone live region request from any child toast — the
-    // toaster's own aria-live region handles all announcements.
-    // Calling preventDefault() causes dispatchEvent() on the toast to return
-    // false, which the toast reads as "a toaster is present — do not set a
-    // standalone live region role on the host element."
-    this._onToastRequestAnnounce = (e) => e.preventDefault();
     this.addEventListener('toast-request-announce', this._onToastRequestAnnounce);
 
     /**
@@ -47,10 +54,11 @@ export class AuroToaster extends LitElement {
       for (const mutation of mutations) {
         const target = mutation.target;
 
-        // Only react to auro-toast elements, not other children
-        // that may also use a "visible" attribute. startsWith also
-        // covers versioned tag names (e.g. auro-toast_9_2_1).
-        if (!target.localName?.startsWith('auro-toast')) continue;
+        // Only react to auro-toast elements, not other children that may also
+        // use a "visible" attribute. The regex matches auro-toast and versioned
+        // tag names (e.g. auro-toast_9_2_1) but intentionally excludes
+        // auro-toaster, which shares the same prefix.
+        if (!/^auro-toast(_|$)/u.test(target.localName ?? '')) continue;
 
         const isErrorToast = target.getAttribute?.('variant') === 'error';
         const becameVisible = target.hasAttribute?.('visible');
@@ -107,8 +115,9 @@ export class AuroToaster extends LitElement {
    * @private
    */
   _onSlotChange(e) {
-    const newErrorToast = e.target.assignedElements()
+    const newErrorToast = e.target.assignedElements({ flatten: true })
       .find(el =>
+        /^auro-toast(_|$)/u.test(el.localName ?? '') &&
         el.getAttribute('variant') === 'error' &&
         el.hasAttribute('visible') &&
         !this._announcedErrorToasts.has(el)
