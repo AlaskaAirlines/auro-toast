@@ -1,0 +1,37 @@
+<p>Use the <code>trigger</code> attribute to pass the <code>id</code> of the element that opened the toast. When the toast is manually closed, focus will return to that element.</p>
+
+<auro-button id="triggerAttrBtn">
+  Show notification
+</auro-button>
+
+<!--
+NOTE: The manually added style is NOT necessary for use,
+Demo purposes ONLY!
+-->
+<auro-toast style="display: block; margin: 0.5rem 0;" id="triggerAttrToast" trigger="triggerAttrBtn" disableAutoHide>
+  Flight booked successfully
+</auro-toast>
+
+<p>Use the <code>triggerElement</code> property to pass a direct reference to the element that opened the toast. Useful when an <code>id</code> is not available or when working programmatically.</p>
+
+<auro-button id="triggerPropBtn">
+  Show notification
+</auro-button>
+
+<auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPropToast" disableAutoHide>
+  Flight booked successfully.
+</auro-toast>
+
+<p>When both <code>trigger</code> and <code>triggerElement</code> are set, <code>trigger</code> takes precedence. In this example, <code>triggerElement</code> points to the second button but <code>trigger</code> points to the first — focus returns to the first button on close.</p>
+
+<auro-button id="triggerPrecedenceBtn1">
+  Button 1 (trigger attribute target)
+</auro-button>
+
+<auro-button id="triggerPrecedenceBtn2">
+  Button 2 (triggerElement target — ignored)
+</auro-button>
+
+<auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPrecedenceToast" trigger="triggerPrecedenceBtn1" disableAutoHide>
+  Flight booked successfully.
+</auro-toast>
