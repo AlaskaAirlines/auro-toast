@@ -230,8 +230,8 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   _returnFocus() {
-    const target = this.triggerElement ??
-      (this.trigger ? document.getElementById(this.trigger) : null);
+    const target = (this.trigger ? document.getElementById(this.trigger) : null) ??
+      this.triggerElement;
 
     if (target) {
       target.focus();
@@ -347,8 +347,21 @@ export class AuroToast extends LitElement {
     // — it disables live region behavior and is not an active announcer.
     this._isStandalone = eventNotPrevented && !this._hasAncestorLiveRegion();
 
+    this._syncStandaloneRole();
+  }
+
+  /**
+   * Sets or removes the live-region role on the host depending on whether
+   * the toast is standalone. Extracted so connectedCallback and updated()
+   * stay in sync without duplicating the logic.
+   * @private
+   * @returns {void}
+   */
+  _syncStandaloneRole() {
     if (this._isStandalone) {
       this.setAttribute('role', this.variant === 'error' ? 'alert' : 'status');
+    } else {
+      this.removeAttribute('role');
     }
   }
 
@@ -383,9 +396,7 @@ export class AuroToast extends LitElement {
     // Keep the standalone role in sync if variant changes after connection.
     if (changedProperties.has("variant")) {
       clearTimeout(this.fadeOutTimer);
-      if (this._isStandalone) {
-        this.setAttribute('role', this.variant === 'error' ? 'alert' : 'status');
-      }
+      this._syncStandaloneRole();
     }
 
     // do not auto dismiss for error toasts or if disableAutoHide is set
@@ -447,7 +458,7 @@ export class AuroToast extends LitElement {
             <${this.iconTag} customColor customSvg>
               ${this.closeSvg}
             </${this.iconTag}>
-            <div slot="ariaLabel">. Close this notification.</div>
+            <span slot="ariaLabel">Close this notification.</span>
           </${this.buttonTag}>
         </div>
       `

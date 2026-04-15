@@ -8,9 +8,18 @@
 
 @use '@aurodesignsystem/webcorestylesheets/dist/bundled/type/classes.alaska.min.css';
 
-// container styles - defines the look of the outer custom component
-:host {
-  display: none;
+// This only applies when auro-toast is used without auro-toaster or a
+// pre-designated parent container that owns and manages the live region.
+// This rule keeps the host in the a11y tree with no visual footprint.
+//
+// When a live-region role is set directly on the host (e.g. role="status"
+// or role="alert"), the element must remain in the accessibility tree even
+// when not visible.
+:host([role]):not([visible]) {
+  display: block;
+  height: 0;
+  width: 0;
+  overflow: hidden;
 }
 
 :host([visible]) {
