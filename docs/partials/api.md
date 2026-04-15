@@ -124,6 +124,25 @@ State of the push notification which determines if it is `visible`.
 
 </auro-accordion>
 
+### Focus Management — trigger and triggerElement
+
+When a toast is manually dismissed via the close button, focus should return to the element that originally triggered it. Use the `trigger` attribute to specify the `id` of that element, or the `triggerElement` property to pass a direct element reference. The `trigger` attribute takes precedence when both are set.
+
+<div class="exampleWrapper">
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/trigger.html) -->
+  <!-- AURO-GENERATED-CONTENT:END -->
+</div>
+<auro-accordion alignRight>
+  <span slot="trigger">See code</span>
+
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/trigger.html) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/trigger.js) -->
+<!-- AURO-GENERATED-CONTENT:END -->
+
+</auro-accordion>
+
 ## Common Usage Patterns & Functional Examples
 
 ### Multiple Toasts

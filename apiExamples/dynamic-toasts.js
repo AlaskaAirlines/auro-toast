@@ -1,9 +1,9 @@
 /* eslint-disable jsdoc/require-jsdoc */
 
 const toastDefs = [
-  { id: "dynamicToast-default", variant: null, message: "Default toast", btnId: "dynamicToastBtn-default" },
-  { id: "dynamicToast-error", variant: "error", message: "Unable to add lap infant. Please try again", btnId: "dynamicToastBtn-error" },
-  { id: "dynamicToast-success", variant: "success", message: "Successfully added lap infant", btnId: "dynamicToastBtn-success" },
+  { id: "dynamicToast-default", variant: null, message: "Default toast.", btnId: "dynamicToastBtn-default" },
+  { id: "dynamicToast-error", variant: "error", message: "Unable to add lap infant. Please try again.", btnId: "dynamicToastBtn-error" },
+  { id: "dynamicToast-success", variant: "success", message: "Successfully added lap infant.", btnId: "dynamicToastBtn-success" },
 ];
 
 export function initDynamicToastsExample() {
