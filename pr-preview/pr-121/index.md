@@ -47,8 +47,12 @@ showToast = (toastID) => {
   <auro-button id="basicToastBtn">
     Show default notification
   </auro-button>
-  <auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
-    Default notification with no error type
+  <!--
+  NOTE: The manually added style is NOT necessary for use,
+  Demo purposes ONLY!
+  -->
+  <auro-toast  style="display: block; margin: 0.5rem 0;" id="basicToast">
+    Default notification with no error type.
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -61,8 +65,12 @@ showToast = (toastID) => {
 <auro-button id="basicToastBtn">
   Show default notification
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
-  Default notification with no error type
+<!--
+NOTE: The manually added style is NOT necessary for use,
+Demo purposes ONLY!
+-->
+<auro-toast  style="display: block; margin: 0.5rem 0;" id="basicToast">
+  Default notification with no error type.
 </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
