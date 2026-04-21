@@ -80,6 +80,13 @@ export class AuroToaster extends LitElement {
     this._observer?.disconnect();
     clearTimeout(this._assertiveResetTimer);
     this.removeEventListener('toast-request-announce', this._onToastRequestAnnounce);
+
+    // Reset the live region to polite so a reconnected toaster does not
+    // inherit a stale assertive state left behind by a cleared timer.
+    const liveRegion = this.shadowRoot?.querySelector('[aria-live]');
+    if (liveRegion) {
+      liveRegion.setAttribute('aria-live', 'polite');
+    }
   }
 
   /**

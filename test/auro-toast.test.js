@@ -1,4 +1,5 @@
 import { aTimeout, elementUpdated, expect, fixture, html } from "@open-wc/testing";
+import sinon from "sinon";
 import "../src/registered.js";
 
 import {
@@ -599,6 +600,33 @@ describe("auro-toast — live region politeness", () => {
 
     expect(divWithLive.getAttribute("aria-live")).to.equal("assertive");
   }).timeout(4500);
+
+  it("resets aria-live to polite on disconnect when live region is assertive", async () => {
+    const wrapper = await fixture(html`
+      <div>
+        <auro-toaster>
+          <auro-toast variant="error" visible disableAutoHide>Something went wrong</auro-toast>
+        </auro-toaster>
+      </div>
+    `);
+
+    const toaster = wrapper.querySelector("auro-toaster");
+    await elementUpdated(toaster);
+
+    const divWithLive = toaster.shadowRoot?.querySelector("div[aria-live]");
+    expect(divWithLive.getAttribute("aria-live")).to.equal("assertive");
+
+    // Disconnect before the 3-second reset timer fires
+    wrapper.removeChild(toaster);
+
+    expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+
+    // Reconnect — live region should still be polite
+    wrapper.appendChild(toaster);
+    await elementUpdated(toaster);
+
+    expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -634,6 +662,8 @@ describe("auro-toast — onToastClose event", () => {
   }).timeout(2000);
 
   it("does NOT fire onToastClose for error toast after timeout", async () => {
+    const clock = sinon.useFakeTimers();
+
     const el = await fixture(html`
       <auro-toast variant="error" visible>Persistent error</auro-toast>
     `);
@@ -641,9 +671,12 @@ describe("auro-toast — onToastClose event", () => {
     let eventFired = false;
     el.addEventListener("onToastClose", () => { eventFired = true; });
 
-    await aTimeout(6000);
+    clock.tick(6000);
+
     expect(eventFired).to.be.false;
-  }).timeout(6100);
+
+    clock.restore();
+  });
 });
 
 // ---------------------------------------------------------------------------
