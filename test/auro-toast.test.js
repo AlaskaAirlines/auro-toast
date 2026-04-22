@@ -510,6 +510,8 @@ describe("auro-toast — live region politeness", () => {
   });
 
   it("aria-live resets to 'polite' after 3 seconds even when error toast remains visible", async () => {
+    const clock = sinon.useFakeTimers();
+
     const el = await fixture(html`
       <auro-toaster>
         <auro-toast variant="error" visible disableAutoHide>Persistent error</auro-toast>
@@ -519,17 +521,19 @@ describe("auro-toast — live region politeness", () => {
 
     const divWithLive = el.shadowRoot?.querySelector("div[aria-live]");
 
-    // should be assertive immediately after error toast appears
     expect(divWithLive.getAttribute("aria-live")).to.equal("assertive");
 
-    // after 3 seconds it should reset to polite even though toast is still visible
-    await aTimeout(3500);
+    // Advance time instead of waiting real time
+    clock.tick(3500);
+    await elementUpdated(el);
+
     expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
 
-    // toast is still visible
     const toast = el.querySelector("auro-toast");
     expect(toast.hasAttribute("visible")).to.be.true;
-  }).timeout(4000);
+
+    clock.restore();
+  });
 
   it("does not trigger assertive when a non-auro-toast element with variant='error' and visible changes", async () => {
     const el = await fixture(html`
@@ -626,6 +630,31 @@ describe("auro-toast — live region politeness", () => {
     await elementUpdated(toaster);
 
     expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+  });
+
+  it("triggers assertive when a visible toast changes variant to error (defensive fallback)", async () => {
+    const el = await fixture(html`
+      <auro-toaster>
+        <auro-toast variant="success" visible disableAutoHide>Saved</auro-toast>
+      </auro-toaster>
+    `);
+
+    const liveRegion = el.shadowRoot.querySelector("div[aria-live]");
+
+    // Initial state should be polite
+    expect(liveRegion.getAttribute("aria-live")).to.equal("polite");
+
+    const toast = el.querySelector("auro-toast");
+
+    // Mutate AFTER visible (unsupported pattern, but must be handled safely)
+    toast.setAttribute("variant", "error");
+    await elementUpdated(toast);
+
+    // Let MutationObserver flush
+    await Promise.resolve();
+    await elementUpdated(el);
+
+    expect(liveRegion.getAttribute("aria-live")).to.equal("assertive");
   });
 });
 

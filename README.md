@@ -93,7 +93,7 @@ In cases where the project is not able to process JS assets, there are pre-proce
 NOTE: The manually added style is NOT necessary for use,
 Demo purposes ONLY!
 -->
-<auro-toast  style="display: block; margin: 0.5rem 0;" id="basicToast">
+<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
   Default notification with no error type.
 </auro-toast>
 ```
