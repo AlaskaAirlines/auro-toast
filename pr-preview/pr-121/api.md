@@ -49,7 +49,7 @@ The `auro-toast` element provides users a way to display short, temporary messag
   NOTE: The manually added style is NOT necessary for use,
   Demo purposes ONLY!
   -->
-  <auro-toast  style="display: block; margin: 0.5rem 0;" id="basicToast">
+  <auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
     Default notification with no error type.
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
@@ -67,7 +67,7 @@ The `auro-toast` element provides users a way to display short, temporary messag
 NOTE: The manually added style is NOT necessary for use,
 Demo purposes ONLY!
 -->
-<auro-toast  style="display: block; margin: 0.5rem 0;" id="basicToast">
+<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
   Default notification with no error type.
 </auro-toast>
 ```
@@ -530,7 +530,7 @@ When dynamically injecting `auro-toast` elements at runtime, the consumer is res
 
 The required pattern is a persistent container — a `div` or equivalent — with `aria-live="polite"` or `aria-live="assertive"`* that remains in the DOM at all times. Your application logic then injects `auro-toast` elements into this container at runtime as notifications occur.
 
-**Warning:** Never apply `display: none` to the live region container. Doing so removes it from the accessibility tree entirely, which prevents screen readers from registering the live region. Any toast announcements will be silently lost, resulting in a critical accessibility violation.
+**Warning:** Avoid applying `display: none` to a live region while it is in use. This removes it from the accessibility tree, preventing screen readers from detecting updates. Any announcements triggered during that time will be lost.
 
 `auro-toast` automatically detects any ancestor live region at connection time. When one is found, it defers to that region and does not add its own role, preventing nested live regions.
 
