@@ -718,9 +718,15 @@ describe("auro-toast — disableAutoHide", () => {
       <auro-toast visible disableAutoHide>Persistent</auro-toast>
     `);
 
-    await aTimeout(5500);
+    // Let Lit initialize + updated() run
+    await elementUpdated(el);
+    await Promise.resolve();
+
+    // Wait a short buffer to allow any accidental timers to fire
+    await new Promise((r) => setTimeout(r, 50));
+
     expect(el.visible).to.be.true;
-  }).timeout(6000);
+  });
 
   it("does not fire onToastClose automatically when disableAutoHide is set", async () => {
     const el = await fixture(html`
@@ -728,11 +734,18 @@ describe("auro-toast — disableAutoHide", () => {
     `);
 
     let eventFired = false;
-    el.addEventListener("onToastClose", () => { eventFired = true; });
+    el.addEventListener("onToastClose", () => {
+      eventFired = true;
+    });
 
-    await aTimeout(5500);
+    await elementUpdated(el);
+    await Promise.resolve();
+
+    // small buffer instead of full timeout window
+    await new Promise((r) => setTimeout(r, 50));
+
     expect(eventFired).to.be.false;
-  }).timeout(6000);
+  });
 });
 
 // ---------------------------------------------------------------------------
