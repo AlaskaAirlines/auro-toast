@@ -536,7 +536,7 @@ export function initDynamicToastsExample() {
       console.log("Toast added:", toastId);
 
       // optional cleanup if your component doesn't auto-remove itself
-      toast.addEventListener("hide", () => {
+      toast.addEventListener("onToastClose", () => {
         activeToasts.delete(toastId);
       });
     });
