@@ -7,13 +7,15 @@ The `auro-toast` element provides users a way to display short, temporary messag
 
 ### Properties & Attributes
 
-| Properties      | Attributes      | Modifiers | Type                             | Default | Description                                                         |
-| --------------- | --------------- | --------- | -------------------------------- | ------- | ------------------------------------------------------------------- |
-| disableAutoHide | disableAutoHide |           | boolean                          |         | Prevents the toast from auto-hiding on the default time.            |
-| noIcon          | noIcon          |           | boolean                          |         | Removes icon from the toast UI.                                     |
-| timeTilHide     | timeTilHide     |           | number                           |         | Sets the time in milliseconds until the toast hides.                |
-| variant         | variant         |           | `error` \| `success` \| `custom` |         | Component will render visually based on which variant value is set. |
-| visible         | visible         |           | boolean                          |         | Sets state of toast to visible                                      |
+| Properties      | Attributes      | Modifiers | Type                             | Default | Description                                                                                                                                                                                                     |
+| --------------- | --------------- | --------- | -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| disableAutoHide | disableAutoHide |           | boolean                          |         | Prevents the toast from auto-hiding on the default time.                                                                                                                                                        |
+| noIcon          | noIcon          |           | boolean                          |         | Removes icon from the toast UI.                                                                                                                                                                                 |
+| timeTilHide     | timeTilHide     |           | number                           |         | Sets the time in milliseconds until the toast hides.                                                                                                                                                            |
+| trigger         | trigger         |           | string                           |         | The id of the element that triggered the toast.<br>When the toast is manually closed, focus will return to this element.<br>Takes precedence over the triggerElement property if both are set.                  |
+| triggerElement  |                 |           | HTMLElement                      |         | A direct reference to the element that triggered the toast.<br>When the toast is manually closed, focus will return to this element.<br>Use the trigger attribute instead if you prefer a declarative approach. |
+| variant         | variant         |           | `error` \| `success` \| `custom` |         | Component will render visually based on which variant value is set.                                                                                                                                             |
+| visible         | visible         |           | boolean                          |         | Sets state of toast to visible                                                                                                                                                                                  |
 
 ### Methods
 
@@ -43,8 +45,12 @@ The `auro-toast` element provides users a way to display short, temporary messag
   <auro-button id="basicToastBtn">
     Show default notification
   </auro-button>
+  <!--
+  NOTE: The manually added style is NOT necessary for use,
+  Demo purposes ONLY!
+  -->
   <auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
-    Default notification with no error type
+    Default notification with no error type.
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -57,8 +63,12 @@ The `auro-toast` element provides users a way to display short, temporary messag
 <auro-button id="basicToastBtn">
   Show default notification
 </auro-button>
+<!--
+NOTE: The manually added style is NOT necessary for use,
+Demo purposes ONLY!
+-->
 <auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
-  Default notification with no error type
+  Default notification with no error type.
 </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -77,7 +87,7 @@ Use the `disableAutoHide` attribute to prevent the toast from automatically dism
     Show default notification
   </auro-button>
   <auro-toast style="display: block; margin: 0.5rem 0;" id="disableHideToast">
-    Default notification with no error type
+    Default notification with no error type.
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -91,7 +101,7 @@ Use the `disableAutoHide` attribute to prevent the toast from automatically dism
   Show default notification
 </auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" id="disableHideToast">
-  Default notification with no error type
+  Default notification with no error type.
 </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -105,7 +115,7 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/no-icon.html) -->
   <!-- The below content is automatically added from ./../apiExamples/no-icon.html -->
   <auro-button id="noIconBtn"> Show toast with no icon </auro-button>
-  <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
+  <auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast. </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion alignRight>
@@ -115,7 +125,7 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
 
 ```html
 <auro-button id="noIconBtn"> Show toast with no icon </auro-button>
-<auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast </auro-toast>
+<auro-toast id="noIcon" noIcon style="display: block; margin: 0.5rem 0;"> Default toast. </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
@@ -131,7 +141,7 @@ Using the `timeTilHide` attribute will set a timer in milliseconds for how long 
     Show default notification
   </auro-button>
   <auro-toast timeTilHide="1000" style="display: block; margin: 0.5rem 0;" id="timeTilHideToast">
-    Default notification with no error type
+    Default notification with no error type.
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -145,7 +155,7 @@ Using the `timeTilHide` attribute will set a timer in milliseconds for how long 
   Show default notification
 </auro-button>
 <auro-toast timeTilHide="1000" style="display: block; margin: 0.5rem 0;" id="timeTilHideToast">
-  Default notification with no error type
+  Default notification with no error type.
 </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -164,19 +174,19 @@ What the component will render visually based on which variant value is set; cur
     Show default toast
   </auro-button>
   <auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">
-    Default toast
+    Default toast.
   </auro-toast>
   <auro-button id="errorVariantBtn">
     Show error toast
   </auro-button>
   <auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">
-    Unable to add lap infant. Please try again
+    Unable to add lap infant. Please try again.
   </auro-toast>
   <auro-button id="successVariantBtn">
     Show success toast
   </auro-button>
   <auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">
-    Successfully added lap infant
+    Successfully added lap infant.
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -190,19 +200,19 @@ What the component will render visually based on which variant value is set; cur
   Show default toast
 </auro-button>
 <auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;">
-  Default toast
+  Default toast.
 </auro-toast>
 <auro-button id="errorVariantBtn">
   Show error toast
 </auro-button>
 <auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;">
-  Unable to add lap infant. Please try again
+  Unable to add lap infant. Please try again.
 </auro-toast>
 <auro-button id="successVariantBtn">
   Show success toast
 </auro-button>
 <auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;">
-  Successfully added lap infant
+  Successfully added lap infant.
 </auro-toast>
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -229,7 +239,7 @@ The toast notification can be customized in several ways.
   variant="custom"
   visible
   disableAutoHide
-  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default);">
+  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default); display: block; margin: 0.5rem 0;">
   Did you know you can create a price alert for this route?
   <br />
   <auro-button variant="tertiary">Create Alert</auro-button>
@@ -252,7 +262,7 @@ The toast notification can be customized in several ways.
   variant="custom"
   visible
   disableAutoHide
-  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default);">
+  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default); display: block; margin: 0.5rem 0;">
   Did you know you can create a price alert for this route?
   <br />
   <auro-button variant="tertiary">Create Alert</auro-button>
@@ -273,7 +283,7 @@ State of the push notification which determines if it is `visible`.
     Set visible to true
   </auro-button>
   <auro-toast id="visibleToast" style="display: block; margin: 0.5rem 0;">
-    Default toast
+    Default toast.
   </auro-toast>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -287,8 +297,132 @@ State of the push notification which determines if it is `visible`.
   Set visible to true
 </auro-button>
 <auro-toast id="visibleToast" style="display: block; margin: 0.5rem 0;">
-  Default toast
+  Default toast.
 </auro-toast>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+</auro-accordion>
+
+### Focus Management — trigger and triggerElement
+
+When a toast is manually dismissed via the close button, focus should return to the element that originally triggered it. Use the `trigger` attribute to specify the `id` of that element, or the `triggerElement` property to pass a direct element reference. The `trigger` attribute takes precedence when both are set.
+
+<div class="exampleWrapper">
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/trigger.html) -->
+  <!-- The below content is automatically added from ./../apiExamples/trigger.html -->
+  <p>Use the <code>trigger</code> attribute to pass the <code>id</code> of the element that opened the toast. When the toast is manually closed, focus will return to that element.</p>
+  <auro-button id="triggerAttrBtn">
+    Show notification
+  </auro-button>
+  <!--
+  NOTE: The manually added style is NOT necessary for use,
+  Demo purposes ONLY!
+  -->
+  <auro-toast style="display: block; margin: 0.5rem 0;" id="triggerAttrToast" trigger="triggerAttrBtn" disableAutoHide>
+    Flight booked successfully
+  </auro-toast>
+  <p>Use the <code>triggerElement</code> property to pass a direct reference to the element that opened the toast. Useful when an <code>id</code> is not available or when working programmatically.</p>
+  <auro-button id="triggerPropBtn">
+    Show notification
+  </auro-button>
+  <auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPropToast" disableAutoHide>
+    Flight booked successfully.
+  </auro-toast>
+  <p>When both <code>trigger</code> and <code>triggerElement</code> are set, <code>trigger</code> takes precedence. In this example, <code>triggerElement</code> points to the second button but <code>trigger</code> points to the first — focus returns to the first button on close.</p>
+  <auro-button id="triggerPrecedenceBtn1">
+    Button 1 (trigger attribute target)
+  </auro-button>
+  <auro-button id="triggerPrecedenceBtn2">
+    Button 2 (triggerElement target — ignored)
+  </auro-button>
+  <auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPrecedenceToast" trigger="triggerPrecedenceBtn1" disableAutoHide>
+    Flight booked successfully.
+  </auro-toast>
+  <!-- AURO-GENERATED-CONTENT:END -->
+</div>
+<auro-accordion alignRight>
+  <span slot="trigger">See code</span>
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/trigger.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/trigger.html -->
+
+```html
+<p>Use the <code>trigger</code> attribute to pass the <code>id</code> of the element that opened the toast. When the toast is manually closed, focus will return to that element.</p>
+<auro-button id="triggerAttrBtn">
+  Show notification
+</auro-button>
+<!--
+NOTE: The manually added style is NOT necessary for use,
+Demo purposes ONLY!
+-->
+<auro-toast style="display: block; margin: 0.5rem 0;" id="triggerAttrToast" trigger="triggerAttrBtn" disableAutoHide>
+  Flight booked successfully
+</auro-toast>
+<p>Use the <code>triggerElement</code> property to pass a direct reference to the element that opened the toast. Useful when an <code>id</code> is not available or when working programmatically.</p>
+<auro-button id="triggerPropBtn">
+  Show notification
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPropToast" disableAutoHide>
+  Flight booked successfully.
+</auro-toast>
+<p>When both <code>trigger</code> and <code>triggerElement</code> are set, <code>trigger</code> takes precedence. In this example, <code>triggerElement</code> points to the second button but <code>trigger</code> points to the first — focus returns to the first button on close.</p>
+<auro-button id="triggerPrecedenceBtn1">
+  Button 1 (trigger attribute target)
+</auro-button>
+<auro-button id="triggerPrecedenceBtn2">
+  Button 2 (triggerElement target — ignored)
+</auro-button>
+<auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPrecedenceToast" trigger="triggerPrecedenceBtn1" disableAutoHide>
+  Flight booked successfully.
+</auro-toast>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/trigger.js) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/trigger.js -->
+
+```js
+/* eslint-disable jsdoc/require-jsdoc */
+
+export function initTriggerExample() {
+  // trigger attribute — pass element id as a string
+  const attrBtn = document.querySelector("#triggerAttrBtn");
+  const attrToast = document.querySelector("#triggerAttrToast");
+
+  attrBtn.addEventListener("click", () => {
+    if (!attrToast.hasAttribute("visible")) {
+      attrToast.setAttribute("visible", true);
+    }
+  });
+
+  // triggerElement property — pass a direct element reference
+  const propBtn = document.querySelector("#triggerPropBtn");
+  const propToast = document.querySelector("#triggerPropToast");
+
+  propBtn.addEventListener("click", () => {
+    if (!propToast.hasAttribute("visible")) {
+      propToast.triggerElement = propBtn;
+      propToast.setAttribute("visible", true);
+    }
+  });
+
+  // precedence — trigger attribute wins over triggerElement when both are set
+  const precedenceBtn1 = document.querySelector("#triggerPrecedenceBtn1");
+  const precedenceBtn2 = document.querySelector("#triggerPrecedenceBtn2");
+  const precedenceToast = document.querySelector("#triggerPrecedenceToast");
+
+  precedenceBtn1.addEventListener("click", () => {
+    if (!precedenceToast.hasAttribute("visible")) {
+      precedenceToast.triggerElement = precedenceBtn2;
+      precedenceToast.setAttribute("visible", true);
+    }
+  });
+
+  precedenceBtn2.addEventListener("click", () => {
+    if (!precedenceToast.hasAttribute("visible")) {
+      precedenceToast.triggerElement = precedenceBtn2;
+      precedenceToast.setAttribute("visible", true);
+    }
+  });
+}
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
@@ -306,9 +440,9 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
   <auro-button id="multiToastBtn-error">Show error toast</auro-button>
   <auro-button id="multiToastBtn-success">Show success toast</auro-button>
   <auro-toaster>
-    <auro-toast id="multiToast-default">Default toast</auro-toast>
-    <auro-toast id="multiToast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
-    <auro-toast id="multiToast-success" variant="success">Successfully added lap infant</auro-toast>
+    <auro-toast id="multiToast-default">Default toast.</auro-toast>
+    <auro-toast id="multiToast-error" variant="error">Unable to add lap infant. Please try again.</auro-toast>
+    <auro-toast id="multiToast-success" variant="success">Successfully added lap infant.</auro-toast>
   </auro-toaster>
   <!-- AURO-GENERATED-CONTENT:END -->
 </div>
@@ -322,10 +456,142 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
 <auro-button id="multiToastBtn-error">Show error toast</auro-button>
 <auro-button id="multiToastBtn-success">Show success toast</auro-button>
 <auro-toaster>
-  <auro-toast id="multiToast-default">Default toast</auro-toast>
-  <auro-toast id="multiToast-error" variant="error">Unable to add lap infant. Please try again</auro-toast>
-  <auro-toast id="multiToast-success" variant="success">Successfully added lap infant</auro-toast>
+  <auro-toast id="multiToast-default">Default toast.</auro-toast>
+  <auro-toast id="multiToast-error" variant="error">Unable to add lap infant. Please try again.</auro-toast>
+  <auro-toast id="multiToast-success" variant="success">Successfully added lap infant.</auro-toast>
 </auro-toaster>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+</auro-accordion>
+
+### Dynamic Toasts
+
+The dynamic notification use case requires the use of the `<auro-toaster>` component. Toaster will render the toasts at the bottom right of a page.
+
+<div class="exampleWrapper">
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/dynamic-toasts.html) -->
+  <!-- The below content is automatically added from ./../apiExamples/dynamic-toasts.html -->
+  <auro-button id="dynamicToastBtn-default">Show default toast</auro-button>
+  <auro-button id="dynamicToastBtn-error">Show error toast</auro-button>
+  <auro-button id="dynamicToastBtn-success">Show success toast</auro-button>
+  <auro-toaster id="dynamicToaster">
+  </auro-toaster>
+  <!-- AURO-GENERATED-CONTENT:END -->
+</div>
+<auro-accordion alignRight>
+  <span slot="trigger">See code</span>
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/dynamic-toasts.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/dynamic-toasts.html -->
+
+```html
+<auro-button id="dynamicToastBtn-default">Show default toast</auro-button>
+<auro-button id="dynamicToastBtn-error">Show error toast</auro-button>
+<auro-button id="dynamicToastBtn-success">Show success toast</auro-button>
+<auro-toaster id="dynamicToaster">
+</auro-toaster>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/dynamic-toasts.js) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/dynamic-toasts.js -->
+
+```js
+/* eslint-disable jsdoc/require-jsdoc */
+
+const toastDefs = [
+  { id: "dynamicToast-default", variant: null, message: "Default toast.", btnId: "dynamicToastBtn-default" },
+  { id: "dynamicToast-error", variant: "error", message: "Unable to add lap infant. Please try again.", btnId: "dynamicToastBtn-error" },
+  { id: "dynamicToast-success", variant: "success", message: "Successfully added lap infant.", btnId: "dynamicToastBtn-success" },
+];
+
+// simple in-memory registry of active toasts
+const activeToasts = new Map();
+
+function generateToastId(baseId) {
+  return `${baseId}-${crypto.randomUUID()}`;
+}
+
+export function initDynamicToastsExample() {
+  const toaster = document.querySelector("#dynamicToaster");
+
+  toastDefs.forEach(({ id: baseId, variant, message, btnId }) => {
+    document.querySelector(`#${btnId}`).addEventListener("click", () => {
+      const toast = document.createElement("auro-toast");
+
+      const toastId = generateToastId(baseId);
+
+      toast.id = toastId;
+
+      if (variant) {
+        toast.setAttribute("variant", variant);
+      }
+
+      toast.setAttribute("visible", true);
+      toast.textContent = message;
+
+      toaster.appendChild(toast);
+
+      // 👇 now the ID is actually used meaningfully
+      activeToasts.set(toastId, toast);
+
+      console.log("Toast added:", toastId);
+
+      // optional cleanup if your component doesn't auto-remove itself
+      toast.addEventListener("onToastClose", () => {
+        activeToasts.delete(toastId);
+      });
+    });
+  });
+}
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+</auro-accordion>
+
+### Dynamic Injection of Standalone Toasts without auro-toaster
+
+When dynamically injecting `auro-toast` elements at runtime, the consumer is responsible for a container element with `aria-live` that **must already be present in the DOM** before any toast is appended to it. Screen readers register a live region when it first encounters the element on the page — content added to it later will trigger an announcement. If a live region and toast content enter the DOM at the same time, the screen reader has no opportunity to register the region first and will **not** announce the content.
+
+The required pattern is a persistent container — a `div` or equivalent — with `aria-live="polite"` or `aria-live="assertive"`* that remains in the DOM at all times. Your application logic then injects `auro-toast` elements into this container at runtime as notifications occur.
+
+**Warning:** Avoid applying `display: none` to a live region while it is in use. This removes it from the accessibility tree, preventing screen readers from detecting updates. Any announcements triggered during that time will be lost.
+
+`auro-toast` automatically detects any ancestor live region at connection time. When one is found, it defers to that region and does not add its own role, preventing nested live regions.
+
+\* Only use `aria-live="assertive"` if your UI is making use of toasts that are alerting the user of important information. If you are not using `auro-toaster` you are responsible for managing the changes between `assertive` and `polite` announcement states.
+
+<div class="exampleWrapper">
+  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/standalone-toast.html) -->
+  <!-- The below content is automatically added from ./../apiExamples/standalone-toast.html -->
+  <auro-button id="standaloneToastBtn">Show toast</auro-button>
+  <div id="standaloneContainer" aria-live="polite" aria-atomic="false"></div>
+  <!-- AURO-GENERATED-CONTENT:END -->
+</div>
+<auro-accordion alignRight>
+  <span slot="trigger">See code</span>
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/standalone-toast.html) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/standalone-toast.html -->
+
+```html
+<auro-button id="standaloneToastBtn">Show toast</auro-button>
+<div id="standaloneContainer" aria-live="polite" aria-atomic="false"></div>
+```
+<!-- AURO-GENERATED-CONTENT:END -->
+<!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/standalone-toast.js) -->
+<!-- The below code snippet is automatically added from ./../apiExamples/standalone-toast.js -->
+
+```js
+/* eslint-disable jsdoc/require-jsdoc */
+
+export function initStandaloneToastExample() {
+  const container = document.querySelector("#standaloneContainer");
+
+  document.querySelector("#standaloneToastBtn").addEventListener("click", () => {
+    const toast = document.createElement("auro-toast");
+    toast.setAttribute("visible", "");
+    toast.setAttribute("variant", "success");
+    toast.textContent = "Successfully added lap infant";
+    container.appendChild(toast);
+  });
+}
 ```
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
