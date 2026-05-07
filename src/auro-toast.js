@@ -120,6 +120,14 @@ export class AuroToast extends LitElement {
      * @private
      */
     this.fadeOutTimer = undefined;
+
+    /**
+     * True when the toast is not inside an auro-toaster and must manage its
+     * own live region announcement. Set once in connectedCallback.
+     * Default -- assumes toast is inside toaster.
+     * @private
+     */
+    this._isStandalone = false;
   }
 
   // This function is to define props used within the scope of this component
@@ -151,6 +159,27 @@ export class AuroToast extends LitElement {
       timeTilHide: {
         type: Number,
         reflect: true,
+      },
+
+      /**
+       * The id of the element that triggered the toast.
+       * When the toast is manually closed, focus will return to this element.
+       * Takes precedence over the triggerElement property if both are set.
+       */
+      trigger: {
+        type: String,
+        reflect: true,
+      },
+
+      /**
+       * A direct reference to the element that triggered the toast.
+       * When the toast is manually closed, focus will return to this element.
+       * Use the trigger attribute instead if you prefer a declarative approach.
+       * @type {HTMLElement}
+       */
+      triggerElement: {
+        type: Object,
+        attribute: false,
       },
 
       /**
@@ -194,10 +223,27 @@ export class AuroToast extends LitElement {
   }
 
   /**
+   * Returns focus to the trigger element when the toast is manually closed.
+   * Not called on auto-dismiss — moving focus during auto-dismiss would
+   * interrupt the AT user's current position in the page.
+   * @private
+   * @returns {void}
+   */
+  _returnFocus() {
+    const target = (this.trigger ? document.getElementById(this.trigger) : null) ??
+      this.triggerElement;
+
+    if (target) {
+      target.focus();
+    }
+  }
+
+  /**
    * @private
    * @returns {void}
    */
   clickToClose() {
+    this._returnFocus();
     this.closeToast();
     clearTimeout(this.fadeOutTimer);
   }
@@ -275,6 +321,71 @@ export class AuroToast extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.setOnClick();
+
+    // Dispatch a cancelable event so auro-toaster can signal it will handle
+    // announcements. If nothing cancels the event the toast is standalone and
+    // must register its own live region on the host element — before
+    // any visibility change — so the AT has already observed it as a live
+    // region by the time content is rendered into the shadow DOM.
+    const event = new CustomEvent('toast-request-announce', {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    });
+
+    // NOTE — reverse logic:
+    // dispatchEvent() returns TRUE when nobody called preventDefault(), which
+    // means no auro-toaster was listening — the toast is standalone and must
+    // own its live region. It returns FALSE when a toaster cancelled the event,
+    // signalling that the toaster's aria-live region will handle announcements.
+    const eventNotPrevented = this.dispatchEvent(event);
+
+    // Secondary check: even if no toaster answered the event, the toast may
+    // be inside another element that already owns a live region (e.g. a plain
+    // div[aria-live="polite"]). Setting a role on the host in that case would
+    // create a nested live region. aria-live="off" is intentionally excluded
+    // — it disables live region behavior and is not an active announcer.
+    this._isStandalone = eventNotPrevented && !this._hasAncestorLiveRegion();
+
+    this._syncStandaloneRole();
+  }
+
+  /**
+   * Sets or removes the live-region role on the host depending on whether
+   * the toast is standalone. Extracted so connectedCallback and updated()
+   * stay in sync without duplicating the logic.
+   * @private
+   * @returns {void}
+   */
+  _syncStandaloneRole() {
+    if (this._isStandalone) {
+      this.setAttribute('role', this.variant === 'error' ? 'alert' : 'status');
+    } else {
+      this.removeAttribute('role');
+    }
+  }
+
+  /**
+   * Walks the DOM ancestors (crossing shadow boundaries) looking for any
+   * active live region — either an aria-live="polite/assertive" attribute or
+   * an implicit live region role (alert, status, log).
+   * aria-live="off" is not considered active and is intentionally ignored.
+   * @private
+   * @returns {boolean}
+   */
+  _hasAncestorLiveRegion() {
+    let node = this.parentElement;
+    while (node) {
+      if (
+        ['polite', 'assertive'].includes(node.getAttribute?.('aria-live')) ||
+        ['alert', 'status', 'log'].includes(node.getAttribute?.('role'))
+      ) {
+        return true;
+      }
+      // Traverse up, crossing shadow DOM boundaries if needed
+      node = node.parentElement ?? node.getRootNode()?.host ?? null;
+    }
+    return false;
   }
 
   updated(changedProperties) {
@@ -282,8 +393,10 @@ export class AuroToast extends LitElement {
       this.handleSlotContent();
     }
 
+    // Keep the standalone role in sync if variant changes after connection.
     if (changedProperties.has("variant")) {
       clearTimeout(this.fadeOutTimer);
+      this._syncStandaloneRole();
     }
 
     // do not auto dismiss for error toasts or if disableAutoHide is set
@@ -319,34 +432,38 @@ export class AuroToast extends LitElement {
   }
 
   render() {
-    return this.visible
-      ? html`
-      <div aria-live="polite" class="toastContainer">
-        ${
-          this.noIcon
-            ? undefined
-            : html`
-          <${this.iconTag} customColor customSvg class="typeIcon body-default" part="type-icon">
-            ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
-          </${this.iconTag}>
-        `
-        }
-        <div class="message body-default"><slot></slot></div>
-        <${this.buttonTag}
-          variant="flat"
-          shape="circle"
-          size="xs"
-          appearance=${this.variant !== "error" && this.variant !== "success" ? "inverse" : this.appearance}
-          @click="${this.clickToClose}"
-          part="close-button"
-          class="closeButton">
-          <${this.iconTag} customColor customSvg>
-            ${this.closeSvg}
-          </${this.iconTag}>
-          <span class="util_displayHiddenVisually">Close</span>
-        </${this.buttonTag}>
-      </div>
-    `
-      : undefined;
+    return html`
+      ${
+        this.visible
+          ? html`
+        <div class="toastContainer">
+          ${
+            this.noIcon
+              ? undefined
+              : html`
+            <${this.iconTag} customColor customSvg class="typeIcon body-default" part="type-icon">
+              ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
+            </${this.iconTag}>
+          `
+          }
+          <div class="message body-default"><slot></slot></div>
+          <${this.buttonTag}
+            variant="flat"
+            shape="circle"
+            size="xs"
+            appearance=${this.variant !== "error" && this.variant !== "success" ? "inverse" : this.appearance}
+            @click="${this.clickToClose}"
+            part="close-button"
+            class="closeButton">
+            <${this.iconTag} customColor customSvg>
+              ${this.closeSvg}
+            </${this.iconTag}>
+            <span slot="ariaLabel">Close this notification.</span>
+          </${this.buttonTag}>
+        </div>
+      `
+          : undefined
+      }
+    `;
   }
 }

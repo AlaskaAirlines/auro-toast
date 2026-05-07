@@ -6,6 +6,9 @@ import { initVariantToastsExample } from "../apiExamples/variant";
 import { initCustomToastExample } from "../apiExamples/custom-toast";
 import { initVisibleExample } from "../apiExamples/visible";
 import { initMultipleToastsExample } from "../apiExamples/multiple-toasts";
+import { initDynamicToastsExample } from "../apiExamples/dynamic-toasts";
+import { initStandaloneToastExample } from "../apiExamples/standalone-toast";
+import { initTriggerExample } from "../apiExamples/trigger";
 
 import "../src/registered";
 /* eslint-disable jsdoc/require-jsdoc, no-magic-numbers, no-param-reassign */
@@ -24,6 +27,9 @@ export function initExamples(initCount) {
     initCustomToastExample();
     initVisibleExample();
     initMultipleToastsExample();
+    initDynamicToastsExample();
+    initStandaloneToastExample();
+    initTriggerExample();
   } catch (_err) {
     if (initCount <= 20) {
       // setTimeout handles issue where content is sometimes loaded after the functions get called
