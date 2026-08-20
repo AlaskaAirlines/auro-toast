@@ -24,11 +24,11 @@
   box-shadow: var(--ds-elevation-200, vac.$ds-elevation-200);
   pointer-events: auto;
 
-  @media (#{vac.$ds-grid-breakpoint-sm} <= width < #{vac.$ds-grid-breakpoint-lg}) {
-    min-width: 33%;
-    max-width: 50%;
-  }
-  @media (width >= #{vac.$ds-grid-breakpoint-lg}) {
+  // Phones (< sm) keep the full-width sizing from the base rule above.
+  // From the sm breakpoint up, use fixed pixel bounds so the toast is sized
+  // consistently across tablet and desktop widths instead of shrinking to a
+  // small fraction of the available space.
+  @media (width >= #{vac.$ds-grid-breakpoint-sm}) {
     min-width: 200px;
     max-width: 500px;
   }
