@@ -27,51 +27,47 @@ The `<auro-toast>` use cases include:
 ## The setup
 Triggering the toasts relies on setting the `visible` property to `true`. See the following example to see how this code is used in an example.
 
-```js
-showToast = (toastID) => {
+<pre class="language-js"><code class="language-js">showToast = (toastID) =&gt; {
   const toast = document.querySelector(toastID);
-
+​
   if (!toast.hasAttribute('visible')) {
     toast.setAttribute('visible', true);
   }
-};
-```
+};</code></pre>
 
 ## Example(s)
 
 ### Basic
 
 <div class="exampleWrapper">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/basic.html) -->
-  <!-- The below content is automatically added from ./../apiExamples/basic.html -->
-  <auro-button id="basicToastBtn">
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/basic.html) -->
+<!-- The below content is automatically added from ./../apiExamples/basic.html -->
+<auro-button id="basicToastBtn">
     Show default notification
-  </auro-button>
-  <!--
+</auro-button>
+<!--
   NOTE: The manually added style is NOT necessary for use,
   Demo purposes ONLY!
   -->
-  <auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
+<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
     Default notification with no error type.
-  </auro-toast>
-  <!-- AURO-GENERATED-CONTENT:END -->
+</auro-toast>
+<!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion alignRight>
-  <span slot="trigger">See code</span>
+<span slot="trigger">See code</span>
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/basic.html) -->
 <!-- The below code snippet is automatically added from ./../apiExamples/basic.html -->
 
-```html
-<auro-button id="basicToastBtn">
+<pre class="language-html"><code class="language-html">&lt;auro-button id="basicToastBtn"&gt;
   Show default notification
-</auro-button>
-<!--
+&lt;/auro-button&gt;
+&lt;!--
 NOTE: The manually added style is NOT necessary for use,
 Demo purposes ONLY!
--->
-<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
+--&gt;
+&lt;auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast"&gt;
   Default notification with no error type.
-</auro-toast>
-```
+&lt;/auro-toast&gt;</code></pre>
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
