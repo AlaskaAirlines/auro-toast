@@ -25,10 +25,10 @@ The `auro-toast` element provides users a way to display short, temporary messag
 
 ### Events
 
-| Name         | Description                                        |
-| ------------ | -------------------------------------------------- |
-| toast-close  | Notifies that the toast has been closed            |
-| onToastClose | ** Deprecated **, use `toast-close` event instead. |
+| Name         | Description                                      |
+| ------------ | ------------------------------------------------ |
+| toast-close  | Notifies that the toast has been closed          |
+| onToastClose | **Deprecated**, use `toast-close` event instead. |
 
 ### CSS Shadow Parts
 
@@ -514,7 +514,7 @@ export function initDynamicToastsExample() {
       console.log("Toast added:", toastId);
 ​
       // optional cleanup if your component doesn't auto-remove itself
-      toast.addEventListener("onToastClose", () =&gt; {
+      toast.addEventListener("toast-close", () =&gt; {
         activeToasts.delete(toastId);
       });
     });
