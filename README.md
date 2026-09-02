@@ -49,9 +49,7 @@ The `<auro-toast>` use cases include:
 [![License](https://img.shields.io/npm/l/@aurodesignsystem/auro-toast?color=blue&style=for-the-badge)](https://www.apache.org/licenses/LICENSE-2.0)
 ![ESM supported](https://img.shields.io/badge/ESM-compatible-FFE900?style=for-the-badge)
 
-```shell
-$ npm i @aurodesignsystem/auro-toast
-```
+<pre class="language-shell"><code class="language-shell">$ npm i @aurodesignsystem/auro-toast</code></pre>
 
 <!-- AURO-GENERATED-CONTENT:END -->
 
@@ -63,9 +61,7 @@ Defining the dependency within each project that is using the `<auro-toast>` com
 <!-- AURO-GENERATED-CONTENT:END -->
 <!-- AURO-GENERATED-CONTENT:START (REMOTE:url=https://raw.githubusercontent.com/AlaskaAirlines/auro-templates/main/templates/default/partials/usage/componentImport.md) -->
 
-```js
-import "@aurodesignsystem/auro-toast";
-```
+<pre class="language-js"><code class="language-js">import "@aurodesignsystem/auro-toast";</code></pre>
 
 <!-- AURO-GENERATED-CONTENT:END -->
 
@@ -74,9 +70,7 @@ import "@aurodesignsystem/auro-toast";
 <!-- AURO-GENERATED-CONTENT:START (REMOTE:url=https://raw.githubusercontent.com/AlaskaAirlines/auro-templates/main/templates/default/partials/usage/bundleInstallDescription.md) -->
 In cases where the project is not able to process JS assets, there are pre-processed assets available for use. Legacy browsers such as IE11 are no longer supported.
 
-```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@aurodesignsystem/auro-toast@latest/+esm"></script>
-```
+<pre class="language-html"><code class="language-html">&lt;script type="module" src="https://cdn.jsdelivr.net/npm/@aurodesignsystem/auro-toast@latest/+esm"&gt;&lt;/script&gt;</code></pre>
 
 <!-- AURO-GENERATED-CONTENT:END -->
 
@@ -85,18 +79,16 @@ In cases where the project is not able to process JS assets, there are pre-proce
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./apiExamples/basic.html) -->
 <!-- The below code snippet is automatically added from ./apiExamples/basic.html -->
 
-```html
-<auro-button id="basicToastBtn">
+<pre class="language-html"><code class="language-html">&lt;auro-button id="basicToastBtn"&gt;
   Show default notification
-</auro-button>
-<!--
+&lt;/auro-button&gt;
+&lt;!--
 NOTE: The manually added style is NOT necessary for use,
 Demo purposes ONLY!
--->
-<auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast">
+--&gt;
+&lt;auro-toast style="display: block; margin: 0.5rem 0;" id="basicToast"&gt;
   Default notification with no error type.
-</auro-toast>
-```
+&lt;/auro-toast&gt;</code></pre>
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## Custom Component Registration for Version Management
@@ -113,39 +105,35 @@ You can do this by importing only the component class and using the `register(na
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./docs/partials/customRegistration.md) -->
 <!-- The below content is automatically added from ./docs/partials/customRegistration.md -->
 
-```js
-// Import the class only
+<pre class="language-js"><code class="language-js">// Import the class only
 import { AuroToast } from '@aurodesignsystem/auro-toast/class';
-
+​
 // Register with a custom name if desired
-AuroToast.register('custom-toast');
-```
+AuroToast.register('custom-toast');</code></pre>
 
 This will create a new custom element `<custom-toast>` that behaves exactly like `<auro-toast>`, allowing both to coexist on the same page without interfering with each other.
 <!-- AURO-GENERATED-CONTENT:END -->
 <div class="exampleWrapper exampleWrapper--flex">
-  <!-- AURO-GENERATED-CONTENT:START (FILE:src=./apiExamples/custom.html) -->
-  <!-- The below content is automatically added from ./apiExamples/custom.html -->
-  <auro-button id="customToastBtn">
+<!-- AURO-GENERATED-CONTENT:START (FILE:src=./apiExamples/custom.html) -->
+<!-- The below content is automatically added from ./apiExamples/custom.html -->
+<auro-button id="customToastBtn">
     Show default notification
-  </auro-button>
-  <custom-toast style="display: block; margin: 0.5rem 0;" id="customToast">
+</auro-button>
+<custom-toast style="display: block; margin: 0.5rem 0;" id="customToast">
     Default notification with no error type.
-  </custom-toast>
-  <!-- AURO-GENERATED-CONTENT:END -->
+</custom-toast>
+<!-- AURO-GENERATED-CONTENT:END -->
 </div>
 <auro-accordion alignRight>
-  <span slot="trigger">See code</span>
+<span slot="trigger">See code</span>
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./apiExamples/custom.html) -->
 <!-- The below code snippet is automatically added from ./apiExamples/custom.html -->
 
-```html
-<auro-button id="customToastBtn">
+<pre class="language-html"><code class="language-html">&lt;auro-button id="customToastBtn"&gt;
   Show default notification
-</auro-button>
-<custom-toast style="display: block; margin: 0.5rem 0;" id="customToast">
+&lt;/auro-button&gt;
+&lt;custom-toast style="display: block; margin: 0.5rem 0;" id="customToast"&gt;
   Default notification with no error type.
-</custom-toast>
-```
+&lt;/custom-toast&gt;</code></pre>
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>

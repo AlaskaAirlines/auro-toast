@@ -84,11 +84,13 @@
   "files": [
     "dist/**/*",
     "demo/**/*",
+    "src/**/*",
+    "custom-elements.json",
     "CHANGELOG.md",
     "README.md",
     "LICENSE",
     "NOTICE"
   ],
-  "custom-elements": "./custom-elements.json",
+  "custom-elements": "custom-elements.json",
   "customElements": "custom-elements.json"
 }
