@@ -112,7 +112,7 @@ describe("auro-toaster — live region structure", () => {
   it("toastContainer does not contain any live region attributes or roles that would create a nested live region", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" visible disableAutoHide>Test</auro-toast>
+        <auro-toast variant="success" visible disableautohide>Test</auro-toast>
       </auro-toaster>
     `);
     await elementUpdated(el);
@@ -130,7 +130,7 @@ describe("auro-toaster — live region structure", () => {
 
   it("close button has an aria label that describes its purpose", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" visible disableAutoHide>Flight booked</auro-toast>
+      <auro-toast variant="success" visible disableautohide>Flight booked</auro-toast>
     `);
     await elementUpdated(el);
 
@@ -209,7 +209,7 @@ describe("auro-toast — standalone live region", () => {
 
   it("sets role='status' on host at connection time — before visible is set", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+      <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
     `);
 
     // Role must already be present — no visibility change needed
@@ -218,7 +218,7 @@ describe("auro-toast — standalone live region", () => {
 
   it("sets role='alert' on host at connection time for error variant", async () => {
     const el = await fixture(html`
-      <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+      <auro-toast variant="error" disableautohide>Something went wrong</auro-toast>
     `);
 
     expect(el.getAttribute('role')).to.equal('alert');
@@ -226,7 +226,7 @@ describe("auro-toast — standalone live region", () => {
 
   it("updates role when variant changes after connection", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" disableAutoHide>Message</auro-toast>
+      <auro-toast variant="success" disableautohide>Message</auro-toast>
     `);
 
     expect(el.getAttribute('role')).to.equal('status');
@@ -240,7 +240,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role when inside a div with aria-live='polite'", async () => {
     const el = await fixture(html`
       <div aria-live="polite">
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -252,7 +252,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role when inside a div with aria-live='assertive'", async () => {
     const el = await fixture(html`
       <div aria-live="assertive">
-        <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+        <auro-toast variant="error" disableautohide>Something went wrong</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -264,7 +264,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role when inside a container with role='status'", async () => {
     const el = await fixture(html`
       <div role="status">
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -276,7 +276,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role when inside a container with role='alert'", async () => {
     const el = await fixture(html`
       <div role="alert">
-        <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+        <auro-toast variant="error" disableautohide>Something went wrong</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -288,7 +288,7 @@ describe("auro-toast — standalone live region", () => {
   it("sets role when inside a div with aria-live='off' — off is not an active live region", async () => {
     const el = await fixture(html`
       <div aria-live="off">
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -300,7 +300,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role on host when inside auro-toaster", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </auro-toaster>
     `);
     const toast = el.querySelector('auro-toast');
@@ -312,7 +312,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role on host for error toast when inside auro-toaster", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+        <auro-toast variant="error" disableautohide>Something went wrong</auro-toast>
       </auro-toaster>
     `);
     const toast = el.querySelector('auro-toast');
@@ -327,7 +327,7 @@ describe("auro-toast — standalone live region", () => {
   it("removes role when reconnected inside a container that owns a live region", async () => {
     const wrapper = await fixture(html`
       <div>
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
         <div id="liveContainer" aria-live="polite"></div>
       </div>
     `);
@@ -387,7 +387,7 @@ describe("auro-toast — axe accessibility", () => {
   it("passes axe for noIcon variant", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" noIcon visible>Saved</auro-toast>
+        <auro-toast variant="success" noicon visible>Saved</auro-toast>
       </auro-toaster>
     `);
 
@@ -404,7 +404,7 @@ describe("auro-toast — live region announcements on show", () => {
   it("announces message text when toast becomes visible", async () => {
     const toaster = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </auro-toaster>
     `);
     const toast = toaster.querySelector("auro-toast");
@@ -434,7 +434,7 @@ describe("auro-toast — live region announcements on show", () => {
 
   it("message text is delivered via slot, not hardcoded in shadow DOM", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" visible disableAutoHide>Flight booked</auro-toast>
+      <auro-toast variant="success" visible disableautohide>Flight booked</auro-toast>
     `);
     await elementUpdated(el);
 
@@ -514,7 +514,7 @@ describe("auro-toast — live region politeness", () => {
 
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="error" visible disableAutoHide>Persistent error</auro-toast>
+        <auro-toast variant="error" visible disableautohide>Persistent error</auro-toast>
       </auro-toaster>
     `);
     await elementUpdated(el);
@@ -578,8 +578,8 @@ describe("auro-toast — live region politeness", () => {
     const root = await fixture(html`
       <div>
         <auro-toaster id="toaster">
-          <auro-toast id="toast1" variant="error" visible disableAutoHide>First error</auro-toast>
-          <auro-toast id="toast2" variant="error" disableAutoHide>Second error</auro-toast>
+          <auro-toast id="toast1" variant="error" visible disableautohide>First error</auro-toast>
+          <auro-toast id="toast2" variant="error" disableautohide>Second error</auro-toast>
         </auro-toaster>
       </div>
     `);
@@ -609,7 +609,7 @@ describe("auro-toast — live region politeness", () => {
     const wrapper = await fixture(html`
       <div>
         <auro-toaster>
-          <auro-toast variant="error" visible disableAutoHide>Something went wrong</auro-toast>
+          <auro-toast variant="error" visible disableautohide>Something went wrong</auro-toast>
         </auro-toaster>
       </div>
     `);
@@ -635,7 +635,7 @@ describe("auro-toast — live region politeness", () => {
   it("triggers assertive when a visible toast changes variant to error (defensive fallback)", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" visible disableAutoHide>Saved</auro-toast>
+        <auro-toast variant="success" visible disableautohide>Saved</auro-toast>
       </auro-toaster>
     `);
 
@@ -665,7 +665,7 @@ describe("auro-toast — live region politeness", () => {
 describe("auro-toast — onToastClose event", () => {
   it("fires onToastClose when X button is clicked", async () => {
     const el = await fixture(html`
-      <auro-toast visible disableAutoHide>Close me</auro-toast>
+      <auro-toast visible disableautohide>Close me</auro-toast>
     `);
 
     let eventFired = false;
@@ -680,7 +680,7 @@ describe("auro-toast — onToastClose event", () => {
 
   it("fires onToastClose after auto-hide timeout", async () => {
     const el = await fixture(html`
-      <auro-toast visible timeTilHide="500">Auto close me</auro-toast>
+      <auro-toast visible timetilhide="500">Auto close me</auro-toast>
     `);
 
     let eventFired = false;
@@ -709,13 +709,84 @@ describe("auro-toast — onToastClose event", () => {
 });
 
 // ---------------------------------------------------------------------------
+// toast-close event
+// ---------------------------------------------------------------------------
+
+describe("auro-toast — toast-close event", () => {
+  it("fires toast-close when X button is clicked", async () => {
+    const el = await fixture(html`
+      <auro-toast visible disableautohide>Close me</auro-toast>
+    `);
+
+    let eventFired = false;
+    el.addEventListener("toast-close", () => { eventFired = true; });
+
+    const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+    closeButton.click();
+    await elementUpdated(el);
+
+    expect(eventFired).to.be.true;
+  });
+
+  it("fires toast-close after auto-hide timeout", async () => {
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="500">Auto close me</auro-toast>
+    `);
+
+    let eventFired = false;
+    el.addEventListener("toast-close", () => { eventFired = true; });
+
+    await aTimeout(1000);
+    expect(eventFired).to.be.true;
+  }).timeout(2000);
+
+  it("does NOT fire toast-close for error toast after timeout", async () => {
+    const clock = sinon.useFakeTimers();
+
+    const el = await fixture(html`
+      <auro-toast variant="error" visible>Persistent error</auro-toast>
+    `);
+
+    let eventFired = false;
+    el.addEventListener("toast-close", () => { eventFired = true; });
+
+    clock.tick(6000);
+
+    expect(eventFired).to.be.false;
+
+    clock.restore();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// lowercase attribute binding
+// ---------------------------------------------------------------------------
+
+describe("auro-toast — lowercase attribute binding", () => {
+  it("disableautohide HTML attribute sets disableAutoHide property", async () => {
+    const el = await fixture(html`<auro-toast disableautohide visible>test</auro-toast>`);
+    expect(el.disableAutoHide).to.be.true;
+  });
+
+  it("noicon HTML attribute sets noIcon property", async () => {
+    const el = await fixture(html`<auro-toast noicon visible>test</auro-toast>`);
+    expect(el.noIcon).to.be.true;
+  });
+
+  it("timetilhide HTML attribute sets timeTilHide property", async () => {
+    const el = await fixture(html`<auro-toast timetilhide="3000" visible>test</auro-toast>`);
+    expect(el.timeTilHide).to.equal(3000);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // disableAutoHide
 // ---------------------------------------------------------------------------
 
 describe("auro-toast — disableAutoHide", () => {
   it("stays visible past the default timeout when disableAutoHide is set", async () => {
     const el = await fixture(html`
-      <auro-toast visible disableAutoHide>Persistent</auro-toast>
+      <auro-toast visible disableautohide>Persistent</auro-toast>
     `);
 
     // Let Lit initialize + updated() run
@@ -730,7 +801,7 @@ describe("auro-toast — disableAutoHide", () => {
 
   it("does not fire onToastClose automatically when disableAutoHide is set", async () => {
     const el = await fixture(html`
-      <auro-toast visible disableAutoHide>Persistent</auro-toast>
+      <auro-toast visible disableautohide>Persistent</auro-toast>
     `);
 
     let eventFired = false;
@@ -795,7 +866,7 @@ describe("auro-toast", () => {
 
   it("sets auro-toast to noIcon style", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" noIcon visible> Success </auro-toast>
+      <auro-toast variant="success" noicon visible> Success </auro-toast>
     `);
     const root = el.shadowRoot;
 
@@ -807,7 +878,7 @@ describe("auro-toast", () => {
       const root = await fixture(html`
         <div>
           <button id="triggerBtn">Show toast</button>
-          <auro-toast trigger="triggerBtn" visible disableAutoHide>Message</auro-toast>
+          <auro-toast trigger="triggerBtn" visible disableautohide>Message</auro-toast>
         </div>
       `);
 
@@ -826,7 +897,7 @@ describe("auro-toast", () => {
       const root = await fixture(html`
         <div>
           <button id="triggerBtn">Show toast</button>
-          <auro-toast visible disableAutoHide>Message</auro-toast>
+          <auro-toast visible disableautohide>Message</auro-toast>
         </div>
       `);
 
@@ -847,7 +918,7 @@ describe("auro-toast", () => {
         <div>
           <button id="attrBtn">Attribute target</button>
           <button id="propBtn">Property target</button>
-          <auro-toast trigger="attrBtn" visible disableAutoHide>Message</auro-toast>
+          <auro-toast trigger="attrBtn" visible disableautohide>Message</auro-toast>
         </div>
       `);
 
@@ -866,7 +937,7 @@ describe("auro-toast", () => {
 
     it("does not throw when no trigger is set and close is clicked", async () => {
       const el = await fixture(html`
-        <auro-toast visible disableAutoHide>Message</auro-toast>
+        <auro-toast visible disableautohide>Message</auro-toast>
       `);
       await elementUpdated(el);
 
@@ -877,7 +948,7 @@ describe("auro-toast", () => {
 
   it("renders custom variant with icon container but no default variant svg", async () => {
     const el = await fixture(html`
-      <auro-toast variant="custom" visible disableAutoHide>Custom</auro-toast>
+      <auro-toast variant="custom" visible disableautohide>Custom</auro-toast>
     `);
     await elementUpdated(el);
 
@@ -889,7 +960,7 @@ describe("auro-toast", () => {
 
   it("handleSlotContent mirrors custom SVG into typeIcon", async () => {
     const el = await fixture(html`
-      <auro-toast variant="custom" visible disableAutoHide>
+      <auro-toast variant="custom" visible disableautohide>
         <svg slot="customSvg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
         Custom message
       </auro-toast>
@@ -910,7 +981,7 @@ describe("auro-toast — color contrast", () => {
   ["success", "error"].forEach((variant) => {
     it(`${variant} — message text meets WCAG AA contrast ratio of 4.5:1 against host background`, async () => {
       const el = await fixture(html`
-        <auro-toast variant="${variant}" visible disableAutoHide>Test message</auro-toast>
+        <auro-toast variant="${variant}" visible disableautohide>Test message</auro-toast>
       `);
       await elementUpdated(el);
 
@@ -923,7 +994,7 @@ describe("auro-toast — color contrast", () => {
 
     it(`${variant} — type icon meets WCAG SC 1.4.11 contrast ratio of 3:1 against host background`, async () => {
       const el = await fixture(html`
-        <auro-toast variant="${variant}" visible disableAutoHide>Test message</auro-toast>
+        <auro-toast variant="${variant}" visible disableautohide>Test message</auro-toast>
       `);
       await elementUpdated(el);
 

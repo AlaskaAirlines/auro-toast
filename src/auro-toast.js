@@ -35,7 +35,8 @@ const FADE_OUT_DURATION = 300;
  *
  * @csspart type-icon - Apply css to the toast type icon
  * @csspart close-button - Apply css to the toast close button
- * @fires onToastClose - Notifies that the toast has been closed
+ * @fires onToastClose - **Deprecated**, use `toast-close` event instead.
+ * @event toast-close - Notifies that the toast has been closed
  */
 
 // build the component class
@@ -143,6 +144,7 @@ export class AuroToast extends LitElement {
       disableAutoHide: {
         type: Boolean,
         reflect: true,
+        attribute: "disableautohide",
       },
 
       /**
@@ -151,6 +153,7 @@ export class AuroToast extends LitElement {
       noIcon: {
         type: Boolean,
         reflect: true,
+        attribute: "noicon",
       },
 
       /**
@@ -159,6 +162,7 @@ export class AuroToast extends LitElement {
       timeTilHide: {
         type: Number,
         reflect: true,
+        attribute: "timetilhide",
       },
 
       /**
@@ -276,12 +280,26 @@ export class AuroToast extends LitElement {
     /**
      * Emits closed toast event.
      *
+     * @deprecated Use `toast-close` event instead.
      * @event onToastClose
-     * @type {object}
-     * @property {boolean} false - Sets visibility value for the toast element.
+     * @type {{ visible: boolean }}
      */
     this.dispatchEvent(
       new CustomEvent("onToastClose", {
+        bubbles: true,
+        composed: true,
+        detail: { visible: this.visible },
+      }),
+    );
+
+    /**
+     * Emits closed toast event.
+     *
+     * @event toast-close
+     * @type {{ visible: boolean }}
+     */
+    this.dispatchEvent(
+      new CustomEvent("toast-close", {
         bubbles: true,
         composed: true,
         detail: this,
@@ -433,14 +451,12 @@ export class AuroToast extends LitElement {
 
   render() {
     return html`
-      ${
-        this.visible
-          ? html`
+      ${this.visible
+        ? html`
         <div class="toastContainer">
-          ${
-            this.noIcon
-              ? undefined
-              : html`
+          ${this.noIcon
+            ? undefined
+            : html`
             <${this.iconTag} customColor customSvg class="typeIcon body-default" part="type-icon">
               ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
             </${this.iconTag}>
@@ -462,7 +478,7 @@ export class AuroToast extends LitElement {
           </${this.buttonTag}>
         </div>
       `
-          : undefined
+        : undefined
       }
     `;
   }
