@@ -282,13 +282,13 @@ export class AuroToast extends LitElement {
      *
      * @deprecated Use `toast-close` event instead.
      * @event onToastClose
-     * @type {{ visible: boolean }}
+     * @type {Object}
      */
     this.dispatchEvent(
       new CustomEvent("onToastClose", {
         bubbles: true,
         composed: true,
-        detail: { visible: this.visible },
+        detail: this, // unchanged for backwards compatibility; use `toast-close` for the new `{ visible }` shape
       }),
     );
 
@@ -302,7 +302,7 @@ export class AuroToast extends LitElement {
       new CustomEvent("toast-close", {
         bubbles: true,
         composed: true,
-        detail: this,
+        detail: { visible: false },
       }),
     );
   }

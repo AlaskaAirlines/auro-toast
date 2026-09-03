@@ -22,10 +22,10 @@ The `auro-toast` element provides users a way to display short, temporary messag
 
 ### Events
 
-| Name         | Description                                        |
-| ------------ | -------------------------------------------------- |
-| toast-close  | Notifies that the toast has been closed            |
-| onToastClose | ** Deprecated **, use `toast-close` event instead. |
+| Name         | Description                                      |
+| ------------ | ------------------------------------------------ |
+| toast-close  | Notifies that the toast has been closed          |
+| onToastClose | **Deprecated**, use `toast-close` event instead. |
 
 ### CSS Shadow Parts
 
