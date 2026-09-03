@@ -231,7 +231,7 @@
             {
               "name": "onToastClose",
               "type": {
-                "text": "AuroToast"
+                "text": "Object"
               },
               "description": "**Deprecated**, use `toast-close` event instead.",
               "deprecated": "Use `toast-close` event instead."

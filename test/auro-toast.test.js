@@ -669,13 +669,18 @@ describe("auro-toast — onToastClose event", () => {
     `);
 
     let eventFired = false;
-    el.addEventListener("onToastClose", () => { eventFired = true; });
+    let detail;
+    el.addEventListener("onToastClose", (e) => {
+      eventFired = true;
+      detail = e.detail;
+    });
 
     const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
     closeButton.click();
     await elementUpdated(el);
 
     expect(eventFired).to.be.true;
+    expect(detail).to.equal(el);
   });
 
   it("fires onToastClose after auto-hide timeout", async () => {
@@ -684,10 +689,15 @@ describe("auro-toast — onToastClose event", () => {
     `);
 
     let eventFired = false;
-    el.addEventListener("onToastClose", () => { eventFired = true; });
+    let detail;
+    el.addEventListener("onToastClose", (e) => {
+      eventFired = true;
+      detail = e.detail;
+    });
 
     await aTimeout(1000);
     expect(eventFired).to.be.true;
+    expect(detail).to.equal(el);
   }).timeout(2000);
 
   it("does NOT fire onToastClose for error toast after timeout", async () => {
@@ -705,6 +715,24 @@ describe("auro-toast — onToastClose event", () => {
     expect(eventFired).to.be.false;
 
     clock.restore();
+  });
+
+  it("fires onToastClose and toast-close exactly once each on a single close", async () => {
+    const el = await fixture(html`
+      <auro-toast visible disableautohide>Close me</auro-toast>
+    `);
+
+    let onToastCloseCount = 0;
+    let toastCloseCount = 0;
+    el.addEventListener("onToastClose", () => { onToastCloseCount += 1; });
+    el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+    const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+    closeButton.click();
+    await elementUpdated(el);
+
+    expect(onToastCloseCount).to.equal(1);
+    expect(toastCloseCount).to.equal(1);
   });
 });
 
