@@ -836,6 +836,36 @@ describe("auro-toast — onToastClose event", () => {
     expect(eventFired).to.be.true;
   }).timeout(2000);
 
+  it("removes the hidden state on disconnect during an in-progress fade-out, so a reconnect isn't stuck invisible", async () => {
+    // Regression test: disconnectedCallback() used to only clear the
+    // timers, not undo the "hidden" class fadeOutToast() had already
+    // applied — leaving a reconnected toast permanently invisible.
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="50">Reconnect me</auro-toast>
+    `);
+    const parent = el.parentNode;
+
+    // Let the auto-hide timer fire and start the fade-out.
+    await aTimeout(100);
+    expect(el.shadowRoot.querySelector(".toastContainer").classList.contains("hidden")).to.be.true;
+
+    // Disconnect while the fade-out is still in progress.
+    parent.removeChild(el);
+    expect(el.shadowRoot.querySelector(".toastContainer").classList.contains("hidden")).to.be.false;
+
+    parent.appendChild(el);
+    await elementUpdated(el);
+
+    expect(el.shadowRoot.querySelector(".toastContainer").classList.contains("hidden")).to.be.false;
+
+    let eventFired = false;
+    el.addEventListener("toast-close", () => { eventFired = true; });
+
+    // The stale completion timer must not close it shortly after reconnect.
+    await aTimeout(100);
+    expect(eventFired).to.be.false;
+  }).timeout(2000);
+
   it("fadeOutToast() does not arm a completion timer once the toast is already closed", async () => {
     // Regression test: fadeOutToast() used to arm its completion timer
     // unconditionally, so calling it after the toast was already closed
@@ -857,6 +887,47 @@ describe("auro-toast — onToastClose event", () => {
     el.fadeOutToast();
 
     expect(el.fadeOutCompleteTimer).to.be.undefined;
+  });
+
+  it("does not close a toast re-shown after visible was set to false directly during a fade-out", async () => {
+    // Regression test: setting `visible = false` directly (bypassing
+    // closeToast()) used to leave fadeOutCompleteTimer armed; if `visible`
+    // was set back to true before it fired, the stale timer would
+    // instantly re-close the freshly-reshown toast. Uses fake timers so the
+    // auto-hide-restart cascade (updated() re-arming fadeOutTimer, whose
+    // own eventual fadeOutToast() call would incidentally clear the stale
+    // completion timer too) can't mask whether this fix is what's actually
+    // responsible for cancelling it.
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="1000">Close me</auro-toast>
+      `);
+
+      // Let the auto-hide timer fire and start the fade-out.
+      clock.tick(1000);
+
+      el.visible = false;
+      await elementUpdated(el);
+
+      el.visible = true;
+      await elementUpdated(el);
+
+      let eventFired = false;
+      el.addEventListener("toast-close", () => { eventFired = true; });
+
+      // The stale completion timer, if left armed, would fire here — well
+      // before the restarted (1000ms) auto-hide timer gets a chance to.
+      clock.tick(300);
+
+      expect(eventFired).to.be.false;
+      expect(el.visible).to.be.true;
+    } finally {
+      // Must run even if an assertion above throws — an un-restored fake
+      // clock stays active globally and hangs every later real-timer test.
+      clock.restore();
+    }
   });
 });
 

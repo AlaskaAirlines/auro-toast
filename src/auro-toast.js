@@ -412,7 +412,12 @@ export class AuroToast extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     clearTimeout(this.fadeOutTimer);
-    clearTimeout(this.fadeOutCompleteTimer);
+
+    // Not just clearTimeout(this.fadeOutCompleteTimer) — a reconnect's bare
+    // requestUpdate() delivers empty changedProperties, so updated()'s
+    // variant/disableAutoHide cancel branch won't run to remove a "hidden"
+    // class left over from a fade that was in progress at disconnect time.
+    this._cancelFadeOut();
   }
 
   /**
@@ -456,6 +461,14 @@ export class AuroToast extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has("visible")) {
       this.handleSlotContent();
+
+      // Setting `visible` to false directly (bypassing closeToast()) would
+      // otherwise leave a pending fadeOutCompleteTimer armed; if `visible`
+      // is then set back to true before it fires, it would instantly
+      // re-close the freshly-reshown toast.
+      if (!this.visible) {
+        this._cancelFadeOut();
+      }
     }
 
     // Keep the standalone role in sync if variant changes after connection.
@@ -478,7 +491,10 @@ export class AuroToast extends LitElement {
     // Note: intentionally does not clear fadeOutCompleteTimer — this block
     // re-runs on every update while visible, and clearing it here would
     // cancel an in-flight fade-out on any unrelated property change.
-    if (this.visible && !this.disableAutoHide && this.variant !== "error") {
+    // isConnected guards against requestUpdate()'s microtask resolving
+    // after a rapid disconnect, which would otherwise arm a timer on an
+    // already-detached element.
+    if (this.isConnected && this.visible && !this.disableAutoHide && this.variant !== "error") {
       clearTimeout(this.fadeOutTimer);
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
