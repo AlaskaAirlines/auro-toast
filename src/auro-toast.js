@@ -35,8 +35,8 @@ const FADE_OUT_DURATION = 300;
  *
  * @csspart type-icon - Apply css to the toast type icon
  * @csspart close-button - Apply css to the toast close button
- * @fires onToastClose - **Deprecated**, use `toast-close` event instead.
- * @event toast-close - Notifies that the toast has been closed
+ * @fires onToastClose - **Deprecated**, use `toast-close` event instead. Note: `detail` is the toast element, not `{ visible }` — the two events do not share a payload shape.
+ * @event toast-close - Notifies that the toast has been closed. `detail` is `{ visible: false }`.
  */
 
 // build the component class
@@ -121,6 +121,11 @@ export class AuroToast extends LitElement {
      * @private
      */
     this.fadeOutTimer = undefined;
+
+    /**
+     * @private
+     */
+    this.fadeOutCompleteTimer = undefined;
 
     /**
      * True when the toast is not inside an auro-toaster and must manage its
@@ -249,7 +254,6 @@ export class AuroToast extends LitElement {
   clickToClose() {
     this._returnFocus();
     this.closeToast();
-    clearTimeout(this.fadeOutTimer);
   }
 
   /**
@@ -263,7 +267,8 @@ export class AuroToast extends LitElement {
         toastContainer.classList.add("hidden");
       }
 
-      setTimeout(() => {
+      clearTimeout(this.fadeOutCompleteTimer);
+      this.fadeOutCompleteTimer = setTimeout(() => {
         this.closeToast();
       }, FADE_OUT_DURATION);
     }
@@ -275,6 +280,14 @@ export class AuroToast extends LitElement {
    */
   closeToast() {
     clearTimeout(this.fadeOutTimer);
+    clearTimeout(this.fadeOutCompleteTimer);
+
+    // Idempotent: a close already in flight (e.g. the close button clicked
+    // while the auto-hide fade-out is in progress) must not dispatch twice.
+    if (!this.visible) {
+      return;
+    }
+
     this.visible = false;
 
     /**
@@ -420,6 +433,7 @@ export class AuroToast extends LitElement {
     // do not auto dismiss for error toasts or if disableAutoHide is set
     if (this.visible && !this.disableAutoHide && this.variant !== "error") {
       clearTimeout(this.fadeOutTimer);
+      clearTimeout(this.fadeOutCompleteTimer);
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
       }, this.timeTilHide || DEFAULT_TIME_TIL_FADE_OUT);

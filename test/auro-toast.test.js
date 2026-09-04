@@ -1,5 +1,6 @@
 import { aTimeout, elementUpdated, expect, fixture, html } from "@open-wc/testing";
 import sinon from "sinon";
+import { AuroToast } from "../src/auro-toast.js";
 import "../src/registered.js";
 
 import {
@@ -734,6 +735,33 @@ describe("auro-toast — onToastClose event", () => {
     expect(onToastCloseCount).to.equal(1);
     expect(toastCloseCount).to.equal(1);
   });
+
+  it("fires onToastClose and toast-close exactly once each when closed during the auto-hide fade-out", async () => {
+    // Regression test: fadeOutToast() used to schedule its close via an
+    // untracked setTimeout, so clicking the close button while an auto-hide
+    // fade-out was already in progress dispatched both events twice.
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="50">Close me</auro-toast>
+    `);
+
+    let onToastCloseCount = 0;
+    let toastCloseCount = 0;
+    el.addEventListener("onToastClose", () => { onToastCloseCount += 1; });
+    el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+    // Let the auto-hide timer fire and start the fade-out (FADE_OUT_DURATION = 300ms).
+    await aTimeout(100);
+
+    const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+    closeButton.click();
+    await elementUpdated(el);
+
+    // Wait past the fade-out duration to catch a delayed second dispatch.
+    await aTimeout(350);
+
+    expect(onToastCloseCount).to.equal(1);
+    expect(toastCloseCount).to.equal(1);
+  }).timeout(2000);
 });
 
 // ---------------------------------------------------------------------------
@@ -747,9 +775,10 @@ describe("auro-toast — toast-close event", () => {
     `);
 
     let eventFired = false;
+    let detail;
     el.addEventListener("toast-close", (e) => {
       eventFired = true;
-      expect(e.detail).to.deep.equal({ visible: false });
+      detail = e.detail;
     });
 
     const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
@@ -757,6 +786,7 @@ describe("auro-toast — toast-close event", () => {
     await elementUpdated(el);
 
     expect(eventFired).to.be.true;
+    expect(detail).to.deep.equal({ visible: false });
   });
 
   it("fires toast-close after auto-hide timeout", async () => {
@@ -765,13 +795,15 @@ describe("auro-toast — toast-close event", () => {
     `);
 
     let eventFired = false;
+    let detail;
     el.addEventListener("toast-close", (e) => {
       eventFired = true;
-      expect(e.detail).to.deep.equal({ visible: false });
+      detail = e.detail;
     });
 
     await aTimeout(1000);
     expect(eventFired).to.be.true;
+    expect(detail).to.deep.equal({ visible: false });
   }).timeout(2000);
 
   it("does NOT fire toast-close for error toast after timeout", async () => {
@@ -782,10 +814,7 @@ describe("auro-toast — toast-close event", () => {
     `);
 
     let eventFired = false;
-    el.addEventListener("toast-close", (e) => {
-      eventFired = true;
-      expect(e.detail).to.deep.equal({ visible: false });
-    });
+    el.addEventListener("toast-close", () => { eventFired = true; });
 
     clock.tick(6000);
 
@@ -800,6 +829,16 @@ describe("auro-toast — toast-close event", () => {
 // ---------------------------------------------------------------------------
 
 describe("auro-toast — lowercase attribute binding", () => {
+  it("declares an explicit lowercase attribute for disableAutoHide, noIcon, and timeTilHide", () => {
+    // These properties would already bind correctly via Lit's default
+    // (undeclared attributes fall back to the lowercased property name), so
+    // this asserts the explicit `attribute:` mapping this change added,
+    // rather than behavior the HTML parser would provide either way.
+    expect(AuroToast.elementProperties.get("disableAutoHide").attribute).to.equal("disableautohide");
+    expect(AuroToast.elementProperties.get("noIcon").attribute).to.equal("noicon");
+    expect(AuroToast.elementProperties.get("timeTilHide").attribute).to.equal("timetilhide");
+  });
+
   it("disableautohide HTML attribute sets disableAutoHide property", async () => {
     const el = await fixture(html`<auro-toast disableautohide visible>test</auro-toast>`);
     expect(el.disableAutoHide).to.be.true;

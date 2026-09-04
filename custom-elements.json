@@ -226,14 +226,14 @@
               "type": {
                 "text": "{ visible: boolean }"
               },
-              "description": "Notifies that the toast has been closed"
+              "description": "Notifies that the toast has been closed. `detail` is `{ visible: false }`."
             },
             {
               "name": "onToastClose",
               "type": {
                 "text": "Object"
               },
-              "description": "**Deprecated**, use `toast-close` event instead.",
+              "description": "**Deprecated**, use `toast-close` event instead. Note: `detail` is the toast element, not `{ visible }` — the two events do not share a payload shape.",
               "deprecated": "Use `toast-close` event instead."
             }
           ],

@@ -107,7 +107,7 @@ You can do this by importing only the component class and using the `register(na
 
 <pre class="language-js"><code class="language-js">// Import the class only
 import { AuroToast } from '@aurodesignsystem/auro-toast/class';
-​
+
 // Register with a custom name if desired
 AuroToast.register('custom-toast');</code></pre>
 
