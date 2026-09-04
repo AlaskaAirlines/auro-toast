@@ -1,0 +1,559 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/auro-toast.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The `auro-toast` element provides users a way to display short, temporary messages.",
+          "name": "AuroToast",
+          "cssParts": [
+            {
+              "description": "Apply css to the toast close button",
+              "name": "close-button"
+            },
+            {
+              "description": "Apply css to the toast type icon",
+              "name": "type-icon"
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "_hasAncestorLiveRegion",
+              "description": "Walks the DOM ancestors (crossing shadow boundaries) looking for any\nactive live region — either an aria-live=\"polite/assertive\" attribute or\nan implicit live region role (alert, status, log).\naria-live=\"off\" is not considered active and is intentionally ignored.",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_initializeDefaults",
+              "type": {
+                "text": "_initializeDefaults() => void"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_returnFocus",
+              "description": "Returns focus to the trigger element when the toast is manually closed.\nNot called on auto-dismiss — moving focus during auto-dismiss would\ninterrupt the AT user's current position in the page.",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_syncStandaloneRole",
+              "description": "Sets or removes the live-region role on the host depending on whether\nthe toast is standalone. Extracted so connectedCallback and updated()\nstay in sync without duplicating the logic.",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "clickToClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "closeToast",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disableAutoHide",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Prevents the toast from auto-hiding on the default time.",
+              "attribute": "disableautohide",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "fadeOutToast",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getVariantIcon",
+              "description": "Determines which type icon to render based on the variant prop.",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "HTMLElement"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleSlotContent",
+              "description": "Mirrors any defined custom type svg into the correct place in the template.",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "noIcon",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Removes icon from the toast UI.",
+              "attribute": "noicon",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "register",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "name",
+                  "default": "\"auro-toast\"",
+                  "description": "The name of the element that you want to register.",
+                  "optional": true,
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "This will register this element with the browser.",
+              "type": {
+                "text": "register(name?: string = \"auro-toast\") => void"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setOnClick",
+              "description": "For mobile, set the onclick function so the toast can be dismissed if it is tapped on anywhere inside the toast.",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "timeTilHide",
+              "privacy": "public",
+              "type": {
+                "text": "number"
+              },
+              "description": "Sets the time in milliseconds until the toast hides.",
+              "attribute": "timetilhide",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "trigger",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "description": "The id of the element that triggered the toast.\nWhen the toast is manually closed, focus will return to this element.\nTakes precedence over the triggerElement property if both are set.",
+              "attribute": "trigger",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "triggerElement",
+              "privacy": "public",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "description": "A direct reference to the element that triggered the toast.\nWhen the toast is manually closed, focus will return to this element.\nUse the trigger attribute instead if you prefer a declarative approach."
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "privacy": "public",
+              "type": {
+                "text": "'error' | 'success' | 'custom'"
+              },
+              "description": "Component will render visually based on which variant value is set.",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "visible",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Sets state of toast to visible",
+              "attribute": "visible",
+              "reflects": true
+            }
+          ],
+          "events": [
+            {
+              "name": "toast-close",
+              "type": {
+                "text": "{ visible: boolean }"
+              },
+              "description": "Notifies that the toast has been closed. `detail` is `{ visible: false }`."
+            },
+            {
+              "name": "onToastClose",
+              "type": {
+                "text": "Object"
+              },
+              "description": "**Deprecated**, use `toast-close` event instead. Note: `detail` is the toast element, not `{ visible }` — the two events do not share a payload shape.",
+              "deprecated": "Use `toast-close` event instead."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disableautohide",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Prevents the toast from auto-hiding on the default time.",
+              "fieldName": "disableAutoHide"
+            },
+            {
+              "name": "noicon",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Removes icon from the toast UI.",
+              "fieldName": "noIcon"
+            },
+            {
+              "name": "timetilhide",
+              "type": {
+                "text": "number"
+              },
+              "description": "Sets the time in milliseconds until the toast hides.",
+              "fieldName": "timeTilHide"
+            },
+            {
+              "name": "trigger",
+              "type": {
+                "text": "string"
+              },
+              "description": "The id of the element that triggered the toast.\nWhen the toast is manually closed, focus will return to this element.\nTakes precedence over the triggerElement property if both are set.",
+              "fieldName": "trigger"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "'error' | 'success' | 'custom'"
+              },
+              "description": "Component will render visually based on which variant value is set.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "visible",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Sets state of toast to visible",
+              "fieldName": "visible"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "auro-toast",
+          "customElement": true,
+          "modulePath": "src/auro-toast.js"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AuroToast",
+          "declaration": {
+            "name": "AuroToast",
+            "module": "src/auro-toast.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/auro-toaster.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "AuroToaster",
+          "members": [
+            {
+              "kind": "field",
+              "name": "_announcedErrorToasts",
+              "default": "new WeakSet()"
+            },
+            {
+              "kind": "field",
+              "name": "_assertiveResetTimer",
+              "default": "undefined"
+            },
+            {
+              "kind": "method",
+              "name": "_onSlotChange",
+              "parameters": [
+                {
+                  "name": "e"
+                }
+              ],
+              "description": "Handles slot changes — checks if a newly slotted error toast\nis already visible at the time it is added to the toaster.",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_onToastRequestAnnounce"
+            },
+            {
+              "kind": "method",
+              "name": "_setAssertiveTemporarily",
+              "description": "Temporarily sets the live region to assertive so the error toast\ninterrupts the screen reader, then resets to polite after 3 seconds.\nThis ensures subsequent polite toasts don't keep interrupting the user,\neven if the error toast remains visible (errors are never auto-dismissed).",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "register",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "name",
+                  "default": "\"auro-toaster\"",
+                  "description": "The name of the element that you want to register to.",
+                  "optional": true,
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "This will register this element with the browser."
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true,
+          "modulePath": "src/auro-toaster.js"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AuroToaster",
+          "declaration": {
+            "name": "AuroToaster",
+            "module": "src/auro-toaster.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/buttonVersion.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "12.3.2",
+            "module": "src/buttonVersion.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/color-css.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/color-css.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/iconVersion.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "9.2.0",
+            "module": "src/iconVersion.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AuroToast",
+          "declaration": {
+            "name": "AuroToast",
+            "module": "src/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "AuroToaster",
+          "declaration": {
+            "name": "AuroToaster",
+            "module": "src/index.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/registered.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/style-css.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/style-css.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/style-toaster-css.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/style-toaster-css.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/styles/color-css.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/styles/color-css.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/styles/style-css.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/styles/style-css.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/styles/style-toaster-css.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/styles/style-toaster-css.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/styles/tokens-css.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/styles/tokens-css.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/tokens-css.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/tokens-css.js"
+          }
+        }
+      ]
+    }
+  ]
+}

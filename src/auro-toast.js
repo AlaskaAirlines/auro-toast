@@ -35,7 +35,8 @@ const FADE_OUT_DURATION = 300;
  *
  * @csspart type-icon - Apply css to the toast type icon
  * @csspart close-button - Apply css to the toast close button
- * @fires onToastClose - Notifies that the toast has been closed
+ * @fires onToastClose - **Deprecated**, use `toast-close` event instead. Note: `detail` is the toast element, not `{ visible }` — the two events do not share a payload shape.
+ * @event toast-close - Notifies that the toast has been closed. `detail` is `{ visible: false }`.
  */
 
 // build the component class
@@ -122,6 +123,11 @@ export class AuroToast extends LitElement {
     this.fadeOutTimer = undefined;
 
     /**
+     * @private
+     */
+    this.fadeOutCompleteTimer = undefined;
+
+    /**
      * True when the toast is not inside an auro-toaster and must manage its
      * own live region announcement. Set once in connectedCallback.
      * Default -- assumes toast is inside toaster.
@@ -143,6 +149,7 @@ export class AuroToast extends LitElement {
       disableAutoHide: {
         type: Boolean,
         reflect: true,
+        attribute: "disableautohide",
       },
 
       /**
@@ -151,6 +158,7 @@ export class AuroToast extends LitElement {
       noIcon: {
         type: Boolean,
         reflect: true,
+        attribute: "noicon",
       },
 
       /**
@@ -159,6 +167,7 @@ export class AuroToast extends LitElement {
       timeTilHide: {
         type: Number,
         reflect: true,
+        attribute: "timetilhide",
       },
 
       /**
@@ -245,7 +254,6 @@ export class AuroToast extends LitElement {
   clickToClose() {
     this._returnFocus();
     this.closeToast();
-    clearTimeout(this.fadeOutTimer);
   }
 
   /**
@@ -253,16 +261,37 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   fadeOutToast() {
-    if (!this.disableAutoHide) {
-      const toastContainer = this.shadowRoot.querySelector(".toastContainer");
-      if (toastContainer) {
-        toastContainer.classList.add("hidden");
-      }
-
-      setTimeout(() => {
-        this.closeToast();
-      }, FADE_OUT_DURATION);
+    // Guards against arming a redundant completion timer: when this fires
+    // after the toast is already closed (e.g. the mobile tap-to-dismiss
+    // handler runs after the close button's own click already closed it),
+    // or auto-hide is disabled.
+    if (!this.visible || this.disableAutoHide) {
+      return;
     }
+
+    const toastContainer = this.shadowRoot.querySelector(".toastContainer");
+    if (toastContainer) {
+      toastContainer.classList.add("hidden");
+    }
+
+    clearTimeout(this.fadeOutCompleteTimer);
+    this.fadeOutCompleteTimer = setTimeout(() => {
+      this.closeToast();
+    }, FADE_OUT_DURATION);
+  }
+
+  /**
+   * Cancels an in-progress fade-out, if any, and restores the toast's
+   * visibility. Without this, interrupting a fade (e.g. escalating to
+   * variant="error" mid-fade) would clear the pending close but leave the
+   * "hidden" CSS class in place, permanently hiding a toast that remains
+   * open.
+   * @private
+   * @returns {void}
+   */
+  _cancelFadeOut() {
+    clearTimeout(this.fadeOutCompleteTimer);
+    this.shadowRoot?.querySelector(".toastContainer")?.classList.remove("hidden");
   }
 
   /**
@@ -271,20 +300,42 @@ export class AuroToast extends LitElement {
    */
   closeToast() {
     clearTimeout(this.fadeOutTimer);
+    clearTimeout(this.fadeOutCompleteTimer);
+
+    // Idempotent: a close already in flight (e.g. the close button clicked
+    // while the auto-hide fade-out is in progress) must not dispatch twice.
+    if (!this.visible) {
+      return;
+    }
+
     this.visible = false;
 
     /**
      * Emits closed toast event.
      *
+     * @deprecated Use `toast-close` event instead.
      * @event onToastClose
-     * @type {object}
-     * @property {boolean} false - Sets visibility value for the toast element.
+     * @type {Object}
      */
     this.dispatchEvent(
       new CustomEvent("onToastClose", {
         bubbles: true,
         composed: true,
-        detail: this,
+        detail: this, // unchanged for backwards compatibility; use `toast-close` for the new `{ visible }` shape
+      }),
+    );
+
+    /**
+     * Emits closed toast event.
+     *
+     * @event toast-close
+     * @type {{ visible: boolean }}
+     */
+    this.dispatchEvent(
+      new CustomEvent("toast-close", {
+        bubbles: true,
+        composed: true,
+        detail: { visible: false },
       }),
     );
   }
@@ -322,6 +373,14 @@ export class AuroToast extends LitElement {
     super.connectedCallback();
     this.setOnClick();
 
+    // On a reconnect (hasUpdated is false on the initial connection, which
+    // Lit's own first-update cycle already handles), force updated() to
+    // re-run so a visible toast's auto-hide timer — cleared by
+    // disconnectedCallback() — gets re-armed instead of being lost forever.
+    if (this.hasUpdated && this.visible) {
+      this.requestUpdate();
+    }
+
     // Dispatch a cancelable event so auro-toaster can signal it will handle
     // announcements. If nothing cancels the event the toast is standalone and
     // must register its own live region on the host element — before
@@ -348,6 +407,17 @@ export class AuroToast extends LitElement {
     this._isStandalone = eventNotPrevented && !this._hasAncestorLiveRegion();
 
     this._syncStandaloneRole();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    clearTimeout(this.fadeOutTimer);
+
+    // Not just clearTimeout(this.fadeOutCompleteTimer) — a reconnect's bare
+    // requestUpdate() delivers empty changedProperties, so updated()'s
+    // variant/disableAutoHide cancel branch won't run to remove a "hidden"
+    // class left over from a fade that was in progress at disconnect time.
+    this._cancelFadeOut();
   }
 
   /**
@@ -391,6 +461,14 @@ export class AuroToast extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has("visible")) {
       this.handleSlotContent();
+
+      // Setting `visible` to false directly (bypassing closeToast()) would
+      // otherwise leave a pending fadeOutCompleteTimer armed; if `visible`
+      // is then set back to true before it fires, it would instantly
+      // re-close the freshly-reshown toast.
+      if (!this.visible) {
+        this._cancelFadeOut();
+      }
     }
 
     // Keep the standalone role in sync if variant changes after connection.
@@ -399,8 +477,24 @@ export class AuroToast extends LitElement {
       this._syncStandaloneRole();
     }
 
+    // Cancel an in-flight fade-out when the toast becomes ineligible for
+    // auto-dismiss (escalated to variant="error", or disableAutoHide set) —
+    // a stale completion timer must not auto-close a now-persistent toast.
+    if (
+      (changedProperties.has("variant") || changedProperties.has("disableAutoHide")) &&
+      (this.variant === "error" || this.disableAutoHide)
+    ) {
+      this._cancelFadeOut();
+    }
+
     // do not auto dismiss for error toasts or if disableAutoHide is set
-    if (this.visible && !this.disableAutoHide && this.variant !== "error") {
+    // Note: intentionally does not clear fadeOutCompleteTimer — this block
+    // re-runs on every update while visible, and clearing it here would
+    // cancel an in-flight fade-out on any unrelated property change.
+    // isConnected guards against requestUpdate()'s microtask resolving
+    // after a rapid disconnect, which would otherwise arm a timer on an
+    // already-detached element.
+    if (this.isConnected && this.visible && !this.disableAutoHide && this.variant !== "error") {
       clearTimeout(this.fadeOutTimer);
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
@@ -433,14 +527,12 @@ export class AuroToast extends LitElement {
 
   render() {
     return html`
-      ${
-        this.visible
-          ? html`
+      ${this.visible
+        ? html`
         <div class="toastContainer">
-          ${
-            this.noIcon
-              ? undefined
-              : html`
+          ${this.noIcon
+            ? undefined
+            : html`
             <${this.iconTag} customColor customSvg class="typeIcon body-default" part="type-icon">
               ${this.variant === "custom" ? undefined : html`${this.getVariantIcon()}`}
             </${this.iconTag}>
@@ -462,7 +554,7 @@ export class AuroToast extends LitElement {
           </${this.buttonTag}>
         </div>
       `
-          : undefined
+        : undefined
       }
     `;
   }
