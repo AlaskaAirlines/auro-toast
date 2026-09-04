@@ -762,6 +762,102 @@ describe("auro-toast — onToastClose event", () => {
     expect(onToastCloseCount).to.equal(1);
     expect(toastCloseCount).to.equal(1);
   }).timeout(2000);
+
+  it("does not auto-close a toast whose variant changes to error during the fade-out", async () => {
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="50">Auto close me</auro-toast>
+    `);
+
+    let eventFired = false;
+    el.addEventListener("toast-close", () => { eventFired = true; });
+
+    // Let the auto-hide timer fire and start the fade-out.
+    await aTimeout(100);
+
+    // Escalate to an error while the fade-out completion timer is still pending.
+    el.variant = "error";
+    await elementUpdated(el);
+
+    // Wait past the original fade-out completion time.
+    await aTimeout(300);
+
+    expect(eventFired).to.be.false;
+    expect(el.visible).to.be.true;
+
+    // Regression: cancelling the fade-out must also undo its visual effect —
+    // otherwise the toast is stuck invisible (opacity/visibility: hidden)
+    // and undismissable even though `visible` is still true.
+    const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+    expect(toastContainer.classList.contains("hidden")).to.be.false;
+  }).timeout(2000);
+
+  it("does not leave the toast visually hidden when disableAutoHide is set during the fade-out", async () => {
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="50">Auto close me</auro-toast>
+    `);
+
+    let eventFired = false;
+    el.addEventListener("toast-close", () => { eventFired = true; });
+
+    // Let the auto-hide timer fire and start the fade-out.
+    await aTimeout(100);
+
+    // Disable auto-hide while the fade-out completion timer is still pending.
+    el.disableAutoHide = true;
+    await elementUpdated(el);
+
+    // Wait past the original fade-out completion time.
+    await aTimeout(300);
+
+    expect(eventFired).to.be.false;
+    expect(el.visible).to.be.true;
+
+    const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+    expect(toastContainer.classList.contains("hidden")).to.be.false;
+  }).timeout(2000);
+
+  it("re-arms the auto-hide timer after a visible toast is disconnected and reconnected", async () => {
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="50">Reconnect me</auro-toast>
+    `);
+    const parent = el.parentNode;
+
+    let eventFired = false;
+    el.addEventListener("toast-close", () => { eventFired = true; });
+
+    // Detach and immediately reattach before the auto-hide timer fires.
+    parent.removeChild(el);
+    parent.appendChild(el);
+    await elementUpdated(el);
+
+    // Wait past when auto-hide + fade-out would have completed.
+    await aTimeout(500);
+
+    expect(eventFired).to.be.true;
+  }).timeout(2000);
+
+  it("fadeOutToast() does not arm a completion timer once the toast is already closed", async () => {
+    // Regression test: fadeOutToast() used to arm its completion timer
+    // unconditionally, so calling it after the toast was already closed
+    // (e.g. a mobile tap-to-dismiss handler bubbling in after the close
+    // button's own click already closed it) could later close a
+    // freshly re-shown toast.
+    const el = await fixture(html`
+      <auro-toast visible>Close me</auro-toast>
+    `);
+
+    const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+    closeButton.click();
+    await elementUpdated(el);
+    expect(el.visible).to.be.false;
+
+    // closeToast() clears fadeOutCompleteTimer as part of closing; reset it
+    // to isolate what fadeOutToast() itself does on this next call.
+    el.fadeOutCompleteTimer = undefined;
+    el.fadeOutToast();
+
+    expect(el.fadeOutCompleteTimer).to.be.undefined;
+  });
 });
 
 // ---------------------------------------------------------------------------

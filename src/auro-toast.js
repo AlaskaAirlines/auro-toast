@@ -261,17 +261,37 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   fadeOutToast() {
-    if (!this.disableAutoHide) {
-      const toastContainer = this.shadowRoot.querySelector(".toastContainer");
-      if (toastContainer) {
-        toastContainer.classList.add("hidden");
-      }
-
-      clearTimeout(this.fadeOutCompleteTimer);
-      this.fadeOutCompleteTimer = setTimeout(() => {
-        this.closeToast();
-      }, FADE_OUT_DURATION);
+    // Guards against arming a redundant completion timer: when this fires
+    // after the toast is already closed (e.g. the mobile tap-to-dismiss
+    // handler runs after the close button's own click already closed it),
+    // or auto-hide is disabled.
+    if (!this.visible || this.disableAutoHide) {
+      return;
     }
+
+    const toastContainer = this.shadowRoot.querySelector(".toastContainer");
+    if (toastContainer) {
+      toastContainer.classList.add("hidden");
+    }
+
+    clearTimeout(this.fadeOutCompleteTimer);
+    this.fadeOutCompleteTimer = setTimeout(() => {
+      this.closeToast();
+    }, FADE_OUT_DURATION);
+  }
+
+  /**
+   * Cancels an in-progress fade-out, if any, and restores the toast's
+   * visibility. Without this, interrupting a fade (e.g. escalating to
+   * variant="error" mid-fade) would clear the pending close but leave the
+   * "hidden" CSS class in place, permanently hiding a toast that remains
+   * open.
+   * @private
+   * @returns {void}
+   */
+  _cancelFadeOut() {
+    clearTimeout(this.fadeOutCompleteTimer);
+    this.shadowRoot?.querySelector(".toastContainer")?.classList.remove("hidden");
   }
 
   /**
@@ -353,6 +373,14 @@ export class AuroToast extends LitElement {
     super.connectedCallback();
     this.setOnClick();
 
+    // On a reconnect (hasUpdated is false on the initial connection, which
+    // Lit's own first-update cycle already handles), force updated() to
+    // re-run so a visible toast's auto-hide timer — cleared by
+    // disconnectedCallback() — gets re-armed instead of being lost forever.
+    if (this.hasUpdated && this.visible) {
+      this.requestUpdate();
+    }
+
     // Dispatch a cancelable event so auro-toaster can signal it will handle
     // announcements. If nothing cancels the event the toast is standalone and
     // must register its own live region on the host element — before
@@ -379,6 +407,12 @@ export class AuroToast extends LitElement {
     this._isStandalone = eventNotPrevented && !this._hasAncestorLiveRegion();
 
     this._syncStandaloneRole();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    clearTimeout(this.fadeOutTimer);
+    clearTimeout(this.fadeOutCompleteTimer);
   }
 
   /**
@@ -430,10 +464,22 @@ export class AuroToast extends LitElement {
       this._syncStandaloneRole();
     }
 
+    // Cancel an in-flight fade-out when the toast becomes ineligible for
+    // auto-dismiss (escalated to variant="error", or disableAutoHide set) —
+    // a stale completion timer must not auto-close a now-persistent toast.
+    if (
+      (changedProperties.has("variant") || changedProperties.has("disableAutoHide")) &&
+      (this.variant === "error" || this.disableAutoHide)
+    ) {
+      this._cancelFadeOut();
+    }
+
     // do not auto dismiss for error toasts or if disableAutoHide is set
+    // Note: intentionally does not clear fadeOutCompleteTimer — this block
+    // re-runs on every update while visible, and clearing it here would
+    // cancel an in-flight fade-out on any unrelated property change.
     if (this.visible && !this.disableAutoHide && this.variant !== "error") {
       clearTimeout(this.fadeOutTimer);
-      clearTimeout(this.fadeOutCompleteTimer);
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
       }, this.timeTilHide || DEFAULT_TIME_TIL_FADE_OUT);
