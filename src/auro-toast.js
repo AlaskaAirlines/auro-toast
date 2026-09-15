@@ -123,6 +123,11 @@ export class AuroToast extends LitElement {
     this.fadeOutTimer = undefined;
 
     /**
+     * @private
+     */
+    this.closeTimer = undefined;
+
+    /**
      * True when the toast is not inside an auro-toaster and must manage its
      * own live region announcement. Set once in connectedCallback.
      * Default -- assumes toast is inside toaster.
@@ -226,6 +231,12 @@ export class AuroToast extends LitElement {
     this.runtimeUtils.handleComponentTagRename(this, "auro-toast");
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    clearTimeout(this.fadeOutTimer);
+    clearTimeout(this.closeTimer);
+  }
+
   /**
    * Returns focus to the trigger element when the toast is manually closed.
    * Not called on auto-dismiss — moving focus during auto-dismiss would
@@ -248,8 +259,9 @@ export class AuroToast extends LitElement {
    */
   clickToClose() {
     this._returnFocus();
-    this.closeToast();
     clearTimeout(this.fadeOutTimer);
+    clearTimeout(this.closeTimer);
+    this.closeToast();
   }
 
   /**
@@ -257,13 +269,14 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   fadeOutToast() {
-    if (!this.disableAutoHide) {
+    if (!this.disableAutoHide && this.visible) {
       const toastContainer = this.shadowRoot.querySelector(".toastContainer");
       if (toastContainer) {
         toastContainer.classList.add("hidden");
       }
 
-      setTimeout(() => {
+      clearTimeout(this.closeTimer);
+      this.closeTimer = setTimeout(() => {
         this.closeToast();
       }, FADE_OUT_DURATION);
     }
@@ -274,7 +287,16 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   closeToast() {
+    // Guards against re-entry -- e.g. a close-button click on mobile widths
+    // both closes the toast directly and bubbles to the host's own onclick
+    // handler (see setOnClick()), which would otherwise schedule a second,
+    // untracked close via fadeOutToast().
+    if (!this.visible) {
+      return;
+    }
+
     clearTimeout(this.fadeOutTimer);
+    clearTimeout(this.closeTimer);
     this.visible = false;
 
     /**
@@ -309,13 +331,19 @@ export class AuroToast extends LitElement {
 
   /**
    * For mobile, set the onclick function so the toast can be dismissed if it is tapped on anywhere inside the toast.
+   * Ignores clicks on the close button -- clickToClose() already handles those, and re-running
+   * fadeOutToast() for the same click is what caused a double close (see AB#1643472).
    * @private
    * @returns {void}
    */
   setOnClick() {
     const mobileBreakPoint = 767;
     if (window.innerWidth < mobileBreakPoint) {
-      this.onclick = () => {
+      this.onclick = (event) => {
+        const closeButton = this.shadowRoot?.querySelector('[part="close-button"]');
+        if (closeButton && event.composedPath().includes(closeButton)) {
+          return;
+        }
         this.fadeOutToast();
       };
     }
@@ -339,6 +367,11 @@ export class AuroToast extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.setOnClick();
+
+    // Re-arm auto-hide on reconnect (e.g. re-parenting the node elsewhere in
+    // the DOM) -- updated() does not re-run just because connectedCallback()
+    // fired again, since no reactive property changed as a result.
+    this._scheduleAutoHide();
 
     // Dispatch a cancelable event so auro-toaster can signal it will handle
     // announcements. If nothing cancels the event the toast is standalone and
@@ -414,9 +447,29 @@ export class AuroToast extends LitElement {
     // Keep the standalone role in sync if variant changes after connection.
     if (changedProperties.has("variant")) {
       clearTimeout(this.fadeOutTimer);
+      clearTimeout(this.closeTimer);
+
+      // Cancelling a pending close mid-fade must also undo fadeOutToast()'s
+      // visual state, otherwise the toast is left invisible (via the
+      // "hidden" class) but still marked visible, with no close ever fired.
+      this.shadowRoot?.querySelector(".toastContainer")?.classList.remove("hidden");
+
       this._syncStandaloneRole();
     }
 
+    this._scheduleAutoHide();
+  }
+
+  /**
+   * (Re-)schedules the auto-hide timer based on current visible/disableAutoHide/
+   * variant/timeTilHide values. Called from updated() on property changes and
+   * from connectedCallback() to re-arm auto-hide after a reconnect (e.g. the
+   * node is re-parented elsewhere in the DOM), since updated() does not run
+   * again on reconnect alone.
+   * @private
+   * @returns {void}
+   */
+  _scheduleAutoHide() {
     // do not auto dismiss for error toasts or if disableAutoHide is set
     if (this.visible && !this.disableAutoHide && this.variant !== "error") {
       clearTimeout(this.fadeOutTimer);
