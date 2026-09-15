@@ -296,13 +296,13 @@ export class AuroToast extends LitElement {
      * Emits closed toast event.
      *
      * @event toast-close
-     * @type {{ visible: boolean }}
+     * @type {{ visible: boolean, id: string }}
      */
     this.dispatchEvent(
       new CustomEvent("toast-close", {
         bubbles: true,
         composed: true,
-        detail: { visible: false },
+        detail: { visible: false, id: this.id },
       }),
     );
   }

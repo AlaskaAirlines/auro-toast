@@ -224,7 +224,7 @@
             {
               "name": "toast-close",
               "type": {
-                "text": "{ visible: boolean }"
+                "text": "{ visible: boolean, id: string }"
               },
               "description": "Notifies that the toast has been closed"
             },

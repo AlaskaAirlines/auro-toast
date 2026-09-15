@@ -749,7 +749,7 @@ describe("auro-toast — toast-close event", () => {
     let eventFired = false;
     el.addEventListener("toast-close", (e) => {
       eventFired = true;
-      expect(e.detail).to.deep.equal({ visible: false });
+      expect(e.detail).to.deep.equal({ visible: false, id: "" });
     });
 
     const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
@@ -767,7 +767,7 @@ describe("auro-toast — toast-close event", () => {
     let eventFired = false;
     el.addEventListener("toast-close", (e) => {
       eventFired = true;
-      expect(e.detail).to.deep.equal({ visible: false });
+      expect(e.detail).to.deep.equal({ visible: false, id: "" });
     });
 
     await aTimeout(1000);
@@ -784,7 +784,7 @@ describe("auro-toast — toast-close event", () => {
     let eventFired = false;
     el.addEventListener("toast-close", (e) => {
       eventFired = true;
-      expect(e.detail).to.deep.equal({ visible: false });
+      expect(e.detail).to.deep.equal({ visible: false, id: "" });
     });
 
     clock.tick(6000);
