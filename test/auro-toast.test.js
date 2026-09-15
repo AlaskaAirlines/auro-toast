@@ -769,6 +769,21 @@ describe("auro-toast — onToastClose event", () => {
       innerWidthStub.restore();
     }
   });
+
+  it("dispatches toast-close only once when closeToast() is called multiple times directly", async () => {
+    const el = await fixture(html`
+      <auro-toast visible disableautohide>Close me</auro-toast>
+    `);
+
+    let toastCloseCount = 0;
+    el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+    el.closeToast();
+    el.closeToast();
+    el.closeToast();
+
+    expect(toastCloseCount).to.equal(1);
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -873,6 +888,39 @@ describe("auro-toast — auto-hide timer lifecycle", () => {
 
     expect(toastContainer.classList.contains("hidden")).to.be.false;
     expect(el.visible).to.be.true;
+  });
+
+  it("fires onToastClose and toast-close exactly once when the close button is clicked mid-fade at a desktop-width viewport", async () => {
+    const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 1200);
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Fading</auro-toast>
+      `);
+
+      let onToastCloseCount = 0;
+      let toastCloseCount = 0;
+      el.addEventListener("onToastClose", () => { onToastCloseCount += 1; });
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Wait for the auto-hide timer to fire fadeOutToast(), which schedules
+      // closeToast() 300ms later -- but click the close button inside that
+      // window, before the scheduled close fires on its own.
+      await aTimeout(150);
+
+      const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+      closeButton.click();
+      await elementUpdated(el);
+
+      // Wait past the original fade-out's close timer, which clickToClose()
+      // must have cancelled -- otherwise it fires a second, delayed close.
+      await aTimeout(400);
+
+      expect(onToastCloseCount).to.equal(1);
+      expect(toastCloseCount).to.equal(1);
+    } finally {
+      innerWidthStub.restore();
+    }
   });
 });
 
