@@ -738,6 +738,37 @@ describe("auro-toast — onToastClose event", () => {
     expect(onToastCloseCount).to.equal(1);
     expect(toastCloseCount).to.equal(1);
   });
+
+  it("fires onToastClose and toast-close exactly once when closed via the close button at a mobile-width viewport", async () => {
+    const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 375);
+
+    try {
+      // No disableautohide -- it must be absent so the click bubbling to the
+      // host's mobile onclick handler actually reaches fadeOutToast()'s
+      // this.visible guard, the code path this test is meant to exercise.
+      const el = await fixture(html`
+        <auro-toast visible>Close me</auro-toast>
+      `);
+
+      let onToastCloseCount = 0;
+      let toastCloseCount = 0;
+      el.addEventListener("onToastClose", () => { onToastCloseCount += 1; });
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+      closeButton.click();
+      await elementUpdated(el);
+
+      // Wait past the fade-out duration so a second, untracked close
+      // (the regression this test guards against) would have fired by now.
+      await aTimeout(500);
+
+      expect(onToastCloseCount).to.equal(1);
+      expect(toastCloseCount).to.equal(1);
+    } finally {
+      innerWidthStub.restore();
+    }
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -795,6 +826,53 @@ describe("auro-toast — toast-close event", () => {
     } finally {
       clock.restore();
     }
+  });
+});
+
+// ---------------------------------------------------------------------------
+// auto-hide timer lifecycle
+// ---------------------------------------------------------------------------
+
+describe("auro-toast — auto-hide timer lifecycle", () => {
+  it("re-arms auto-hide after being disconnected and reconnected to the DOM", async () => {
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="200">Reparented</auro-toast>
+    `);
+
+    el.remove();
+
+    const newParent = document.createElement("div");
+    document.body.appendChild(newParent);
+    newParent.appendChild(el);
+
+    let eventFired = false;
+    el.addEventListener("toast-close", () => { eventFired = true; });
+
+    // 200ms auto-hide delay + 300ms fade-out duration, plus buffer.
+    await aTimeout(700);
+
+    expect(eventFired).to.be.true;
+
+    newParent.remove();
+  }).timeout(2000);
+
+  it("does not leave the toast stuck hidden if variant changes while fading out", async () => {
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="50">Fading</auro-toast>
+    `);
+
+    // Wait past the auto-hide delay (fadeOutToast() has added the "hidden"
+    // class) but before the 300ms fade-out close timer completes.
+    await aTimeout(150);
+
+    const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+    expect(toastContainer.classList.contains("hidden")).to.be.true;
+
+    el.setAttribute("variant", "success");
+    await elementUpdated(el);
+
+    expect(toastContainer.classList.contains("hidden")).to.be.false;
+    expect(el.visible).to.be.true;
   });
 });
 
