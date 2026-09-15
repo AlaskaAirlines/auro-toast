@@ -519,20 +519,22 @@ describe("auro-toast — live region politeness", () => {
     `);
     await elementUpdated(el);
 
-    const divWithLive = el.shadowRoot?.querySelector("div[aria-live]");
+    try {
+      const divWithLive = el.shadowRoot?.querySelector("div[aria-live]");
 
-    expect(divWithLive.getAttribute("aria-live")).to.equal("assertive");
+      expect(divWithLive.getAttribute("aria-live")).to.equal("assertive");
 
-    // Advance time instead of waiting real time
-    clock.tick(3500);
-    await elementUpdated(el);
+      // Advance time instead of waiting real time
+      clock.tick(3500);
+      await elementUpdated(el);
 
-    expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+      expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
 
-    const toast = el.querySelector("auro-toast");
-    expect(toast.hasAttribute("visible")).to.be.true;
-
-    clock.restore();
+      const toast = el.querySelector("auro-toast");
+      expect(toast.hasAttribute("visible")).to.be.true;
+    } finally {
+      clock.restore();
+    }
   });
 
   it("does not trigger assertive when a non-auro-toast element with variant='error' and visible changes", async () => {
@@ -707,14 +709,16 @@ describe("auro-toast — onToastClose event", () => {
       <auro-toast variant="error" visible>Persistent error</auro-toast>
     `);
 
-    let eventFired = false;
-    el.addEventListener("onToastClose", () => { eventFired = true; });
+    let captured;
+    el.addEventListener("onToastClose", (e) => { captured = e.detail; });
 
-    clock.tick(6000);
+    try {
+      clock.tick(6000);
 
-    expect(eventFired).to.be.false;
-
-    clock.restore();
+      expect(captured, "error toast should not dispatch onToastClose").to.be.undefined;
+    } finally {
+      clock.restore();
+    }
   });
 
   it("fires onToastClose and toast-close exactly once each on a single close", async () => {
@@ -781,17 +785,16 @@ describe("auro-toast — toast-close event", () => {
       <auro-toast variant="error" visible>Persistent error</auro-toast>
     `);
 
-    let eventFired = false;
-    el.addEventListener("toast-close", (e) => {
-      eventFired = true;
-      expect(e.detail).to.deep.equal({ visible: false, id: "" });
-    });
+    let captured;
+    el.addEventListener("toast-close", (e) => { captured = e.detail; });
 
-    clock.tick(6000);
+    try {
+      clock.tick(6000);
 
-    expect(eventFired).to.be.false;
-
-    clock.restore();
+      expect(captured, "error toast should not dispatch toast-close").to.be.undefined;
+    } finally {
+      clock.restore();
+    }
   });
 });
 
@@ -875,7 +878,7 @@ describe("auro-toast", () => {
     const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
     closeButton.click();
 
-    setTimeout(() => expect(el.visible).to.be.false, 1000);
+    expect(el.visible).to.be.false;
   });
 
   it("auro-toast is hidden after five seconds", async () => {
@@ -979,7 +982,7 @@ describe("auro-toast", () => {
       await elementUpdated(el);
 
       const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
-      expect(() => closeButton.click()).to.not.throw;
+      expect(() => closeButton.click()).to.not.throw();
     });
   });
 

@@ -1,7 +1,6 @@
 ```js
 // Import the class only
 import { AuroToast } from '@aurodesignsystem/auro-toast/class';
-
 // Register with a custom name if desired
 AuroToast.register('custom-toast');
 ```
