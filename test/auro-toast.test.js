@@ -770,6 +770,33 @@ describe("auro-toast — onToastClose event", () => {
     }
   });
 
+  it("fires toast-close when tapping the toast body (not the close button) at a mobile-width viewport", async () => {
+    const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 375);
+
+    try {
+      // No disableautohide -- it must be absent, same as fadeOutToast()'s
+      // own guard requires, for the click to actually schedule a close.
+      const el = await fixture(html`
+        <auro-toast visible>Tap me</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Tap the message body, not the close button -- guards against an
+      // over-broad composedPath() check suppressing the whole handler.
+      const message = el.shadowRoot.querySelector(".message");
+      message.click();
+
+      // fadeOutToast() schedules the close 300ms later.
+      await aTimeout(400);
+
+      expect(toastCloseCount).to.equal(1);
+    } finally {
+      innerWidthStub.restore();
+    }
+  });
+
   it("dispatches toast-close only once when closeToast() is called multiple times directly", async () => {
     const el = await fixture(html`
       <auro-toast visible disableautohide>Close me</auro-toast>
@@ -872,26 +899,34 @@ describe("auro-toast — auto-hide timer lifecycle", () => {
   }).timeout(2000);
 
   it("does not leave the toast stuck hidden if variant changes while fading out", async () => {
-    const el = await fixture(html`
-      <auro-toast visible timetilhide="50">Fading</auro-toast>
-    `);
+    const clock = sinon.useFakeTimers();
 
-    // Wait past the auto-hide delay (fadeOutToast() has added the "hidden"
-    // class) but before the 300ms fade-out close timer completes.
-    await aTimeout(150);
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Fading</auro-toast>
+      `);
 
-    const toastContainer = el.shadowRoot.querySelector(".toastContainer");
-    expect(toastContainer.classList.contains("hidden")).to.be.true;
+      // Advance exactly to the auto-hide delay (fadeOutToast() has added the
+      // "hidden" class) but stop short of the 300ms fade-out close timer --
+      // a fake clock removes the real-timer race the un-mocked version had.
+      clock.tick(50);
 
-    el.setAttribute("variant", "success");
-    await elementUpdated(el);
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(toastContainer.classList.contains("hidden")).to.be.true;
 
-    expect(toastContainer.classList.contains("hidden")).to.be.false;
-    expect(el.visible).to.be.true;
+      el.setAttribute("variant", "success");
+      await elementUpdated(el);
+
+      expect(toastContainer.classList.contains("hidden")).to.be.false;
+      expect(el.visible).to.be.true;
+    } finally {
+      clock.restore();
+    }
   });
 
   it("fires onToastClose and toast-close exactly once when the close button is clicked mid-fade at a desktop-width viewport", async () => {
     const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 1200);
+    const clock = sinon.useFakeTimers();
 
     try {
       const el = await fixture(html`
@@ -903,24 +938,60 @@ describe("auro-toast — auto-hide timer lifecycle", () => {
       el.addEventListener("onToastClose", () => { onToastCloseCount += 1; });
       el.addEventListener("toast-close", () => { toastCloseCount += 1; });
 
-      // Wait for the auto-hide timer to fire fadeOutToast(), which schedules
+      // Advance past the auto-hide timer so fadeOutToast() fires and schedules
       // closeToast() 300ms later -- but click the close button inside that
-      // window, before the scheduled close fires on its own.
-      await aTimeout(150);
+      // window, before the scheduled close fires on its own. A fake clock
+      // makes this deterministic instead of racing real timers.
+      clock.tick(150);
 
       const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
       closeButton.click();
       await elementUpdated(el);
 
-      // Wait past the original fade-out's close timer, which clickToClose()
+      // Advance past the original fade-out's close timer, which clickToClose()
       // must have cancelled -- otherwise it fires a second, delayed close.
-      await aTimeout(400);
+      clock.tick(400);
 
       expect(onToastCloseCount).to.equal(1);
       expect(toastCloseCount).to.equal(1);
     } finally {
+      clock.restore();
       innerWidthStub.restore();
     }
+  });
+
+  it("cancels a pending close when disconnected mid-fade, and restores full visibility on reconnect", async () => {
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="50">Detached mid-fade</auro-toast>
+    `);
+
+    let toastCloseCount = 0;
+    el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+    // Wait past the auto-hide delay so fadeOutToast() has added "hidden" and
+    // scheduled the 300ms close, then detach before that close fires.
+    await aTimeout(150);
+    el.remove();
+
+    // Wait past the close delay that would have fired had disconnectedCallback
+    // not cancelled it (this is the regression covered by the connectedCallback
+    // fix below).
+    await aTimeout(400);
+    expect(toastCloseCount, "close must not fire while detached").to.equal(0);
+
+    const newParent = document.createElement("div");
+    document.body.appendChild(newParent);
+    newParent.appendChild(el);
+    await elementUpdated(el);
+
+    const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+    expect(
+      toastContainer.classList.contains("hidden"),
+      "reconnect must restore visibility, not leave the toast stuck hidden"
+    ).to.be.false;
+    expect(el.visible).to.be.true;
+
+    newParent.remove();
   });
 });
 
