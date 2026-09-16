@@ -961,37 +961,120 @@ describe("auro-toast — auto-hide timer lifecycle", () => {
   });
 
   it("cancels a pending close when disconnected mid-fade, and restores full visibility on reconnect", async () => {
-    const el = await fixture(html`
-      <auro-toast visible timetilhide="50">Detached mid-fade</auro-toast>
-    `);
+    const clock = sinon.useFakeTimers();
 
-    let toastCloseCount = 0;
-    el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Detached mid-fade</auro-toast>
+      `);
 
-    // Wait past the auto-hide delay so fadeOutToast() has added "hidden" and
-    // scheduled the 300ms close, then detach before that close fires.
-    await aTimeout(150);
-    el.remove();
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
 
-    // Wait past the close delay that would have fired had disconnectedCallback
-    // not cancelled it (this is the regression covered by the connectedCallback
-    // fix below).
-    await aTimeout(400);
-    expect(toastCloseCount, "close must not fire while detached").to.equal(0);
+      // Advance past the auto-hide delay so fadeOutToast() has added "hidden"
+      // and scheduled the 300ms close, then detach before that close fires.
+      clock.tick(150);
+      el.remove();
 
-    const newParent = document.createElement("div");
-    document.body.appendChild(newParent);
-    newParent.appendChild(el);
-    await elementUpdated(el);
+      // Advance past the close delay that would have fired had
+      // disconnectedCallback not cancelled it (this is the regression covered
+      // by the connectedCallback fix below).
+      clock.tick(400);
+      expect(toastCloseCount, "close must not fire while detached").to.equal(0);
 
-    const toastContainer = el.shadowRoot.querySelector(".toastContainer");
-    expect(
-      toastContainer.classList.contains("hidden"),
-      "reconnect must restore visibility, not leave the toast stuck hidden"
-    ).to.be.false;
-    expect(el.visible).to.be.true;
+      const newParent = document.createElement("div");
+      document.body.appendChild(newParent);
+      newParent.appendChild(el);
+      await elementUpdated(el);
 
-    newParent.remove();
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(
+        toastContainer.classList.contains("hidden"),
+        "reconnect must restore visibility, not leave the toast stuck hidden"
+      ).to.be.false;
+      expect(el.visible).to.be.true;
+
+      newParent.remove();
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("restores full visibility on reconnect even when disableAutoHide is set, so no new auto-hide timer gets scheduled", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Detached mid-fade</auro-toast>
+      `);
+
+      // Advance past the auto-hide delay so fadeOutToast() has added "hidden"
+      // and scheduled the 300ms close, then detach before that close fires.
+      clock.tick(50);
+      el.remove();
+
+      // Reconnecting with disableAutoHide set means _scheduleAutoHide() will
+      // not schedule a new fade-out timer -- connectedCallback() must still
+      // clear the leftover "hidden" class unconditionally, not only as a
+      // side effect of re-arming auto-hide.
+      el.disableAutoHide = true;
+      const newParent = document.createElement("div");
+      document.body.appendChild(newParent);
+      newParent.appendChild(el);
+      await elementUpdated(el);
+
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(
+        toastContainer.classList.contains("hidden"),
+        "reconnect must restore visibility even when auto-hide is disabled"
+      ).to.be.false;
+      expect(el.visible).to.be.true;
+
+      newParent.remove();
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("mobile tap-to-dismiss handler stays excluded via composedPath() even if a toast-close listener reentrantly re-shows the toast", async () => {
+    const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 375);
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Mobile</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => {
+        toastCloseCount += 1;
+
+        // Reentrantly re-show the toast in the same tick clickToClose()
+        // dispatched this event. A `visible`-only guard on the host's mobile
+        // handler would see `visible === true` again by the time the click
+        // finishes bubbling to the host, and incorrectly run fadeOutToast()
+        // a second time -- composedPath() must exclude the close button
+        // regardless of `visible`'s state at bubble time.
+        if (toastCloseCount === 1) {
+          el.visible = true;
+        }
+      });
+
+      const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+      closeButton.click();
+      await elementUpdated(el);
+
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(
+        toastCloseCount,
+        "toast-close must not fire a second time from the bubbled click"
+      ).to.equal(1);
+      expect(
+        toastContainer.classList.contains("hidden"),
+        "fadeOutToast() must not have run via the host's mobile handler"
+      ).to.be.false;
+    } finally {
+      innerWidthStub.restore();
+    }
   });
 });
 
