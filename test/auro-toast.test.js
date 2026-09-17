@@ -877,26 +877,32 @@ describe("auro-toast — toast-close event", () => {
 
 describe("auro-toast — auto-hide timer lifecycle", () => {
   it("re-arms auto-hide after being disconnected and reconnected to the DOM", async () => {
-    const el = await fixture(html`
-      <auro-toast visible timetilhide="200">Reparented</auro-toast>
-    `);
+    const clock = sinon.useFakeTimers();
 
-    el.remove();
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="200">Reparented</auro-toast>
+      `);
 
-    const newParent = document.createElement("div");
-    document.body.appendChild(newParent);
-    newParent.appendChild(el);
+      el.remove();
 
-    let eventFired = false;
-    el.addEventListener("toast-close", () => { eventFired = true; });
+      const newParent = document.createElement("div");
+      document.body.appendChild(newParent);
+      newParent.appendChild(el);
 
-    // 200ms auto-hide delay + 300ms fade-out duration, plus buffer.
-    await aTimeout(700);
+      let eventFired = false;
+      el.addEventListener("toast-close", () => { eventFired = true; });
 
-    expect(eventFired).to.be.true;
+      // 200ms auto-hide delay + 300ms fade-out duration, plus buffer.
+      clock.tick(700);
 
-    newParent.remove();
-  }).timeout(2000);
+      expect(eventFired).to.be.true;
+
+      newParent.remove();
+    } finally {
+      clock.restore();
+    }
+  });
 
   it("does not leave the toast stuck hidden if variant changes while fading out", async () => {
     const clock = sinon.useFakeTimers();
@@ -905,6 +911,9 @@ describe("auro-toast — auto-hide timer lifecycle", () => {
       const el = await fixture(html`
         <auro-toast visible timetilhide="50">Fading</auro-toast>
       `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
 
       // Advance exactly to the auto-hide delay (fadeOutToast() has added the
       // "hidden" class) but stop short of the 300ms fade-out close timer --
@@ -919,6 +928,16 @@ describe("auro-toast — auto-hide timer lifecycle", () => {
 
       expect(toastContainer.classList.contains("hidden")).to.be.false;
       expect(el.visible).to.be.true;
+
+      // Stop _scheduleAutoHide()'s own (legitimate) re-arm from confounding
+      // the result, then advance past the original fade-out's close timer --
+      // it must have been cancelled by the variant-change branch of
+      // updated(), not merely have its visual side effect undone above.
+      el.disableAutoHide = true;
+      await elementUpdated(el);
+      clock.tick(400);
+
+      expect(toastCloseCount, "the cancelled fade-out's close timer must not have fired").to.equal(0);
     } finally {
       clock.restore();
     }
@@ -1000,6 +1019,34 @@ describe("auro-toast — auto-hide timer lifecycle", () => {
     }
   });
 
+  it("cancels the pending auto-hide timer when disconnected before it fires, not just the close timer", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Detached before fade</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Detach before the auto-hide delay elapses, while fadeOutTimer (not
+      // closeTimer) is the only pending timer -- disconnectedCallback() must
+      // clear it too, or fadeOutToast() runs on a node no longer in the
+      // document once the delay elapses. The sibling test above only
+      // exercises the closeTimer clear, by detaching after fadeOutToast()
+      // has already run.
+      el.remove();
+
+      // Advance past timeTilHide + the 300ms fade-out duration.
+      clock.tick(400);
+
+      expect(toastCloseCount, "close must not fire from a timer left pending after disconnect").to.equal(0);
+    } finally {
+      clock.restore();
+    }
+  });
+
   it("restores full visibility on reconnect even when disableAutoHide is set, so no new auto-hide timer gets scheduled", async () => {
     const clock = sinon.useFakeTimers();
 
@@ -1041,7 +1088,7 @@ describe("auro-toast — auto-hide timer lifecycle", () => {
 
     try {
       const el = await fixture(html`
-        <auro-toast visible timetilhide="50">Mobile</auro-toast>
+        <auro-toast visible>Mobile</auro-toast>
       `);
 
       let toastCloseCount = 0;

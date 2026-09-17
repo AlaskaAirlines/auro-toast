@@ -486,9 +486,13 @@ export class AuroToast extends LitElement {
    * @returns {void}
    */
   _scheduleAutoHide() {
+    // Unconditional so a pending timer never survives becoming ineligible
+    // (e.g. disableAutoHide toggled on mid-countdown) -- correctness should
+    // not depend on fadeOutToast()'s own guard re-checking eligibility.
+    clearTimeout(this.fadeOutTimer);
+
     // do not auto dismiss for error toasts or if disableAutoHide is set
     if (this.visible && !this.disableAutoHide && this.variant !== "error") {
-      clearTimeout(this.fadeOutTimer);
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
       }, this.timeTilHide || DEFAULT_TIME_TIL_FADE_OUT);
