@@ -1083,6 +1083,79 @@ describe("auro-toast — auto-hide timer lifecycle", () => {
     }
   });
 
+  it("does not re-arm the auto-hide timer if a reactive property changes while detached", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Detached</auro-toast>
+      `);
+
+      el.remove();
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // A reactive property change processed after disconnect (Lit's update
+      // cycle runs regardless of connection state) must not re-arm the
+      // auto-hide timer -- without an isConnected guard in
+      // _scheduleAutoHide(), this schedules a new fadeOutTimer that fires
+      // while off-DOM, ahead of connectedCallback's own restoration logic
+      // on reconnect (AB#1646998).
+      el.noIcon = true;
+      await elementUpdated(el);
+
+      // Advance well past timeTilHide plus the fade-out duration.
+      clock.tick(1000);
+
+      expect(toastCloseCount, "toast must not auto-close while detached").to.equal(0);
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("clears a stale closeTimer and hidden state when a reused toast element becomes visible again mid-fade", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">First message</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Let auto-hide begin fading the toast out -- fadeOutToast() has added
+      // "hidden" and scheduled closeTimer for 300ms later, but `visible` is
+      // still true until that timer actually fires.
+      clock.tick(50);
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(toastContainer.classList.contains("hidden")).to.be.true;
+
+      // Simulate a message-queue implementation reusing this element
+      // instance for a new message: toggle visible directly, bypassing
+      // clickToClose()/closeToast() and disconnectedCallback() -- previously
+      // the only places that cleared closeTimer (AB#1646998).
+      el.visible = false;
+      el.visible = true;
+      await elementUpdated(el);
+
+      expect(
+        toastContainer.classList.contains("hidden"),
+        "reused toast must not still show the previous fade-out's hidden state"
+      ).to.be.false;
+
+      // The stale closeTimer from the original fade-out must not survive --
+      // advancing past its original 300ms window must not close the
+      // freshly-reused toast.
+      clock.tick(300);
+
+      expect(toastCloseCount, "stale closeTimer must not close the reused toast").to.equal(0);
+    } finally {
+      clock.restore();
+    }
+  });
+
   it("mobile tap-to-dismiss handler stays excluded via composedPath() even if a toast-close listener reentrantly re-shows the toast", async () => {
     const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 375);
 
