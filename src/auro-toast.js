@@ -458,6 +458,17 @@ export class AuroToast extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has("visible")) {
       this.handleSlotContent();
+
+      // A toast element reused for a new message (e.g. a message queue
+      // recycling instances) can still have a closeTimer pending from an
+      // earlier close's fade-out -- nothing previously cleared it when
+      // visible flips back to true, so it could fire ~300ms later and close
+      // the freshly re-shown toast. Also restore visibility in case the
+      // earlier fade-out had already applied the "hidden" class.
+      if (this.visible) {
+        clearTimeout(this.closeTimer);
+        this.shadowRoot?.querySelector(".toastContainer")?.classList.remove("hidden");
+      }
     }
 
     // Keep the standalone role in sync if variant changes after connection.
@@ -482,6 +493,12 @@ export class AuroToast extends LitElement {
    * from connectedCallback() to re-arm auto-hide after a reconnect (e.g. the
    * node is re-parented elsewhere in the DOM), since updated() does not run
    * again on reconnect alone.
+   *
+   * Restarts the full countdown on every reconnect rather than resuming
+   * elapsed time -- this is intentional (AB#1646998): "visible for N ms"
+   * is scoped to a single connected mount, and connectedCallback() itself
+   * re-arms on every reconnect, so a resume-elapsed-time model would need
+   * its own persisted start time with no corresponding product ask.
    * @private
    * @returns {void}
    */
@@ -491,8 +508,12 @@ export class AuroToast extends LitElement {
     // not depend on fadeOutToast()'s own guard re-checking eligibility.
     clearTimeout(this.fadeOutTimer);
 
-    // do not auto dismiss for error toasts or if disableAutoHide is set
-    if (this.visible && !this.disableAutoHide && this.variant !== "error") {
+    // do not auto dismiss for error toasts, if disableAutoHide is set, or
+    // while disconnected -- updated() can still run after disconnect (Lit's
+    // update cycle does not require an active connection), and arming a
+    // timer here would let it fire off-DOM, ahead of connectedCallback's own
+    // re-arm and hidden-class restoration on reconnect (AB#1646998).
+    if (this.isConnected && this.visible && !this.disableAutoHide && this.variant !== "error") {
       this.fadeOutTimer = setTimeout(() => {
         this.fadeOutToast();
       }, this.timeTilHide || DEFAULT_TIME_TIL_FADE_OUT);
