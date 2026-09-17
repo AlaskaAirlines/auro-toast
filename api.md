@@ -9,9 +9,9 @@ The `auro-toast` element provides users a way to display short, temporary messag
 
 | Properties      | Attributes      | Modifiers | Type                             | Default | Description                                                                                                                                                                                                     |
 | --------------- | --------------- | --------- | -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| disableAutoHide | disableAutoHide |           | boolean                          |         | Prevents the toast from auto-hiding on the default time.                                                                                                                                                        |
-| noIcon          | noIcon          |           | boolean                          |         | Removes icon from the toast UI.                                                                                                                                                                                 |
-| timeTilHide     | timeTilHide     |           | number                           |         | Sets the time in milliseconds until the toast hides.                                                                                                                                                            |
+| disableAutoHide | disableautohide |           | boolean                          |         | Prevents the toast from auto-hiding on the default time.                                                                                                                                                        |
+| noIcon          | noicon          |           | boolean                          |         | Removes icon from the toast UI.                                                                                                                                                                                 |
+| timeTilHide     | timetilhide     |           | number                           |         | Sets the time in milliseconds until the toast hides.                                                                                                                                                            |
 | trigger         | trigger         |           | string                           |         | The id of the element that triggered the toast.<br>When the toast is manually closed, focus will return to this element.<br>Takes precedence over the triggerElement property if both are set.                  |
 | triggerElement  |                 |           | HTMLElement                      |         | A direct reference to the element that triggered the toast.<br>When the toast is manually closed, focus will return to this element.<br>Use the trigger attribute instead if you prefer a declarative approach. |
 | variant         | variant         |           | `error` \| `success` \| `custom` |         | Component will render visually based on which variant value is set.                                                                                                                                             |
@@ -25,9 +25,10 @@ The `auro-toast` element provides users a way to display short, temporary messag
 
 ### Events
 
-| Name         | Description                             |
-| ------------ | --------------------------------------- |
-| onToastClose | Notifies that the toast has been closed |
+| Name         | Description                                      |
+| ------------ | ------------------------------------------------ |
+| toast-close  | Notifies that the toast has been closed          |
+| onToastClose | **Deprecated**, use `toast-close` event instead. |
 
 ### CSS Shadow Parts
 
@@ -513,7 +514,7 @@ export function initDynamicToastsExample() {
       console.log("Toast added:", toastId);
 ​
       // optional cleanup if your component doesn't auto-remove itself
-      toast.addEventListener("onToastClose", () =&gt; {
+      toast.addEventListener("toast-close", () =&gt; {
         activeToasts.delete(toastId);
       });
     });
