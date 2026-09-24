@@ -112,7 +112,7 @@ describe("auro-toaster — live region structure", () => {
   it("toastContainer does not contain any live region attributes or roles that would create a nested live region", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" visible disableAutoHide>Test</auro-toast>
+        <auro-toast variant="success" visible disableautohide>Test</auro-toast>
       </auro-toaster>
     `);
     await elementUpdated(el);
@@ -130,7 +130,7 @@ describe("auro-toaster — live region structure", () => {
 
   it("close button has an aria label that describes its purpose", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" visible disableAutoHide>Flight booked</auro-toast>
+      <auro-toast variant="success" visible disableautohide>Flight booked</auro-toast>
     `);
     await elementUpdated(el);
 
@@ -209,7 +209,7 @@ describe("auro-toast — standalone live region", () => {
 
   it("sets role='status' on host at connection time — before visible is set", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+      <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
     `);
 
     // Role must already be present — no visibility change needed
@@ -218,7 +218,7 @@ describe("auro-toast — standalone live region", () => {
 
   it("sets role='alert' on host at connection time for error variant", async () => {
     const el = await fixture(html`
-      <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+      <auro-toast variant="error" disableautohide>Something went wrong</auro-toast>
     `);
 
     expect(el.getAttribute('role')).to.equal('alert');
@@ -226,7 +226,7 @@ describe("auro-toast — standalone live region", () => {
 
   it("updates role when variant changes after connection", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" disableAutoHide>Message</auro-toast>
+      <auro-toast variant="success" disableautohide>Message</auro-toast>
     `);
 
     expect(el.getAttribute('role')).to.equal('status');
@@ -240,7 +240,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role when inside a div with aria-live='polite'", async () => {
     const el = await fixture(html`
       <div aria-live="polite">
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -252,7 +252,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role when inside a div with aria-live='assertive'", async () => {
     const el = await fixture(html`
       <div aria-live="assertive">
-        <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+        <auro-toast variant="error" disableautohide>Something went wrong</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -264,7 +264,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role when inside a container with role='status'", async () => {
     const el = await fixture(html`
       <div role="status">
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -276,7 +276,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role when inside a container with role='alert'", async () => {
     const el = await fixture(html`
       <div role="alert">
-        <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+        <auro-toast variant="error" disableautohide>Something went wrong</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -288,7 +288,7 @@ describe("auro-toast — standalone live region", () => {
   it("sets role when inside a div with aria-live='off' — off is not an active live region", async () => {
     const el = await fixture(html`
       <div aria-live="off">
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </div>
     `);
     const toast = el.querySelector('auro-toast');
@@ -300,7 +300,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role on host when inside auro-toaster", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </auro-toaster>
     `);
     const toast = el.querySelector('auro-toast');
@@ -312,7 +312,7 @@ describe("auro-toast — standalone live region", () => {
   it("does not set role on host for error toast when inside auro-toaster", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="error" disableAutoHide>Something went wrong</auro-toast>
+        <auro-toast variant="error" disableautohide>Something went wrong</auro-toast>
       </auro-toaster>
     `);
     const toast = el.querySelector('auro-toast');
@@ -327,7 +327,7 @@ describe("auro-toast — standalone live region", () => {
   it("removes role when reconnected inside a container that owns a live region", async () => {
     const wrapper = await fixture(html`
       <div>
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
         <div id="liveContainer" aria-live="polite"></div>
       </div>
     `);
@@ -387,7 +387,7 @@ describe("auro-toast — axe accessibility", () => {
   it("passes axe for noIcon variant", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" noIcon visible>Saved</auro-toast>
+        <auro-toast variant="success" noicon visible>Saved</auro-toast>
       </auro-toaster>
     `);
 
@@ -404,7 +404,7 @@ describe("auro-toast — live region announcements on show", () => {
   it("announces message text when toast becomes visible", async () => {
     const toaster = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" disableAutoHide>Flight booked</auro-toast>
+        <auro-toast variant="success" disableautohide>Flight booked</auro-toast>
       </auro-toaster>
     `);
     const toast = toaster.querySelector("auro-toast");
@@ -434,7 +434,7 @@ describe("auro-toast — live region announcements on show", () => {
 
   it("message text is delivered via slot, not hardcoded in shadow DOM", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" visible disableAutoHide>Flight booked</auro-toast>
+      <auro-toast variant="success" visible disableautohide>Flight booked</auro-toast>
     `);
     await elementUpdated(el);
 
@@ -514,25 +514,27 @@ describe("auro-toast — live region politeness", () => {
 
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="error" visible disableAutoHide>Persistent error</auro-toast>
+        <auro-toast variant="error" visible disableautohide>Persistent error</auro-toast>
       </auro-toaster>
     `);
     await elementUpdated(el);
 
-    const divWithLive = el.shadowRoot?.querySelector("div[aria-live]");
+    try {
+      const divWithLive = el.shadowRoot?.querySelector("div[aria-live]");
 
-    expect(divWithLive.getAttribute("aria-live")).to.equal("assertive");
+      expect(divWithLive.getAttribute("aria-live")).to.equal("assertive");
 
-    // Advance time instead of waiting real time
-    clock.tick(3500);
-    await elementUpdated(el);
+      // Advance time instead of waiting real time
+      clock.tick(3500);
+      await elementUpdated(el);
 
-    expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+      expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
 
-    const toast = el.querySelector("auro-toast");
-    expect(toast.hasAttribute("visible")).to.be.true;
-
-    clock.restore();
+      const toast = el.querySelector("auro-toast");
+      expect(toast.hasAttribute("visible")).to.be.true;
+    } finally {
+      clock.restore();
+    }
   });
 
   it("does not trigger assertive when a non-auro-toast element with variant='error' and visible changes", async () => {
@@ -578,8 +580,8 @@ describe("auro-toast — live region politeness", () => {
     const root = await fixture(html`
       <div>
         <auro-toaster id="toaster">
-          <auro-toast id="toast1" variant="error" visible disableAutoHide>First error</auro-toast>
-          <auro-toast id="toast2" variant="error" disableAutoHide>Second error</auro-toast>
+          <auro-toast id="toast1" variant="error" visible disableautohide>First error</auro-toast>
+          <auro-toast id="toast2" variant="error" disableautohide>Second error</auro-toast>
         </auro-toaster>
       </div>
     `);
@@ -609,7 +611,7 @@ describe("auro-toast — live region politeness", () => {
     const wrapper = await fixture(html`
       <div>
         <auro-toaster>
-          <auro-toast variant="error" visible disableAutoHide>Something went wrong</auro-toast>
+          <auro-toast variant="error" visible disableautohide>Something went wrong</auro-toast>
         </auro-toaster>
       </div>
     `);
@@ -635,7 +637,7 @@ describe("auro-toast — live region politeness", () => {
   it("triggers assertive when a visible toast changes variant to error (defensive fallback)", async () => {
     const el = await fixture(html`
       <auro-toaster>
-        <auro-toast variant="success" visible disableAutoHide>Saved</auro-toast>
+        <auro-toast variant="success" visible disableautohide>Saved</auro-toast>
       </auro-toaster>
     `);
 
@@ -665,29 +667,39 @@ describe("auro-toast — live region politeness", () => {
 describe("auro-toast — onToastClose event", () => {
   it("fires onToastClose when X button is clicked", async () => {
     const el = await fixture(html`
-      <auro-toast visible disableAutoHide>Close me</auro-toast>
+      <auro-toast visible disableautohide>Close me</auro-toast>
     `);
 
     let eventFired = false;
-    el.addEventListener("onToastClose", () => { eventFired = true; });
+    let detail;
+    el.addEventListener("onToastClose", (e) => {
+      eventFired = true;
+      detail = e.detail;
+    });
 
     const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
     closeButton.click();
     await elementUpdated(el);
 
     expect(eventFired).to.be.true;
+    expect(detail).to.equal(el);
   });
 
   it("fires onToastClose after auto-hide timeout", async () => {
     const el = await fixture(html`
-      <auro-toast visible timeTilHide="500">Auto close me</auro-toast>
+      <auro-toast visible timetilhide="500">Auto close me</auro-toast>
     `);
 
     let eventFired = false;
-    el.addEventListener("onToastClose", () => { eventFired = true; });
+    let detail;
+    el.addEventListener("onToastClose", (e) => {
+      eventFired = true;
+      detail = e.detail;
+    });
 
     await aTimeout(1000);
     expect(eventFired).to.be.true;
+    expect(detail).to.equal(el);
   }).timeout(2000);
 
   it("does NOT fire onToastClose for error toast after timeout", async () => {
@@ -697,14 +709,513 @@ describe("auro-toast — onToastClose event", () => {
       <auro-toast variant="error" visible>Persistent error</auro-toast>
     `);
 
+    let captured;
+    el.addEventListener("onToastClose", (e) => { captured = e.detail; });
+
+    try {
+      clock.tick(6000);
+
+      expect(captured, "error toast should not dispatch onToastClose").to.be.undefined;
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("fires onToastClose and toast-close exactly once each on a single close", async () => {
+    const el = await fixture(html`
+      <auro-toast visible disableautohide>Close me</auro-toast>
+    `);
+
+    let onToastCloseCount = 0;
+    let toastCloseCount = 0;
+    el.addEventListener("onToastClose", () => { onToastCloseCount += 1; });
+    el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+    const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+    closeButton.click();
+    await elementUpdated(el);
+
+    expect(onToastCloseCount).to.equal(1);
+    expect(toastCloseCount).to.equal(1);
+  });
+
+  it("fires onToastClose and toast-close exactly once when closed via the close button at a mobile-width viewport", async () => {
+    const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 375);
+
+    try {
+      // No disableautohide -- it must be absent so the click bubbling to the
+      // host's mobile onclick handler actually reaches fadeOutToast()'s
+      // this.visible guard, the code path this test is meant to exercise.
+      const el = await fixture(html`
+        <auro-toast visible>Close me</auro-toast>
+      `);
+
+      let onToastCloseCount = 0;
+      let toastCloseCount = 0;
+      el.addEventListener("onToastClose", () => { onToastCloseCount += 1; });
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+      closeButton.click();
+      await elementUpdated(el);
+
+      // Wait past the fade-out duration so a second, untracked close
+      // (the regression this test guards against) would have fired by now.
+      await aTimeout(500);
+
+      expect(onToastCloseCount).to.equal(1);
+      expect(toastCloseCount).to.equal(1);
+    } finally {
+      innerWidthStub.restore();
+    }
+  });
+
+  it("fires toast-close when tapping the toast body (not the close button) at a mobile-width viewport", async () => {
+    const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 375);
+
+    try {
+      // No disableautohide -- it must be absent, same as fadeOutToast()'s
+      // own guard requires, for the click to actually schedule a close.
+      const el = await fixture(html`
+        <auro-toast visible>Tap me</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Tap the message body, not the close button -- guards against an
+      // over-broad composedPath() check suppressing the whole handler.
+      const message = el.shadowRoot.querySelector(".message");
+      message.click();
+
+      // fadeOutToast() schedules the close 300ms later.
+      await aTimeout(400);
+
+      expect(toastCloseCount).to.equal(1);
+    } finally {
+      innerWidthStub.restore();
+    }
+  });
+
+  it("dispatches toast-close only once when closeToast() is called multiple times directly", async () => {
+    const el = await fixture(html`
+      <auro-toast visible disableautohide>Close me</auro-toast>
+    `);
+
+    let toastCloseCount = 0;
+    el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+    el.closeToast();
+    el.closeToast();
+    el.closeToast();
+
+    expect(toastCloseCount).to.equal(1);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// toast-close event
+// ---------------------------------------------------------------------------
+
+describe("auro-toast — toast-close event", () => {
+  it("fires toast-close when X button is clicked", async () => {
+    const el = await fixture(html`
+      <auro-toast visible disableautohide>Close me</auro-toast>
+    `);
+
     let eventFired = false;
-    el.addEventListener("onToastClose", () => { eventFired = true; });
+    el.addEventListener("toast-close", (e) => {
+      eventFired = true;
+      expect(e.detail).to.deep.equal({ visible: false, id: "" });
+    });
 
-    clock.tick(6000);
+    const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+    closeButton.click();
+    await elementUpdated(el);
 
-    expect(eventFired).to.be.false;
+    expect(eventFired).to.be.true;
+  });
 
-    clock.restore();
+  it("fires toast-close after auto-hide timeout", async () => {
+    const el = await fixture(html`
+      <auro-toast visible timetilhide="500">Auto close me</auro-toast>
+    `);
+
+    let eventFired = false;
+    el.addEventListener("toast-close", (e) => {
+      eventFired = true;
+      expect(e.detail).to.deep.equal({ visible: false, id: "" });
+    });
+
+    await aTimeout(1000);
+    expect(eventFired).to.be.true;
+  }).timeout(2000);
+
+  it("does NOT fire toast-close for error toast after timeout", async () => {
+    const clock = sinon.useFakeTimers();
+
+    const el = await fixture(html`
+      <auro-toast variant="error" visible>Persistent error</auro-toast>
+    `);
+
+    let captured;
+    el.addEventListener("toast-close", (e) => { captured = e.detail; });
+
+    try {
+      clock.tick(6000);
+
+      expect(captured, "error toast should not dispatch toast-close").to.be.undefined;
+    } finally {
+      clock.restore();
+    }
+  });
+});
+
+// ---------------------------------------------------------------------------
+// auto-hide timer lifecycle
+// ---------------------------------------------------------------------------
+
+describe("auro-toast — auto-hide timer lifecycle", () => {
+  it("re-arms auto-hide after being disconnected and reconnected to the DOM", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="200">Reparented</auro-toast>
+      `);
+
+      el.remove();
+
+      const newParent = document.createElement("div");
+      document.body.appendChild(newParent);
+      newParent.appendChild(el);
+
+      let eventFired = false;
+      el.addEventListener("toast-close", () => { eventFired = true; });
+
+      // 200ms auto-hide delay + 300ms fade-out duration, plus buffer.
+      clock.tick(700);
+
+      expect(eventFired).to.be.true;
+
+      newParent.remove();
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("does not leave the toast stuck hidden if variant changes while fading out", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Fading</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Advance exactly to the auto-hide delay (fadeOutToast() has added the
+      // "hidden" class) but stop short of the 300ms fade-out close timer --
+      // a fake clock removes the real-timer race the un-mocked version had.
+      clock.tick(50);
+
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(toastContainer.classList.contains("hidden")).to.be.true;
+
+      el.setAttribute("variant", "success");
+      await elementUpdated(el);
+
+      expect(toastContainer.classList.contains("hidden")).to.be.false;
+      expect(el.visible).to.be.true;
+
+      // Stop _scheduleAutoHide()'s own (legitimate) re-arm from confounding
+      // the result, then advance past the original fade-out's close timer --
+      // it must have been cancelled by the variant-change branch of
+      // updated(), not merely have its visual side effect undone above.
+      el.disableAutoHide = true;
+      await elementUpdated(el);
+      clock.tick(400);
+
+      expect(toastCloseCount, "the cancelled fade-out's close timer must not have fired").to.equal(0);
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("fires onToastClose and toast-close exactly once when the close button is clicked mid-fade at a desktop-width viewport", async () => {
+    const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 1200);
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Fading</auro-toast>
+      `);
+
+      let onToastCloseCount = 0;
+      let toastCloseCount = 0;
+      el.addEventListener("onToastClose", () => { onToastCloseCount += 1; });
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Advance past the auto-hide timer so fadeOutToast() fires and schedules
+      // closeToast() 300ms later -- but click the close button inside that
+      // window, before the scheduled close fires on its own. A fake clock
+      // makes this deterministic instead of racing real timers.
+      clock.tick(150);
+
+      const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+      closeButton.click();
+      await elementUpdated(el);
+
+      // Advance past the original fade-out's close timer, which clickToClose()
+      // must have cancelled -- otherwise it fires a second, delayed close.
+      clock.tick(400);
+
+      expect(onToastCloseCount).to.equal(1);
+      expect(toastCloseCount).to.equal(1);
+    } finally {
+      clock.restore();
+      innerWidthStub.restore();
+    }
+  });
+
+  it("cancels a pending close when disconnected mid-fade, and restores full visibility on reconnect", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Detached mid-fade</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Advance past the auto-hide delay so fadeOutToast() has added "hidden"
+      // and scheduled the 300ms close, then detach before that close fires.
+      clock.tick(150);
+      el.remove();
+
+      // Advance past the close delay that would have fired had
+      // disconnectedCallback not cancelled it (this is the regression covered
+      // by the connectedCallback fix below).
+      clock.tick(400);
+      expect(toastCloseCount, "close must not fire while detached").to.equal(0);
+
+      const newParent = document.createElement("div");
+      document.body.appendChild(newParent);
+      newParent.appendChild(el);
+      await elementUpdated(el);
+
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(
+        toastContainer.classList.contains("hidden"),
+        "reconnect must restore visibility, not leave the toast stuck hidden"
+      ).to.be.false;
+      expect(el.visible).to.be.true;
+
+      newParent.remove();
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("cancels the pending auto-hide timer when disconnected before it fires, not just the close timer", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Detached before fade</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Detach before the auto-hide delay elapses, while fadeOutTimer (not
+      // closeTimer) is the only pending timer -- disconnectedCallback() must
+      // clear it too, or fadeOutToast() runs on a node no longer in the
+      // document once the delay elapses. The sibling test above only
+      // exercises the closeTimer clear, by detaching after fadeOutToast()
+      // has already run.
+      el.remove();
+
+      // Advance past timeTilHide + the 300ms fade-out duration.
+      clock.tick(400);
+
+      expect(toastCloseCount, "close must not fire from a timer left pending after disconnect").to.equal(0);
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("restores full visibility on reconnect even when disableAutoHide is set, so no new auto-hide timer gets scheduled", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Detached mid-fade</auro-toast>
+      `);
+
+      // Advance past the auto-hide delay so fadeOutToast() has added "hidden"
+      // and scheduled the 300ms close, then detach before that close fires.
+      clock.tick(50);
+      el.remove();
+
+      // Reconnecting with disableAutoHide set means _scheduleAutoHide() will
+      // not schedule a new fade-out timer -- connectedCallback() must still
+      // clear the leftover "hidden" class unconditionally, not only as a
+      // side effect of re-arming auto-hide.
+      el.disableAutoHide = true;
+      const newParent = document.createElement("div");
+      document.body.appendChild(newParent);
+      newParent.appendChild(el);
+      await elementUpdated(el);
+
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(
+        toastContainer.classList.contains("hidden"),
+        "reconnect must restore visibility even when auto-hide is disabled"
+      ).to.be.false;
+      expect(el.visible).to.be.true;
+
+      newParent.remove();
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("does not re-arm the auto-hide timer if a reactive property changes while detached", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">Detached</auro-toast>
+      `);
+
+      el.remove();
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // A reactive property change processed after disconnect (Lit's update
+      // cycle runs regardless of connection state) must not re-arm the
+      // auto-hide timer -- without an isConnected guard in
+      // _scheduleAutoHide(), this schedules a new fadeOutTimer that fires
+      // while off-DOM, ahead of connectedCallback's own restoration logic
+      // on reconnect (AB#1646998).
+      el.noIcon = true;
+      await elementUpdated(el);
+
+      // Advance well past timeTilHide plus the fade-out duration.
+      clock.tick(1000);
+
+      expect(toastCloseCount, "toast must not auto-close while detached").to.equal(0);
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("clears a stale closeTimer and hidden state when a reused toast element becomes visible again mid-fade", async () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible timetilhide="50">First message</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => { toastCloseCount += 1; });
+
+      // Let auto-hide begin fading the toast out -- fadeOutToast() has added
+      // "hidden" and scheduled closeTimer for 300ms later, but `visible` is
+      // still true until that timer actually fires.
+      clock.tick(50);
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(toastContainer.classList.contains("hidden")).to.be.true;
+
+      // Simulate a message-queue implementation reusing this element
+      // instance for a new message: toggle visible directly, bypassing
+      // clickToClose()/closeToast() and disconnectedCallback() -- previously
+      // the only places that cleared closeTimer (AB#1646998).
+      el.visible = false;
+      el.visible = true;
+      await elementUpdated(el);
+
+      expect(
+        toastContainer.classList.contains("hidden"),
+        "reused toast must not still show the previous fade-out's hidden state"
+      ).to.be.false;
+
+      // The stale closeTimer from the original fade-out must not survive --
+      // advancing past its original 300ms window must not close the
+      // freshly-reused toast.
+      clock.tick(300);
+
+      expect(toastCloseCount, "stale closeTimer must not close the reused toast").to.equal(0);
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it("mobile tap-to-dismiss handler stays excluded via composedPath() even if a toast-close listener reentrantly re-shows the toast", async () => {
+    const innerWidthStub = sinon.stub(window, "innerWidth").get(() => 375);
+
+    try {
+      const el = await fixture(html`
+        <auro-toast visible>Mobile</auro-toast>
+      `);
+
+      let toastCloseCount = 0;
+      el.addEventListener("toast-close", () => {
+        toastCloseCount += 1;
+
+        // Reentrantly re-show the toast in the same tick clickToClose()
+        // dispatched this event. A `visible`-only guard on the host's mobile
+        // handler would see `visible === true` again by the time the click
+        // finishes bubbling to the host, and incorrectly run fadeOutToast()
+        // a second time -- composedPath() must exclude the close button
+        // regardless of `visible`'s state at bubble time.
+        if (toastCloseCount === 1) {
+          el.visible = true;
+        }
+      });
+
+      const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
+      closeButton.click();
+      await elementUpdated(el);
+
+      const toastContainer = el.shadowRoot.querySelector(".toastContainer");
+      expect(
+        toastCloseCount,
+        "toast-close must not fire a second time from the bubbled click"
+      ).to.equal(1);
+      expect(
+        toastContainer.classList.contains("hidden"),
+        "fadeOutToast() must not have run via the host's mobile handler"
+      ).to.be.false;
+    } finally {
+      innerWidthStub.restore();
+    }
+  });
+});
+
+// ---------------------------------------------------------------------------
+// lowercase attribute binding
+// ---------------------------------------------------------------------------
+
+describe("auro-toast — lowercase attribute binding", () => {
+  it("disableautohide HTML attribute sets disableAutoHide property", async () => {
+    const el = await fixture(html`<auro-toast disableautohide visible>test</auro-toast>`);
+    expect(el.disableAutoHide).to.be.true;
+  });
+
+  it("noicon HTML attribute sets noIcon property", async () => {
+    const el = await fixture(html`<auro-toast noicon visible>test</auro-toast>`);
+    expect(el.noIcon).to.be.true;
+  });
+
+  it("timetilhide HTML attribute sets timeTilHide property", async () => {
+    const el = await fixture(html`<auro-toast timetilhide="3000" visible>test</auro-toast>`);
+    expect(el.timeTilHide).to.equal(3000);
   });
 });
 
@@ -715,7 +1226,7 @@ describe("auro-toast — onToastClose event", () => {
 describe("auro-toast — disableAutoHide", () => {
   it("stays visible past the default timeout when disableAutoHide is set", async () => {
     const el = await fixture(html`
-      <auro-toast visible disableAutoHide>Persistent</auro-toast>
+      <auro-toast visible disableautohide>Persistent</auro-toast>
     `);
 
     // Let Lit initialize + updated() run
@@ -730,7 +1241,7 @@ describe("auro-toast — disableAutoHide", () => {
 
   it("does not fire onToastClose automatically when disableAutoHide is set", async () => {
     const el = await fixture(html`
-      <auro-toast visible disableAutoHide>Persistent</auro-toast>
+      <auro-toast visible disableautohide>Persistent</auro-toast>
     `);
 
     let eventFired = false;
@@ -767,7 +1278,7 @@ describe("auro-toast", () => {
     const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
     closeButton.click();
 
-    setTimeout(() => expect(el.visible).to.be.false, 1000);
+    expect(el.visible).to.be.false;
   });
 
   it("auro-toast is hidden after five seconds", async () => {
@@ -795,7 +1306,7 @@ describe("auro-toast", () => {
 
   it("sets auro-toast to noIcon style", async () => {
     const el = await fixture(html`
-      <auro-toast variant="success" noIcon visible> Success </auro-toast>
+      <auro-toast variant="success" noicon visible> Success </auro-toast>
     `);
     const root = el.shadowRoot;
 
@@ -807,7 +1318,7 @@ describe("auro-toast", () => {
       const root = await fixture(html`
         <div>
           <button id="triggerBtn">Show toast</button>
-          <auro-toast trigger="triggerBtn" visible disableAutoHide>Message</auro-toast>
+          <auro-toast trigger="triggerBtn" visible disableautohide>Message</auro-toast>
         </div>
       `);
 
@@ -826,7 +1337,7 @@ describe("auro-toast", () => {
       const root = await fixture(html`
         <div>
           <button id="triggerBtn">Show toast</button>
-          <auro-toast visible disableAutoHide>Message</auro-toast>
+          <auro-toast visible disableautohide>Message</auro-toast>
         </div>
       `);
 
@@ -847,7 +1358,7 @@ describe("auro-toast", () => {
         <div>
           <button id="attrBtn">Attribute target</button>
           <button id="propBtn">Property target</button>
-          <auro-toast trigger="attrBtn" visible disableAutoHide>Message</auro-toast>
+          <auro-toast trigger="attrBtn" visible disableautohide>Message</auro-toast>
         </div>
       `);
 
@@ -866,18 +1377,18 @@ describe("auro-toast", () => {
 
     it("does not throw when no trigger is set and close is clicked", async () => {
       const el = await fixture(html`
-        <auro-toast visible disableAutoHide>Message</auro-toast>
+        <auro-toast visible disableautohide>Message</auro-toast>
       `);
       await elementUpdated(el);
 
       const closeButton = el.shadowRoot.querySelector('[part="close-button"]');
-      expect(() => closeButton.click()).to.not.throw;
+      expect(() => closeButton.click()).to.not.throw();
     });
   });
 
   it("renders custom variant with icon container but no default variant svg", async () => {
     const el = await fixture(html`
-      <auro-toast variant="custom" visible disableAutoHide>Custom</auro-toast>
+      <auro-toast variant="custom" visible disableautohide>Custom</auro-toast>
     `);
     await elementUpdated(el);
 
@@ -889,7 +1400,7 @@ describe("auro-toast", () => {
 
   it("handleSlotContent mirrors custom SVG into typeIcon", async () => {
     const el = await fixture(html`
-      <auro-toast variant="custom" visible disableAutoHide>
+      <auro-toast variant="custom" visible disableautohide>
         <svg slot="customSvg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
         Custom message
       </auro-toast>
@@ -910,7 +1421,7 @@ describe("auro-toast — color contrast", () => {
   ["success", "error"].forEach((variant) => {
     it(`${variant} — message text meets WCAG AA contrast ratio of 4.5:1 against host background`, async () => {
       const el = await fixture(html`
-        <auro-toast variant="${variant}" visible disableAutoHide>Test message</auro-toast>
+        <auro-toast variant="${variant}" visible disableautohide>Test message</auro-toast>
       `);
       await elementUpdated(el);
 
@@ -923,7 +1434,7 @@ describe("auro-toast — color contrast", () => {
 
     it(`${variant} — type icon meets WCAG SC 1.4.11 contrast ratio of 3:1 against host background`, async () => {
       const el = await fixture(html`
-        <auro-toast variant="${variant}" visible disableAutoHide>Test message</auro-toast>
+        <auro-toast variant="${variant}" visible disableautohide>Test message</auro-toast>
       `);
       await elementUpdated(el);
 
