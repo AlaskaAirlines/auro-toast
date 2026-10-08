@@ -311,7 +311,7 @@ export class AuroToast extends LitElement {
      *
      * @deprecated Use `toast-close` event instead.
      * @event onToastClose
-     * @type {Object}
+     * @type {HTMLElement}
      */
     this.dispatchEvent(
       new CustomEvent("onToastClose", {
