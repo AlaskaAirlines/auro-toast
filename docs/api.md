@@ -5,7 +5,7 @@ Shows a short, temporary message, such as a confirmation or an error.
 **Key capabilities**
 - **Success and error styles**: Set `variant` to `success` or `error` to change the color and icon, or to `custom` to show your own icon.
 - **Hides on its own**: The toast hides after five seconds, except error toasts, which stay open until someone closes them; use `timeTilHide` to change the time or `disableAutoHide` to keep any toast open.
-- **Returns focus**: Set `trigger` or `triggerElement` to send focus back to the element that opened the toast when someone closes it.
+- **Returns focus**: Set `trigger` or `triggerElement` to send focus back to the element that opened the toast when someone closes the toast with its close button.
 - **Stacks with other toasts**: Wrap toasts in `auro-toaster` to stack them at the bottom of the screen.
 
 **Example**
@@ -38,12 +38,28 @@ Shows a short, temporary message, such as a confirmation or an error.
 | toast-close  | Fires when the toast closes. The `detail` holds `visible` (always `false`) and the toast's `id`. |
 | onToastClose | Deprecated: Use `toast-close` instead.                                                           |
 
+### Slots
+
+| Name      | Description                                                                                        |
+| --------- | -------------------------------------------------------------------------------------------------- |
+| (default) | The message shown in the toast.                                                                    |
+| customSvg | The icon to show with `variant="custom"`. Give a meaningful icon a description for screen readers. |
+
 ### CSS shadow parts
 
 | Name         | Description                                                            |
 | ------------ | ---------------------------------------------------------------------- |
 | close-button | The button that closes the toast.                                      |
 | type-icon    | The icon at the start of the toast. Not rendered when `noIcon` is set. |
+
+### CSS custom properties
+
+| Name                                               | Description                                                     |
+| -------------------------------------------------- | --------------------------------------------------------------- |
+| --ds-auro-toast-container-color                    | Background color of the toast.                                  |
+| --ds-auro-toast-text-color                         | Color of the message text.                                      |
+| --ds-auro-toast-icon-color                         | Color of the icon at the start of the toast.                    |
+| --ds-auro-toast-close-button-hover-container-color | Background color of the close button when a pointer is over it. |
 
 # auro-toaster
 
@@ -65,3 +81,9 @@ Shows `auro-toast` elements in a stack fixed to the bottom of the screen and ann
 | Name     | Parameters                                                    | Return | Description                                              |
 | -------- | ------------------------------------------------------------- | ------ | -------------------------------------------------------- |
 | register | `name` (string) - The tag name to register the element under. |        | Registers the element with the browser under a tag name. |
+
+### Slots
+
+| Name      | Description                                                     |
+| --------- | --------------------------------------------------------------- |
+| (default) | The `auro-toast` elements to stack at the bottom of the screen. |

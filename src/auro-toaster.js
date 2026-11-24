@@ -23,6 +23,8 @@ import styleCss from "./styles/style-toaster.scss";
  *
  * @summary Stacks toasts at the bottom of the screen and announces them to screen readers.
  * @customElement auro-toaster
+ *
+ * @slot - The `auro-toast` elements to stack at the bottom of the screen.
  */
 export class AuroToaster extends LitElement {
   static get styles() {
