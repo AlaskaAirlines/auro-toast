@@ -280,7 +280,7 @@ You can customize a toast in several ways:
   variant="custom"
   visible
   disableAutoHide
-  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default); display: block; margin: 0.5rem 0;">
+  style="--ds-auro-toast-container-color: var(--ds-basic-color-status-info-subtle); --ds-auro-toast-text-color: var(--ds-basic-color-texticon-default); display: block; margin: 0.5rem 0;">
   Did you know you can create a price alert for this route?
 <br />
 <auro-button variant="tertiary">Create Alert</auro-button>
@@ -302,7 +302,7 @@ You can customize a toast in several ways:
   variant="custom"
   visible
   disableAutoHide
-  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default); display: block; margin: 0.5rem 0;"&gt;
+  style="--ds-auro-toast-container-color: var(--ds-basic-color-status-info-subtle); --ds-auro-toast-text-color: var(--ds-basic-color-texticon-default); display: block; margin: 0.5rem 0;"&gt;
   Did you know you can create a price alert for this route?
   &lt;br /&gt;
   &lt;auro-button variant="tertiary"&gt;Create Alert&lt;/auro-button&gt;
