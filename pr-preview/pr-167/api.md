@@ -8,7 +8,7 @@ Shows a short, temporary message, such as a confirmation or an error.
 **Key capabilities**
 - **Success and error styles**: Set `variant` to `success` or `error` to change the color and icon, or to `custom` to show your own icon.
 - **Hides on its own**: The toast hides after five seconds, except error toasts, which stay open until someone closes them; use `timeTilHide` to change the time or `disableAutoHide` to keep any toast open.
-- **Returns focus**: Set `trigger` or `triggerElement` to send focus back to the element that opened the toast when someone closes it.
+- **Returns focus**: Set `trigger` or `triggerElement` to send focus back to the element that opened the toast when someone closes the toast with its close button.
 - **Stacks with other toasts**: Wrap toasts in `auro-toaster` to stack them at the bottom of the screen.
 
 **Example**
@@ -39,12 +39,28 @@ Shows a short, temporary message, such as a confirmation or an error.
 | toast-close  | Fires when the toast closes. The `detail` holds `visible` (always `false`) and the toast's `id`. |
 | onToastClose | Deprecated: Use `toast-close` instead.                                                           |
 
+### Slots
+
+| Name      | Description                                                                                        |
+| --------- | -------------------------------------------------------------------------------------------------- |
+| (default) | The message shown in the toast.                                                                    |
+| customSvg | The icon to show with `variant="custom"`. Give a meaningful icon a description for screen readers. |
+
 ### CSS shadow parts
 
 | Name         | Description                                                            |
 | ------------ | ---------------------------------------------------------------------- |
 | close-button | The button that closes the toast.                                      |
 | type-icon    | The icon at the start of the toast. Not rendered when `noIcon` is set. |
+
+### CSS custom properties
+
+| Name                                               | Description                                                     |
+| -------------------------------------------------- | --------------------------------------------------------------- |
+| --ds-auro-toast-container-color                    | Background color of the toast.                                  |
+| --ds-auro-toast-text-color                         | Color of the message text.                                      |
+| --ds-auro-toast-icon-color                         | Color of the icon at the start of the toast.                    |
+| --ds-auro-toast-close-button-hover-container-color | Background color of the close button when a pointer is over it. |
 
 # auro-toaster
 
@@ -64,6 +80,12 @@ Shows `auro-toast` elements in a stack fixed to the bottom of the screen and ann
 | Name     | Parameters                                                    | Return | Description                                              |
 | -------- | ------------------------------------------------------------- | ------ | -------------------------------------------------------- |
 | register | `name` (string) - The tag name to register the element under. |        | Registers the element with the browser under a tag name. |
+
+### Slots
+
+| Name      | Description                                                     |
+| --------- | --------------------------------------------------------------- |
+| (default) | The `auro-toast` elements to stack at the bottom of the screen. |
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## Basic
@@ -541,7 +563,7 @@ Use a persistent container, such as a `div`, with `aria-live="polite"` or `aria-
 
 `auro-toast` automatically detects any ancestor live region at connection time. When one is found, it defers to that region and does not add its own role, preventing nested live regions.
 
-\* Only use `aria-live="assertive"` if your UI is making use of toasts that are alerting the user of important information. If you are not using `auro-toaster` you are responsible for managing the changes between `assertive` and `polite` announcement states.
+\* Use `aria-live="assertive"` only for toasts that alert people to important information. Without `auro-toaster`, you're responsible for switching between `assertive` and `polite`.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/standalone-toast.html) -->
