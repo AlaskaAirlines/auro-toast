@@ -1,35 +1,67 @@
 # auro-toast
 
-The `auro-toast` element provides users a way to display short, temporary messages.
+Shows a short, temporary message, such as a confirmation or an error.
 
-### Properties & Attributes
+**Key capabilities**
+- **Success and error styles**: Set `variant` to `success` or `error` to change the color and icon, or to `custom` to show your own icon.
+- **Hides on its own**: The toast hides after five seconds, except error toasts, which stay open until someone closes them; use `timeTilHide` to change the time or `disableAutoHide` to keep any toast open.
+- **Returns focus**: Set `trigger` or `triggerElement` to send focus back to the element that opened the toast when someone closes it.
+- **Stacks with other toasts**: Wrap toasts in `auro-toaster` to stack them at the bottom of the screen.
 
-| Properties      | Attributes      | Modifiers | Type                             | Default | Description                                                                                                                                                                                                     |
-| --------------- | --------------- | --------- | -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| disableAutoHide | disableautohide |           | boolean                          |         | Prevents the toast from auto-hiding on the default time.                                                                                                                                                        |
-| noIcon          | noicon          |           | boolean                          |         | Removes icon from the toast UI.                                                                                                                                                                                 |
-| timeTilHide     | timetilhide     |           | number                           |         | Sets the time in milliseconds until the toast hides.                                                                                                                                                            |
-| trigger         | trigger         |           | string                           |         | The id of the element that triggered the toast.<br>When the toast is manually closed, focus will return to this element.<br>Takes precedence over the triggerElement property if both are set.                  |
-| triggerElement  |                 |           | HTMLElement                      |         | A direct reference to the element that triggered the toast.<br>When the toast is manually closed, focus will return to this element.<br>Use the trigger attribute instead if you prefer a declarative approach. |
-| variant         | variant         |           | `error` \| `success` \| `custom` |         | Component will render visually based on which variant value is set.                                                                                                                                             |
-| visible         | visible         |           | boolean                          |         | Sets state of toast to visible                                                                                                                                                                                  |
+**Example**
+```html
+<auro-toast visible>Your changes were saved.</auro-toast>
+```
+
+### Properties and attributes
+
+| Properties      | Attributes      | Modifiers | Type                             | Default | Description                                                                                                                                                                                                                                                                 |
+| --------------- | --------------- | --------- | -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| disableAutoHide | disableautohide |           | boolean                          |         | Stops the toast from hiding on its own, even when `timeTilHide` is set. People can still close it with the close button.                                                                                                                                                    |
+| noIcon          | noicon          |           | boolean                          |         | Hides the icon at the start of the toast, including a custom icon.                                                                                                                                                                                                          |
+| timeTilHide     | timetilhide     |           | number                           | `5000`  | Sets how long, in milliseconds, the toast stays visible before it hides. Has no effect on error toasts or when `disableAutoHide` is set.                                                                                                                                    |
+| trigger         | trigger         |           | string                           |         | Sets the `id` of the element that opened the toast, so focus returns to it when someone closes the toast with its close button.<br>Takes precedence over `triggerElement` when both are set and an element has this `id`.                                                   |
+| triggerElement  |                 |           | HTMLElement                      |         | Sets the element that opened the toast, so focus returns to it when someone closes the toast with its close button.<br>Use `trigger` instead to set it with an `id` in markup. `trigger` takes precedence when both are set.                                                |
+| variant         | variant         |           | `error` \| `success` \| `custom` |         | Sets the toast's color and icon. Use `success` to confirm that something worked, `error` to report a problem, and `custom` to show your own icon (a child with `slot="customSvg"`).<br>Error toasts don't hide on their own, and any other value shows an information icon. |
+| visible         | visible         |           | boolean                          |         | Shows the toast. The toast sets this back to `false` when it closes, whether it hides on its own or someone uses the close button.                                                                                                                                          |
 
 ### Methods
 
-| Name     | Parameters                                                           | Return | Description                                       |
-| -------- | -------------------------------------------------------------------- | ------ | ------------------------------------------------- |
-| register | `name` (string) - The name of the element that you want to register. |        | This will register this element with the browser. |
+| Name     | Parameters                                                    | Return | Description                                              |
+| -------- | ------------------------------------------------------------- | ------ | -------------------------------------------------------- |
+| register | `name` (string) - The tag name to register the element under. |        | Registers the element with the browser under a tag name. |
 
 ### Events
 
-| Name         | Description                                      |
-| ------------ | ------------------------------------------------ |
-| toast-close  | Notifies that the toast has been closed          |
-| onToastClose | **Deprecated**, use `toast-close` event instead. |
+| Name         | Description                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------ |
+| toast-close  | Fires when the toast closes. The `detail` holds `visible` (always `false`) and the toast's `id`. |
+| onToastClose | Deprecated: Use `toast-close` instead.                                                           |
 
-### CSS Shadow Parts
+### CSS shadow parts
 
-| Name         | Description                         |
-| ------------ | ----------------------------------- |
-| close-button | Apply css to the toast close button |
-| type-icon    | Apply css to the toast type icon    |
+| Name         | Description                                                            |
+| ------------ | ---------------------------------------------------------------------- |
+| close-button | The button that closes the toast.                                      |
+| type-icon    | The icon at the start of the toast. Not rendered when `noIcon` is set. |
+
+# auro-toaster
+
+Shows `auro-toast` elements in a stack fixed to the bottom of the screen and announces them to screen readers.
+
+**Key capabilities**
+- **Stacks toasts**: Fixes the toasts to the bottom of the screen, so they stay in view while the page scrolls.
+- **Announces toasts**: Screen readers announce each toast politely, and error toasts are announced right away.
+
+**Example**
+```html
+<auro-toaster>
+  <auro-toast visible>Your changes were saved.</auro-toast>
+</auro-toaster>
+```
+
+### Methods
+
+| Name     | Parameters                                                    | Return | Description                                              |
+| -------- | ------------------------------------------------------------- | ------ | -------------------------------------------------------- |
+| register | `name` (string) - The tag name to register the element under. |        | Registers the element with the browser under a tag name. |
