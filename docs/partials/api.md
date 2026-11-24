@@ -190,7 +190,7 @@ Use a persistent container, such as a `div`, with `aria-live="polite"` or `aria-
 
 `auro-toast` automatically detects any ancestor live region at connection time. When one is found, it defers to that region and does not add its own role, preventing nested live regions.
 
-\* Only use `aria-live="assertive"` if your UI is making use of toasts that are alerting the user of important information. If you are not using `auro-toaster` you are responsible for managing the changes between `assertive` and `polite` announcement states.
+\* Use `aria-live="assertive"` only for toasts that alert people to important information. Without `auro-toaster`, you're responsible for switching between `assertive` and `polite`.
 
 <div class="exampleWrapper">
   <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/standalone-toast.html) -->
