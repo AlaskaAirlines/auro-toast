@@ -84,9 +84,10 @@ export class AuroToaster extends LitElement {
       for (const mutation of mutations) {
         const target = mutation.target;
 
-        // Only react to auro-toast elements (including versioned tags like
-        // auro-toast_1_2_3). Explicitly ignore auro-toaster itself.
-        if (!/^auro-toast(_|$)/u.test(target.localName ?? '')) continue;
+        // Only react to auro-toast elements, including versioned and
+        // custom-registered ones (see _isToast). Explicitly ignore
+        // auro-toaster itself.
+        if (!this._isToast(target)) continue;
 
         const isVisible = target.hasAttribute?.('visible');
         const isError = target.getAttribute?.('variant') === 'error';
@@ -146,6 +147,21 @@ export class AuroToaster extends LitElement {
   }
 
   /**
+   * Checks whether an element is an auro-toast. A tag named `auro-toast` or
+   * starting with `auro-toast_` counts. Otherwise the element counts only if it
+   * has an `auro-toast` attribute, which a toast registered under any other
+   * name, including a versioned tag such as `auro-toast-1_2_3`, sets on itself
+   * once it renders (see handleComponentTagRename).
+   * @private
+   * @param {Element} el - The element to check.
+   * @returns {boolean} True if the element is an auro-toast; false otherwise.
+   */
+  _isToast(el) {
+    return /^auro-toast(_|$)/u.test(el.localName ?? '') ||
+      Boolean(el.hasAttribute?.('auro-toast'));
+  }
+
+  /**
    * Temporarily sets the live region to assertive so the error toast
    * interrupts the screen reader, then resets to polite after 3 seconds.
    * This ensures subsequent polite toasts don't keep interrupting the user,
@@ -180,7 +196,7 @@ export class AuroToaster extends LitElement {
   _onSlotChange(e) {
     const newErrorToast = e.target.assignedElements({ flatten: true })
       .find(el =>
-        /^auro-toast(_|$)/u.test(el.localName ?? '') &&
+        this._isToast(el) &&
         el.getAttribute('variant') === 'error' &&
         el.hasAttribute('visible') &&
         !this._announcedErrorToasts.has(el)
