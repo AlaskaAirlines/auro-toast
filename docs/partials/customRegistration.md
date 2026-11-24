@@ -5,4 +5,4 @@ import { AuroToast } from '@aurodesignsystem/auro-toast/class';
 AuroToast.register('custom-toast');
 ```
 
-This will create a new custom element `<custom-toast>` that behaves exactly like `<auro-toast>`, allowing both to coexist on the same page without interfering with each other.
+This creates a custom element `<custom-toast>` that works like `<auro-toast>`, so both can be on the same page without interfering with each other. `<auro-toaster>` only announces errors urgently for toasts named `auro-toast` or starting with `auro-toast_`.

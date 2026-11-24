@@ -1,5 +1,5 @@
-The `<auro-toast>` use cases include:
+Use `<auro-toast>` to:
 
-* Sending an error push notification
-* Sending a success push notification
-* Sending any type of push notification
+* Confirm that an action worked, with the `success` variant.
+* Tell someone that something went wrong, with the `error` variant.
+* Share any other short message, such as a reminder or tip.

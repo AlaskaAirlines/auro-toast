@@ -7,6 +7,23 @@ import { html, LitElement } from "lit";
 import AuroLibraryRuntimeUtils from "@aurodesignsystem/auro-library/scripts/utils/runtimeUtils.mjs";
 import styleCss from "./styles/style-toaster.scss";
 
+/**
+ * Shows `auro-toast` elements in a stack fixed to the bottom of the screen and announces them to screen readers.
+ *
+ * **Key capabilities**
+ * - **Stacks toasts**: Fixes the toasts to the bottom of the screen, so they stay in view while the page scrolls.
+ * - **Announces toasts**: Screen readers announce each toast politely, and error toasts are announced right away.
+ *
+ * **Example**
+ * ```html
+ * <auro-toaster>
+ *   <auro-toast visible>Your changes were saved.</auro-toast>
+ * </auro-toaster>
+ * ```
+ *
+ * @summary Stacks toasts at the bottom of the screen and announces them to screen readers.
+ * @customElement auro-toaster
+ */
 export class AuroToaster extends LitElement {
   static get styles() {
     return [styleCss];
@@ -29,11 +46,11 @@ export class AuroToaster extends LitElement {
   }
 
   /**
-   * This will register this element with the browser.
-   * @param {string} [name="auro-toaster"] - The name of the element that you want to register to.
+   * Registers the element with the browser under a tag name.
+   * @param {string} [name="auro-toaster"] - The tag name to register the element under.
    *
    * @example
-   * AuroToaster.register("custom-toaster") // this will register this element to <custom-toaster/>
+   * AuroToaster.register("custom-toaster") // Registers this element as <custom-toaster>
    *
    */
   static register(name = "auro-toaster") {
@@ -47,8 +64,8 @@ export class AuroToaster extends LitElement {
     /**
      * @private
      *
-     * Observes toast attribute changes to determine when we should temporarily
-     * switch the live region from "polite" → "assertive".
+     * Observes toast attribute changes to determine when to temporarily
+     * switch the live region from "polite" to "assertive".
      *
      * Supported trigger paths:
      * 1. Normal path:
@@ -154,8 +171,8 @@ export class AuroToaster extends LitElement {
   }
 
   /**
-   * Handles slot changes — checks if a newly slotted error toast
-   * is already visible at the time it is added to the toaster.
+   * Handles slot changes by checking whether a newly slotted error toast
+   * is already visible when it is added to the toaster.
    * @private
    */
   _onSlotChange(e) {
