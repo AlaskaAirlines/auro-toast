@@ -559,6 +559,30 @@ describe("auro-toast — live region politeness", () => {
     expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
   });
 
+  it("triggers assertive for an error toast registered under a custom tag name", async () => {
+    const { AuroToast } = await import("../src/index.js");
+    AuroToast.register("custom-toast-assertive");
+
+    const el = await fixture(html`
+      <auro-toaster>
+        <custom-toast-assertive variant="error">Custom error</custom-toast-assertive>
+      </auro-toaster>
+    `);
+    const customToast = el.querySelector("custom-toast-assertive");
+    await customToast.updateComplete;
+
+    // handleComponentTagRename marks a renamed toast with an auro-toast attribute.
+    expect(customToast.hasAttribute("auro-toast")).to.be.true;
+
+    const divWithLive = el.shadowRoot?.querySelector("div[aria-live]");
+    expect(divWithLive.getAttribute("aria-live")).to.equal("polite");
+
+    customToast.setAttribute("visible", "");
+    await elementUpdated(el);
+
+    expect(divWithLive.getAttribute("aria-live")).to.equal("assertive");
+  });
+
   it("does not trigger assertive when auro-toaster itself gains a visible attribute", async () => {
     const el = await fixture(html`
       <auro-toaster></auro-toaster>
