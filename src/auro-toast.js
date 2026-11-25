@@ -30,13 +30,32 @@ const FADE_OUT_DURATION = 300;
 
 // See https://git.io/JJ6SJ for "How to document your components using JSDoc"
 /**
- * The `auro-toast` element provides users a way to display short, temporary messages.
+ * Shows a short, temporary message, such as a confirmation or an error.
+ *
+ * **Key capabilities**
+ * - **Success and error styles**: Set `variant` to `success` or `error` to change the color and icon, or to `custom` to show your own icon.
+ * - **Hides on its own**: The toast hides after five seconds, except error toasts, which stay open until someone closes them; use `timeTilHide` to change the time or `disableAutoHide` to keep any toast open.
+ * - **Returns focus**: Set `trigger` or `triggerElement` to send focus back to the element that opened the toast when someone closes the toast with its close button.
+ * - **Stacks with other toasts**: Wrap toasts in `auro-toaster` to stack them at the bottom of the screen.
+ *
+ * **Example**
+ * ```html
+ * <auro-toast visible>Your changes were saved.</auro-toast>
+ * ```
+ *
+ * @summary A short, temporary message with success, error, and custom styles that can hide on its own.
  * @customElement auro-toast
  *
- * @csspart type-icon - Apply css to the toast type icon
- * @csspart close-button - Apply css to the toast close button
- * @event onToastClose - **Deprecated**, use `toast-close` event instead.
- * @event toast-close - Notifies that the toast has been closed
+ * @slot - The message shown in the toast.
+ * @slot customSvg - The icon to show with `variant="custom"`. Give a meaningful icon a description for screen readers.
+ * @csspart type-icon - The icon at the start of the toast. Not rendered when `noIcon` is set.
+ * @csspart close-button - The button that closes the toast.
+ * @cssprop --ds-auro-toast-container-color - Background color of the toast.
+ * @cssprop --ds-auro-toast-text-color - Color of the message text.
+ * @cssprop --ds-auro-toast-icon-color - Color of the icon at the start of the toast.
+ * @cssprop --ds-auro-toast-close-button-hover-container-color - Background color of the close button when a pointer is over it.
+ * @event onToastClose - Deprecated: Use `toast-close` instead.
+ * @event toast-close - Fires when the toast closes. The `detail` holds `visible` (always `false`) and the toast's `id`.
  */
 
 // build the component class
@@ -130,7 +149,7 @@ export class AuroToast extends LitElement {
     /**
      * True when the toast is not inside an auro-toaster and must manage its
      * own live region announcement. Set once in connectedCallback.
-     * Default -- assumes toast is inside toaster.
+     * Defaults to false, which assumes the toast is inside a toaster.
      * @private
      */
     this._isStandalone = false;
@@ -144,7 +163,7 @@ export class AuroToast extends LitElement {
       ...LitElement.properties,
 
       /**
-       * Prevents the toast from auto-hiding on the default time.
+       * Stops the toast from hiding on its own, even when `timeTilHide` is set. People can still close it with the close button.
        */
       disableAutoHide: {
         type: Boolean,
@@ -153,7 +172,7 @@ export class AuroToast extends LitElement {
       },
 
       /**
-       * Removes icon from the toast UI.
+       * Hides the icon at the start of the toast, including a custom icon.
        */
       noIcon: {
         type: Boolean,
@@ -162,7 +181,8 @@ export class AuroToast extends LitElement {
       },
 
       /**
-       * Sets the time in milliseconds until the toast hides.
+       * Sets how long, in milliseconds, the toast stays visible before it hides. Has no effect on error toasts or when `disableAutoHide` is set.
+       * @default 5000
        */
       timeTilHide: {
         type: Number,
@@ -171,9 +191,8 @@ export class AuroToast extends LitElement {
       },
 
       /**
-       * The id of the element that triggered the toast.
-       * When the toast is manually closed, focus will return to this element.
-       * Takes precedence over the triggerElement property if both are set.
+       * Sets the `id` of the element that opened the toast, so focus returns to it when someone closes the toast with its close button.
+       * Takes precedence over `triggerElement` when both are set and an element has this `id`.
        */
       trigger: {
         type: String,
@@ -181,9 +200,8 @@ export class AuroToast extends LitElement {
       },
 
       /**
-       * A direct reference to the element that triggered the toast.
-       * When the toast is manually closed, focus will return to this element.
-       * Use the trigger attribute instead if you prefer a declarative approach.
+       * Sets the element that opened the toast, so focus returns to it when someone closes the toast with its close button.
+       * Use `trigger` instead to set it with an `id` in markup. `trigger` takes precedence when both are set.
        * @type {HTMLElement}
        */
       triggerElement: {
@@ -192,7 +210,8 @@ export class AuroToast extends LitElement {
       },
 
       /**
-       * Component will render visually based on which variant value is set.
+       * Sets the toast's color and icon. Use `success` to confirm that something worked, `error` to report a problem, and `custom` to show your own icon (a child with `slot="customSvg"`).
+       * Error toasts don't hide on their own, and any other value shows an information icon.
        * @type {'error' | 'success' | 'custom'}
        */
       variant: {
@@ -201,7 +220,7 @@ export class AuroToast extends LitElement {
       },
 
       /**
-       * Sets state of toast to visible
+       * Shows the toast. The toast sets this back to `false` when it closes, whether it hides on its own or someone uses the close button.
        */
       visible: {
         type: Boolean,
@@ -215,11 +234,11 @@ export class AuroToast extends LitElement {
   }
 
   /**
-   * This will register this element with the browser.
-   * @param {string} [name="auro-toast"] - The name of the element that you want to register.
+   * Registers the element with the browser under a tag name.
+   * @param {string} [name="auro-toast"] - The tag name to register the element under.
    *
    * @example
-   * AuroToast.register("custom-toast") // this will register this element to <custom-toast/>
+   * AuroToast.register("custom-toast") // Registers this element as <custom-toast>
    *
    */
   static register(name = "auro-toast") {
@@ -246,8 +265,8 @@ export class AuroToast extends LitElement {
 
   /**
    * Returns focus to the trigger element when the toast is manually closed.
-   * Not called on auto-dismiss — moving focus during auto-dismiss would
-   * interrupt the AT user's current position in the page.
+   * Not called on auto-dismiss, because moving focus then would
+   * interrupt a screen reader user's current position in the page.
    * @private
    * @returns {void}
    */
@@ -307,11 +326,12 @@ export class AuroToast extends LitElement {
     this.visible = false;
 
     /**
-     * Emits closed toast event.
+     * Deprecated: Use `toast-close` instead.
+     * Fires when the toast closes.
      *
-     * @deprecated Use `toast-close` event instead.
+     * @deprecated Use `toast-close` instead.
      * @event onToastClose
-     * @type {Object}
+     * @type {HTMLElement}
      */
     this.dispatchEvent(
       new CustomEvent("onToastClose", {
@@ -322,7 +342,7 @@ export class AuroToast extends LitElement {
     );
 
     /**
-     * Emits closed toast event.
+     * Fires when the toast closes. The `detail` holds `visible` (always `false`) and the toast's `id`.
      *
      * @event toast-close
      * @type {{ visible: boolean, id: string }}
@@ -338,8 +358,8 @@ export class AuroToast extends LitElement {
 
   /**
    * For mobile, set the onclick function so the toast can be dismissed if it is tapped on anywhere inside the toast.
-   * Ignores clicks on the close button -- clickToClose() already handles those, and re-running
-   * fadeOutToast() for the same click is what caused a double close (see AB#1643472).
+   * Ignores clicks on the close button: clickToClose() already handles those, and re-running
+   * fadeOutToast() for the same click caused a double close (see AB#1643472).
    * @private
    * @returns {void}
    */
@@ -434,8 +454,8 @@ export class AuroToast extends LitElement {
 
   /**
    * Walks the DOM ancestors (crossing shadow boundaries) looking for any
-   * active live region — either an aria-live="polite/assertive" attribute or
-   * an implicit live region role (alert, status, log).
+   * active live region: either an aria-live="polite" or "assertive" attribute,
+   * or an implicit live region role (alert, status, log).
    * aria-live="off" is not considered active and is intentionally ignored.
    * @private
    * @returns {boolean}
@@ -488,14 +508,14 @@ export class AuroToast extends LitElement {
   }
 
   /**
-   * (Re-)schedules the auto-hide timer based on current visible/disableAutoHide/
-   * variant/timeTilHide values. Called from updated() on property changes and
-   * from connectedCallback() to re-arm auto-hide after a reconnect (e.g. the
-   * node is re-parented elsewhere in the DOM), since updated() does not run
-   * again on reconnect alone.
+   * (Re-)schedules the auto-hide timer based on the current values of visible,
+   * disableAutoHide, variant, and timeTilHide. Called from updated() on property
+   * changes and from connectedCallback() to re-arm auto-hide after a reconnect
+   * (for example, when the node is re-parented elsewhere in the DOM), since
+   * updated() does not run again on reconnect alone.
    *
    * Restarts the full countdown on every reconnect rather than resuming
-   * elapsed time -- this is intentional (AB#1646998): "visible for N ms"
+   * elapsed time. This is intentional (AB#1646998): "visible for N ms"
    * is scoped to a single connected mount, and connectedCallback() itself
    * re-arms on every reconnect, so a resume-elapsed-time model would need
    * its own persisted start time with no corresponding product ask.
