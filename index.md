@@ -1,6 +1,6 @@
 <!--
  THIS PAGE'S CONTENT SHOULD BE KEPT MINIMAL.
- ONLY ADD EXAMPLES THAT ARE TRULY NECESSARY FOR THE INDEX PAGE — THE BASIC EXAMPLE IS USUALLY ENOUGH.
+ ONLY ADD EXAMPLES THAT ARE TRULY NECESSARY FOR THE INDEX PAGE. THE BASIC EXAMPLE IS USUALLY ENOUGH.
  ALL OTHER EXAMPLES SHOULD GO IN THE API DOCUMENTATION.
 -->
 
@@ -8,34 +8,33 @@
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/description.md) -->
 <!-- The below content is automatically added from ./../docs/partials/description.md -->
-The `<auro-toast>` element is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of sending an unobtrusive toast (or push) notification to your visitors.
+Use `<auro-toast>` to show a short, temporary message, such as a confirmation or an error.
 
-The `<auro-toaster>` wrapper-element is a [HTML custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) for the purpose of managing a series of notifications  at the bottom of the screen using the `<auro-toast>` element.
+Use `<auro-toaster>` to stack several toasts at the bottom of the screen.
 <!-- AURO-GENERATED-CONTENT:END -->
 
-## Use Cases
+## Use cases
 
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../docs/partials/useCases.md) -->
 <!-- The below content is automatically added from ./../docs/partials/useCases.md -->
-The `<auro-toast>` use cases include:
+Use `<auro-toast>` to:
 
-* Sending an error push notification
-* Sending a success push notification
-* Sending any type of push notification
+* Confirm that an action worked, with the `success` variant.
+* Tell someone that something went wrong, with the `error` variant.
+* Share any other short message, such as a reminder or tip.
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## The setup
-Triggering the toasts relies on setting the `visible` property to `true`. See the following example to see how this code is used in an example.
+To show a toast, set its `visible` attribute. The following example shows one way to do it.
 
 <pre class="language-js"><code class="language-js">showToast = (toastID) =&gt; {
   const toast = document.querySelector(toastID);
-​
-  if (!toast.hasAttribute('visible')) {
+&#10;  if (!toast.hasAttribute('visible')) {
     toast.setAttribute('visible', true);
   }
 };</code></pre>
 
-## Example(s)
+## Examples
 
 ### Basic
 
@@ -62,7 +61,7 @@ Triggering the toasts relies on setting the `visible` property to `true`. See th
 <pre class="language-html"><code class="language-html">&lt;auro-button id="basicToastBtn"&gt;
   Show default notification
 &lt;/auro-button&gt;
-&lt;!--
+&#10;&lt;!--
 NOTE: The manually added style is NOT necessary for use,
 Demo purposes ONLY!
 --&gt;

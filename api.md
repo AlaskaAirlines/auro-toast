@@ -3,39 +3,89 @@
 
 # auro-toast
 
-The `auro-toast` element provides users a way to display short, temporary messages.
+Shows a short, temporary message, such as a confirmation or an error.
 
-### Properties & Attributes
+**Key capabilities**
+- **Success and error styles**: Set `variant` to `success` or `error` to change the color and icon, or to `custom` to show your own icon.
+- **Hides on its own**: The toast hides after five seconds, except error toasts, which stay open until someone closes them; use `timeTilHide` to change the time or `disableAutoHide` to keep any toast open.
+- **Returns focus**: Set `trigger` or `triggerElement` to send focus back to the element that opened the toast when someone closes the toast with its close button.
+- **Stacks with other toasts**: Wrap toasts in `auro-toaster` to stack them at the bottom of the screen.
 
-| Properties      | Attributes      | Modifiers | Type                             | Default | Description                                                                                                                                                                                                     |
-| --------------- | --------------- | --------- | -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| disableAutoHide | disableautohide |           | boolean                          |         | Prevents the toast from auto-hiding on the default time.                                                                                                                                                        |
-| noIcon          | noicon          |           | boolean                          |         | Removes icon from the toast UI.                                                                                                                                                                                 |
-| timeTilHide     | timetilhide     |           | number                           |         | Sets the time in milliseconds until the toast hides.                                                                                                                                                            |
-| trigger         | trigger         |           | string                           |         | The id of the element that triggered the toast.<br>When the toast is manually closed, focus will return to this element.<br>Takes precedence over the triggerElement property if both are set.                  |
-| triggerElement  |                 |           | HTMLElement                      |         | A direct reference to the element that triggered the toast.<br>When the toast is manually closed, focus will return to this element.<br>Use the trigger attribute instead if you prefer a declarative approach. |
-| variant         | variant         |           | `error` \| `success` \| `custom` |         | Component will render visually based on which variant value is set.                                                                                                                                             |
-| visible         | visible         |           | boolean                          |         | Sets state of toast to visible                                                                                                                                                                                  |
+**Example**
+<pre class="language-html"><code class="language-html">&lt;auro-toast visible&gt;Your changes were saved.&lt;/auro-toast&gt;</code></pre>
+
+### Properties and attributes
+
+| Properties      | Attributes      | Modifiers | Type                             | Default | Description                                                                                                                                                                                                                                                                 |
+| --------------- | --------------- | --------- | -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| disableAutoHide | disableautohide |           | boolean                          |         | Stops the toast from hiding on its own, even when `timeTilHide` is set. People can still close it with the close button.                                                                                                                                                    |
+| noIcon          | noicon          |           | boolean                          |         | Hides the icon at the start of the toast, including a custom icon.                                                                                                                                                                                                          |
+| timeTilHide     | timetilhide     |           | number                           | `5000`  | Sets how long, in milliseconds, the toast stays visible before it hides. Has no effect on error toasts or when `disableAutoHide` is set.                                                                                                                                    |
+| trigger         | trigger         |           | string                           |         | Sets the `id` of the element that opened the toast, so focus returns to it when someone closes the toast with its close button.<br>Takes precedence over `triggerElement` when both are set and an element has this `id`.                                                   |
+| triggerElement  |                 |           | HTMLElement                      |         | Sets the element that opened the toast, so focus returns to it when someone closes the toast with its close button.<br>Use `trigger` instead to set it with an `id` in markup. `trigger` takes precedence when both are set.                                                |
+| variant         | variant         |           | `error` \| `success` \| `custom` |         | Sets the toast's color and icon. Use `success` to confirm that something worked, `error` to report a problem, and `custom` to show your own icon (a child with `slot="customSvg"`).<br>Error toasts don't hide on their own, and any other value shows an information icon. |
+| visible         | visible         |           | boolean                          |         | Shows the toast. The toast sets this back to `false` when it closes, whether it hides on its own or someone uses the close button.                                                                                                                                          |
 
 ### Methods
 
-| Name     | Parameters                                                           | Return | Description                                       |
-| -------- | -------------------------------------------------------------------- | ------ | ------------------------------------------------- |
-| register | `name` (string) - The name of the element that you want to register. |        | This will register this element with the browser. |
+| Name     | Parameters                                                    | Return | Description                                              |
+| -------- | ------------------------------------------------------------- | ------ | -------------------------------------------------------- |
+| register | `name` (string) - The tag name to register the element under. |        | Registers the element with the browser under a tag name. |
 
 ### Events
 
-| Name         | Description                                      |
-| ------------ | ------------------------------------------------ |
-| toast-close  | Notifies that the toast has been closed          |
-| onToastClose | **Deprecated**, use `toast-close` event instead. |
+| Name         | Description                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------ |
+| toast-close  | Fires when the toast closes. The `detail` holds `visible` (always `false`) and the toast's `id`. |
+| onToastClose | Deprecated: Use `toast-close` instead.                                                           |
 
-### CSS Shadow Parts
+### Slots
 
-| Name         | Description                         |
-| ------------ | ----------------------------------- |
-| close-button | Apply css to the toast close button |
-| type-icon    | Apply css to the toast type icon    |
+| Name      | Description                                                                                        |
+| --------- | -------------------------------------------------------------------------------------------------- |
+| (default) | The message shown in the toast.                                                                    |
+| customSvg | The icon to show with `variant="custom"`. Give a meaningful icon a description for screen readers. |
+
+### CSS shadow parts
+
+| Name         | Description                                                            |
+| ------------ | ---------------------------------------------------------------------- |
+| close-button | The button that closes the toast.                                      |
+| type-icon    | The icon at the start of the toast. Not rendered when `noIcon` is set. |
+
+### CSS custom properties
+
+| Name                                               | Description                                                     |
+| -------------------------------------------------- | --------------------------------------------------------------- |
+| --ds-auro-toast-container-color                    | Background color of the toast.                                  |
+| --ds-auro-toast-text-color                         | Color of the message text.                                      |
+| --ds-auro-toast-icon-color                         | Color of the icon at the start of the toast.                    |
+| --ds-auro-toast-close-button-hover-container-color | Background color of the close button when a pointer is over it. |
+
+# auro-toaster
+
+Shows `auro-toast` elements in a stack fixed to the bottom of the screen and announces them to screen readers.
+
+**Key capabilities**
+- **Stacks toasts**: Fixes the toasts to the bottom of the screen, so they stay in view while the page scrolls.
+- **Announces toasts**: Screen readers announce each toast politely, and error toasts are announced right away.
+
+**Example**
+<pre class="language-html"><code class="language-html">&lt;auro-toaster&gt;
+  &lt;auro-toast visible&gt;Your changes were saved.&lt;/auro-toast&gt;
+&lt;/auro-toaster&gt;</code></pre>
+
+### Methods
+
+| Name     | Parameters                                                    | Return | Description                                              |
+| -------- | ------------------------------------------------------------- | ------ | -------------------------------------------------------- |
+| register | `name` (string) - The tag name to register the element under. |        | Registers the element with the browser under a tag name. |
+
+### Slots
+
+| Name      | Description                                                     |
+| --------- | --------------------------------------------------------------- |
+| (default) | The `auro-toast` elements to stack at the bottom of the screen. |
 <!-- AURO-GENERATED-CONTENT:END -->
 
 ## Basic
@@ -63,7 +113,7 @@ The `auro-toast` element provides users a way to display short, temporary messag
 <pre class="language-html"><code class="language-html">&lt;auro-button id="basicToastBtn"&gt;
   Show default notification
 &lt;/auro-button&gt;
-&lt;!--
+&#10;&lt;!--
 NOTE: The manually added style is NOT necessary for use,
 Demo purposes ONLY!
 --&gt;
@@ -73,9 +123,9 @@ Demo purposes ONLY!
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-## Property & Attribute Examples
+## Property and attribute examples
 
-### Disable Auto Hide
+### Disable auto hide
 
 Use the `disableAutoHide` attribute to prevent the toast from automatically dismissing itself.
 
@@ -85,7 +135,7 @@ Use the `disableAutoHide` attribute to prevent the toast from automatically dism
 <auro-button id="disableHideToastBtn">
     Show default notification
 </auro-button>
-<auro-toast style="display: block; margin: 0.5rem 0;" id="disableHideToast">
+<auro-toast disableAutoHide style="display: block; margin: 0.5rem 0;" id="disableHideToast">
     Default notification with no error type.
 </auro-toast>
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -98,15 +148,15 @@ Use the `disableAutoHide` attribute to prevent the toast from automatically dism
 <pre class="language-html"><code class="language-html">&lt;auro-button id="disableHideToastBtn"&gt;
   Show default notification
 &lt;/auro-button&gt;
-&lt;auro-toast style="display: block; margin: 0.5rem 0;" id="disableHideToast"&gt;
+&#10;&lt;auro-toast disableAutoHide style="display: block; margin: 0.5rem 0;" id="disableHideToast"&gt;
   Default notification with no error type.
 &lt;/auro-toast&gt;</code></pre>
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-### No Icon
+### No icon
 
-Using the `noIcon` attribute will set no icon to be visible in the notification.
+Use the `noIcon` attribute to hide the icon.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/no-icon.html) -->
@@ -125,9 +175,9 @@ Using the `noIcon` attribute will set no icon to be visible in the notification.
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-### Time Until Hide
+### Time until hide
 
-Using the `timeTilHide` attribute will set a timer in milliseconds for how long the notification will be visible before it automatically hides. The default is `5000` milliseconds.
+Use the `timeTilHide` attribute to set how long, in milliseconds, the toast stays visible before it hides. The default is `5000`. Error toasts and toasts with `disableAutoHide` never hide on their own.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/time-til-hide.html) -->
@@ -156,9 +206,9 @@ Using the `timeTilHide` attribute will set a timer in milliseconds for how long 
 
 ### Variant
 
-What the component will render visually based on which variant value is set; currently supports `error`, `success`.
+Use `variant` to set the toast's color and icon: `success`, `error`, or `custom`. Any other value shows an information icon.
 
-**Note:** The `error` variant does not automatically hide by default, like other variants.
+**Note:** Error toasts never hide on their own, even when `timeTilHide` is set. They stay open until someone closes them.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/variant.html) -->
@@ -194,13 +244,13 @@ What the component will render visually based on which variant value is set; cur
 &lt;auro-toast id="defaultVariant" style="display: block; margin: 0.5rem 0;"&gt;
   Default toast.
 &lt;/auro-toast&gt;
-&lt;auro-button id="errorVariantBtn"&gt;
+&#10;&lt;auro-button id="errorVariantBtn"&gt;
   Show error toast
 &lt;/auro-button&gt;
 &lt;auro-toast id="errorVariant" variant="error" style="display: block; margin: 0.5rem 0;"&gt;
   Unable to add lap infant. Please try again.
 &lt;/auro-toast&gt;
-&lt;auro-button id="successVariantBtn"&gt;
+&#10;&lt;auro-button id="successVariantBtn"&gt;
   Show success toast
 &lt;/auro-button&gt;
 &lt;auro-toast id="successVariant" variant="success" style="display: block; margin: 0.5rem 0;"&gt;
@@ -209,14 +259,14 @@ What the component will render visually based on which variant value is set; cur
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-#### Customizing Toast Notifications
+#### Customizing toast notifications
 
-The toast notification can be customized in several ways.
+You can customize a toast in several ways:
 
-- By applying the `variant="custom"` attribute value, you may pass in custom svg to use in place of the defaults assigned to the other variants.
-- You may recolor the toast notification using the tier 3 theme tokens.
-- You may disable the auto hide behavior of the toast by applying the `disableAutoHide` attribute.
-- You may programmatically show the toast by applying the `visible` attribute. (e.g. if you want the toast to show on load)
+- Set `variant="custom"` and add your own icon as a child with `slot="customSvg"`.
+- Recolor the toast with the `--ds-auro-toast-*` custom properties.
+- Add `disableAutoHide` to keep the toast open until someone closes it.
+- Add `visible` to show the toast when the page loads.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=../apiExamples/custom-toast.html) -->
@@ -230,7 +280,7 @@ The toast notification can be customized in several ways.
   variant="custom"
   visible
   disableAutoHide
-  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default); display: block; margin: 0.5rem 0;">
+  style="--ds-auro-toast-container-color: var(--ds-basic-color-status-info-subtle); --ds-auro-toast-text-color: var(--ds-basic-color-texticon-default); display: block; margin: 0.5rem 0;">
   Did you know you can create a price alert for this route?
 <br />
 <auro-button variant="tertiary">Create Alert</auro-button>
@@ -252,7 +302,7 @@ The toast notification can be customized in several ways.
   variant="custom"
   visible
   disableAutoHide
-  style="--ds-auro-toast-container-color: var(--ds-color-background-info-default); --ds-auro-toast-text-color: var(--ds-color-text-primary-default); display: block; margin: 0.5rem 0;"&gt;
+  style="--ds-auro-toast-container-color: var(--ds-basic-color-status-info-subtle); --ds-auro-toast-text-color: var(--ds-basic-color-texticon-default); display: block; margin: 0.5rem 0;"&gt;
   Did you know you can create a price alert for this route?
   &lt;br /&gt;
   &lt;auro-button variant="tertiary"&gt;Create Alert&lt;/auro-button&gt;
@@ -263,7 +313,7 @@ The toast notification can be customized in several ways.
 
 ### Visible
 
-State of the push notification which determines if it is `visible`.
+Add the `visible` attribute to show the toast. The toast removes it when it closes.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/visible.html) -->
@@ -290,14 +340,14 @@ State of the push notification which determines if it is `visible`.
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-### Focus Management — trigger and triggerElement
+### Focus management with `trigger` and `triggerElement`
 
-When a toast is manually dismissed via the close button, focus should return to the element that originally triggered it. Use the `trigger` attribute to specify the `id` of that element, or the `triggerElement` property to pass a direct element reference. The `trigger` attribute takes precedence when both are set.
+When someone closes a toast with the close button, focus returns to the element that opened it. Use the `trigger` attribute to set the `id` of that element, or the `triggerElement` property to pass the element itself. When both are set, `trigger` takes precedence. If no element has that `id`, the toast uses `triggerElement`.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/trigger.html) -->
 <!-- The below content is automatically added from ./../apiExamples/trigger.html -->
-<p>Use the <code>trigger</code> attribute to pass the <code>id</code> of the element that opened the toast. When the toast is manually closed, focus will return to that element.</p>
+<p>Use the <code>trigger</code> attribute to pass the <code>id</code> of the element that opened the toast. When someone closes the toast with its close button, focus returns to that element.</p>
 <auro-button id="triggerAttrBtn">
     Show notification
 </auro-button>
@@ -306,7 +356,7 @@ When a toast is manually dismissed via the close button, focus should return to 
   Demo purposes ONLY!
   -->
 <auro-toast style="display: block; margin: 0.5rem 0;" id="triggerAttrToast" trigger="triggerAttrBtn" disableAutoHide>
-    Flight booked successfully
+    Flight booked successfully.
 </auro-toast>
 <p>Use the <code>triggerElement</code> property to pass a direct reference to the element that opened the toast. Useful when an <code>id</code> is not available or when working programmatically.</p>
 <auro-button id="triggerPropBtn">
@@ -315,12 +365,12 @@ When a toast is manually dismissed via the close button, focus should return to 
 <auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPropToast" disableAutoHide>
     Flight booked successfully.
 </auro-toast>
-<p>When both <code>trigger</code> and <code>triggerElement</code> are set, <code>trigger</code> takes precedence. In this example, <code>triggerElement</code> points to the second button but <code>trigger</code> points to the first — focus returns to the first button on close.</p>
+<p>When both <code>trigger</code> and <code>triggerElement</code> are set, <code>trigger</code> takes precedence. In this example, <code>triggerElement</code> points to the second button but <code>trigger</code> points to the first, so focus returns to the first button on close.</p>
 <auro-button id="triggerPrecedenceBtn1">
-    Button 1 (trigger attribute target)
+    Button 1 (<code>trigger</code> attribute target)
 </auro-button>
 <auro-button id="triggerPrecedenceBtn2">
-    Button 2 (triggerElement target — ignored)
+    Button 2 (<code>triggerElement</code> target, ignored)
 </auro-button>
 <auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPrecedenceToast" trigger="triggerPrecedenceBtn1" disableAutoHide>
     Flight booked successfully.
@@ -332,32 +382,32 @@ When a toast is manually dismissed via the close button, focus should return to 
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/trigger.html) -->
 <!-- The below code snippet is automatically added from ./../apiExamples/trigger.html -->
 
-<pre class="language-html"><code class="language-html">&lt;p&gt;Use the &lt;code&gt;trigger&lt;/code&gt; attribute to pass the &lt;code&gt;id&lt;/code&gt; of the element that opened the toast. When the toast is manually closed, focus will return to that element.&lt;/p&gt;
-&lt;auro-button id="triggerAttrBtn"&gt;
+<pre class="language-html"><code class="language-html">&lt;p&gt;Use the &lt;code&gt;trigger&lt;/code&gt; attribute to pass the &lt;code&gt;id&lt;/code&gt; of the element that opened the toast. When someone closes the toast with its close button, focus returns to that element.&lt;/p&gt;
+&#10;&lt;auro-button id="triggerAttrBtn"&gt;
   Show notification
 &lt;/auro-button&gt;
-&lt;!--
+&#10;&lt;!--
 NOTE: The manually added style is NOT necessary for use,
 Demo purposes ONLY!
 --&gt;
 &lt;auro-toast style="display: block; margin: 0.5rem 0;" id="triggerAttrToast" trigger="triggerAttrBtn" disableAutoHide&gt;
-  Flight booked successfully
-&lt;/auro-toast&gt;
-&lt;p&gt;Use the &lt;code&gt;triggerElement&lt;/code&gt; property to pass a direct reference to the element that opened the toast. Useful when an &lt;code&gt;id&lt;/code&gt; is not available or when working programmatically.&lt;/p&gt;
-&lt;auro-button id="triggerPropBtn"&gt;
-  Show notification
-&lt;/auro-button&gt;
-&lt;auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPropToast" disableAutoHide&gt;
   Flight booked successfully.
 &lt;/auro-toast&gt;
-&lt;p&gt;When both &lt;code&gt;trigger&lt;/code&gt; and &lt;code&gt;triggerElement&lt;/code&gt; are set, &lt;code&gt;trigger&lt;/code&gt; takes precedence. In this example, &lt;code&gt;triggerElement&lt;/code&gt; points to the second button but &lt;code&gt;trigger&lt;/code&gt; points to the first — focus returns to the first button on close.&lt;/p&gt;
-&lt;auro-button id="triggerPrecedenceBtn1"&gt;
-  Button 1 (trigger attribute target)
+&#10;&lt;p&gt;Use the &lt;code&gt;triggerElement&lt;/code&gt; property to pass a direct reference to the element that opened the toast. Useful when an &lt;code&gt;id&lt;/code&gt; is not available or when working programmatically.&lt;/p&gt;
+&#10;&lt;auro-button id="triggerPropBtn"&gt;
+  Show notification
 &lt;/auro-button&gt;
-&lt;auro-button id="triggerPrecedenceBtn2"&gt;
-  Button 2 (triggerElement target — ignored)
+&#10;&lt;auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPropToast" disableAutoHide&gt;
+  Flight booked successfully.
+&lt;/auro-toast&gt;
+&#10;&lt;p&gt;When both &lt;code&gt;trigger&lt;/code&gt; and &lt;code&gt;triggerElement&lt;/code&gt; are set, &lt;code&gt;trigger&lt;/code&gt; takes precedence. In this example, &lt;code&gt;triggerElement&lt;/code&gt; points to the second button but &lt;code&gt;trigger&lt;/code&gt; points to the first, so focus returns to the first button on close.&lt;/p&gt;
+&#10;&lt;auro-button id="triggerPrecedenceBtn1"&gt;
+  Button 1 (&lt;code&gt;trigger&lt;/code&gt; attribute target)
 &lt;/auro-button&gt;
-&lt;auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPrecedenceToast" trigger="triggerPrecedenceBtn1" disableAutoHide&gt;
+&#10;&lt;auro-button id="triggerPrecedenceBtn2"&gt;
+  Button 2 (&lt;code&gt;triggerElement&lt;/code&gt; target, ignored)
+&lt;/auro-button&gt;
+&#10;&lt;auro-toast style="display: block; margin: 0.5rem 0;" id="triggerPrecedenceToast" trigger="triggerPrecedenceBtn1" disableAutoHide&gt;
   Flight booked successfully.
 &lt;/auro-toast&gt;</code></pre>
 <!-- AURO-GENERATED-CONTENT:END -->
@@ -365,42 +415,35 @@ Demo purposes ONLY!
 <!-- The below code snippet is automatically added from ./../apiExamples/trigger.js -->
 
 <pre class="language-js"><code class="language-js">/* eslint-disable jsdoc/require-jsdoc */
-​
-export function initTriggerExample() {
+&#10;export function initTriggerExample() {
   // trigger attribute — pass element id as a string
   const attrBtn = document.querySelector("#triggerAttrBtn");
   const attrToast = document.querySelector("#triggerAttrToast");
-​
-  attrBtn.addEventListener("click", () =&gt; {
+&#10;  attrBtn.addEventListener("click", () =&gt; {
     if (!attrToast.hasAttribute("visible")) {
       attrToast.setAttribute("visible", true);
     }
   });
-​
-  // triggerElement property — pass a direct element reference
+&#10;  // triggerElement property — pass a direct element reference
   const propBtn = document.querySelector("#triggerPropBtn");
   const propToast = document.querySelector("#triggerPropToast");
-​
-  propBtn.addEventListener("click", () =&gt; {
+&#10;  propBtn.addEventListener("click", () =&gt; {
     if (!propToast.hasAttribute("visible")) {
       propToast.triggerElement = propBtn;
       propToast.setAttribute("visible", true);
     }
   });
-​
-  // precedence — trigger attribute wins over triggerElement when both are set
+&#10;  // precedence — trigger attribute wins over triggerElement when both are set
   const precedenceBtn1 = document.querySelector("#triggerPrecedenceBtn1");
   const precedenceBtn2 = document.querySelector("#triggerPrecedenceBtn2");
   const precedenceToast = document.querySelector("#triggerPrecedenceToast");
-​
-  precedenceBtn1.addEventListener("click", () =&gt; {
+&#10;  precedenceBtn1.addEventListener("click", () =&gt; {
     if (!precedenceToast.hasAttribute("visible")) {
       precedenceToast.triggerElement = precedenceBtn2;
       precedenceToast.setAttribute("visible", true);
     }
   });
-​
-  precedenceBtn2.addEventListener("click", () =&gt; {
+&#10;  precedenceBtn2.addEventListener("click", () =&gt; {
     if (!precedenceToast.hasAttribute("visible")) {
       precedenceToast.triggerElement = precedenceBtn2;
       precedenceToast.setAttribute("visible", true);
@@ -410,11 +453,11 @@ export function initTriggerExample() {
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-## Common Usage Patterns & Functional Examples
+## Common usage patterns
 
-### Multiple Toasts
+### Multiple toasts
 
-The multi-notification use case requires the use of the `<auro-toaster>` component. Toaster will render the toasts at the bottom right of a page.
+Use `<auro-toaster>` to show several toasts at once. It displays them at the bottom of the screen.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/multiple-toasts.html) -->
@@ -437,7 +480,7 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
 <pre class="language-html"><code class="language-html">&lt;auro-button id="multiToastBtn-default"&gt;Show default toast&lt;/auro-button&gt;
 &lt;auro-button id="multiToastBtn-error"&gt;Show error toast&lt;/auro-button&gt;
 &lt;auro-button id="multiToastBtn-success"&gt;Show success toast&lt;/auro-button&gt;
-&lt;auro-toaster&gt;
+&#10;&lt;auro-toaster&gt;
   &lt;auro-toast id="multiToast-default"&gt;Default toast.&lt;/auro-toast&gt;
   &lt;auro-toast id="multiToast-error" variant="error"&gt;Unable to add lap infant. Please try again.&lt;/auro-toast&gt;
   &lt;auro-toast id="multiToast-success" variant="success"&gt;Successfully added lap infant.&lt;/auro-toast&gt;
@@ -445,9 +488,9 @@ The multi-notification use case requires the use of the `<auro-toaster>` compone
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-### Dynamic Toasts
+### Dynamic toasts
 
-The dynamic notification use case requires the use of the `<auro-toaster>` component. Toaster will render the toasts at the bottom right of a page.
+Use `<auro-toaster>` to add toasts with JavaScript while the page runs. It displays them at the bottom of the screen and announces them to screen readers. To add toasts without `<auro-toaster>`, see the next section.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/dynamic-toasts.html) -->
@@ -467,53 +510,40 @@ The dynamic notification use case requires the use of the `<auro-toaster>` compo
 <pre class="language-html"><code class="language-html">&lt;auro-button id="dynamicToastBtn-default"&gt;Show default toast&lt;/auro-button&gt;
 &lt;auro-button id="dynamicToastBtn-error"&gt;Show error toast&lt;/auro-button&gt;
 &lt;auro-button id="dynamicToastBtn-success"&gt;Show success toast&lt;/auro-button&gt;
-&lt;auro-toaster id="dynamicToaster"&gt;
-&lt;/auro-toaster&gt;</code></pre>
+&#10;&lt;auro-toaster id="dynamicToaster"&gt;
+&#10;&lt;/auro-toaster&gt;</code></pre>
 <!-- AURO-GENERATED-CONTENT:END -->
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/dynamic-toasts.js) -->
 <!-- The below code snippet is automatically added from ./../apiExamples/dynamic-toasts.js -->
 
 <pre class="language-js"><code class="language-js">/* eslint-disable jsdoc/require-jsdoc */
-​
-const toastDefs = [
+&#10;const toastDefs = [
   { id: "dynamicToast-default", variant: null, message: "Default toast.", btnId: "dynamicToastBtn-default" },
   { id: "dynamicToast-error", variant: "error", message: "Unable to add lap infant. Please try again.", btnId: "dynamicToastBtn-error" },
   { id: "dynamicToast-success", variant: "success", message: "Successfully added lap infant.", btnId: "dynamicToastBtn-success" },
 ];
-​
-// simple in-memory registry of active toasts
+&#10;// simple in-memory registry of active toasts
 const activeToasts = new Map();
-​
-function generateToastId(baseId) {
+&#10;function generateToastId(baseId) {
   return `${baseId}-${crypto.randomUUID()}`;
 }
-​
-export function initDynamicToastsExample() {
+&#10;export function initDynamicToastsExample() {
   const toaster = document.querySelector("#dynamicToaster");
-​
-  toastDefs.forEach(({ id: baseId, variant, message, btnId }) =&gt; {
+&#10;  toastDefs.forEach(({ id: baseId, variant, message, btnId }) =&gt; {
     document.querySelector(`#${btnId}`).addEventListener("click", () =&gt; {
       const toast = document.createElement("auro-toast");
-​
-      const toastId = generateToastId(baseId);
-​
-      toast.id = toastId;
-​
-      if (variant) {
+&#10;      const toastId = generateToastId(baseId);
+&#10;      toast.id = toastId;
+&#10;      if (variant) {
         toast.setAttribute("variant", variant);
       }
-​
-      toast.setAttribute("visible", true);
+&#10;      toast.setAttribute("visible", true);
       toast.textContent = message;
-​
-      toaster.appendChild(toast);
-​
-      // 👇 now the ID is actually used meaningfully
+&#10;      toaster.appendChild(toast);
+&#10;      // 👇 now the ID is actually used meaningfully
       activeToasts.set(toastId, toast);
-​
-      console.log("Toast added:", toastId);
-​
-      // optional cleanup if your component doesn't auto-remove itself
+&#10;      console.log("Toast added:", toastId);
+&#10;      // optional cleanup if your component doesn't auto-remove itself
       toast.addEventListener("toast-close", () =&gt; {
         activeToasts.delete(toastId);
       });
@@ -523,17 +553,17 @@ export function initDynamicToastsExample() {
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-### Dynamic Injection of Standalone Toasts without auro-toaster
+### Dynamic injection of standalone toasts without `auro-toaster`
 
-When dynamically injecting `auro-toast` elements at runtime, the consumer is responsible for a container element with `aria-live` that **must already be present in the DOM** before any toast is appended to it. Screen readers register a live region when it first encounters the element on the page — content added to it later will trigger an announcement. If a live region and toast content enter the DOM at the same time, the screen reader has no opportunity to register the region first and will **not** announce the content.
+When you add `auro-toast` elements with JavaScript, you're responsible for a container element with `aria-live` that **must already be in the DOM** before you add any toast to it. Screen readers register a live region when they first encounter the element on the page, and they announce content added to it later. If the live region and the toast enter the DOM together, the screen reader can't register the region first and doesn't announce the content.
 
-The required pattern is a persistent container — a `div` or equivalent — with `aria-live="polite"` or `aria-live="assertive"`* that remains in the DOM at all times. Your application logic then injects `auro-toast` elements into this container at runtime as notifications occur.
+Use a persistent container, such as a `div`, with `aria-live="polite"` or `aria-live="assertive"`* that stays in the DOM at all times. Your application then adds `auro-toast` elements to this container as notifications occur.
 
-**Warning:** Avoid applying `display: none` to a live region while it is in use. This removes it from the accessibility tree, preventing screen readers from detecting updates. Any announcements triggered during that time will be lost.
+**Warning:** Don't apply `display: none` to a live region while it's in use. This removes it from the accessibility tree, so screen readers can't detect updates, and any announcements made during that time are lost.
 
 `auro-toast` automatically detects any ancestor live region at connection time. When one is found, it defers to that region and does not add its own role, preventing nested live regions.
 
-\* Only use `aria-live="assertive"` if your UI is making use of toasts that are alerting the user of important information. If you are not using `auro-toaster` you are responsible for managing the changes between `assertive` and `polite` announcement states.
+\* Use `aria-live="assertive"` only for toasts that alert people to important information. Without `auro-toaster`, you're responsible for switching between `assertive` and `polite`.
 
 <div class="exampleWrapper">
 <!-- AURO-GENERATED-CONTENT:START (FILE:src=./../apiExamples/standalone-toast.html) -->
@@ -548,17 +578,15 @@ The required pattern is a persistent container — a `div` or equivalent — wit
 <!-- The below code snippet is automatically added from ./../apiExamples/standalone-toast.html -->
 
 <pre class="language-html"><code class="language-html">&lt;auro-button id="standaloneToastBtn"&gt;Show toast&lt;/auro-button&gt;
-&lt;div id="standaloneContainer" aria-live="polite" aria-atomic="false"&gt;&lt;/div&gt;</code></pre>
+&#10;&lt;div id="standaloneContainer" aria-live="polite" aria-atomic="false"&gt;&lt;/div&gt;</code></pre>
 <!-- AURO-GENERATED-CONTENT:END -->
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../apiExamples/standalone-toast.js) -->
 <!-- The below code snippet is automatically added from ./../apiExamples/standalone-toast.js -->
 
 <pre class="language-js"><code class="language-js">/* eslint-disable jsdoc/require-jsdoc */
-​
-export function initStandaloneToastExample() {
+&#10;export function initStandaloneToastExample() {
   const container = document.querySelector("#standaloneContainer");
-​
-  document.querySelector("#standaloneToastBtn").addEventListener("click", () =&gt; {
+&#10;  document.querySelector("#standaloneToastBtn").addEventListener("click", () =&gt; {
     const toast = document.createElement("auro-toast");
     toast.setAttribute("visible", "");
     toast.setAttribute("variant", "success");
@@ -569,16 +597,15 @@ export function initStandaloneToastExample() {
 <!-- AURO-GENERATED-CONTENT:END -->
 </auro-accordion>
 
-## Restyle Component with CSS Variables
+## Restyle with CSS custom properties
 
-The component may be restyled by changing the values of the following token(s).
+Restyle the component by changing the values of the following custom properties.
 
 <!-- AURO-GENERATED-CONTENT:START (CODE:src=./../src/styles/tokens.scss) -->
 <!-- The below code snippet is automatically added from ./../src/styles/tokens.scss -->
 
 <pre class="language-scss"><code class="language-scss">@use "@aurodesignsystem/design-tokens/dist/themes/alaska/SCSSVariables--alaska" as v;
-​
-:host {
+&#10;:host {
   --ds-auro-toast-close-button-hover-container-color: var(--ds-advanced-color-button-tertiary-background-hover, #{v.$ds-advanced-color-button-tertiary-background-hover});
   --ds-auro-toast-container-color: var(--ds-advanced-color-shared-background-strong, #{v.$ds-advanced-color-shared-background-strong});
   --ds-auro-toast-icon-color: var(--ds-basic-color-texticon-inverse, #{v.$ds-basic-color-texticon-inverse});
